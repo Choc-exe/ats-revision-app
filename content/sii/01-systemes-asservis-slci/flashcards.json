@@ -1,0 +1,62 @@
+{
+  "chapterId": "01-systemes-asservis-slci",
+  "subject": "sii",
+  "title": "Systèmes asservis et modélisation SLCI",
+  "cards": [
+    {
+      "id": "fc-sii-01-01",
+      "category": "Formule Critique",
+      "difficulty": 1,
+      "front": "Quelle est l'expression de la Fonction de Transfert en Boucle Fermée (Formule de Black) pour un système de chaîne directe $A(p)$ et de chaîne de retour $B(p)$ avec comparateur soustracteur ?",
+      "back": {
+        "mainAnswer": "En écrivant $S(p) = A(p)\\,\\varepsilon(p)$ et $\\varepsilon(p) = E(p) - B(p)\\,S(p)$, on isole le rapport $S(p)/E(p)$.",
+        "criticalFormula": "$\\text{FTBF}(p) = \\frac{S(p)}{E(p)} = \\frac{A(p)}{1 + A(p)\\,B(p)} = \\frac{A(p)}{1 + \\text{FTBO}(p)}$",
+        "mnemonicOrTip": "Attention au signe au dénominateur : pour une contre-réaction négative (comparateur $+ / -$), le dénominateur comporte un signe $+$ ($1 + \\text{FTBO}$)."
+      }
+    },
+    {
+      "id": "fc-sii-01-02",
+      "category": "Formule Critique",
+      "difficulty": 1,
+      "front": "Quelle est la fonction de transfert canonique d'un système du 1er ordre, l'expression de sa réponse à un échelon $E_0$, et son temps de réponse à $5\\%$ ?",
+      "back": {
+        "mainAnswer": "Un système du premier ordre est caractérisé par son gain statique $K$ et sa constante de temps $\\tau > 0$. Sa réponse indicielle démarre avec une pente non nulle à l'origine.",
+        "criticalFormula": "$H(p) = \\frac{K}{1 + \\tau\\,p} \\implies s(t) = K\\,E_0\\left(1 - e^{-\\frac{t}{\\tau}}\\right)$ et $t_{r5\\%} \\approx 3\\,\\tau$",
+        "mnemonicOrTip": "Pour identifier graphiquement $\\tau$ sur un essai indiciel : relevez l'instant où la courbe atteint $63\\%$ de sa variation totale (ou l'intersection de la tangente à l'origine avec l'asymptote finale)."
+      }
+    },
+    {
+      "id": "fc-sii-01-03",
+      "category": "Méthode",
+      "difficulty": 2,
+      "front": "Comment distinguer immédiatement sur un relevé expérimental de réponse indicielle un modèle du 1er ordre d'un modèle du 2nd ordre ?",
+      "back": {
+        "mainAnswer": "On observe la tangente à l'origine ($t = 0^+$) ainsi que la présence éventuelle de dépassements (oscillations).",
+        "criticalFormula": "• 1er ordre : Tangente à l'origine de pente NON NULLE et aucun dépassement.\n• 2nd ordre : Tangente à l'origine HORIZONTALE ($\\dot{s}(0^+) = 0$), avec oscillations si $0 < \\xi < 1$.",
+        "mnemonicOrTip": "Si la courbe ne présente aucun dépassement mais possède une tangente horizontale au démarrage (point d'inflexion en S), il s'agit d'un 2nd ordre apériodique ($\\xi \\ge 1$) et non d'un 1er ordre."
+      }
+    },
+    {
+      "id": "fc-sii-01-04",
+      "category": "Théorème",
+      "difficulty": 2,
+      "front": "Énoncer le théorème de la valeur finale et préciser sa condition stricte de validité.",
+      "back": {
+        "mainAnswer": "Le théorème de la valeur finale permet de calculer la limite temporelle d'un signal $x(t)$ lorsque $t \\to +\\infty$ directement à partir de sa transformée de Laplace $X(p)$ lorsque $p \\to 0$, à condition que le système soit stable.",
+        "criticalFormula": "$\\lim_{t \\to +\\infty} x(t) = \\lim_{p \\to 0} \\big[p \\cdot X(p)\\big]$",
+        "mnemonicOrTip": "Piège classique : Ne jamais oublier de multiplier $X(p)$ par $p$ avant de faire tendre $p$ vers $0$ ! Pour un échelon $E(p) = \\frac{E_0}{p}$, le $p$ du théorème simplifie le $\\frac{1}{p}$ de l'échelon."
+      }
+    },
+    {
+      "id": "fc-sii-01-05",
+      "category": "Méthode",
+      "difficulty": 2,
+      "front": "Quel est le lien entre la classe $\\alpha$ de la $\\text{FTBO}(p)$ d'un système asservi à retour unitaire et l'écart statique $\\varepsilon_\\infty$ en réponse à un échelon de consigne $E_0$ ?",
+      "back": {
+        "mainAnswer": "La classe $\\alpha$ correspond au nombre d'intégrateurs purs ($1/p$) dans la FTBO. Un intégrateur dans la chaîne directe annule l'erreur statique pour une entrée en échelon.",
+        "criticalFormula": "• Si $\\alpha = 0$ : $\\varepsilon_\\infty = \\frac{E_0}{1 + K_{\\text{BO}}} \\neq 0$\n• Si $\\alpha \\ge 1$ : $\\varepsilon_\\infty = 0$ (précision parfaite en échelon)",
+        "mnemonicOrTip": "C'est pour passer de la classe $0$ à la classe $1$ (et ainsi annuler l'écart statique) que l'on ajoute un correcteur Proportionnel-Intégral (PI) dans la chaîne directe."
+      }
+    }
+  ]
+}

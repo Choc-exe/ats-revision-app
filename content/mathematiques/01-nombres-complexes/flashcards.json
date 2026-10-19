@@ -1,0 +1,62 @@
+{
+  "chapterId": "01-nombres-complexes",
+  "subject": "mathematiques",
+  "title": "Nombres complexes et trigonométrie",
+  "cards": [
+    {
+      "id": "fc-math-01-01",
+      "category": "Méthode",
+      "difficulty": 1,
+      "front": "Comment factoriser $1 + e^{i\\theta}$ et $1 - e^{i\\theta}$ par la technique de l'angle moitié ?",
+      "back": {
+        "mainAnswer": "On met en facteur $e^{i\\frac{\\theta}{2}}$ afin de faire apparaître symétriquement les formules d'Euler pour $\\cos(\\theta/2)$ et $\\sin(\\theta/2)$.",
+        "criticalFormula": "$1 + e^{i\\theta} = 2\\cos\\left(\\frac{\\theta}{2}\\right)e^{i\\frac{\\theta}{2}}$ et $1 - e^{i\\theta} = -2i\\sin\\left(\\frac{\\theta}{2}\\right)e^{i\\frac{\\theta}{2}}$",
+        "mnemonicOrTip": "Attention : $2\\cos(\\theta/2)$ n'est le module de $1 + e^{i\\theta}$ que si $\\cos(\\theta/2) > 0$. Sinon, le module vaut $2|\\cos(\\theta/2)|$ et l'argument est décalé de $\\pi$."
+      }
+    },
+    {
+      "id": "fc-math-01-02",
+      "category": "Formule Critique",
+      "difficulty": 2,
+      "front": "Comment transformer une expression de la forme $a\\cos(\\omega t) + b\\sin(\\omega t)$ sous la forme $A\\cos(\\omega t - \\varphi)$ ?",
+      "back": {
+        "mainAnswer": "On associe au couple $(a, b)$ le nombre complexe $z = a + ib$ que l'on écrit sous forme trigonométrique $z = A e^{i\\varphi}$.",
+        "criticalFormula": "$A = \\sqrt{a^2 + b^2}$ avec $\\cos(\\varphi) = \\frac{a}{A}$ et $\\sin(\\varphi) = \\frac{b}{A}$",
+        "mnemonicOrTip": "En utilisant $\\cos(u - v) = \\cos u \\cos v + \\sin u \\sin v$, on vérifie immédiatement que $A\\cos(\\omega t - \\varphi) = (A\\cos\\varphi)\\cos(\\omega t) + (A\\sin\\varphi)\\sin(\\omega t)$."
+      }
+    },
+    {
+      "id": "fc-math-01-03",
+      "category": "Méthode",
+      "difficulty": 2,
+      "front": "Quel système de 3 équations réelles permet de déterminer les racines carrées $\\delta = x + iy$ d'un nombre complexe $\\Delta = a + ib$ sous forme algébrique ?",
+      "back": {
+        "mainAnswer": "On identifie les parties réelle et imaginaire de $\\delta^2 = \\Delta$, et on ajoute l'égalité des modules $|\\delta|^2 = |\\Delta|$ pour obtenir une somme de carrés facile à combiner.",
+        "criticalFormula": "$\\begin{cases} x^2 - y^2 = a \\\\ x^2 + y^2 = \\sqrt{a^2 + b^2} \\\\ 2xy = b \\end{cases}$",
+        "mnemonicOrTip": "Les deux premières lignes donnent directement $x^2$ et $y^2$ par addition et soustraction ; la 3e ligne ($2xy = b$) sert uniquement à déterminer si $x$ et $y$ sont de même signe ($b > 0$) ou de signes contraires ($b < 0$)."
+      }
+    },
+    {
+      "id": "fc-math-01-04",
+      "category": "Théorème",
+      "difficulty": 2,
+      "front": "Quelles sont les $n$ solutions de l'équation $z^n = \\lambda$ dans $\\mathbb{C}$ (avec $\\lambda = r e^{i\\alpha}$ et $r > 0$) ?",
+      "back": {
+        "mainAnswer": "On divise l'argument $\\alpha$ par $n$, on prend la racine $n$-ième réelle du module $r$, et on multiplie cette solution particulière par les $n$ racines $n$-ièmes de l'unité.",
+        "criticalFormula": "$z_k = \\sqrt[n]{r}\\,e^{i\\left(\\frac{\\alpha}{n} + \\frac{2k\\pi}{n}\\right)}$ pour $k \\in \\{0, 1, \\dots, n-1\\}$",
+        "mnemonicOrTip": "Géométriquement, les points images des $n$ solutions forment un polygone régulier à $n$ sommets inscrit dans le cercle de centre $O$ et de rayon $\\sqrt[n]{r}$."
+      }
+    },
+    {
+      "id": "fc-math-01-05",
+      "category": "Piège Classique",
+      "difficulty": 1,
+      "front": "Dans quelle condition exacte l'inégalité triangulaire $|z_1 + z_2| \\le |z_1| + |z_2|$ devient-elle une égalité ?",
+      "back": {
+        "mainAnswer": "Il y a égalité si et seulement si les vecteurs d'affixes $z_1$ et $z_2$ sont colinéaires et de même sens (ou si l'un des deux est nul).",
+        "criticalFormula": "$|z_1 + z_2| = |z_1| + |z_2| \\iff z_1 = 0 \\text{ ou } \\exists \\lambda \\in \\mathbb{R}_+,\\; z_2 = \\lambda\\,z_1$",
+        "mnemonicOrTip": "En termes d'arguments (pour $z_1, z_2 \\neq 0$), cela équivaut à $\\arg(z_1) \\equiv \\arg(z_2) \\pmod{2\\pi}$."
+      }
+    }
+  ]
+}

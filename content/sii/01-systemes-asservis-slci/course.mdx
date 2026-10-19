@@ -1,0 +1,148 @@
+---
+title: "Chapitre 01 : Systèmes asservis et modélisation SLCI"
+subject: "sii"
+chapterId: "01-systemes-asservis-slci"
+semester: 1
+description: "Structure des systèmes asservis, transformée de Laplace, schémas-blocs, modèles canoniques d'ordre 1 et 2, et analyse des performances (stabilité, précision, rapidité)."
+---
+
+# Systèmes asservis et modélisation des SLCI
+
+L'étude des **Systèmes Linéaires Continus et Invariants (SLCI)** constitue le socle de l'automatique en classe préparatoire ATS, permettant de modéliser des systèmes pluritechnologiques, de prévoir leur comportement temporel ou fréquentiel et d'optimiser leurs performances vis-à-vis d'un cahier des charges[cite: 31, 32, 40].
+
+---
+
+## 1. Structure et organisation d'un système asservi
+
+### Justification et architecture d'un asservissement
+La nécessité d'asservir un système industriel est justifiée par la présence de **perturbations** extérieures imprévisibles et par les exigences de performances attendues (précision, rapidité, stabilité)[cite: 38, 121].
+
+Un système asservi standard s'organise autour des constituants suivants[cite: 38, 121] :
+* **La consigne $e(t)$** : grandeur d'entrée traduisant le souhait de l'utilisateur[cite: 38].
+* **Le comparateur** : élabore le signal d'**écart** (ou erreur) $\varepsilon(t)$ en comparant la consigne et la mesure issue de la chaîne de retour[cite: 38].
+* **La chaîne directe (ou chaîne d'action)** : comprend le **correcteur** (qui élabore la loi de commande à partir de l'écart) et le processus physique (préactionneur, actionneur, transmetteur, effecteur) soumis d'éventuelles **perturbations**[cite: 36, 38, 121].
+* **La chaîne de retour (ou chaîne de mesure)** : constituée d'un **capteur** qui prélève la grandeur de sortie $s(t)$ pour la convertir en une image mesurée homogène à la consigne[cite: 38, 126].
+
+<SchemaPlaceholder 
+  src="/images/sii/structure-systeme-asservi.png" 
+  alt="Schéma-blocs canonique d'un système asservi avec consigne, comparateur, correcteur, actionneur, perturbation en entrée de processus, sortie et capteur en chaîne de retour"
+  caption="Figure 1.1 : Architecture fonctionnelle d'un système asservi avec chaîne directe et chaîne de retour."
+/>
+
+<WarningBox title="Homogénéité et modes de fonctionnement (Poursuite vs Régulation)">
+* **Condition d'homogénéité** : On ne peut soustraire dans un comparateur que des grandeurs physiquement homogènes. Si le capteur délivre une tension $u_m(t)$ image d'une vitesse $\omega(t)$, un bloc d'adaptation de consigne doit convertir la consigne en tension avant le comparateur[cite: 126].
+* **Régulation** : La consigne est maintenue constante et le système doit rejeter l'effet des perturbations[cite: 38, 121].
+* **Poursuite (ou asservissement)** : La sortie doit suivre le plus fidèlement possible une consigne évoluant dans le temps[cite: 38, 121].
+</WarningBox>
+
+---
+
+## 2. Modélisation des SLCI et Transformée de Laplace
+
+### Hypothèses SLCI et formalisme de Laplace
+Un système est dit **SLCI** s'il vérifie trois propriétés[cite: 40] :
+1. **Linéarité** : Il obéit au principe de superposition et de proportionnalité (modélisable par une équation différentielle linéaire)[cite: 40, 85].
+2. **Continuité** : Les signaux d'entrée et de sortie sont des fonctions continues du temps (par opposition aux systèmes échantillonnés)[cite: 40].
+3. **Invariance** : Les paramètres physiques du modèle ne vieillissent pas et restent constants au cours du temps (équation différentielle à coefficients constants)[cite: 40, 85].
+4. **Causalité** : La sortie à l'instant $t$ ne dépend pas des valeurs futures de l'entrée ($s(t) = 0$ pour $t < 0$)[cite: 40].
+
+En supposant les **conditions initiales nulles** ($f(0^-) = 0, \dot{f}(0^-) = 0, \dots$), la transformée de Laplace associe à tout signal temporel causal $f(t)$ une fonction $F(p)$ de la variable complexe $p$[cite: 40, 124].
+
+<CriticalFormula title="Propriétés du calcul symbolique et Signaux canoniques exigibles">
+Le programme ATS limite strictement l'usage de la transformée de Laplace aux opérateurs de dérivation et d'intégration (conditions initiales nulles) ainsi qu'aux signaux canoniques d'entrée[cite: 40, 48, 124] :
+* **Dérivation temporelle** : $\mathcal{L}\left[\frac{\mathrm{d}f(t)}{\mathrm{d}t}\right] = p\,F(p)$ et $\mathcal{L}\left[\frac{\mathrm{d}^2f(t)}{\mathrm{d}t^2}\right] = p^2\,F(p)$[cite: 40, 124].
+* **Intégration temporelle** : $\mathcal{L}\left[\int_0^t f(\tau)\,\mathrm{d}\tau\right] = \frac{1}{p}\,F(p)$[cite: 40, 124].
+* **Échelon d'amplitude $E_0$** ($e(t) = E_0\,u(t)$ pour $t \ge 0$) : **$E(p) = \frac{E_0}{p}$**[cite: 40].
+* **Rampe de pente $a$** ($e(t) = a\,t\,u(t)$ pour $t \ge 0$) : **$E(p) = \frac{a}{p^2}$**[cite: 40].
+</CriticalFormula>
+
+### Fonction de transfert et forme canonique
+La **fonction de transfert** $H(p)$ d'un SLCI est définie par le rapport entre la transformée de Laplace de la sortie $S(p)$ et celle de l'entrée $E(p)$, à conditions initiales nulles[cite: 40, 124] :
+$$H(p) = \frac{S(p)}{E(p)}$$
+
+<CriticalFormula title="Forme canonique d'une fonction de transfert (Gain, Classe, Ordre, Pôles)">
+Toute fonction de transfert rationnelle s'écrit sous sa **forme canonique** en factorisant par $p^\alpha$ au dénominateur de sorte que les termes constants des polynômes valent $1$[cite: 40] :
+$$H(p) = \frac{K}{p^\alpha} \cdot \frac{1 + b_1 p + \dots + b_m p^m}{1 + a_1 p + \dots + a_{n-\alpha} p^{n-\alpha}}$$
+* **$K$** : **Gain statique** (ou gain de la fonction de transfert, qui possède l'unité du rapport $\frac{\text{Sortie}}{\text{Entrée}}$)[cite: 40, 44].
+* **$\alpha \in \mathbb{N}$** : **Classe** du système (nombre d'intégrateurs purs $\frac{1}{p}$ en facteur)[cite: 40, 48].
+* **$n$** : **Ordre** du système (degré total du dénominateur, avec $n \ge m$ par causalité)[cite: 40].
+* **Pôles et Zéros** : Les **pôles** sont les racines du dénominateur ; les **zéros** sont les racines du numérateur[cite: 40].
+</CriticalFormula>
+
+---
+
+## 3. Algèbre des schémas-blocs : FTBO et FTBF
+
+Pour un système bouclé comportant une chaîne directe de transmittance $A(p)$ et une chaîne de retour de transmittance $B(p)$ (avec un comparateur soustracteur)[cite: 38, 40, 124] :
+* **Fonction de Transfert en Boucle Ouverte (FTBO)** : Rapport entre le signal de retour mesuré $M(p)$ et l'écart $\varepsilon(p)$ lorsque l'on ouvre la boucle juste avant le comparateur[cite: 124] :
+$$\text{FTBO}(p) = T(p) = A(p)\cdot B(p)$$
+* **Fonction de Transfert en Boucle Fermée (FTBF) — Formule de Black**[cite: 40, 124] :
+
+<CriticalFormula title="Formule de Black (FTBF)">
+Pour une boucle à retour négatif de chaîne directe $A(p)$ et de chaîne de retour $B(p)$[cite: 40, 124] :
+$$\text{FTBF}(p) = H_{\text{BF}}(p) = \frac{S(p)}{E(p)} = \frac{A(p)}{1 + A(p)\,B(p)} = \frac{A(p)}{1 + \text{FTBO}(p)}$$
+Dans le cas particulier d'un **retour unitaire** ($B(p) = 1$), on obtient **$H_{\text{BF}}(p) = \frac{\text{FTBO}(p)}{1 + \text{FTBO}(p)}$**[cite: 40, 124].
+</CriticalFormula>
+
+---
+
+## 4. Modèles de comportement d'ordre 1 et d'ordre 2
+
+<WarningBox title="Limites du programme officiel sur la réponse temporelle">
+Le calcul explicite des transformées de Laplace inverses est **hors programme**[cite: 48, 125]. Vous devez uniquement connaître l'expression analytique de la réponse indicielle d'un système du **premier ordre**, ainsi que l'allure graphique des réponses indicielles des systèmes du **premier et du second ordre**[cite: 40, 48, 125].
+</WarningBox>
+
+### Système fondamental du premier ordre
+Modélisé par l'équation différentielle $\tau \frac{\mathrm{d}s(t)}{\mathrm{d}t} + s(t) = K\,e(t)$ (avec $\tau > 0$ la **constante de temps** en secondes et $K$ le **gain statique**), sa fonction de transfert canonique est[cite: 40, 48] :
+$$H(p) = \frac{K}{1 + \tau\,p}$$
+
+<CriticalFormula title="Réponse indicielle d'un système du 1er ordre (Exigible)">
+Soumis à un échelon d'amplitude $E_0$, la réponse temporelle $s(t)$ (pour $t \ge 0$) s'écrit[cite: 48] :
+$$s(t) = K\,E_0\left(1 - e^{-\frac{t}{\tau}}\right)$$
+* Valeur finale asymptotique : $s_\infty = K\,E_0$[cite: 48].
+* Pente de la tangente à l'origine ($t = 0^+$) : $\dot{s}(0^+) = \frac{K\,E_0}{\tau}$ (la tangente coupe l'asymptote $s_\infty$ en $t = \tau$)[cite: 40, 48].
+* À $t = \tau$, la sortie atteint **$63\,\%$** de sa valeur finale ; le **temps de réponse à $5\,\%$** vaut exactement **$t_{r5\%} \approx 3\,\tau$**[cite: 45, 48].
+</CriticalFormula>
+
+### Système fondamental du second ordre
+Modélisé par l'équation différentielle $\frac{1}{\omega_0^2}\frac{\mathrm{d}^2s(t)}{\mathrm{d}t^2} + \frac{2\xi}{\omega_0}\frac{\mathrm{d}s(t)}{\mathrm{d}t} + s(t) = K\,e(t)$, sa fonction de transfert canonique dépend du **gain statique $K$**, de la **pulsation propre non amortie $\omega_0$** ($\text{rad}\cdot\text{s}^{-1}$) et du **facteur d'amortissement $\xi$** (ou $z$, sans unité)[cite: 40, 48] :
+
+<CriticalFormula title="Fonction de transfert canonique du 2nd ordre et Régimes temporels">
+$$H(p) = \frac{K}{1 + \frac{2\xi}{\omega_0}p + \frac{1}{\omega_0^2}p^2}$$
+Pour une entrée échelon, la tangente à l'origine est toujours horizontale ($\dot{s}(0^+) = 0$) et l'allure dépend de $\xi$[cite: 40, 48] :
+* **$\xi > 1$ (Régime apériodique)** : Deux pôles réels négatifs ; réponse sans oscillation ni dépassement (possibilité de réduction de modèle par **pôle dominant** si un pôle est beaucoup plus proche de $0$ que l'autre)[cite: 40, 48, 125].
+* **$\xi = 1$ (Régime critique)** : Pôle double réel ; réponse la plus rapide possible sans dépassement[cite: 48].
+* **$0 < \xi < 1$ (Régime pseudopériodique)** : Deux pôles complexes conjugués ; oscillations amorties avec **dépassements** successifs[cite: 45, 48]. Le premier dépassement relatif $D_1\%$ ne dépend que de $\xi$ : $D_1\% = 100\,\exp\left(\frac{-\pi\xi}{\sqrt{1-\xi^2}}\right)$ (formule ou abaque fournis aux concours)[cite: 40, 48].
+</CriticalFormula>
+
+<SchemaPlaceholder 
+  src="/images/sii/reponses-indicielles-ordre-1-2.png" 
+  alt="Courbes comparées des réponses indicielles : ordre 1 (tangente non nulle à l'origine) et ordre 2 selon xi < 1 (oscillations et dépassement D1) et xi >= 1 (apériodique à tangente horizontale)"
+  caption="Figure 1.2 : Allures des réponses indicielles d'un système d'ordre 1 et d'ordre 2 selon le facteur d'amortissement."
+/>
+
+---
+
+## 5. Évaluation des performances des systèmes asservis
+
+Le cahier des charges d'un système asservi évalue trois grandes familles d'exigences[cite: 45, 48, 125] :
+
+### A. La Stabilité
+* **Critère algébrique (domaine de Laplace)** : Un SLCI est stable si et seulement si **tous les pôles de sa FTBF sont à partie réelle strictement négative** ($\text{Re}(p_i) < 0$)[cite: 45, 125]. Pour un système d'ordre 1 ou d'ordre 2, cela équivaut à ce que tous les coefficients du dénominateur de la FTBF soient strictement de même signe (le critère de Routh pour les ordres $\ge 3$ est hors programme)[cite: 125, 126].
+* **Amortissement et Marges de stabilité** : En temporel, le degré de stabilité se mesure par la limitation du premier dépassement relatif $D_1\%$ (pour $\xi \approx 0{,}7$, $D_1\% \approx 4{,}3\%$)[cite: 45, 48]. En fréquentiel sur le diagramme de Bode de la FTBO, il se caractérise par la **marge de phase $M_\varphi$** (souvent exigée $> 45^\circ$) et la **marge de gain $M_G$**[cite: 38, 45, 48].
+
+### B. La Précision (en régime permanent)
+La précision en poursuite se quantifie par l'**écart statique** $\varepsilon_\infty = \lim_{t \to +\infty} \varepsilon(t)$ (ou erreur en régime permanent) en réponse à une entrée canonique[cite: 45, 48, 125].
+
+<CriticalFormula title="Théorème de la valeur finale et Rôle de la Classe de la FTBO">
+Sous réserve que le système en boucle fermée soit stable, le **théorème de la valeur finale** permet de calculer la valeur permanente directement dans le domaine de Laplace[cite: 48, 126] :
+$$\varepsilon_\infty = \lim_{t \to +\infty} \varepsilon(t) = \lim_{p \to 0} \big[p \cdot \varepsilon(p)\big]$$
+Pour un système à retour unitaire dont la $\text{FTBO}(p)$ a pour gain $K_{\text{BO}}$ et pour **classe $\alpha$** ($\alpha$ intégrateurs en boucle ouverte) soumis à un **échelon d'amplitude $E_0$**[cite: 48] :
+* Si **$\alpha = 0$** (aucun intégrateur dans la FTBO) : **$\varepsilon_\infty = \frac{E_0}{1 + K_{\text{BO}}}$** (erreur statique non nulle, d'autant plus faible que $K_{\text{BO}}$ est grand)[cite: 48].
+* Si **$\alpha \ge 1$** (au moins un intégrateur $\frac{1}{p}$ dans la chaîne directe) : **$\varepsilon_\infty = 0$** (le système est parfaitement précis pour une entrée en échelon)[cite: 48].
+</CriticalFormula>
+
+> **Sensibilité aux perturbations :** Pour annuler l'effet en régime permanent d'une perturbation constante (en échelon), l'intégrateur $\frac{1}{p}$ (apporté par exemple par un **correcteur Proportionnel-Intégral PI** de fonction $C(p) = K_p\left(1 + \frac{1}{T_i p}\right)$) doit impérativement être placé **en amont** du point d'injection de la perturbation dans la chaîne directe[cite: 38, 48].
+
+### C. La Rapidité
+La rapidité est évaluée dans le domaine temporel par le **temps de réponse à $5\,\%$ ($t_{r5\%}$)**, défini comme la durée nécessaire pour que la réponse indicielle entre et reste définitivement dans la bande de $\pm 5\,\%$ autour de sa valeur finale $s_\infty$ ($0{,}95\,s_\infty \le s(t) \le 1{,}05\,s_\infty$)[cite: 45, 48]. Dans le domaine fréquentiel, la rapidité est liée à la largeur de la **bande passante** : plus la pulsation de coupure est élevée, plus le système est rapide[cite: 38, 45, 48, 126].

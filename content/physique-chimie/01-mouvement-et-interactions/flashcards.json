@@ -1,0 +1,62 @@
+{
+  "chapterId": "01-mouvement-et-interactions",
+  "subject": "physique-chimie",
+  "title": "Mouvement et interactions - Mécanique du point",
+  "cards": [
+    {
+      "id": "fc-phys-01-01",
+      "category": "Formule Critique",
+      "difficulty": 1,
+      "front": "En coordonnées polaires ou cylindriques, comment s'expriment les vecteurs de la base locale $(\\vec{u}_r, \\vec{u}_\\theta)$ en fonction de la base cartésienne $(\\vec{u}_x, \\vec{u}_y)$ ?",
+      "back": {
+        "mainAnswer": "On projette les deux vecteurs unitaires locaux sur les axes $(Ox)$ et $(Oy)$ à l'aide de l'angle orienté $\\theta = (\\vec{u}_x, \\vec{u}_r)$.",
+        "criticalFormula": "$\\vec{u}_r = \\cos(\\theta)\\,\\vec{u}_x + \\sin(\\theta)\\,\\vec{u}_y$ et $\\vec{u}_\\theta = -\\sin(\\theta)\\,\\vec{u}_x + \\cos(\\theta)\\,\\vec{u}_y$",
+        "mnemonicOrTip": "Remarque : $\\vec{u}_\\theta$ s'obtient directement en dérivant $\\vec{u}_r$ par rapport à l'angle $\\theta$."
+      }
+    },
+    {
+      "id": "fc-phys-01-02",
+      "category": "Méthode",
+      "difficulty": 2,
+      "front": "Un point matériel de masse $m$ chute verticalement dans un champ de pesanteur $g$ avec une force de frottement fluide $\\vec{f} = -h\\,\\vec{v}$. Quelles sont les expressions du temps caractéristique $\\tau$ et de la vitesse limite $v_{\\text{lim}}$ ?",
+      "back": {
+        "mainAnswer": "En projetant le PFD sur un axe vertical descendant, on obtient $m\\dot{v}_z + h v_z = mg$, soit sous forme canonique $\\dot{v}_z + \\frac{v_z}{\\tau} = g$. En régime permanent ($\\dot{v}_z = 0$), la vitesse atteint $v_{\\text{lim}}$.",
+        "criticalFormula": "$\\tau = \\frac{m}{h}$ et $v_{\\text{lim}} = \\frac{m\\,g}{h} = g\\,\\tau$",
+        "mnemonicOrTip": "Vérifiez toujours l'homogénéité : $g\\tau$ est bien le produit d'une accélération ($\\text{m}\\cdot\\text{s}^{-2}$) par un temps ($\\text{s}$), donc une vitesse ($\\text{m}\\cdot\\text{s}^{-1}$)."
+      }
+    },
+    {
+      "id": "fc-phys-01-03",
+      "category": "Formule Critique",
+      "difficulty": 1,
+      "front": "Dans un mouvement rectiligne selon l'axe $(Ox)$, quelle relation relie la force conservative $F_x(x)$ à l'énergie potentielle $E_p(x)$, et comment caractérise-t-on une position d'équilibre stable ?",
+      "back": {
+        "mainAnswer": "La force dérive de l'énergie potentielle avec un signe moins. Une position $x_{\\text{eq}}$ est un équilibre stable si l'énergie potentielle y présente un minimum local (fond d'un puits de potentiel).",
+        "criticalFormula": "$F_x(x) = -\\frac{\\mathrm{d}E_p}{\\mathrm{d}x}$ ; Équilibre stable : $\\left(\\frac{\\mathrm{d}E_p}{\\mathrm{d}x}\\right)_{x_{\\text{eq}}} = 0$ et $\\left(\\frac{\\mathrm{d}^2E_p}{\\mathrm{d}x^2}\\right)_{x_{\\text{eq}}} > 0$",
+        "mnemonicOrTip": "Piège classique : Ne jamais oublier le signe '-' devant la dérivée. La force conservative pousse toujours le système vers les énergies potentielles décroissantes."
+      }
+    },
+    {
+      "id": "fc-phys-01-04",
+      "category": "Formule Critique",
+      "difficulty": 2,
+      "front": "Écrire l'équation différentielle canonique d'un oscillateur harmonique amorti (masse $m$, raideur $k$, frottement fluide $-h\\dot{x}$) en exprimant $\\omega_0$ et le facteur de qualité $Q$.",
+      "back": {
+        "mainAnswer": "À partir du PFD ($m\\ddot{x} + h\\dot{x} + kx = 0$), on divise par la masse $m$ pour obtenir un coefficient $1$ devant $\\ddot{x}$ et identifier les paramètres canoniques.",
+        "criticalFormula": "$\\ddot{x} + \\frac{\\omega_0}{Q}\\dot{x} + \\omega_0^2\\,x = 0$ avec $\\omega_0 = \\sqrt{\\frac{k}{m}}$ et $Q = \\frac{\\sqrt{k\\,m}}{h} = \\frac{m\\,\\omega_0}{h}$",
+        "mnemonicOrTip": "En SII, on utilise le facteur d'amortissement $\\xi$ (ou $z$) tel que $2\\xi\\omega_0 = \\frac{\\omega_0}{Q}$, d'où la relation fondamentale $Q = \\frac{1}{2\\xi}$."
+      }
+    },
+    {
+      "id": "fc-phys-01-05",
+      "category": "Théorème",
+      "difficulty": 2,
+      "front": "Quels sont les trois régimes d'évolution libre d'un oscillateur mécanique amorti selon la valeur du facteur de qualité $Q$ ?",
+      "back": {
+        "mainAnswer": "La nature des racines de l'équation caractéristique $r^2 + \\frac{\\omega_0}{Q}r + \\omega_0^2 = 0$ dépend du signe du discriminant $\\Delta = \\omega_0^2(Q^{-2} - 4)$.",
+        "criticalFormula": "• $Q > \\frac{1}{2}$ : Régime pseudopériodique (oscillations amorties)\n• $Q = \\frac{1}{2}$ : Régime critique (retour le plus rapide sans osciller)\n• $Q < \\frac{1}{2}$ : Régime apériodique (retour lent sans osciller)",
+        "mnemonicOrTip": "En régime pseudopériodique à fort facteur de qualité ($Q \\gg 1$), le nombre d'oscillations visibles avant amortissement est de l'ordre de $Q$."
+      }
+    }
+  ]
+}

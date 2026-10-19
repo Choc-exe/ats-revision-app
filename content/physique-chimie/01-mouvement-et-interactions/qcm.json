@@ -1,0 +1,113 @@
+{
+  "chapterId": "01-mouvement-et-interactions",
+  "subject": "physique-chimie",
+  "title": "QCM d'entraînement : Mouvement et interactions",
+  "questions": [
+    {
+      "id": "qcm-phys-01-01",
+      "difficulty": "Application directe",
+      "questionText": "Une bille de masse $m$ tombe verticalement sans vitesse initiale dans un fluide sous l'effet de la pesanteur $g$. Elle subit une force de frottement fluide quadratique de la forme $\\vec{f} = -\\alpha\\,v^2\\,\\vec{u}_z$ (avec $\\alpha > 0$ et l'axe $Oz$ orienté vers le bas). Quelle est l'expression de sa vitesse limite $v_{\\text{lim}}$ ?",
+      "options": [
+        { "id": "A", "text": "$v_{\\text{lim}} = \\frac{m\\,g}{\\alpha}$" },
+        { "id": "B", "text": "$v_{\\text{lim}} = \\sqrt{\\frac{m\\,g}{\\alpha}}$" },
+        { "id": "C", "text": "$v_{\\text{lim}} = \\sqrt{\\frac{\\alpha}{m\\,g}}$" },
+        { "id": "D", "text": "$v_{\\text{lim}} = \\frac{m\\,g^2}{\\alpha}$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. On applique le Principe Fondamental de la Dynamique (PFD) dans le référentiel terrestre supposé galiléen, projeté sur l'axe vertical descendant $(Oz)$ : $m\\frac{\\mathrm{d}v}{\\mathrm{d}t} = m\\,g - \\alpha\\,v^2$.",
+          "2. Lorsque la vitesse limite $v_{\\text{lim}}$ est atteinte, le régime est permanent, donc l'accélération est nulle : $\\frac{\\mathrm{d}v}{\\mathrm{d}t} = 0$.",
+          "3. On résout l'équation algébrique : $m\\,g - \\alpha\\,v_{\\text{lim}}^2 = 0 \\iff v_{\\text{lim}}^2 = \\frac{m\\,g}{\\alpha} \\implies v_{\\text{lim}} = \\sqrt{\\frac{m\\,g}{\\alpha}}$ (car $v_{\\text{lim}} > 0$)."
+        ],
+        "keyFormula": "$\\frac{\\mathrm{d}v}{\\mathrm{d}t} = 0 \\implies m\\,g - \\alpha\\,v_{\\text{lim}}^2 = 0 \\implies v_{\\text{lim}} = \\sqrt{\\frac{m\\,g}{\\alpha}}$",
+        "commonTrap": "La réponse A correspond au cas d'un frottement linéaire ($f = h\\,v$) et non quadratique ($f = \\alpha\\,v^2$)."
+      }
+    },
+    {
+      "id": "qcm-phys-01-02",
+      "difficulty": "Calculatoire",
+      "questionText": "Un point matériel de masse $m = 2\\text{ kg}$ se déplace sans frottement le long d'un axe $(Ox)$ dans un champ de force conservatif d'énergie potentielle $E_p(x) = x^2 - 4x + 10$ (en Joules, avec $x$ en mètres). Sachant que son énergie mécanique vaut $E_m = 15\\text{ J}$, quelle est la vitesse maximale $v_{\\max}$ atteinte par ce point matériel ?",
+      "options": [
+        { "id": "A", "text": "$v_{\\max} = 3\\text{ m}\\cdot\\text{s}^{-1}$" },
+        { "id": "B", "text": "$v_{\\max} = \\sqrt{5}\\text{ m}\\cdot\\text{s}^{-1}$" },
+        { "id": "C", "text": "$v_{\\max} = 9\\text{ m}\\cdot\\text{s}^{-1}$" },
+        { "id": "D", "text": "$v_{\\max} = 2\\text{ m}\\cdot\\text{s}^{-1}$" }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. On cherche la position d'équilibre stable $x_{\\text{eq}}$ où l'énergie potentielle est minimale : $\\frac{\\mathrm{d}E_p}{\\mathrm{d}x} = 2x - 4 = 0 \\implies x_{\\text{eq}} = 2\\text{ m}$ (avec $\\frac{\\mathrm{d}^2E_p}{\\mathrm{d}x^2} = 2 > 0$).",
+          "2. On calcule l'énergie potentielle minimale en ce point : $E_{p,\\min} = E_p(2) = 2^2 - 4(2) + 10 = 6\\text{ J}$.",
+          "3. Par conservation de l'énergie mécanique ($E_m = E_c + E_p = 15\\text{ J}$), l'énergie cinétique est maximale lorsque $E_p$ est minimale : $E_{c,\\max} = E_m - E_{p,\\min} = 15 - 6 = 9\\text{ J}$.",
+          "4. On en déduit la vitesse maximale : $\\frac{1}{2}m\\,v_{\\max}^2 = 9 \\implies v_{\\max} = \\sqrt{\\frac{2 \\times 9}{2}} = 3\\text{ m}\\cdot\\text{s}^{-1}$."
+        ],
+        "keyFormula": "$E_{c,\\max} = \\frac{1}{2}m\\,v_{\\max}^2 = E_m - E_p(x_{\\text{eq}})$",
+        "commonTrap": "La réponse B résulte d'une confusion entre le minimum d'énergie potentielle (en $x_{\\text{eq}} = 2\\text{ m}$) et la valeur en l'origine $E_p(0) = 10\\text{ J}$."
+      }
+    },
+    {
+      "id": "qcm-phys-01-03",
+      "difficulty": "Application directe",
+      "questionText": "Un oscillateur harmonique non amorti (masse $m$, ressort de raideur $k$) oscille librement selon la loi horaire $x(t) = X_m \\cos(\\omega_0 t)$. Quelle est la période temporelle des variations de son énergie cinétique $E_c(t)$ ?",
+      "options": [
+        { "id": "A", "text": "$T_{E_c} = T_0 = \\frac{2\\pi}{\\omega_0}$" },
+        { "id": "B", "text": "$T_{E_c} = 2\\,T_0 = \\frac{4\\pi}{\\omega_0}$" },
+        { "id": "C", "text": "$T_{E_c} = \\frac{T_0}{2} = \\frac{\\pi}{\\omega_0}$" },
+        { "id": "D", "text": "L'énergie cinétique est constante au cours du temps." }
+      ],
+      "correctOptionId": "C",
+      "explanation": {
+        "steps": [
+          "1. La vitesse s'obtient en dérivant la position : $\\dot{x}(t) = -X_m\\,\\omega_0 \\sin(\\omega_0 t)$.",
+          "2. L'énergie cinétique vaut $E_c(t) = \\frac{1}{2}m\\,\\dot{x}^2(t) = \\frac{1}{2}m\\,\\omega_0^2\\,X_m^2 \\sin^2(\\omega_0 t)$.",
+          "3. En utilisant la formule de linéarisation trigonométrique $\\sin^2(\\omega_0 t) = \\frac{1 - \\cos(2\\omega_0 t)}{2}$, on voit que $E_c(t)$ oscille à la pulsation $2\\omega_0$, donc avec une période $T_{E_c} = \\frac{2\\pi}{2\\omega_0} = \\frac{T_0}{2}$."
+        ],
+        "keyFormula": "$E_c(t) = \\frac{1}{4}k\\,X_m^2\\,(1 - \\cos(2\\omega_0 t)) \\implies T_{E_c} = \\frac{T_0}{2}$",
+        "commonTrap": "L'énergie mécanique $E_m = E_c(t) + E_p(t) = \\frac{1}{2}k X_m^2$ est constante, mais $E_c(t)$ et $E_p(t)$ s'annulent deux fois par période $T_0$."
+      }
+    },
+    {
+      "id": "qcm-phys-01-04",
+      "difficulty": "Type Concours",
+      "questionText": "Un système masse-ressort amorti ($m = 0{,}5\\text{ kg}$, $k = 50\\text{ N}\\cdot\\text{m}^{-1}$, coefficient de frottement fluide $h$) est réglé pour être exactement en **régime critique**. Quelle est la valeur du coefficient de frottement $h$ ?",
+      "options": [
+        { "id": "A", "text": "$h = 5\\text{ kg}\\cdot\\text{s}^{-1}$" },
+        { "id": "B", "text": "$h = 10\\text{ kg}\\cdot\\text{s}^{-1}$" },
+        { "id": "C", "text": "$h = 2{,}5\\text{ kg}\\cdot\\text{s}^{-1}$" },
+        { "id": "D", "text": "$h = 25\\text{ kg}\\cdot\\text{s}^{-1}$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. On calcule d'abord la pulsation propre : $\\omega_0 = \\sqrt{\\frac{k}{m}} = \\sqrt{\\frac{50}{0{,}5}} = \\sqrt{100} = 10\\text{ rad}\\cdot\\text{s}^{-1}$.",
+          "2. Le régime critique est atteint lorsque le facteur de qualité vaut exactement $Q = \\frac{1}{2}$.",
+          "3. En utilisant $Q = \\frac{m\\,\\omega_0}{h} = \\frac{1}{2}$, on isole $h = 2\\,m\\,\\omega_0 = 2 \\times 0{,}5 \\times 10 = 10\\text{ kg}\\cdot\\text{s}^{-1}$."
+        ],
+        "keyFormula": "Régime critique : $Q = \\frac{\\sqrt{k\\,m}}{h} = \\frac{1}{2} \\iff h_{\\text{critique}} = 2\\sqrt{k\\,m}$",
+        "commonTrap": "La réponse A ($h = 5\\text{ kg}\\cdot\\text{s}^{-1}$) correspond à l'oubli du facteur $2$ (confusion entre $Q = 1$ et la condition critique $Q = 1/2$)."
+      }
+    },
+    {
+      "id": "qcm-phys-01-05",
+      "difficulty": "Type Concours",
+      "questionText": "Pour un oscillateur mécanique amorti soumis à une force de frottement visqueux $\\vec{f} = -h\\,\\dot{x}\\,\\vec{u}_x$, que vaut la dérivée temporelle de l'énergie mécanique $\\frac{\\mathrm{d}E_m}{\\mathrm{d}t}$ ?",
+      "options": [
+        { "id": "A", "text": "$\\frac{\\mathrm{d}E_m}{\\mathrm{d}t} = 0$" },
+        { "id": "B", "text": "$\\frac{\\mathrm{d}E_m}{\\mathrm{d}t} = -h\\,x\\,\\dot{x}$" },
+        { "id": "C", "text": "$\\frac{\\mathrm{d}E_m}{\\mathrm{d}t} = -h\\,\\dot{x}^2$" },
+        { "id": "D", "text": "$\\frac{\\mathrm{d}E_m}{\\mathrm{d}t} = -\\frac{1}{2}h\\,\\dot{x}^2$" }
+      ],
+      "correctOptionId": "C",
+      "explanation": {
+        "steps": [
+          "1. D'après le théorème de la puissance mécanique, la dérivée temporelle de l'énergie mécanique est égale à la puissance des forces non conservatives : $\\frac{\\mathrm{d}E_m}{\\mathrm{d}t} = \\mathcal{P}(\\vec{f})$.",
+          "2. La puissance de la force de frottement fluide s'écrit $\\mathcal{P}(\\vec{f}) = \\vec{f} \\cdot \\vec{v} = (-h\\,\\dot{x}\\,\\vec{u}_x) \\cdot (\\dot{x}\\,\\vec{u}_x) = -h\\,\\dot{x}^2 \\le 0$.",
+          "3. Ce résultat confirme que l'énergie mécanique décroît de façon monotone au cours du temps à cause de la dissipation par frottement."
+        ],
+        "keyFormula": "$\\frac{\\mathrm{d}E_m}{\\mathrm{d}t} = \\mathcal{P}(\\vec{F}_{\\text{nc}}) = \\vec{f} \\cdot \\vec{v} = -h\\,\\dot{x}^2$",
+        "commonTrap": "Ne pas confondre l'expression d'une puissance dissipée ($-h\\,\\dot{x}^2$) avec la forme quadratique d'une énergie cinétique ou potentielle comportant un facteur $1/2$ (réponse D)."
+      }
+    }
+  ]
+}

@@ -1,0 +1,144 @@
+---
+title: "Thème A : Mouvement et interactions"
+subject: "physique-chimie"
+chapterId: "01-mouvement-et-interactions"
+semester: 1
+description: "Cinématique du point matériel, lois de Newton, approche énergétique, équilibre et oscillateurs harmoniques libres."
+---
+
+# Mouvement et interactions
+
+Ce chapitre inaugural du premier semestre s'appuie sur l'utilisation raisonnée des lois de Newton et des bilans énergétiques associés pour étudier les mouvements rectilignes, les mouvements plans dans un champ de force uniforme, les mouvements circulaires et les oscillations mécaniques libres[cite: 7].
+
+---
+
+## 1. Caractérisation du mouvement d'un point matériel
+
+### Repérage dans l'espace et systèmes de coordonnées
+La description du mouvement d'un point matériel $M$ nécessite le choix préalable d'un **référentiel** (solide de référence muni d'une horloge), mettant en évidence le caractère relatif du mouvement[cite: 7].
+
+Pour repérer la position du point $M$, quatre systèmes de coordonnées sont utilisés[cite: 7] :
+* **Coordonnées cartésiennes** $(x, y, z)$ dans la base fixe $(\vec{u}_x, \vec{u}_y, \vec{u}_z)$ : les surfaces où une coordonnée est uniforme sont des plans parallèles aux plans de base[cite: 7].
+* **Coordonnées polaires** $(r, \theta)$ dans le plan, associées à la base locale tournante $(\vec{u}_r, \vec{u}_\theta)$[cite: 7].
+* **Coordonnées cylindriques** $(r, \theta, z)$ dans la base locale $(\vec{u}_r, \vec{u}_\theta, \vec{u}_z)$ : la surface $r = \text{cte}$ est un cylindre d'axe $(Oz)$, $\theta = \text{cte}$ est un demi-plan contenant $(Oz)$, et $z = \text{cte}$ est un plan horizontal[cite: 7].
+* **Coordonnées sphériques** $(r, \theta, \varphi)$ : la surface $r = \text{cte}$ est une sphère centrée sur l'origine[cite: 7].
+
+<CriticalFormula title="Projection de la base locale polaire / cylindrique dans la base cartésienne">
+Dans le cas des coordonnées polaires et cylindriques, l'étudiant doit savoir exprimer les vecteurs de la base locale en fonction des vecteurs de la base cartésienne[cite: 7, 69] :
+$$\vec{u}_r = \cos(\theta)\,\vec{u}_x + \sin(\theta)\,\vec{u}_y$$
+$$\vec{u}_\theta = -\sin(\theta)\,\vec{u}_x + \cos(\theta)\,\vec{u}_y$$
+</CriticalFormula>
+
+<SchemaPlaceholder 
+  src="/images/physique-chimie/base-polaire-cylindrique.png" 
+  alt="Représentation du cercle trigonométrique et des vecteurs unitaires locaux ur et utheta par rapport à ux et uy"
+  caption="Figure 1.1 : Repérage polaire dans le plan (Oxy) et projection des vecteurs de la base locale."
+/>
+
+### Vecteurs position, vitesse et accélération
+<WarningBox title="Limite stricte du programme officiel ATS">
+Les expressions des composantes des vecteurs position $\vec{OM}$, vitesse $\vec{v}$ et accélération $\vec{a}$ sont à connaître et à utiliser **dans le seul cas des coordonnées cartésiennes**[cite: 7]. Les mouvements circulaires sont abordés par une approche énergétique et par la relation liant vitesse linéaire et vitesse angulaire[cite: 7].
+</WarningBox>
+
+En coordonnées cartésiennes, la base étant fixe dans le référentiel d'étude[cite: 7, 28] :
+$$\vec{OM}(t) = x(t)\,\vec{u}_x + y(t)\,\vec{u}_y + z(t)\,\vec{u}_z$$
+$$\vec{v}(t) = \frac{\mathrm{d}\vec{OM}}{\mathrm{d}t} = \dot{x}(t)\,\vec{u}_x + \dot{y}(t)\,\vec{u}_y + \dot{z}(t)\,\vec{u}_z$$
+$$\vec{a}(t) = \frac{\mathrm{d}\vec{v}}{\mathrm{d}t} = \ddot{x}(t)\,\vec{u}_x + \ddot{y}(t)\,\vec{u}_y + \ddot{z}(t)\,\vec{u}_z$$
+
+* **Mouvement à vecteur accélération constant ($\vec{a} = \vec{a}_0 = \text{cte}$)** : Par intégrations successives en tenant compte des conditions initiales $\vec{v}(0) = \vec{v}_0$ et $\vec{OM}(0) = \vec{OM}_0$, on obtient $\vec{v}(t) = \vec{a}_0\,t + \vec{v}_0$ et $\vec{OM}(t) = \frac{1}{2}\vec{a}_0\,t^2 + \vec{v}_0\,t + \vec{OM}_0$[cite: 7, 27]. L'élimination du paramètre temps $t$ entre $x(t)$ et $y(t)$ (ou $z(t)$) fournit l'équation cartésienne parabolique de la trajectoire[cite: 7].
+* **Mouvement circulaire de rayon $R$** : La norme de la vitesse linéaire $v$ est directement reliée à la vitesse angulaire $\omega = \dot{\theta}$ par la relation fondamentale **$v = R\,\omega$**[cite: 7].
+
+---
+
+## 2. Lois de Newton et dynamique du point
+
+### Référentiels galiléens et principes fondamentaux
+1. **Principe d'inertie (1re loi de Newton)** : Il existe des référentiels privilégiés, appelés **référentiels galiléens**, dans lesquels tout point matériel isolé ou pseudo-isolé ($\sum \vec{F}_{\text{ext}} = \vec{0}$) conserve un vecteur vitesse constant (repos ou mouvement rectiligne uniforme)[cite: 8, 59]. Tout référentiel en translation rectiligne uniforme par rapport à un référentiel galiléen est lui-même galiléen[cite: 8]. Exemples usuels : référentiel de Copernic, géocentrique (sur quelques heures), terrestre (pour des expériences courtes)[cite: 8].
+2. **Principe fondamental de la dynamique (2e loi de Newton)** : Dans un référentiel galiléen, la somme des forces extérieures appliquées à un point matériel de masse $m$ constante est égale au produit de sa masse par son vecteur accélération[cite: 8, 62].
+3. **Principe des actions réciproques (3e loi de Newton)** : Si un corps $A$ exerce une force $\vec{F}_{A \to B}$ sur un corps $B$, alors $B$ exerce simultanément sur $A$ une force opposée $\vec{F}_{B \to A} = -\vec{F}_{A \to B}$[cite: 8, 62].
+
+<CriticalFormula title="Principe Fondamental de la Dynamique (PFD)">
+Dans un référentiel galiléen, pour un point matériel de masse $m$ constante[cite: 8, 62] :
+$$\sum \vec{F}_{\text{ext}} = m\,\vec{a}$$
+</CriticalFormula>
+
+### Chute verticale avec frottement fluide
+Considérons un point matériel de masse $m$ en chute verticale selon un axe $(Oz)$ orienté vers le bas, dans le champ de pesanteur uniforme $\vec{g} = g\,\vec{u}_z$, soumis à une force de frottement fluide linéaire $\vec{f} = -h\,\vec{v} = -h\,v_z\,\vec{u}_z$[cite: 8].
+
+La projection du PFD sur $(Oz)$ donne l'équation différentielle linéaire du premier ordre vérifiée par la vitesse $v_z(t)$[cite: 8, 28] :
+$$m\frac{\mathrm{d}v_z}{\mathrm{d}t} = m\,g - h\,v_z \iff \frac{\mathrm{d}v_z}{\mathrm{d}t} + \frac{1}{\tau}v_z = g$$
+
+<CriticalFormula title="Temps caractéristique et vitesse limite (Frottement linéaire)">
+En mettant l'équation différentielle sous forme canonique, on identifie le **temps caractéristique d'évolution** $\tau$ et la **vitesse limite** $v_{\text{lim}}$ (atteinte lorsque $\frac{\mathrm{d}v_z}{\mathrm{d}t} = 0$)[cite: 8, 28] :
+$$\tau = \frac{m}{h} \quad \text{et} \quad v_{\text{lim}} = \frac{m\,g}{h} = g\,\tau$$
+</CriticalFormula>
+
+Si la force de frottement n'est pas proportionnelle à la vitesse (ex: frottement quadratique $f = k\,v^2$), la vitesse limite se détermine directement en imposant la condition de régime permanent $\dot{v}_z = 0$, soit $m\,g - k\,v_{\text{lim}}^2 = 0 \implies v_{\text{lim}} = \sqrt{\frac{m\,g}{k}}$[cite: 8].
+
+---
+
+## 3. Énergie mécanique
+
+### Travail, puissance et théorème de l'énergie cinétique
+* **Travail et puissance** : La puissance instantanée d'une force $\vec{F}$ appliquée à un point animé d'une vitesse $\vec{v}$ vaut $\mathcal{P} = \vec{F} \cdot \vec{v}$[cite: 8, 62]. Pour une force constante $\vec{F}$ lors d'un déplacement de $A$ vers $B$, le travail vaut $W_{A \to B}(\vec{F}) = \vec{F} \cdot \vec{AB}$[cite: 8]. Le travail est **moteur** si $W > 0$, **résistant** si $W < 0$, et **nul** si la force est constamment orthogonale au déplacement ($\vec{F} \perp \vec{v}$)[cite: 8].
+* **Théorème de l'énergie cinétique (TEC)** : Dans un référentiel galiléen, la variation de l'énergie cinétique $E_c = \frac{1}{2}m\,v^2$ entre deux états $A$ et $B$ est égale à la somme des travaux de toutes les forces extérieures[cite: 8, 59] :
+$$\Delta E_c = E_c(B) - E_c(A) = \sum W_{A \to B}(\vec{F}_{\text{ext}})$$
+
+### Forces conservatives, énergie potentielle et énergie mécanique
+Une force est dite **conservative** si son travail ne dépend pas du chemin suivi et dérive d'une énergie potentielle $E_p$ telle que $W_{A \to B}(\vec{F}_{\text{cons}}) = E_p(A) - E_p(B) = -\Delta E_p$[cite: 8].
+
+<CriticalFormula title="Lien Force Conservative / Énergie Potentielle (Mouvement rectiligne)">
+Dans le seul cas d'un mouvement rectiligne selon l'axe $(Ox)$, la composante de la force conservative se déduit de l'énergie potentielle $E_p(x)$ par dérivation[cite: 7, 8] :
+$$F_x(x) = -\frac{\mathrm{d}E_p}{\mathrm{d}x}$$
+</CriticalFormula>
+
+Les deux expressions fondamentales d'énergie potentielle à connaître par cœur sont (à une constante additive près)[cite: 8, 59] :
+* **Pesanteur uniforme** (axe $Oz$ vertical ascendant) : **$E_{pp}(z) = m\,g\,z$**[cite: 8, 59].
+* **Élastique (ressort idéal de raideur $k$ et d'allongement $x$)** : **$E_{pe}(x) = \frac{1}{2}k\,x^2$**[cite: 8, 59].
+
+L'**énergie mécanique** est définie par $E_m = E_c + E_p$[cite: 8, 60]. En présence de forces non conservatives $\vec{F}_{\text{nc}}$ (comme les frottements), le **théorème de la puissance mécanique** s'écrit[cite: 8, 60] :
+$$\frac{\mathrm{d}E_m}{\mathrm{d}t} = \sum \mathcal{P}(\vec{F}_{\text{nc}})$$
+En l'absence de travail des forces non conservatives, **l'énergie mécanique se conserve** ($\Delta E_m = 0$)[cite: 8, 60].
+
+---
+
+## 4. Équilibre et stabilité d'un point matériel
+
+Dans un référentiel galiléen, un point matériel soumis à une force conservative dans un mouvement à un degré de liberté $x$ est en **position d'équilibre** en $x = x_{\text{eq}}$ si la résultante des forces est nulle :
+$$F_x(x_{\text{eq}}) = 0 \iff \left(\frac{\mathrm{d}E_p}{\mathrm{d}x}\right)_{x_{\text{eq}}} = 0$$
+
+<SchemaPlaceholder 
+  src="/images/physique-chimie/puits-energie-potentielle.png" 
+  alt="Graphe de l'énergie potentielle Ep(x) montrant un minimum local (équilibre stable), un maximum local (équilibre instable) et la droite horizontale d'énergie mécanique Em bornant le mouvement"
+  caption="Figure 1.2 : Analyse graphique d'un profil d'énergie potentielle Ep(x) : positions d'équilibre et états liés."
+/>
+
+* **Équilibre stable** : Correspond à un **minimum local** d'énergie potentielle ($\frac{\mathrm{d}^2 E_p}{\mathrm{d}x^2}(x_{\text{eq}}) > 0$, forme de « cuvette » ou puits de potentiel). Si l'on écarte légèrement la particule de $x_{\text{eq}}$, la force $F_x = -\frac{\mathrm{d}E_p}{\mathrm{d}x}$ tend à la ramener vers sa position d'équilibre, engendrant des oscillations[cite: 9, 59, 60].
+* **Équilibre instable** : Correspond à un **maximum local** d'énergie potentielle ($\frac{\mathrm{d}^2 E_p}{\mathrm{d}x^2}(x_{\text{eq}}) < 0$, sommet d'une colline). Tout petit déplacement écarte définitivement le point de $x_{\text{eq}}$[cite: 9, 59].
+* Comme $E_c = E_m - E_p(x) \ge 0$, le mouvement n'est physiquement possible que dans les régions où **$E_p(x) \le E_m$**[cite: 8, 60].
+
+---
+
+## 5. Oscillations libres au voisinage d'un équilibre stable
+
+### Oscillateur harmonique non amorti
+Pour un système masse-ressort horizontal sans frottement (masse $m$, raideur $k$), le PFD ou la conservation de l'énergie mécanique $E_m = \frac{1}{2}m\dot{x}^2 + \frac{1}{2}kx^2 = \text{cte}$ conduit à l'équation différentielle canonique de l'oscillateur harmonique[cite: 9] :
+
+<CriticalFormula title="Équation canonique de l'oscillateur harmonique non amorti">
+$$\ddot{x} + \omega_0^2\,x = 0 \quad \text{avec} \quad \omega_0 = \sqrt{\frac{k}{m}} \quad \text{et} \quad T_0 = \frac{2\pi}{\omega_0}$$
+</CriticalFormula>
+
+La solution générale s'écrit $x(t) = A\cos(\omega_0 t) + B\sin(\omega_0 t) = X_m \cos(\omega_0 t + \varphi)$, où les constantes se déterminent à l'aide des conditions initiales $x(0)$ et $\dot{x}(0)$[cite: 9, 28, 29]. L'énergie mécanique totale est constante et vaut **$E_m = \frac{1}{2}k\,X_m^2 = \frac{1}{2}m\,\omega_0^2\,X_m^2$** ; au cours du temps, $E_c(t)$ et $E_p(t)$ s'échangent périodiquement avec une période égale à $\frac{T_0}{2}$[cite: 9].
+
+### Oscillateur harmonique amorti
+En ajoutant une force de frottement fluide visqueux $\vec{f} = -h\,\dot{x}\,\vec{u}_x$, le PFD donne $m\ddot{x} + h\dot{x} + kx = 0$[cite: 9].
+
+<CriticalFormula title="Équation canonique de l'oscillateur amorti (Pulsation propre et Facteur de qualité)">
+En divisant par $m$, on écrit l'équation sous sa forme canonique faisant apparaître la pulsation propre $\omega_0$ et le **facteur de qualité** $Q$[cite: 9, 28] :
+$$\ddot{x} + \frac{\omega_0}{Q}\dot{x} + \omega_0^2\,x = 0 \quad \text{avec} \quad \omega_0 = \sqrt{\frac{k}{m}} \quad \text{et} \quad Q = \frac{\sqrt{k\,m}}{h} = \frac{m\,\omega_0}{h}$$
+</CriticalFormula>
+
+L'étude du discriminant de l'équation caractéristique $r^2 + \frac{\omega_0}{Q}r + \omega_0^2 = 0$, soit $\Delta = \omega_0^2\left(\frac{1}{Q^2} - 4\right)$, distingue trois régimes d'évolution libre[cite: 9, 28] :
+1. **Régime pseudopériodique ($Q > \frac{1}{2}$, $\Delta < 0$)** : Le système oscille avec une amplitude qui décroît exponentiellement selon un temps caractéristique d'amortissement $\tau_{\text{amort}} = \frac{2Q}{\omega_0}$ et une pseudopériode $T = \frac{T_0}{\sqrt{1 - \frac{1}{4Q^2}}}$[cite: 9]. Plus $Q$ est grand devant $1$, plus le nombre d'oscillations visibles avant amortissement est élevé ($N_{\text{osc}} \approx Q$)[cite: 9, 60].
+2. **Régime critique ($Q = \frac{1}{2}$, $\Delta = 0$)** : Retour à l'équilibre le plus rapide possible sans dépassement ni oscillation[cite: 9].
+3. **Régime apériodique ($Q < \frac{1}{2}$, $\Delta > 0$)** : Amortissement fort ; le système revient lentement vers sa position d'équilibre sans jamais osciller[cite: 9].

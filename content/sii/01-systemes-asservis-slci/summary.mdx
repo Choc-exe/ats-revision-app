@@ -1,0 +1,22 @@
+---
+title: "Fiche Synthèse : Systèmes asservis et SLCI"
+subject: "sii"
+chapterId: "01-systemes-asservis-slci"
+---
+
+## L'Essentiel du Bulletin Officiel ATS
+
+* **Transformée de Laplace (CI nulles) & Entrées canoniques** :
+  * Dérivation : $\mathcal{L}[\dot{s}(t)] = p\,S(p)$ ; Intégration : $\mathcal{L}[\int s] = \frac{1}{p}S(p)$[cite: 40, 124].
+  * Échelon d'amplitude $E_0$ : **$E(p) = \frac{E_0}{p}$** ; Rampe de pente $a$ : **$E(p) = \frac{a}{p^2}$**[cite: 40].
+  * *Hors programme* : Calcul de transformées de Laplace inverses, critère de Routh, diagrammes de Black et de Nyquist[cite: 48, 125, 126].
+* **Schémas-Blocs & Forme Canonique** :
+  * **Formule de Black (retour négatif)** : **$\text{FTBF}(p) = \frac{A(p)}{1 + A(p)\,B(p)}$** avec $\text{FTBO}(p) = A(p)\,B(p)$[cite: 40, 124].
+  * **Forme canonique** : $H(p) = \frac{K}{p^\alpha} \frac{1 + b_1 p + \dots}{1 + a_1 p + \dots}$ ($K$ : gain, $\alpha$ : classe, degré dénominateur : ordre)[cite: 40].
+* **Modèles temporels de comportement (Entrée échelon $E_0$)** :
+  * **1er ordre** : $H(p) = \frac{K}{1 + \tau p} \implies$ **$s(t) = K E_0 (1 - e^{-t/\tau})$**, tangente à l'origine non nulle ($\frac{K E_0}{\tau}$), $s(\tau) = 0{,}63\,s_\infty$, **$t_{r5\%} \approx 3\tau$**[cite: 40, 48].
+  * **2nd ordre** : $H(p) = \frac{K}{1 + \frac{2\xi}{\omega_0}p + \frac{p^2}{\omega_0^2}} \implies$ tangente horizontale en $t=0$ ; apériodique si $\xi > 1$, critique si $\xi = 1$, pseudopériodique (oscillations + dépassement) si $0 < \xi < 1$ (optimum de rapidité $t_{r5\%}$ pour $\xi \approx 0{,}7$)[cite: 40, 48].
+* **Performances (Stabilité, Précision, Rapidité)** :
+  * **Stabilité** : Parties réelles des pôles de la FTBF strictement négatives[cite: 45, 125].
+  * **Théorème de la valeur finale** : **$s_\infty = \lim_{p\to 0} p\,S(p)$** et **$\varepsilon_\infty = \lim_{p\to 0} p\,\varepsilon(p)$**[cite: 48, 126].
+  * **Précision (retour unitaire, entrée échelon $E_0$)** : Si classe $\alpha = 0$, $\varepsilon_\infty = \frac{E_0}{1 + K_{\text{BO}}}$ ; si classe $\alpha \ge 1$ (présence d'un intégrateur), **$\varepsilon_\infty = 0$**[cite: 48].

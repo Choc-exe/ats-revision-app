@@ -1,0 +1,113 @@
+{
+  "chapterId": "01-systemes-asservis-slci",
+  "subject": "sii",
+  "title": "QCM d'entraînement : Systèmes asservis et SLCI",
+  "questions": [
+    {
+      "id": "qcm-sii-01-01",
+      "difficulty": "Application directe",
+      "questionText": "Un moteur électrique modélisé par un système du premier ordre de fonction de transfert $H(p) = \\frac{\\Omega(p)}{U(p)} = \\frac{K}{1 + \\tau\\,p}$ est soumis à un échelon de tension $U_0 = 10\\text{ V}$. En régime permanent, la vitesse se stabilise à $\\omega_\\infty = 150\\text{ rad}\\cdot\\text{s}^{-1}$, et la vitesse atteint $94{,}5\\text{ rad}\\cdot\\text{s}^{-1}$ à l'instant $t = 0{,}2\\text{ s}$. Quelles sont les valeurs de $K$, de $\\tau$ et du temps de réponse à $5\\%$ ?",
+      "options": [
+        { "id": "A", "text": "$K = 150\\text{ rad}\\cdot\\text{s}^{-1}\\cdot\\text{V}^{-1}$, $\\tau = 0{,}2\\text{ s}$ et $t_{r5\\%} = 0{,}6\\text{ s}$" },
+        { "id": "B", "text": "$K = 15\\text{ rad}\\cdot\\text{s}^{-1}\\cdot\\text{V}^{-1}$, $\\tau = 0{,}2\\text{ s}$ et $t_{r5\\%} = 0{,}6\\text{ s}$" },
+        { "id": "C", "text": "$K = 15\\text{ rad}\\cdot\\text{s}^{-1}\\cdot\\text{V}^{-1}$, $\\tau = 0{,}6\\text{ s}$ et $t_{r5\\%} = 0{,}2\\text{ s}$" },
+        { "id": "D", "text": "$K = 15\\text{ rad}\\cdot\\text{s}^{-1}\\cdot\\text{V}^{-1}$, $\\tau = 0{,}1\\text{ s}$ et $t_{r5\\%} = 0{,}3\\text{ s}$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. En régime permanent, la valeur finale vaut $\\omega_\\infty = K\\,U_0$. On en déduit le gain statique : $K = \\frac{\\omega_\\infty}{U_0} = \\frac{150}{10} = 15\\text{ rad}\\cdot\\text{s}^{-1}\\cdot\\text{V}^{-1}$.",
+          "2. On calcule $63\\%$ de la valeur finale : $0{,}63 \\times 150 = 94{,}5\\text{ rad}\\cdot\\text{s}^{-1}$. Or, pour un système du 1er ordre, la sortie atteint $63\\%$ de sa valeur finale à l'instant $t = \\tau$, donc $\\tau = 0{,}2\\text{ s}$.",
+          "3. Le temps de réponse à $5\\%$ d'un premier ordre vaut $t_{r5\\%} \\approx 3\\tau = 3 \\times 0{,}2 = 0{,}6\\text{ s}$."
+        ],
+        "keyFormula": "$\\omega_\\infty = K\\,U_0 \\quad ; \\quad \\omega(\\tau) \\approx 0{,}63\\,\\omega_\\infty \\quad ; \\quad t_{r5\\%} \\approx 3\\tau$",
+        "commonTrap": "La réponse A confond la valeur finale $\\omega_\\infty = 150\\text{ rad}\\cdot\\text{s}^{-1}$ avec le gain statique $K$ en oubliant de diviser par l'amplitude de l'échelon d'entrée $U_0 = 10\\text{ V}$."
+      }
+    },
+    {
+      "id": "qcm-sii-01-02",
+      "difficulty": "Calculatoire",
+      "questionText": "Un système asservi à retour unitaire possède une chaîne directe de fonction de transfert $A(p) = \\frac{9}{p(1 + 0{,}2\\,p)}$. En utilisant la formule de Black, quelle est la forme canonique de sa Fonction de Transfert en Boucle Fermée $H_{\\text{BF}}(p)$ et que valent ses paramètres caractéristiques $(K_{\\text{BF}}, \\omega_0, \\xi)$ ?",
+      "options": [
+        { "id": "A", "text": "$K_{\\text{BF}} = 1$, $\\omega_0 = \\sqrt{45}\\text{ rad}\\cdot\\text{s}^{-1}$ et $\\xi = \\frac{1}{2\\sqrt{45}}$" },
+        { "id": "B", "text": "$K_{\\text{BF}} = 9$, $\\omega_0 = 3\\sqrt{5}\\text{ rad}\\cdot\\text{s}^{-1}$ et $\\xi = \\frac{\\sqrt{5}}{6}$" },
+        { "id": "C", "text": "$K_{\\text{BF}} = 1$, $\\omega_0 = 3\\sqrt{5}\\text{ rad}\\cdot\\text{s}^{-1}$ et $\\xi = \\frac{\\sqrt{5}}{6} \\approx 0{,}37$" },
+        { "id": "D", "text": "$K_{\\text{BF}} = 1$, $\\omega_0 = 45\\text{ rad}\\cdot\\text{s}^{-1}$ et $\\xi = 0{,}1$" }
+      ],
+      "correctOptionId": "C",
+      "explanation": {
+        "steps": [
+          "1. Avec un retour unitaire ($B(p) = 1$), la formule de Black donne : $H_{\\text{BF}}(p) = \\frac{A(p)}{1 + A(p)} = \\frac{\\frac{9}{p(1 + 0{,}2p)}}{1 + \\frac{9}{p(1 + 0{,}2p)}} = \\frac{9}{p + 0{,}2p^2 + 9}$.",
+          "2. Pour obtenir la forme canonique (terme constant égal à $1$ au dénominateur), on divise numérateur et dénominateur par $9$ : $H_{\\text{BF}}(p) = \\frac{1}{1 + \\frac{1}{9}p + \\frac{0{,}2}{9}p^2} = \\frac{1}{1 + \\frac{1}{9}p + \\frac{1}{45}p^2}$.",
+          "3. Par identification avec $\\frac{K_{\\text{BF}}}{1 + \\frac{2\\xi}{\\omega_0}p + \\frac{1}{\\omega_0^2}p^2}$, on trouve : $K_{\\text{BF}} = 1$, puis $\\frac{1}{\\omega_0^2} = \\frac{1}{45} \\implies \\omega_0 = \\sqrt{45} = 3\\sqrt{5}\\text{ rad}\\cdot\\text{s}^{-1}$.",
+          "4. Enfin, $\\frac{2\\xi}{\\omega_0} = \\frac{1}{9} \\implies \\xi = \\frac{\\omega_0}{18} = \\frac{3\\sqrt{5}}{18} = \\frac{\\sqrt{5}}{6} \\approx 0{,}37$."
+        ],
+        "keyFormula": "$H_{\\text{BF}}(p) = \\frac{A(p)}{1 + A(p)} = \\frac{K_{\\text{BF}}}{1 + \\frac{2\\xi}{\\omega_0}p + \\frac{1}{\\omega_0^2}p^2}$",
+        "commonTrap": "La réponse B oublie de diviser par $9$ pour mettre le dénominateur sous forme canonique ($1 + \\dots$). La réponse A identifie $\\frac{2\\xi}{\\omega_0} = 1$ sur l'équation non normalisée."
+      }
+    },
+    {
+      "id": "qcm-sii-01-03",
+      "difficulty": "Application directe",
+      "questionText": "Soit un système asservi stable à retour unitaire dont la Fonction de Transfert en Boucle Ouverte est $\\text{FTBO}(p) = \\frac{19}{(1 + 2p)(1 + 0{,}5p)}$. On applique en entrée un échelon unitaire $e(t) = u(t)$ ($E_0 = 1$). Que vaut l'écart statique $\\varepsilon_\\infty$ en régime permanent ?",
+      "options": [
+        { "id": "A", "text": "$\\varepsilon_\\infty = 0$" },
+        { "id": "B", "text": "$\\varepsilon_\\infty = \\frac{1}{19} \\approx 0{,}053$" },
+        { "id": "C", "text": "$\\varepsilon_\\infty = \\frac{1}{20} = 0{,}05$" },
+        { "id": "D", "text": "$\\varepsilon_\\infty = \\frac{19}{20} = 0{,}95$" }
+      ],
+      "correctOptionId": "C",
+      "explanation": {
+        "steps": [
+          "1. On repère la classe de la FTBO : il n'y a aucun terme en $1/p$ en facteur au dénominateur, donc le système est de classe $\\alpha = 0$ et de gain en boucle ouverte $K_{\\text{BO}} = 19$.",
+          "2. L'écart s'exprime en fonction de la consigne : $\\varepsilon(p) = \\frac{E(p)}{1 + \\text{FTBO}(p)}$ avec $E(p) = \\frac{1}{p}$.",
+          "3. En appliquant le théorème de la valeur finale : $\\varepsilon_\\infty = \\lim_{p \\to 0} p\\,\\varepsilon(p) = \\lim_{p \\to 0} \\frac{1}{1 + \\text{FTBO}(p)} = \\frac{1}{1 + K_{\\text{BO}}} = \\frac{1}{1 + 19} = \\frac{1}{20} = 0{,}05$."
+        ],
+        "keyFormula": "Pour une FTBO de classe $\\alpha = 0$ : $\\varepsilon_\\infty = \\frac{E_0}{1 + K_{\\text{BO}}}$",
+        "commonTrap": "La réponse A suppose à tort la présence d'un intégrateur. La réponse D calcule la valeur finale de la sortie $s_\\infty = \\frac{K_{\\text{BO}}}{1 + K_{\\text{BO}}} = \\frac{19}{20}$ au lieu de l'écart $\\varepsilon_\\infty = 1 - s_\\infty$."
+      }
+    },
+    {
+      "id": "qcm-sii-01-04",
+      "difficulty": "Type Concours",
+      "questionText": "Un système du second ordre possède deux pôles réels négatifs $p_1 = -1\\text{ s}^{-1}$ et $p_2 = -50\\text{ s}^{-1}$, de sorte que sa fonction de transfert s'écrit $H(p) = \\frac{10}{(1 + p)(1 + 0{,}02\\,p)}$. En appliquant l'approximation du **pôle dominant**, par quel modèle réduit du 1er ordre peut-on simplifier $H(p)$ et quel est son temps de réponse à $5\\%$ estimé ?",
+      "options": [
+        { "id": "A", "text": "$H_{\\text{réduit}}(p) = \\frac{10}{1 + 0{,}02\\,p}$ et $t_{r5\\%} \\approx 0{,}06\\text{ s}$" },
+        { "id": "B", "text": "$H_{\\text{réduit}}(p) = \\frac{10}{1 + p}$ et $t_{r5\\%} \\approx 3\\text{ s}$" },
+        { "id": "C", "text": "$H_{\\text{réduit}}(p) = \\frac{10}{1 + 50\\,p}$ et $t_{r5\\%} \\approx 150\\text{ s}$" },
+        { "id": "D", "text": "$H_{\\text{réduit}}(p) = \\frac{1}{1 + p}$ et $t_{r5\\%} \\approx 1\\text{ s}$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. Les deux constantes de temps associées aux pôles sont $\\tau_1 = \\frac{1}{|p_1|} = 1\\text{ s}$ et $\\tau_2 = \\frac{1}{|p_2|} = 0{,}02\\text{ s}$.",
+          "2. Comme $\\tau_1 \\gg \\tau_2$ (rapport de $50$), le mode rapide $e^{-50t}$ s'éteint presque instantanément devant le mode lent $e^{-t}$ : le **pôle dominant** est celui qui est le plus proche de l'axe imaginaire ($p_1 = -1\\text{ s}^{-1}$, associé à la plus grande constante de temps $\\tau_1 = 1\\text{ s}$).",
+          "3. On néglige donc la petite constante de temps $\\tau_2 = 0{,}02\\text{ s}$ tout en conservant impérativement le même gain statique $K = 10$, soit $H_{\\text{réduit}}(p) = \\frac{10}{1 + p}$ avec $t_{r5\\%} \\approx 3\\tau_1 = 3\\text{ s}$."
+        ],
+        "keyFormula": "Si $\\tau_1 \\gg \\tau_2$, le pôle dominant est $p_1 = -\\frac{1}{\\tau_1}$ et $H(p) \\approx \\frac{K}{1 + \\tau_1\\,p}$",
+        "commonTrap": "Le piège classique (réponse A) consiste à croire que le pôle de plus grande valeur absolue ($|-50| > |-1|$) est le pôle dominant : en réalité, c'est le pôle le plus lent (le plus proche de $0$, donc de plus grande constante de temps) qui ralentit et domine la dynamique asymptotique du système."
+      }
+    },
+    {
+      "id": "qcm-sii-01-05",
+      "difficulty": "Type Concours",
+      "questionText": "Dans un système asservi de classe $0$, on remplace un correcteur proportionnel $C(p) = K_p$ par un correcteur Proportionnel-Intégral (PI) de fonction de transfert $C(p) = K_p\\left(1 + \\frac{1}{T_i\\,p}\\right) = K_p\\frac{1 + T_i\\,p}{T_i\\,p}$. Quel est l'effet principal de l'action intégrale sur les performances du système ?",
+      "options": [
+        { "id": "A", "text": "Elle augmente la classe de la FTBO de $1$, ce qui annule l'écart statique en réponse à un échelon." },
+        { "id": "B", "text": "Elle diminue la classe de la FTBO et augmente systématiquement la marge de phase." },
+        { "id": "C", "text": "Elle supprime tous les dépassements en rendant le système inconditionnellement stable." },
+        { "id": "D", "text": "Elle divise par deux l'ordre du système en boucle fermée." }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. La fonction de transfert du correcteur PI comporte un pôle en $p = 0$ (facteur $\\frac{1}{T_i\\,p}$), ce qui introduit un intégrateur pur dans la chaîne directe.",
+          "2. La classe $\\alpha$ de la FTBO passe donc de $\\alpha = 0$ à $\\alpha = 1$.",
+          "3. D'après les propriétés de précision des systèmes asservis, une classe $\\alpha \\ge 1$ garantit un écart statique nul ($\\varepsilon_\\infty = 0$) pour une consigne en échelon (ainsi qu'un rejet total d'une perturbation constante située en aval du correcteur)."
+        ],
+        "keyFormula": "$C_{\\text{PI}}(p) = K_p\\left(1 + \\frac{1}{T_i\\,p}\\right) \\implies \\text{Classe FTBO } \\alpha \\ge 1 \\implies \\varepsilon_\\infty = 0$",
+        "commonTrap": "Contrairement aux affirmations B et C, l'ajout d'un intégrateur pur apporte un déphasage négatif (jusqu'à $-90^\\circ$ à basse fréquence), ce qui tend à réduire la marge de phase si $T_i$ est mal réglé."
+      }
+    }
+  ]
+}
