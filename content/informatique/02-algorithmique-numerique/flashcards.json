@@ -1,0 +1,62 @@
+{
+  "chapterId": "02-algorithmique-numerique",
+  "subject": "informatique",
+  "title": "Algorithmique numérique (Flottants, Dérivation, Intégration, Zéros)",
+  "cards": [
+    {
+      "id": "fc-info-02-01",
+      "category": "Piège Classique",
+      "difficulty": 1,
+      "front": "Pourquoi ne faut-il jamais utiliser le test d'égalité `x == y` entre deux nombres de type `float`, et par quelle condition faut-il le remplacer ?",
+      "back": {
+        "mainAnswer": "Le codage binaire en virgule flottante sur un nombre fini de bits engendre des erreurs d'arrondi lors des calculs arithmétiques. Deux valeurs théoriquement égales peuvent différer d'environ $10^{-16}$.",
+        "criticalFormula": "Condition correcte : abs(x - y) <= eps (avec eps = 1e-9 par exemple)",
+        "mnemonicOrTip": "De même, n'utilisez jamais une égalité entre flottants (comme while t != 1.0:) comme condition d'arrêt d'une boucle while, au risque de créer une boucle infinie !"
+      }
+    },
+    {
+      "id": "fc-info-02-02",
+      "category": "Formule Critique",
+      "difficulty": 1,
+      "front": "Quelle est la convention imposée par le programme ATS pour calculer la dérivée discrète d'une fonction tabulée `(X, Y)` de taille $n$, et quelle est la taille du tableau `dY` obtenu ?",
+      "back": {
+        "mainAnswer": "Par convention officielle, la dérivée discrète se calcule par différence avant. Comme le calcul à l'indice $i$ utilise l'indice $i+1$, la boucle s'arrête à $n - 2$ et le tableau `dY` possède une taille égale à $n - 1$.",
+        "criticalFormula": "Pour i dans range(0, len(X) - 1) : dY[i] = (Y[i + 1] - Y[i]) / (X[i + 1] - X[i])",
+        "mnemonicOrTip": "Si la boucle va jusqu'à len(X) au lieu de len(X) - 1, l'évaluation de X[i + 1] au dernier tour déclenchera immédiatement une erreur IndexError."
+      }
+    },
+    {
+      "id": "fc-info-02-03",
+      "category": "Formule Critique",
+      "difficulty": 2,
+      "front": "Quelle est la formule de récurrence de la **méthode de Newton** pour approcher un zéro de $f(x) = 0$, et quelle est son interprétation géométrique ?",
+      "back": {
+        "mainAnswer": "Géométriquement, on remplace la courbe de $f$ par sa tangente au point d'abscisse $x_k$ et on définit $x_{k+1}$ comme l'abscisse du point d'intersection de cette tangente avec l'axe $(Ox)$.",
+        "criticalFormula": "$$x_{k+1} = x_k - \\frac{f(x_k)}{f'(x_k)}$$",
+        "mnemonicOrTip": "En l'absence de la fonction dérivée exacte df, on peut approcher f'(x_k) dans la formule par une dérivée discrète par différence avant : (f(x_k + h) - f(x_k)) / h."
+      }
+    },
+    {
+      "id": "fc-info-02-04",
+      "category": "Méthode",
+      "difficulty": 2,
+      "front": "Dans l'algorithme de **dichotomie** sur $[g, d]$, comment choisit-on le sous-intervalle à conserver après avoir calculé le milieu $m = (g + d) / 2$ ?",
+      "back": {
+        "mainAnswer": "On teste le signe du produit $f(g) \\times f(m)$. S'il est négatif ou nul, la fonction change de signe entre $g$ et $m$ (la racine est à gauche, donc $d \\leftarrow m$). Sinon, la racine est à droite ($g \\leftarrow m$).",
+        "criticalFormula": "if f(g) * f(m) <= 0:\n    d = m\nelse:\n    g = m",
+        "mnemonicOrTip": "Après $k$ itérations de la boucle while, la largeur de l'intervalle d'encadrement initial $[a, b]$ est divisée par $2^k$, soit une précision égale à $(b - a) / 2^k$."
+      }
+    },
+    {
+      "id": "fc-info-02-05",
+      "category": "Formule Critique",
+      "difficulty": 2,
+      "front": "Comment s'écrit l'approximation de l'intégrale $\\int_a^b f(x)\\,\\mathrm{d}x$ sur $n$ sous-intervalles de pas $h = \\frac{b - a}{n}$ par la **méthode des trapèzes** ?",
+      "back": {
+        "mainAnswer": "Sur chaque sous-intervalle $[x_i, x_{i+1}]$ de largeur $h$, on approche l'aire sous la courbe par celle d'un trapèze de hauteur moyenne $\\frac{f(x_i) + f(x_{i+1})}{2}$.",
+        "criticalFormula": "$$I_{\\text{trap}} = \\sum_{i=0}^{n-1} h\\,\\frac{f(x_i) + f(x_{i+1})}{2} = h\\left(\\frac{f(a) + f(b)}{2} + \\sum_{i=1}^{n-1} f(a + i\\,h)\\right)$$",
+        "mnemonicOrTip": "En factorisant par $h$, chaque terme intérieur $f(x_i)$ est compté deux fois (à droite du trapèze $i-1$ et à gauche du trapèze $i$), tandis que les extrémités $f(a)$ et $f(b)$ ne sont comptées qu'une demi-fois."
+      }
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "chapterId": "02-energie-conversion-transferts",
+  "subject": "physique-chimie",
+  "title": "QCM d'entraînement : Énergie, conversion et transferts",
+  "questions": [
+    {
+      "id": "qcm-phys-02-01",
+      "difficulty": "Application directe",
+      "questionText": "Une pompe à chaleur (PAC) réversible assure le chauffage d'un bâtiment en extrayant de la chaleur de l'extérieur. Elle fournit une puissance thermique de $-Q_C = 12\\text{ kW}$ à la source chaude ($T_C = 20^\\circ\\text{C}$) tout en consommant une puissance électrique $W = 3\\text{ kW}$. Quel est le Coefficient de Performance (COP) réel de cette PAC, et respecte-t-elle le théorème de Carnot ?",
+      "options": [
+        { "id": "A", "text": "$\\text{COP} = 4{,}0$ et elle respecte Carnot (le COP de Carnot est supérieur)." },
+        { "id": "B", "text": "$\\text{COP} = 4{,}0$ et elle viole le théorème de Carnot." },
+        { "id": "C", "text": "$\\text{COP} = 5{,}0$ et elle respecte Carnot." },
+        { "id": "D", "text": "$\\text{COP} = 3{,}0$ et elle respecte Carnot." }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. On convertit les températures en Kelvin : $T_C = 20 + 273{,}15 = 293{,}15\\text{ K}$. Supposons une température extérieure source froide $T_F = 0^\\circ\\text{C} = 273{,}15\\text{ K}$.",
+          "2. Calcul du COP réel : $\\text{COP}_{\\text{PAC}} = \\frac{-Q_C}{W} = \\frac{12\\text{ kW}}{3\\text{ kW}} = 4{,}0$.",
+          "3. Calcul du COP maximal de Carnot : $\\text{COP}_{\\text{Carnot}} = \\frac{T_C}{T_C - T_F} = \\frac{293{,}15}{293{,}15 - 273{,}15} = \\frac{293{,}15}{20} \\approx 14{,}66$.",
+          "4. Comme $\\text{COP}_{\\text{réel}} = 4{,}0 \\le \\text{COP}_{\\text{Carnot}} = 14{,}66$, la machine respecte le second principe."
+        ],
+        "keyFormula": "$\\text{COP}_{\\text{PAC}} = \\frac{-Q_C}{W} \\le \\frac{T_C}{T_C - T_F}$",
+        "commonTrap": "Oublier de convertir les températures en Kelvin avant d'évaluer la limite de Carnot."
+      }
+    },
+    {
+      "id": "qcm-phys-02-02",
+      "difficulty": "Calculatoire",
+      "questionText": "On chauffe une masse $m = 500\\text{ g}$ d'eau liquide (assimilée à une phase condensée incompressible et indilatable de capacité thermique massique $c = 4{,}18\\text{ kJ}\\cdot\\text{kg}^{-1}\\cdot\\text{K}^{-1}$) de $20^\\circ\\text{C}$ à $80^\\circ\\text{C}$ sous pression atmosphérique constante. Quel est le transfert thermique $Q$ reçu par l'eau ?",
+      "options": [
+        { "id": "A", "text": "$Q = 125{,}4\\text{ kJ}$" },
+        { "id": "B", "text": "$Q = 209{,}0\\text{ kJ}$" },
+        { "id": "C", "text": "$Q = 62{,}7\\text{ kJ}$" },
+        { "id": "D", "text": "$Q = 418{,}0\\text{ kJ}$" }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. Pour une phase condensée monobare, le transfert thermique est égal à la variation d'enthalpie : $Q = \\Delta H = \\int_{T_1}^{T_2} m\\,c\\,\\mathrm{dT} = m\\,c\\,(T_2 - T_1)$.",
+          "2. Application numérique : $m = 0{,}5\\text{ kg}$, $c = 4180\\text{ J}\\cdot\\text{kg}^{-1}\\cdot\\text{K}^{-1}$, $\\Delta T = 80 - 20 = 60\\text{ K}$.",
+          "3. $Q = 0{,}5 \\times 4180 \\times 60 = 125\\,400\\text{ J} = 125{,}4\\text{ kJ}$."
+        ],
+        "keyFormula": "$Q = \\Delta H = m\\,c\\,(T_2 - T_1)$",
+        "commonTrap": "Convertir imprudemment la différence de température en Kelvin : $\\Delta T$ en Celsius est strictement identique à $\\Delta T$ en Kelvin."
+      }
+    },
+    {
+      "id": "qcm-phys-02-03",
+      "difficulty": "Application directe",
+      "questionText": "Au cours d'une transformation adiabatique et réversible (isentropique) d'un gaz parfait, la pression est multipliée par $8$ ($P_2 / P_1 = 8$). Sachant que le coefficient isentropique vaut $\\gamma = 1{,}4$, quel est le rapport des températures $T_2 / T_1$ ?",
+      "options": [
+        { "id": "A", "text": "$\\frac{T_2}{T_1} = 8^{1{,}4} \\approx 18{,}38$" },
+        { "id": "B", "text": "$\\frac{T_2}{T_1} = 8^{\\frac{0{,}4}{1{,}4}} \\approx 1{,}87$" },
+        { "id": "C", "text": "$\\frac{T_2}{T_1} = 8^{\\frac{1}{1{,}4}} \\approx 4{,}59$" },
+        { "id": "D", "text": "$\\frac{T_2}{T_1} = 8 \\times 1{,}4 = 11{,}2$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. On utilise la loi de Laplace liant la pression et la température : $P^{1-\\gamma}T^\\gamma = \\text{cte}$, soit $T^\\gamma P^{1-\\gamma} = \\text{constante}$.",
+          "2. On isole le rapport de température : $\\left(\\frac{T_2}{T_1}\\right)^\\gamma = \\left(\\frac{P_2}{P_1}\\right)^{\\gamma - 1} \\implies \\frac{T_2}{T_1} = \\left(\\frac{P_2}{P_1}\\right)^{\\frac{\\gamma - 1}{\\gamma}}.$",
+          "3. Application numérique : $\\frac{T_2}{T_1} = 8^{\\frac{1{,}4 - 1}{1{,}4}} = 8^{\\frac{0{,}4}{1{,}4}} = 8^{\\frac{2}{7}} \\approx 1{,}866$."
+        ],
+        "keyFormula": "$\\frac{T_2}{T_1} = \\left(\\frac{P_2}{P_1}\\right)^{\\frac{\\gamma - 1}{\\gamma}}$",
+        "commonTrap": "Appliquer la loi des gaz parfaits $PV = nRT$ sans tenir compte de la condition adiabatique isentropique (ce qui conduirait à l'expression fausse $\\frac{T_2}{T_1} = \\frac{P_2}{P_1} = 8$)."
+      }
+    },
+    {
+      "id": "qcm-phys-02-04",
+      "difficulty": "Type Concours",
+      "questionText": "Quelle est la cause principale de la création d'entropie ($S_{\\text{cre}} > 0$) constatée dans les machines thermiques réelles par rapport au cycle de Carnot théorique ?",
+      "options": [
+        { "id": "A", "text": "La constance de la pression atmosphérique extérieure." },
+        { "id": "B", "text": "Les transferts thermiques avec des écarts de température finis et les frottements mécaniques." },
+        { "id": "C", "text": "L'utilisation exclusive de gaz parfaits monoatomiques." },
+        { "id": "D", "text": "Le caractère stationnaire des écoulements dans les turbines." }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. D'après le second principe, l'entropie créée $S_{\\text{cre}}$ quantifie l'irréversibilité d'une transformation.",
+          "2. Les sources d'irréversibilité dans les machines réelles proviennent des frottements mécaniques (visqueux ou solides) et des transferts thermiques à travers des gradients de température finis ($\\Delta T \\neq 0$ entre le fluide et les sources).",
+          "3. Le cycle de Carnot suppose des transferts infiniment lents et isothermes (sans gradient de température), d'où $S_{\\text{cre}} = 0$."
+        ],
+        "keyFormula": "$S_{\\text{cre}} = \\Delta S - \\int \\frac{\\delta Q}{T} > 0$ (en présence d'irréversibilités)",
+        "commonTrap": "Croire que le premier principe (conservation de l'énergie) est violé dans les machines réelles : l'énergie se conserve toujours, mais sa qualité (exergie/entropie) se dégrade."
+      }
+    },
+    {
+      "id": "qcm-phys-02-05",
+      "difficulty": "Type Concours",
+      "questionText": "Un fluide subit une détente au travers d'un **détendeur adiabatique** en régime stationnaire. En négligeant les variations d'énergie cinétique et potentielle, que peut-on affirmer concernant son enthalpie massique $h$ entre l'entrée (1) et la sortie (2) ?",
+      "options": [
+        { "id": "A", "text": "$h_2 = h_1$ (la détente est isenthalpique)." },
+        { "id": "B", "text": "$h_2 < h_1$ (l'enthalpie diminue car le fluide fournit du travail)." },
+        { "id": "C", "text": "$h_2 > h_1$ (l'enthalpie augmente par frottement visqueux)." },
+        { "id": "D", "text": "$h_2 = h_1$ et la transformation est isentropique ($s_2 = s_1$)." }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. On applique le premier principe en système ouvert en régime stationnaire : $\\Delta h + \\Delta e_c + \\Delta e_p = w_{\\text{indiqué}} + q_{\\text{ext}}.$",
+          "2. Un détendeur est une vanne ou un capillaire fixe : il n'y a aucune partie mobile, donc le travail indiqué reçu sur un axe est nul ($w_{\\text{indiqué}} = 0$).",
+          "3. Le dispositif est qualifié d'adiabatique, donc aucun transfert thermique n'a lieu avec l'extérieur ($q_{\\text{ext}} = 0$).",
+          "4. En négligeant $\\Delta e_c$ et $\\Delta e_p$, on obtient immédiatement $\\Delta h = 0 \\implies h_2 = h_1$."
+        ],
+        "keyFormula": "Détendeur adiabatique : $q_{\\text{ext}} = 0$, $w_{\\text{indiqué}} = 0 \\implies h_2 = h_1$",
+        "commonTrap": "Confondre adiabatique réversible (isentropique, $s_2 = s_1$) et détente adiabatique d'un détendeur (isenthalpique, $h_2 = h_1$, avec forte création d'entropie $s_2 > s_1$)."
+      }
+    }
+  ]
+}

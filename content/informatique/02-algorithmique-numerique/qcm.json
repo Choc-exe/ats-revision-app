@@ -1,0 +1,112 @@
+{
+  "chapterId": "02-algorithmique-numerique",
+  "subject": "informatique",
+  "title": "QCM d'entraînement : Algorithmique numérique",
+  "questions": [
+    {
+      "id": "qcm-info-02-01",
+      "difficulty": "Application directe",
+      "questionText": "On dispose de deux tableaux `X` et `Y` contenant chacun $N = 100$ mesures expérimentales de temps et de position. On calcule le tableau `V` de la vitesse par dérivation discrète (différence avant). Quelle doit être l'instruction `for` utilisée et quelle sera la longueur `len(V)` du tableau obtenu ?",
+      "options": [
+        { "id": "A", "text": "`for i in range(0, len(X)):` et `len(V) == 100`" },
+        { "id": "B", "text": "`for i in range(0, len(X) - 1):` et `len(V) == 99`" },
+        { "id": "C", "text": "`for i in range(1, len(X) - 1):` et `len(V) == 98`" },
+        { "id": "D", "text": "`for i in range(0, len(X) + 1):` et `len(V) == 101`" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. Par convention du programme ATS, la dérivée discrète par différence avant s'écrit `V.append((Y[i + 1] - Y[i]) / (X[i + 1] - X[i]))`.",
+          "2. Pour que l'indice `i + 1` reste strictement inférieur à `len(X) = 100`, le dernier indice `i` valide est `98`, ce qui correspond à `for i in range(0, len(X) - 1):`.",
+          "3. La boucle s'exécute pour $i \\in \\{0, 1, \\dots, 98\\}$, soit exactement $99$ fois : le tableau `V` a donc une taille `len(V) == 99` ($N - 1$)."
+        ],
+        "keyFormula": "Différence avant sur N points -> range(0, N - 1) -> Tableau dérivé de taille N - 1",
+        "commonTrap": "La réponse A provoque systématiquement une erreur `IndexError: list index out of range` lors de la dernière itération ($i = 99 \\implies i + 1 = 100$)."
+      }
+    },
+    {
+      "id": "qcm-info-02-02",
+      "difficulty": "Calculatoire",
+      "questionText": "On utilise l'algorithme de **dichotomie** pour encadrer une solution de $f(x) = 0$ sur l'intervalle initial $[a, b] = [2{,}0\\,;\\, 4{,}0]$. Combien d'itérations de la boucle `while` sont effectuées pour que la largeur de l'intervalle devienne inférieure ou égale à $\\varepsilon = 0{,}125$ ?",
+      "options": [
+        { "id": "A", "text": "$3$ itérations" },
+        { "id": "B", "text": "$4$ itérations" },
+        { "id": "C", "text": "$8$ itérations" },
+        { "id": "D", "text": "$16$ itérations" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. La largeur initiale de l'intervalle est $L_0 = b - a = 4{,}0 - 2{,}0 = 2{,}0$.",
+          "2. À chaque itération $k$, la largeur de l'intervalle est divisée par $2$ : $L_k = \\frac{L_0}{2^k} = \\frac{2}{2^k}$.",
+          "3. On détaille les étapes : après $1$ tour, $L_1 = 1{,}0$ ; après $2$ tours, $L_2 = 0{,}5$ ; après $3$ tours, $L_3 = 0{,}25$ ; après $4$ tours, $L_4 = 0{,}125 \\le \\varepsilon$. Il faut donc $4$ itérations."
+        ],
+        "keyFormula": "$$L_k = \\frac{b - a}{2^k} \\le \\varepsilon$$",
+        "commonTrap": "La réponse A ($3$ itérations) correspond au cas d'un intervalle initial de largeur $1$ ($\\frac{1}{2^3} = 0{,}125$) en oubliant que l'intervalle $[2, 4]$ a une largeur initiale égale à $2$."
+      }
+    },
+    {
+      "id": "qcm-info-02-03",
+      "difficulty": "Calculatoire",
+      "questionText": "On cherche à approcher $\\sqrt{2}$ en appliquant la **méthode de Newton** à la fonction $f(x) = x^2 - 2$ en partant de $x_0 = 2{,}0$. Quelle est la valeur de la première itération $x_1$ ?",
+      "options": [
+        { "id": "A", "text": "$x_1 = 1{,}0$" },
+        { "id": "B", "text": "$x_1 = 1{,}5$" },
+        { "id": "C", "text": "$x_1 = 1{,}25$" },
+        { "id": "D", "text": "$x_1 = 1{,}414$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. Pour $f(x) = x^2 - 2$, la fonction dérivée est $f'(x) = 2x$.",
+          "2. En $x_0 = 2{,}0$, on calcule $f(2{,}0) = 2^2 - 2 = 2$ et $f'(2{,}0) = 2 \\times 2 = 4$.",
+          "3. On applique la relation de récurrence de Newton : $x_1 = x_0 - \\frac{f(x_0)}{f'(x_0)} = 2{,}0 - \\frac{2}{4} = 2{,}0 - 0{,}5 = 1{,}5$."
+        ],
+        "keyFormula": "$$x_{k+1} = x_k - \\frac{f(x_k)}{f'(x_k)} = x_k - \\frac{x_k^2 - 2}{2x_k}$$",
+        "commonTrap": "Attention à ne pas inverser le numérateur et le dénominateur dans le rapport $\\frac{f(x_k)}{f'(x_k)}$, ni à remplacer le signe $-$ par un signe $+$."
+      }
+    },
+    {
+      "id": "qcm-info-02-04",
+      "difficulty": "Type Concours",
+      "questionText": "On calcule une valeur approchée de $\\int_0^2 x^2\\,\\mathrm{d}x$ (dont la valeur exacte est $\\frac{8}{3} \\approx 2{,}67$) avec seulement $n = 2$ sous-intervalles (donc un pas $h = 1$). Que renvoient respectivement la **méthode des rectangles à gauche** ($I_{\\text{rect}}$) et la **méthode des trapèzes** ($I_{\\text{trap}}$) ?",
+      "options": [
+        { "id": "A", "text": "$I_{\\text{rect}} = 1{,}0$ et $I_{\\text{trap}} = 3{,}0$" },
+        { "id": "B", "text": "$I_{\\text{rect}} = 5{,}0$ et $I_{\\text{trap}} = 3{,}0$" },
+        { "id": "C", "text": "$I_{\\text{rect}} = 2{,}0$ et $I_{\\text{trap}} = 2{,}5$" },
+        { "id": "D", "text": "$I_{\\text{rect}} = 1{,}0$ et $I_{\\text{trap}} = 2{,}5$" }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. Pour $[a, b] = [0, 2]$ et $n = 2$, le pas vaut $h = \\frac{2 - 0}{2} = 1$. Les points de la subdivision sont $x_0 = 0$, $x_1 = 1$ et $x_2 = 2$, d'ordonnées $f(0) = 0$, $f(1) = 1$ et $f(2) = 4$.",
+          "2. Méthode des rectangles à gauche : $I_{\\text{rect}} = h\\,\\big(f(x_0) + f(x_1)\\big) = 1 \\times (0 + 1) = 1{,}0$.",
+          "3. Méthode des trapèzes : $I_{\\text{trap}} = h\\left(\\frac{f(x_0) + f(x_1)}{2} + \\frac{f(x_1) + f(x_2)}{2}\\right) = 1 \\times \\left(\\frac{0 + 1}{2} + \\frac{1 + 4}{2}\\right) = 0{,}5 + 2{,}5 = 3{,}0$."
+        ],
+        "keyFormula": "$$I_{\\text{rect}} = h\\sum_{i=0}^{n-1} f(x_i) \\quad ; \\quad I_{\\text{trap}} = h\\sum_{i=0}^{n-1} \\frac{f(x_i) + f(x_{i+1})}{2}$$",
+        "commonTrap": "La réponse B ($I_{\\text{rect}} = 5{,}0$) calcule la méthode des rectangles à droite ($f(x_1) + f(x_2) = 1 + 4 = 5$) au lieu des rectangles à gauche ($i \\in \\{0, \\dots, n-1\\}$)."
+      }
+    },
+    {
+      "id": "qcm-info-02-05",
+      "difficulty": "Type Concours",
+      "questionText": "En physique, on résout l'équation différentielle $\\frac{\\mathrm{d}v}{\\mathrm{d}t} = 10 - 2\\,v(t)$ avec la condition initiale $v(0) = 0$ par la **méthode d'Euler explicite** avec un pas de temps $h = 0{,}1\\text{ s}$. Quelles sont les valeurs approchées de $v_1 \\approx v(0{,}1)$ et $v_2 \\approx v(0{,}2)$ ?",
+      "options": [
+        { "id": "A", "text": "$v_1 = 1{,}0\\text{ m}\\cdot\\text{s}^{-1}$ et $v_2 = 2{,}0\\text{ m}\\cdot\\text{s}^{-1}$" },
+        { "id": "B", "text": "$v_1 = 1{,}0\\text{ m}\\cdot\\text{s}^{-1}$ et $v_2 = 1{,}8\\text{ m}\\cdot\\text{s}^{-1}$" },
+        { "id": "C", "text": "$v_1 = 0{,}8\\text{ m}\\cdot\\text{s}^{-1}$ et $v_2 = 1{,}6\\text{ m}\\cdot\\text{s}^{-1}$" },
+        { "id": "D", "text": "$v_1 = 10\\text{ m}\\cdot\\text{s}^{-1}$ et $v_2 = 18\\text{ m}\\cdot\\text{s}^{-1}$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. On identifie la fonction dérivée $F(t, v) = 10 - 2v$, l'état initial $v_0 = 0$ et le pas $h = 0{,}1$.",
+          "2. Premier pas ($i = 0 \\to 1$) : $v_1 = v_0 + h \\times F(t_0, v_0) = 0 + 0{,}1 \\times (10 - 2 \\times 0) = 1{,}0\\text{ m}\\cdot\\text{s}^{-1}$.",
+          "3. Second pas ($i = 1 \\to 2$) : on réévalue la pente avec $v_1 = 1{,}0$, soit $F(t_1, v_1) = 10 - 2 \\times 1{,}0 = 8$. On obtient $v_2 = v_1 + h \\times F(t_1, v_1) = 1{,}0 + 0{,}1 \\times 8 = 1{,}8\\text{ m}\\cdot\\text{s}^{-1}$."
+        ],
+        "keyFormula": "$$v_{i+1} = v_i + h \\cdot F(t_i, v_i)$$",
+        "commonTrap": "La réponse A oublie de mettre à jour la dérivée $F(t_i, v_i)$ à l'étape 2 en gardant l'accélération initiale constante. La réponse D oublie de multiplier la dérivée par le pas de temps $h = 0{,}1$."
+      }
+    }
+  ]
+}

@@ -1,0 +1,169 @@
+---
+title: "Chapitre 01 : Programmation impérative et tableaux 1D/2D"
+subject: "informatique"
+chapterId: "01-bases-tableaux"
+semester: 1
+description: "Socle impératif Python 3, structures de contrôle, algorithmes élémentaires sur les listes 1D, matrices 2D, tris et complexité expérimentale."
+---
+
+# Programmation impérative et tableaux 1D/2D
+
+L'enseignement d'informatique en CPGE ATS repose sur un fragment restreint du langage **Python (version 3 ou supérieure)** visant à instaurer une bonne discipline de programmation impérative[cite: 112, 115].
+
+---
+
+## 1. Types de base, expressions et structures de contrôle
+
+### Typage dynamique et opérations fondamentales
+En Python, le typage est **dynamique** : l'interpréteur détermine le type à la volée lors de l'exécution du code, et les blocs sont définis par le principe d'**indentation**[cite: 115].
+
+Les quatre types de base exigibles au programme sont[cite: 112, 115] :
+* **Entiers (`int`)** : opérations `+`, `-`, `*`, division entière `//`, puissance `**` et reste modulo `%` (avec des opérandes positifs)[cite: 115].
+* **Flottants (`float`)** : opérations `+`, `-`, `*`, division `/` et puissance `**`[cite: 112, 115].
+* **Booléens (`bool`)** : valeurs de vérité manipulées avec `not`, `or`, `and` et les opérateurs de comparaison `==`, `!=`, `<`, `>`, `<=`, `>=`[cite: 112, 115].
+* **Chaînes de caractères (`str`)** : utilisées pour faciliter les entrées/sorties et effectuer des conversions vers un entier ou un flottant[cite: 112, 115].
+
+<CriticalFormula title="Caractère paresseux des opérateurs booléens (and / or)">
+Les opérateurs `and` et `or` possèdent une évaluation paresseuse (en court-circuit)[cite: 115] :
+* Dans `A and B`, si `A` est faux, `B` n'est pas évalué[cite: 115].
+* Dans `A or B`, si `A` est vrai, `B` n'est pas évalué[cite: 115].
+Cela permet d'écrire `i < len(tab) and tab[i] == x` sans jamais provoquer de dépassement d'indice (`IndexError`).
+</CriticalFormula>
+
+### Structures de contrôle, fonctions et assertions
+* **Instructions conditionnelles** : `if`, `elif`, `else`[cite: 113, 115].
+* **Boucles inconditionnelles bornées (`for`)** : écrites sous la forme `for compteur in range(debut, arret):` ou par itération sur une liste (sans clause `else`)[cite: 113, 115].
+* **Boucles inconditionnelles (`while`)** : l'usage de la boucle `while` (sans `else`) est réservé au seul cas où le nombre d'itérations ne peut pas être connu à l'avance[cite: 113, 115].
+* **Fonctions** : définies avec `def f(p1, ..., pn):` et `return` (autorisé dans un corps de boucle), en validant les données d'entrée avec l'instruction `assert` sans message d'erreur[cite: 113, 115].
+
+<WarningBox title="Syntaxes Python HORS PROGRAMME aux concours ATS">
+Pour respecter le programme officiel ATS, les éléments suivants sont proscrits ou hors programme[cite: 113, 114, 115] :
+* Les **fonctions récursives** et la bibliothèque **`numpy`** sont hors programme[cite: 113, 114].
+* L'importation `from module import *` est proscrite (utiliser uniquement `import module`, `import module as alias` ou `from module import f, g`)[cite: 113, 115].
+* Sur les listes : les **listes par compréhension**, la **multiplication d'une liste singleton** (`[0] * n`), l'**extraction de tranche** (*slicing* `tab[a:b]`) et la méthode **`.pop()`** sont hors programme[cite: 113].
+</WarningBox>
+
+---
+
+## 2. Tableaux de taille fixe (1D) et algorithmes élémentaires
+
+### Initialisation et parcours d'un tableau 1D
+Le type `list` est utilisé pour manipuler des tableaux de taille fixe, en limitant l'usage de `.append()` à la construction ou à l'initialisation du tableau[cite: 113, 115]. L'accès se fait par un indice positif valide de `0` à `len(tab) - 1`[cite: 115]. On distingue l'itération **par indice** (`for i in range(0, len(tab)):`) de l'itération **par valeur** (`for val in tab:`)[cite: 113].
+
+```python
+# Initialisation réglementaire d'un tableau de taille n rempli de zéros
+def creer_tableau(n):
+    assert n >= 0
+    tab = []
+    for i in range(0, n):
+        tab.append(0)
+    return tab
+```
+
+### Les 4 algorithmes élémentaires exigibles
+Le programme impose de maîtriser ces quatre algorithmes classiques en distinguant rigoureusement **indice** et **valeur** dans les paramètres et les valeurs de retour[cite: 113] :
+
+```python
+# 1. Recherche de l'indice d'un élément x dans un tableau (-1 si absent)
+def rechercher_indice(tab, x):
+    for i in range(0, len(tab)):
+        if tab[i] == x:
+            return i
+    return -1
+
+# 2. Détermination de l'indice et de la valeur du maximum d'un tableau non vide
+def indice_maximum(tab):
+    assert len(tab) > 0
+    ind_max = 0
+    val_max = tab[0]
+    for i in range(1, len(tab)):
+        if tab[i] > val_max:
+            val_max = tab[i]
+            ind_max = i
+    return ind_max  # Renvoyer val_max si l'énoncé demande la valeur maximale
+
+# 3. Calcul de la somme des éléments d'un tableau
+def somme_elements(tab):
+    somme = 0
+    for val in tab:
+        somme = somme + val
+    return somme
+
+# 4. Renversement d'un tableau en place par échanges successifs
+def renverser_tableau(tab):
+    n = len(tab)
+    for i in range(0, n // 2):
+        temp = tab[i]
+        tab[i] = tab[n - 1 - i]
+        tab[n - 1 - i] = temp
+```
+
+<CriticalFormula title="Point clé sur le renversement d'un tableau">
+Lors du renversement par échanges successifs entre l'indice $i$ et l'indice $n - 1 - i$, la boucle `for` doit impérativement s'arrêter à la moitié du tableau (`range(0, n // 2)`), sinon chaque paire est échangée deux fois et le tableau revient à son état de départ[cite: 113, 115].
+</CriticalFormula>
+
+---
+
+## 3. Tableaux bi-dimensionnels (Matrices et Images)
+
+<WarningBox title="Règle stricte de construction d'un tableau 2D">
+Les tableaux bi-dimensionnels doivent être définis **exclusivement à l'aide d'ajouts de lignes par `append`**, ces lignes étant elles-mêmes construites par `append`[cite: 113].
+</WarningBox>
+
+```python
+# Création d'un tableau 2D de n lignes et p colonnes initialisé à 0
+def creer_matrice(n, p):
+    assert n > 0 and p > 0
+    mat = []
+    for i in range(0, n):
+        ligne = []
+        for j in range(0, p):
+            ligne.append(0)
+        mat.append(ligne)
+    return mat
+
+# Somme par ligne (ligne i), par colonne (colonne j) et somme totale
+def somme_totale_matrice(mat):
+    total = 0
+    for i in range(0, len(mat)):
+        for j in range(0, len(mat[0])):
+            total = total + mat[i][j]
+    return total
+```
+
+Une image en niveaux de gris (valeurs entre `0` et `255`) se manipule comme un tableau bi-dimensionnel[cite: 113] :
+* **Négatif d'une image** (modification des éléments) : remplacer chaque pixel `img[i][j]` par `255 - img[i][j]`[cite: 113].
+* **Miroir d'une image** (permutation des éléments) : inverser chaque ligne `i` en échangeant `img[i][j]` et `img[i][p - 1 - j]` pour `j` dans `range(0, p // 2)`[cite: 113].
+
+---
+
+## 4. Tri de tableaux et Complexité expérimentale
+
+Outre l'appel natif `tab.sort()`, deux algorithmes de tri sont étudiés : le **tri par sélection** et le **tri par insertion**.
+
+```python
+# Tri par sélection
+def tri_selection(tab):
+    n = len(tab)
+    for i in range(0, n - 1):
+        ind_min = i
+        for j in range(i + 1, n):
+            if tab[j] < tab[ind_min]:
+                ind_min = j
+        temp = tab[i]
+        tab[i] = tab[ind_min]
+        tab[ind_min] = temp
+
+# Tri par insertion
+def tri_insertion(tab):
+    n = len(tab)
+    for i in range(1, n):
+        cle = tab[i]
+        j = i - 1
+        while j >= 0 and tab[j] > cle:
+            tab[j + 1] = tab[j]
+            j = j - 1
+        tab[j + 1] = cle
+```
+
+Pour introduire expérimentalement la **complexité**, on mesure le temps d'exécution d'un algorithme à l'aide de la fonction `time.time()`[cite: 114]. Pour la lecture de données externes via le module `csv`, on se limite à l'ouverture d'un fichier avec `open(nom_fichier)`[cite: 113].

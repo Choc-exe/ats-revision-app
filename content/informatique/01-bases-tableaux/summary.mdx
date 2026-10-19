@@ -1,0 +1,22 @@
+---
+title: "Fiche Synthèse : Programmation impérative et tableaux"
+subject: "informatique"
+chapterId: "01-bases-tableaux"
+---
+
+## L'Essentiel du Bulletin Officiel ATS
+
+* **Règles Syntaxiques Python 3 (Socle Restreint ATS)** :
+  * **Opérations entières (`int`)** : `+`, `-`, `*`, quotient entier `//`, reste `%`, puissance `**`[cite: 115].
+  * **Évaluation paresseuse (`bool`)** : dans `A and B` (ou `A or B`), le second terme n'est évalué que si le premier ne suffit pas à conclure[cite: 115].
+  * **Usage des boucles** : `for i in range(debut, arret):` pour un nombre de tours connu ; `while` réservé uniquement au cas où le nombre d'itérations est inconnu à l'avance[cite: 113, 115].
+  * **Éléments interdits (Hors Programme)** : récursivité, module `numpy`, `from module import *`, listes par compréhension, multiplication `[0] * n`, tranches (*slicing*) et `.pop()`[cite: 113, 114, 115].
+* **Algorithmes sur les Tableaux 1D (`list`)** :
+  * Construction uniquement par ajouts successifs avec `.append()`[cite: 113, 115].
+  * Savoir distinguer **indice** (`i`) et **valeur** (`tab[i]`) dans la recherche d'un élément, la recherche du maximum (initialisé à `tab[0]` après `assert len(tab) > 0`), le calcul de la somme et le renversement par échanges successifs sur `range(0, len(tab) // 2)`[cite: 113, 115].
+* **Tableaux Bi-dimensionnels (Matrices & Images)** :
+  * Construction obligatoire ligne par ligne avec deux boucles `for` imbriquées et `.append()`[cite: 113].
+  * Savoir calculer une somme par ligne, par colonne, ou totale, et appliquer un traitement sur une image en niveaux de gris (négatif par modification des pixels, miroir par permutation symétrique)[cite: 113].
+* **Tris et Mesure de Temps** :
+  * Connaître `tab.sort()`, le **tri par sélection** et le **tri par insertion**[cite: 114].
+  * Évaluer expérimentalement la complexité temporelle avec `time.time()`[cite: 114].

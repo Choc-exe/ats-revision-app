@@ -1,0 +1,62 @@
+{
+  "chapterId": "01-bases-tableaux",
+  "subject": "informatique",
+  "title": "Programmation impérative Python et Tableaux 1D/2D",
+  "cards": [
+    {
+      "id": "fc-info-01-01",
+      "category": "Piège Classique",
+      "difficulty": 1,
+      "front": "Quelles sont les syntaxes Python courantes sur les listes qui sont formellement HORS PROGRAMME aux concours ATS ?",
+      "back": {
+        "mainAnswer": "Le programme ATS impose de manipuler le type list comme un tableau de taille fixe avec un socle minimal d'instructions.",
+        "criticalFormula": "Sont interdits : [0] * n, les listes par compréhension [f(x) for x in L], le slicing L[a:b], la méthode .pop(), la récursivité et le module numpy.",
+        "mnemonicOrTip": "Pour créer un tableau de taille n, utilisez toujours une liste vide [] suivie d'une boucle for i in range(0, n): avec .append()."
+      }
+    },
+    {
+      "id": "fc-info-01-02",
+      "category": "Méthode",
+      "difficulty": 2,
+      "front": "Comment initialiser correctement une matrice (tableau 2D) de $n$ lignes et $p$ colonnes remplie de zéros en respectant la norme ATS ?",
+      "back": {
+        "mainAnswer": "On crée une liste principale vide, puis dans une boucle sur les $n$ lignes, on construit une nouvelle liste ligne par ajouts successifs de $p$ zéros avec append avant d'ajouter cette ligne à la matrice.",
+        "criticalFormula": "mat = []\nfor i in range(0, n):\n    ligne = []\n    for j in range(0, p):\n        ligne.append(0)\n    mat.append(ligne)",
+        "mnemonicOrTip": "Piège critique : Ne jamais créer une seule liste 'ligne' avant la boucle sur i pour l'ajouter n fois à 'mat', sinon toutes les lignes pointeront vers le même objet en mémoire !"
+      }
+    },
+    {
+      "id": "fc-info-01-03",
+      "category": "Formule Critique",
+      "difficulty": 2,
+      "front": "Quel est l'algorithme de renversement en place d'un tableau 1D par échanges successifs ?",
+      "back": {
+        "mainAnswer": "On parcourt uniquement la première moitié du tableau (indices de $0$ à $\\text{len}(T)//2 - 1$) et on échange l'élément d'indice $i$ avec son symétrique d'indice $n - 1 - i$.",
+        "criticalFormula": "n = len(tab)\nfor i in range(0, n // 2):\n    temp = tab[i]\n    tab[i] = tab[n - 1 - i]\n    tab[n - 1 - i] = temp",
+        "mnemonicOrTip": "Attention à la borne d'arrêt : si la boucle va jusqu'à n au lieu de n // 2, chaque paire est échangée deux fois et le tableau revient à son état initial !"
+      }
+    },
+    {
+      "id": "fc-info-01-04",
+      "category": "Définition",
+      "difficulty": 1,
+      "front": "Qu'appelle-t-on le caractère paresseux des opérateurs booléens `and` et `or` en Python, et quel est son intérêt pratique sur les tableaux ?",
+      "back": {
+        "mainAnswer": "L'interpréteur évalue l'expression de gauche à droite et s'arrête dès que la valeur de vérité finale est certaine, sans évaluer l'opérande de droite.",
+        "criticalFormula": "while i < len(tab) and tab[i] != cible:",
+        "mnemonicOrTip": "Grâce à l'évaluation paresseuse, si i atteint len(tab), la condition i < len(tab) est fausse et tab[i] n'est pas évalué, ce qui évite une erreur IndexError."
+      }
+    },
+    {
+      "id": "fc-info-01-05",
+      "category": "Méthode",
+      "difficulty": 2,
+      "front": "Dans quel cas précis le programme ATS autorise-t-il l'utilisation d'une boucle `while` plutôt qu'une boucle `for` ?",
+      "back": {
+        "mainAnswer": "La boucle inconditionnelle while est réservée au seul cas où le nombre d'itérations ne peut pas être connu à l'avance (ex: recherche de seuil, dichotomie, décalage dans le tri par insertion).",
+        "criticalFormula": "Nombre d'itérations connu à l'avance -> for i in range(debut, arret):\nNombre d'itérations inconnu -> while condition:",
+        "mnemonicOrTip": "Noter toutefois qu'un return placé dans le corps d'une boucle for est parfaitement autorisé pour interrompre une recherche d'indice dès que l'élément est trouvé."
+      }
+    }
+  ]
+}

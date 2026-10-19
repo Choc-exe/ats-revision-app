@@ -1,0 +1,111 @@
+{
+  "chapterId": "01-bases-tableaux",
+  "subject": "informatique",
+  "title": "QCM d'entraînement : Programmation impérative et tableaux",
+  "questions": [
+    {
+      "id": "qcm-info-01-01",
+      "difficulty": "Application directe",
+      "questionText": "On souhaite déterminer la valeur maximale d'un tableau non vide `tab` pouvant contenir des nombres flottants **tous strictement négatifs** (par exemple `[-12.5, -3.2, -8.0]`). Quelle initialisation de la variable `val_max` avant la boucle de parcours est correcte ?",
+      "options": [
+        { "id": "A", "text": "`val_max = 0`" },
+        { "id": "B", "text": "`val_max = tab[0]` après avoir vérifié `assert len(tab) > 0`" },
+        { "id": "C", "text": "`val_max = -100`" },
+        { "id": "D", "text": "`val_max = len(tab)`" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. Pour rechercher le maximum d'un tableau non vide sans faire d'hypothèse arbitraire sur le signe ou l'ordre de grandeur de ses éléments, on valide d'abord que le tableau est non vide avec `assert len(tab) > 0`.",
+          "2. On initialise ensuite le maximum provisoire avec le premier élément réel du tableau : `val_max = tab[0]`.",
+          "3. On compare ensuite `val_max` aux éléments suivants `for i in range(1, len(tab)):`."
+        ],
+        "keyFormula": "assert len(tab) > 0 ; val_max = tab[0]",
+        "commonTrap": "Initialiser `val_max = 0` (réponse A) est une erreur très fréquente : si tous les éléments du tableau sont strictement négatifs, la fonction renverra `0`, une valeur qui n'appartient même pas au tableau !"
+      }
+    },
+    {
+      "id": "qcm-info-01-02",
+      "difficulty": "Calculatoire",
+      "questionText": "Soit `M` un tableau bi-dimensionnel (matrice) comportant $n = 4$ lignes et $p = 3$ colonnes, défini par `M = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10, 11, 12]]`. Que valent respectivement `len(M)`, `len(M[0])` et `M[2][1]` ?",
+      "options": [
+        { "id": "A", "text": "`len(M) = 3`, `len(M[0]) = 4` et `M[2][1] = 6`" },
+        { "id": "B", "text": "`len(M) = 4`, `len(M[0]) = 3` et `M[2][1] = 8`" },
+        { "id": "C", "text": "`len(M) = 4`, `len(M[0]) = 3` et `M[2][1] = 5`" },
+        { "id": "D", "text": "`len(M) = 12`, `len(M[0]) = 3` et `M[2][1] = 8`" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. `M` est une liste contenant $4$ sous-listes (les $4$ lignes), donc `len(M)` vaut $4$.",
+          "2. `M[0]` est la première ligne `[1, 2, 3]`, qui contient $3$ éléments (les $3$ colonnes), donc `len(M[0])` vaut $3$.",
+          "3. Comme l'indexation commence à $0$, `M[2]` désigne la 3e ligne `[7, 8, 9]`, et `M[2][1]` désigne le 2e élément de cette ligne, soit `8`."
+        ],
+        "keyFormula": "Nombre de lignes = len(M) ; Nombre de colonnes = len(M[0]) ; Élément (ligne i, col j) = M[i][j]",
+        "commonTrap": "La réponse C oublie que les indices débutent à $0$ en Python (elle lit la 2e ligne et la 1re ou 2e colonne). La réponse A inverse lignes et colonnes."
+      }
+    },
+    {
+      "id": "qcm-info-01-03",
+      "difficulty": "Type Concours",
+      "questionText": "Un étudiant écrit la fonction suivante en pensant renverser un tableau `tab` de taille $n$ :\n`for i in range(0, len(tab)):`\n`    temp = tab[i]`\n`    tab[i] = tab[len(tab) - 1 - i]`\n`    tab[len(tab) - 1 - i] = temp`\nQuel est le contenu final de `tab` si l'on appelle cette fonction sur `tab = [10, 20, 30, 40]` ?",
+      "options": [
+        { "id": "A", "text": "`[40, 30, 20, 10]`" },
+        { "id": "B", "text": "`[10, 20, 30, 40]` (le tableau est resté inchangé)" },
+        { "id": "C", "text": "`[40, 30, 30, 40]`" },
+        { "id": "D", "text": "Une erreur `IndexError` se produit à l'exécution." }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. Pour $i = 0$ et $i = 1$, la boucle échange $10 \\leftrightarrow 40$ puis $20 \\leftrightarrow 30$ : à mi-parcours, le tableau vaut bien `[40, 30, 20, 10]`.",
+          "2. Mais comme la boucle `range(0, len(tab))` continue pour $i = 2$ et $i = 3$, elle ré-échange $30 \\leftrightarrow 20$ puis $40 \\leftrightarrow 10$.",
+          "3. À la fin de la boucle, chaque paire symétrique a été échangée deux fois : le tableau est revenu à son état initial `[10, 20, 30, 40]`."
+        ],
+        "keyFormula": "Pour renverser un tableau en place, la boucle doit s'arrêter à la moitié : for i in range(0, len(tab) // 2):",
+        "commonTrap": "C'est l'erreur numéro 1 dans l'algorithme de renversement (ou de miroir d'image 2D) : parcourir tout le tableau au lieu de s'arrêter à `len(tab) // 2`."
+      }
+    },
+    {
+      "id": "qcm-info-01-04",
+      "difficulty": "Application directe",
+      "questionText": "Parmi les instructions d'importation suivantes du module `math`, laquelle est **strictement proscrite** par le Bulletin Officiel d'informatique ATS ?",
+      "options": [
+        { "id": "A", "text": "`import math`" },
+        { "id": "B", "text": "`import math as m`" },
+        { "id": "C", "text": "`from math import sqrt, cos`" },
+        { "id": "D", "text": "`from math import *`" }
+      ],
+      "correctOptionId": "D",
+      "explanation": {
+        "steps": [
+          "1. Le programme officiel autorise trois formes d'importation : l'import global `import module` (A), l'import avec alias `import module as alias` (B) et l'import qualifié explicite `from module import f, g` (C).",
+          "2. En revanche, l'importation globale non qualifiée `from module import *` (D) est explicitement proscrite car elle pollue l'espace de noms et masque l'origine des fonctions."
+        ],
+        "keyFormula": "Autorisés : import module | import module as alias | from module import f, g",
+        "commonTrap": "Beaucoup de scripts de lycée ou de BTS utilisent `from math import *` par commodité ; son utilisation en épreuve écrite de concours ATS est pénalisée."
+      }
+    },
+    {
+      "id": "qcm-info-01-05",
+      "difficulty": "Type Concours",
+      "questionText": "On mesure expérimentalement avec `time.time()` la durée d'exécution du **tri par sélection** sur un tableau de $N = 5\\,000$ éléments et on obtient $t_1 = 0{,}4\\text{ s}$. Si l'on exécute ce même algorithme sur un tableau de taille double ($2N = 10\\,000$ éléments), quel sera l'ordre de grandeur du temps d'exécution $t_2$ ?",
+      "options": [
+        { "id": "A", "text": "$t_2 \\approx 0{,}4\\text{ s}$" },
+        { "id": "B", "text": "$t_2 \\approx 0{,}8\\text{ s}$" },
+        { "id": "C", "text": "$t_2 \\approx 1{,}6\\text{ s}$" },
+        { "id": "D", "text": "$t_2 \\approx 4{,}0\\text{ s}$" }
+      ],
+      "correctOptionId": "C",
+      "explanation": {
+        "steps": [
+          "1. Le tri par sélection comporte deux boucles `for` imbriquées dont le nombre de comparaisons vaut $\\frac{N(N-1)}{2} \\approx \\frac{N^2}{2}$.",
+          "2. Le temps d'exécution est donc proportionnel au carré de la taille $N$ du tableau (complexité quadratique).",
+          "3. Lorsque la taille $N$ est multipliée par $2$, le temps d'exécution est multiplié par $2^2 = 4$, soit $t_2 \\approx 4 \\times 0{,}4 = 1{,}6\\text{ s}$."
+        ],
+        "keyFormula": "Deux boucles imbriquées dépendant de $N \\implies T(2N) \\approx 4\\,T(N)$",
+        "commonTrap": "La réponse B ($0{,}8\\text{ s}$) suppose à tort une proportionnalité linéaire ($2 \\times t_1$), qui correspond au parcours simple d'un tableau (somme, recherche du maximum) et non à un tri par sélection."
+      }
+    }
+  ]
+}

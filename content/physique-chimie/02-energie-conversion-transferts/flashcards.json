@@ -1,0 +1,62 @@
+{
+  "chapterId": "02-energie-conversion-transferts",
+  "subject": "physique-chimie",
+  "title": "Énergie : conversion et transferts (Thermodynamique)",
+  "cards": [
+    {
+      "id": "fc-phys-02-01",
+      "category": "Formule Critique",
+      "difficulty": 1,
+      "front": "Quelle est la définition de l'enthalpie $H$, et à quoi correspond sa variation $\\Delta H$ au cours d'une transformation monobare en système fermé ?",
+      "back": {
+        "mainAnswer": "L'enthalpie est définie par $H = U + PV$. Sa variation lors d'une transformation monobare (pression extérieure constante) est exactement égale au transfert thermique reçu par le système.",
+        "criticalFormula": "$H = U + P\\,V \\quad \\text{et} \\quad \\Delta H = Q_{\\text{monobare}}$",
+        "mnemonicOrTip": "C'est pour cette raison que l'enthalpie est la fonction d'état privilégiée en chimie et en thermique industrielle, car la plupart des réacteurs fonctionnent à l'air libre sous pression atmosphérique constante."
+      }
+    },
+    {
+      "id": "fc-phys-02-02",
+      "category": "Théorème",
+      "difficulty": 2,
+      "front": "Énoncer le second principe de la thermodynamique et expliciter la signification physique de l'entropie créée $S_{\\text{cre}}$ par rapport à l'irréversibilité.",
+      "back": {
+        "mainAnswer": "La variation d'entropie d'un système fermé se décompose en une entropie échangée et une entropie créée qui est toujours positive ou nulle.",
+        "criticalFormula": "$\\Delta S = S_{\\text{ech}} + S_{\\text{cre}} \\quad \\text{avec} \\quad S_{\\text{cre}} \\ge 0$",
+        "mnemonicOrTip": "S_cre = 0 uniquement pour une transformation idéale réversible (sans frottement ni gradient thermique). Dans la réalité industrielle, S_cre > 0 (irréversibilité)."
+      }
+    },
+    {
+      "id": "fc-phys-02-03",
+      "category": "Formule Critique",
+      "difficulty": 1,
+      "front": "Quelles sont les expressions des performances maximales (rendement ou COP de Carnot) pour un moteur thermique et une pompe à chaleur fonctionnant entre $T_C$ et $T_F$ ?",
+      "back": {
+        "mainAnswer": "Les performances de Carnot constituent la limite théorique supérieure dictée par le second principe pour des cycles réversibles dithermes.",
+        "criticalFormula": "• Moteur : $\\eta_{\\text{max}} = 1 - \\frac{T_F}{T_C}$\n• Pompe à chaleur (PAC) : $\\text{COP}_{\\text{max}} = \\frac{T_C}{T_C - T_F}$",
+        "mnemonicOrTip": "Attention aux températures : $T_C$ et $T_F$ doivent impérativement être exprimées en Kelvin (K) et non en degrés Celsius !"
+      }
+    },
+    {
+      "id": "fc-phys-02-04",
+      "category": "Définition",
+      "difficulty": 1,
+      "front": "Quelle est la nature thermodynamique exacte de la transformation subie par un fluide traversant un détendeur adiabatique en régime stationnaire ?",
+      "back": {
+        "mainAnswer": "En appliquant le premier principe en système ouvert sans apport de travail ni d'échange thermique avec l'extérieur, l'enthalpie massique se conserve.",
+        "criticalFormula": "Détendeur adiabatique $\\implies \\Delta h = 0$ (transformation isenthalpique)",
+        "mnemonicOrTip": "Utile en climatisation et réfrigération : la détente au travers d'un capillaire ou d'un détendeur provoque une chute de pression brutale sans variation d'enthalpie."
+      }
+    },
+    {
+      "id": "fc-phys-02-05",
+      "category": "Formule Critique",
+      "difficulty": 2,
+      "front": "Rappeler les trois expressions des lois de Laplace pour une transformation adiabatique et réversible (isentropique) d'un gaz parfait de coefficient $\\gamma$.",
+      "back": {
+        "mainAnswer": "Ces lois relient les variables d'état $(P, V, T)$ au cours d'une compression ou détente sans échange thermique ni irréversibilité.",
+        "criticalFormula": "$P^{1-\\gamma}T^gamma = \\text{cte} \\quad ; \\quad P\\,V^gamma = \\text{cte} \\quad ; \\quad T\\,V^{\\gamma-1} = \\text{cte}$",
+        "mnemonicOrTip": "Méthode mnémotechnique pour les retrouver : partir de $\\mathrm{d}U = \\delta W$ avec $C_v \\mathrm{d}T = -P \\mathrm{d}V$ et utiliser la loi des gaz parfaits $PV = nRT$ combinée à $\\gamma = C_p/C_v$."
+      }
+    }
+  ]
+}
