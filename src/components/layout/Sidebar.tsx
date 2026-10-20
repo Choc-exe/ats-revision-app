@@ -46,7 +46,7 @@ export default function Sidebar() {
         <div className="w-9 h-9 rounded-lg bg-red-600 flex items-center justify-center text-white shadow-sm">
           <GraduationCap className="w-5 h-5" />
         </div>
-        <div>
+        <div className="flex flex-col truncate">
           <span className="font-extrabold text-slate-900 tracking-tight text-[15px] leading-tight flex items-center gap-1.5">
             Prépa ATS
             <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse" />
