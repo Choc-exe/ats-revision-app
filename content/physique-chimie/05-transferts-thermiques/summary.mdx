@@ -7,17 +7,17 @@ chapterId: "05-transferts-thermiques"
 ## L'Essentiel du Bulletin Officiel ATS
 
 * **Conduction thermique & Loi de Fourier** :
-  * Puissance thermique (débit d'énergie en $\text{W}$) : $\Phi = \iint_S \vec{j}_{\text{th}}\cdot\vec{n}\,\mathrm{d}S$ (soit $\Phi = j_{\text{th}}\,S$ en 1D uniforme)[cite: 19].
-  * **Loi de Fourier** : **$\vec{j}_{\text{th}} = -\lambda\,\overrightarrow{\text{grad}}\,T$** ; en 1D selon $(Ox)$ : **$\Phi = -\lambda\,S\frac{\mathrm{d}T}{\mathrm{d}x}$**[cite: 19].
-  * En régime stationnaire 1D sans source : $\Phi = \text{cte}$ et le profil de température $T(x)$ est affine[cite: 19].
-  * *Hors programme 2025* : Équation de la diffusion thermique (équation de la chaleur)[cite: 19].
+  * Puissance thermique (débit d'énergie en $\text{W}$) : $\Phi = \iint_S \vec{j}_{\text{th}}\cdot\vec{n}\,\mathrm{d}S$ (soit $\Phi = j_{\text{th}}\,S$ en 1D uniforme).
+  * **Loi de Fourier** : **$\vec{j}_{\text{th}} = -\lambda\,\overrightarrow{\text{grad}}\,T$** ; en 1D selon $(Ox)$ : **$\Phi = -\lambda\,S\frac{\mathrm{d}T}{\mathrm{d}x}$**.
+  * En régime stationnaire 1D sans source : $\Phi = \text{cte}$ et le profil de température $T(x)$ est affine.
+  * *Hors programme 2025* : Équation de la diffusion thermique (équation de la chaleur).
 * **Résistance thermique & Analogie électrique** :
-  * Relation intégrée : **$T_1 - T_2 = R_{\text{th}}\,\Phi$** avec $T \leftrightarrow V$, $\Phi \leftrightarrow I$ et $R_{\text{th}} \leftrightarrow R_{\text{élec}}$[cite: 19].
-  * **Conduction (mur plan d'épaisseur $e$)** : **$R_{\text{th, cond}} = \frac{e}{\lambda\,S}$** (en $\text{K}\cdot\text{W}^{-1}$)[cite: 19].
-  * **Convection pariétale (Loi de Newton)** : $\Phi = h\,S\,(T_p - T_f) \implies$ **$R_{\text{th, conv}} = \frac{1}{h\,S}$**[cite: 19].
-  * **Associations** : En série (même $\Phi$) : $R_{\text{eq}} = \sum R_{\text{th}, i}$ ; en parallèle (même $\Delta T$) : $\frac{1}{R_{\text{eq}}} = \sum \frac{1}{R_{\text{th}, i}}$[cite: 19].
-  * **Régime quasi stationnaire** (corps de capacité $C$ relié à $T_{\text{ext}}$ par $R_{\text{th}}$) : $\tau\frac{\mathrm{d}T}{\mathrm{d}t} + T = T_{\text{ext}}$ avec **$\tau = R_{\text{th}}\,C$**[cite: 19].
+  * Relation intégrée : **$T_1 - T_2 = R_{\text{th}}\,\Phi$** avec $T \leftrightarrow V$, $\Phi \leftrightarrow I$ et $R_{\text{th}} \leftrightarrow R_{\text{élec}}$.
+  * **Conduction (mur plan d'épaisseur $e$)** : **$R_{\text{th, cond}} = \frac{e}{\lambda\,S}$** (en $\text{K}\cdot\text{W}^{-1}$).
+  * **Convection pariétale (Loi de Newton)** : $\Phi = h\,S\,(T_p - T_f) \implies$ **$R_{\text{th, conv}} = \frac{1}{h\,S}$**.
+  * **Associations** : En série (même $\Phi$) : $R_{\text{eq}} = \sum R_{\text{th}, i}$ ; en parallèle (même $\Delta T$) : $\frac{1}{R_{\text{eq}}} = \sum \frac{1}{R_{\text{th}, i}}$.
+  * **Régime quasi stationnaire** (corps de capacité $C$ relié à $T_{\text{ext}}$ par $R_{\text{th}}$) : $\tau\frac{\mathrm{d}T}{\mathrm{d}t} + T = T_{\text{ext}}$ avec **$\tau = R_{\text{th}}\,C$**.
 * **Rayonnement du Corps Noir & Climat** :
-  * **Loi de Wien** : $\lambda_{\max}\,T = \text{cte} \approx 2{,}90 \times 10^{-3}\text{ m}\cdot\text{K}$[cite: 20].
-  * **Loi de Stefan** : Flux surfacique émis **$\varphi = \sigma\,T^4$** (puissance totale émise $\Phi = S\,\sigma\,T^4$)[cite: 20].
-  * **Bilan radiatif & Effet de serre** : Flux solaire moyen absorbé $\varphi_{\text{abs}} = \frac{1 - A}{4}\varphi_S$ (avec $A$ l'albédo) ; l'atmosphère absorbe les infrarouges émis par le sol et lui renvoie un flux thermique vers le bas, élevant la température de surface[cite: 20].
+  * **Loi de Wien** : $\lambda_{\max}\,T = \text{cte} \approx 2{,}90 \times 10^{-3}\text{ m}\cdot\text{K}$.
+  * **Loi de Stefan** : Flux surfacique émis **$\varphi = \sigma\,T^4$** (puissance totale émise $\Phi = S\,\sigma\,T^4$).
+  * **Bilan radiatif & Effet de serre** : Flux solaire moyen absorbé $\varphi_{\text{abs}} = \frac{1 - A}{4}\varphi_S$ (avec $A$ l'albédo) ; l'atmosphère absorbe les infrarouges émis par le sol et lui renvoie un flux thermique vers le bas, élevant la température de surface.

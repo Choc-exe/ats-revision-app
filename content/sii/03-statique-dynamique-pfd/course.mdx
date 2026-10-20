@@ -8,28 +8,28 @@ description: "Torseurs d'actions mécaniques, lois de Coulomb, PFS, PFD, théor�
 
 # Actions mécaniques, Statique, Dynamique et RDM
 
-Ce chapitre établit les méthodes permettant de déterminer une action mécanique inconnue (effort dans un actionneur ou dans une liaison), d'établir l'équation différentielle du mouvement d'un mécanisme (par le PFD ou le TEC) et de dimensionner une poutre soumise à de la traction ou de la flexion simple[cite: 42, 45, 46, 47, 52].
+Ce chapitre établit les méthodes permettant de déterminer une action mécanique inconnue (effort dans un actionneur ou dans une liaison), d'établir l'équation différentielle du mouvement d'un mécanisme (par le PFD ou le TEC) et de dimensionner une poutre soumise à de la traction ou de la flexion simple.
 
 ---
 
 ## 1. Modélisation des actions mécaniques et Statique (PFS)
 
 ### Torseur d'une action mécanique, Glisseur et Couple
-Toute action mécanique exercée par un système $1$ sur un système $2$ est modélisée en un point $A$ par le **torseur d'action mécanique** $\mathcal{T}(1 \to 2)$, composé d'une résultante $\vec{R}(1 \to 2)$ (en $\text{N}$) et d'un moment $\vec{M}_A(1 \to 2)$ (en $\text{N}\cdot\text{m}$) vérifiant la formule de Varignon (`BABAR`)[cite: 42] :
+Toute action mécanique exercée par un système $1$ sur un système $2$ est modélisée en un point $A$ par le **torseur d'action mécanique** $\mathcal{T}(1 \to 2)$, composé d'une résultante $\vec{R}(1 \to 2)$ (en $\text{N}$) et d'un moment $\vec{M}_A(1 \to 2)$ (en $\text{N}\cdot\text{m}$) vérifiant la formule de Varignon (`BABAR`) :
 $$\mathcal{T}(1 \to 2) = \left\{ \begin{array}{c} \vec{R}(1 \to 2) \\ \vec{M}_A(1 \to 2) \end{array} \right\}_A \quad \text{avec} \quad \vec{M}_B(1 \to 2) = \vec{M}_A(1 \to 2) + \vec{BA} \wedge \vec{R}(1 \to 2)$$
-* **Torseur glisseur** : Torseur dont le moment est nul le long d'une droite appelée axe central (ex: force ponctuelle $\vec{F}$ appliquée en $A$ ou poids $\vec{P} = -mg\vec{z}$ appliqué au centre de gravité $G$, où $\vec{M}_G(\text{pesanteur} \to S) = \vec{0}$)[cite: 42].
-* **Torseur couple** : Torseur dont la résultante est nulle ($\vec{R} = \vec{0}$) et le moment $\vec{C} \neq \vec{0}$ est **uniforme** (identique en tout point de l'espace : $\vec{M}_B = \vec{M}_A = \vec{C}$)[cite: 42].
-* **Liaisons parfaites** : Dans une liaison parfaite (sans jeu ni frottement), la puissance dissipée par les inter-efforts est nulle : **à chaque degré de liberté (vitesse autorisée non nulle) correspond une composante d'effort ou de moment nulle** au centre de la liaison (ex: une liaison pivot parfaite d'axe $(A, \vec{z})$ a un moment nul suivant l'axe de rotation : $\vec{M}_A(1 \to 2) \cdot \vec{z} = L_{12} \dots = 0 \implies N_{12} = 0$)[cite: 41, 42, 47, 124].
-* **Lois de Coulomb du frottement sec** : Au contact entre deux solides de normale $\vec{n}$ avec $\vec{R}(1 \to 2) = \vec{T} + N\,\vec{n}$ ($N > 0$ effort normal et $\vec{T}$ effort tangentiel) et de coefficient de frottement $f = \tan\varphi$[cite: 42, 124] :
-  * **Adhérence ($\vec{V}_g = \vec{0}$)** : **$\|\vec{T}\| \le f\,N$** (le vecteur réaction reste à l'intérieur du cône de frottement de demi-angle $\varphi$)[cite: 42].
-  * **Glissement ($\vec{V}_g \neq \vec{0}$)** : **$\|\vec{T}\| = f\,N$** et $\vec{T}$ est directement opposé à la vitesse de glissement $\vec{V}_g$[cite: 42].
+* **Torseur glisseur** : Torseur dont le moment est nul le long d'une droite appelée axe central (ex: force ponctuelle $\vec{F}$ appliquée en $A$ ou poids $\vec{P} = -mg\vec{z}$ appliqué au centre de gravité $G$, où $\vec{M}_G(\text{pesanteur} \to S) = \vec{0}$).
+* **Torseur couple** : Torseur dont la résultante est nulle ($\vec{R} = \vec{0}$) et le moment $\vec{C} \neq \vec{0}$ est **uniforme** (identique en tout point de l'espace : $\vec{M}_B = \vec{M}_A = \vec{C}$).
+* **Liaisons parfaites** : Dans une liaison parfaite (sans jeu ni frottement), la puissance dissipée par les inter-efforts est nulle : **à chaque degré de liberté (vitesse autorisée non nulle) correspond une composante d'effort ou de moment nulle** au centre de la liaison (ex: une liaison pivot parfaite d'axe $(A, \vec{z})$ a un moment nul suivant l'axe de rotation : $\vec{M}_A(1 \to 2) \cdot \vec{z} = L_{12} \dots = 0 \implies N_{12} = 0$).
+* **Lois de Coulomb du frottement sec** : Au contact entre deux solides de normale $\vec{n}$ avec $\vec{R}(1 \to 2) = \vec{T} + N\,\vec{n}$ ($N > 0$ effort normal et $\vec{T}$ effort tangentiel) et de coefficient de frottement $f = \tan\varphi$ :
+  * **Adhérence ($\vec{V}_g = \vec{0}$)** : **$\|\vec{T}\| \le f\,N$** (le vecteur réaction reste à l'intérieur du cône de frottement de demi-angle $\varphi$).
+  * **Glissement ($\vec{V}_g \neq \vec{0}$)** : **$\|\vec{T}\| = f\,N$** et $\vec{T}$ est directement opposé à la vitesse de glissement $\vec{V}_g$.
 
 ### Principe Fondamental de la Statique (PFS) et Stratégie d'isolement
 <CriticalFormula title="Principe Fondamental de la Statique (PFS) et Actions réciproques">
-* **Principe des actions réciproques** : $\mathcal{T}(1 \to 2) = -\mathcal{T}(2 \to 1)$[cite: 46].
-* **PFS** : Dans un référentiel galiléen $\mathcal{R}_0$, si un système matériel $\Sigma$ est en équilibre (ou en mouvement uniforme), le torseur des actions mécaniques extérieures exercées sur $\Sigma$ est égal au torseur nul en tout point $A$[cite: 45, 46] :
+* **Principe des actions réciproques** : $\mathcal{T}(1 \to 2) = -\mathcal{T}(2 \to 1)$.
+* **PFS** : Dans un référentiel galiléen $\mathcal{R}_0$, si un système matériel $\Sigma$ est en équilibre (ou en mouvement uniforme), le torseur des actions mécaniques extérieures exercées sur $\Sigma$ est égal au torseur nul en tout point $A$ :
 $$\mathcal{T}(\bar{\Sigma} \to \Sigma) = \{0\} \iff \begin{cases} \sum \vec{R}(\text{ext} \to \Sigma) = \vec{0} \quad (\text{Théorème de la résultante statique}) \\ \sum \vec{M}_A(\text{ext} \to \Sigma) = \vec{0} \quad (\text{Théorème du moment statique en } A) \end{cases}$$
-* **Choix judicieux de l'isolement et de l'équation** : À partir du **graphe de structure**, pour trouver une action d'actionneur sans faire apparaître les inconnues d'une liaison pivot d'axe $(A, \vec{z})$, on isole l'ensemble mobile et on écrit **uniquement l'équation de moment projetée sur l'axe $(A, \vec{z})$ de la liaison pivot** ($\sum \vec{M}_A \cdot \vec{z} = 0$)[cite: 45, 125].
+* **Choix judicieux de l'isolement et de l'équation** : À partir du **graphe de structure**, pour trouver une action d'actionneur sans faire apparaître les inconnues d'une liaison pivot d'axe $(A, \vec{z})$, on isole l'ensemble mobile et on écrit **uniquement l'équation de moment projetée sur l'axe $(A, \vec{z})$ de la liaison pivot** ($\sum \vec{M}_A \cdot \vec{z} = 0$).
 </CriticalFormula>
 
 ---
@@ -37,18 +37,18 @@ $$\mathcal{T}(\bar{\Sigma} \to \Sigma) = \{0\} \iff \begin{cases} \sum \vec{R}(\
 ## 2. Cinétique et Principe Fondamental de la Dynamique (PFD)
 
 ### Centre d'inertie, Matrice d'inertie et Torseurs cinétique / dynamique
-Soit un solide indéformable $S$ de masse $m$ et de centre d'inertie (centre de gravité) $G$[cite: 41]. Dans un repère $(\vec{x}, \vec{y}, \vec{z})$ lié au solide, l'opérateur d'inertie en un point $O$ est représenté par la **matrice d'inertie** $\mathcal{I}_O(S)$ symétrique réelle ($A, B, C$ moments d'inertie autour des axes ; $D, E, F$ produits d'inertie, nuls si le repère est principal d'inertie par symétrie matérielle)[cite: 41, 96, 135]. *(Les calculs intégraux et le théorème de Huygens ne donnent pas lieu à évaluation)*[cite: 41].
+Soit un solide indéformable $S$ de masse $m$ et de centre d'inertie (centre de gravité) $G$. Dans un repère $(\vec{x}, \vec{y}, \vec{z})$ lié au solide, l'opérateur d'inertie en un point $O$ est représenté par la **matrice d'inertie** $\mathcal{I}_O(S)$ symétrique réelle ($A, B, C$ moments d'inertie autour des axes ; $D, E, F$ produits d'inertie, nuls si le repère est principal d'inertie par symétrie matérielle). *(Les calculs intégraux et le théorème de Huygens ne donnent pas lieu à évaluation)*.
 
 <WarningBox title="Restriction stricte du programme sur le moment dynamique">
-En CPGE ATS, la détermination du moment dynamique $\vec{\delta}_A(S/\mathcal{R}_0)$ est faite **uniquement au centre d'inertie $G$ du solide ou en un point $O$ fixe dans le référentiel galiléen $\mathcal{R}_0$**[cite: 45, 47, 126].
+En CPGE ATS, la détermination du moment dynamique $\vec{\delta}_A(S/\mathcal{R}_0)$ est faite **uniquement au centre d'inertie $G$ du solide ou en un point $O$ fixe dans le référentiel galiléen $\mathcal{R}_0$**.
 </WarningBox>
 
 <CriticalFormula title="Torseur dynamique et Principe Fondamental de la Dynamique (PFD)">
-Dans un référentiel galiléen $\mathcal{R}_0$, le **torseur dynamique** $\mathcal{D}(S/\mathcal{R}_0)$ d'un solide $S$ de masse $m$ et de centre d'inertie $G$ a pour éléments de réduction[cite: 46, 47, 126] :
-* **Résultante dynamique** : $\vec{R}_d(S/\mathcal{R}_0) = m\,\vec{\Gamma}(G/\mathcal{R}_0)$[cite: 46, 126].
+Dans un référentiel galiléen $\mathcal{R}_0$, le **torseur dynamique** $\mathcal{D}(S/\mathcal{R}_0)$ d'un solide $S$ de masse $m$ et de centre d'inertie $G$ a pour éléments de réduction :
+* **Résultante dynamique** : $\vec{R}_d(S/\mathcal{R}_0) = m\,\vec{\Gamma}(G/\mathcal{R}_0)$.
 * **Moment dynamique** (en $G$ ou en $O$ fixe dans $\mathcal{R}_0$, pour une rotation d'axe fixe $(O, \vec{z}_0)$ de moment d'inertie $J_{Oz}$ et d'angle $\theta$) :
 $$\vec{\delta}_O(S/\mathcal{R}_0) = \left(\frac{\mathrm{d}\vec{\sigma}_O(S/\mathcal{R}_0)}{\mathrm{d}t}\right)_{\mathcal{R}_0} \implies \vec{\delta}_O(S/\mathcal{R}_0)\cdot\vec{z}_0 = J_{Oz}\,\ddot{\theta} = J_{Oz}\,\dot{\omega}$$
-**Énoncé du PFD** : Pour tout système isolé $\Sigma$, en tout point $A$[cite: 45, 46] :
+**Énoncé du PFD** : Pour tout système isolé $\Sigma$, en tout point $A$ :
 $$\mathcal{T}(\bar{\Sigma} \to \Sigma) = \mathcal{D}(\Sigma/\mathcal{R}_0) \iff \begin{cases} \sum \vec{R}(\text{ext} \to \Sigma) = m\,\vec{\Gamma}(G/\mathcal{R}_0) \quad (\text{TRS / TRD}) \\ \sum \vec{M}_A(\text{ext} \to \Sigma) = \vec{\delta}_A(\Sigma/\mathcal{R}_0) \quad (\text{TMS / TMD en } A) \end{cases}$$
 </CriticalFormula>
 
@@ -57,18 +57,18 @@ $$\mathcal{T}(\bar{\Sigma} \to \Sigma) = \mathcal{D}(\Sigma/\mathcal{R}_0) \iff 
 ## 3. Approche énergétique : Puissance, Inertie équivalente et TEC
 
 ### Puissance d'une action mécanique et Énergie cinétique
-* **Puissance galiléenne d'une action extérieure** exercée sur un solide $S$ en mouvement par rapport à $\mathcal{R}_0$ : C'est le comoment du torseur d'action mécanique et du torseur cinématique au même point $A$[cite: 47, 123, 126] :
+* **Puissance galiléenne d'une action extérieure** exercée sur un solide $S$ en mouvement par rapport à $\mathcal{R}_0$ : C'est le comoment du torseur d'action mécanique et du torseur cinématique au même point $A$ :
 $$\mathcal{P}(\text{ext} \to S/\mathcal{R}_0) = \mathcal{T}(\text{ext} \to S) \otimes \mathcal{V}(S/\mathcal{R}_0) = \vec{R}(\text{ext} \to S)\cdot\vec{V}(A \in S/\mathcal{R}_0) + \vec{M}_A(\text{ext} \to S)\cdot\vec{\Omega}(S/\mathcal{R}_0)$$
-*(Exemples usuels : couple moteur $C_m$ sur un arbre à la vitesse $\omega_m \implies \mathcal{P}_m = C_m\,\omega_m$ ; vérin exerçant une force $F$ à la vitesse $v \implies \mathcal{P}_v = F\,v$)*[cite: 123].
-* **Puissance des inter-efforts** entre deux solides $S_1$ et $S_2$ : $\mathcal{P}_{\text{int}}(1 \leftrightarrow 2) = \mathcal{T}(1 \to 2) \otimes \mathcal{V}(S_2/S_1)$ (indépendante du référentiel d'observation ; elle est **nulle si la liaison entre $S_1$ et $S_2$ est parfaite**, et vaut $\mathcal{P}_{\text{int}} = (\eta - 1)\mathcal{P}_{\text{entrante}} \le 0$ dans un réducteur réel de rendement $\eta$)[cite: 47, 126].
+*(Exemples usuels : couple moteur $C_m$ sur un arbre à la vitesse $\omega_m \implies \mathcal{P}_m = C_m\,\omega_m$ ; vérin exerçant une force $F$ à la vitesse $v \implies \mathcal{P}_v = F\,v$)*.
+* **Puissance des inter-efforts** entre deux solides $S_1$ et $S_2$ : $\mathcal{P}_{\text{int}}(1 \leftrightarrow 2) = \mathcal{T}(1 \to 2) \otimes \mathcal{V}(S_2/S_1)$ (indépendante du référentiel d'observation ; elle est **nulle si la liaison entre $S_1$ et $S_2$ est parfaite**, et vaut $\mathcal{P}_{\text{int}} = (\eta - 1)\mathcal{P}_{\text{entrante}} \le 0$ dans un réducteur réel de rendement $\eta$).
 
 <CriticalFormula title="Énergie cinétique, Masse/Inertie équivalente et Théorème de l'Énergie Cinétique (TEC)">
-En ATS, seuls les calculs d'énergie cinétique pour les **mouvements élémentaires** sont exigibles (pour les mouvements combinés, l'expression est fournie)[cite: 45, 47] :
-* **Solide en translation de vitesse $v$** : **$E_c(S/\mathcal{R}_0) = \frac{1}{2}\,m\,v^2$**[cite: 45, 47].
-* **Solide en rotation autour d'un axe fixe $(O, \vec{z}_0)$ de moment d'inertie $J$ et de vitesse angulaire $\omega$** : **$E_c(S/\mathcal{R}_0) = \frac{1}{2}\,J\,\omega^2$**[cite: 45, 47].
-* **Inertie équivalente $J_{\text{eq}}$ ramenée sur l'arbre moteur ($\omega_m$)** : Pour une chaîne cinématique à 1 degré de liberté comprenant des solides en rotation ($J_i, \omega_i$) et des solides en translation ($m_k, v_k$), la somme des énergies cinétiques s'écrit[cite: 47] :
+En ATS, seuls les calculs d'énergie cinétique pour les **mouvements élémentaires** sont exigibles (pour les mouvements combinés, l'expression est fournie) :
+* **Solide en translation de vitesse $v$** : **$E_c(S/\mathcal{R}_0) = \frac{1}{2}\,m\,v^2$**.
+* **Solide en rotation autour d'un axe fixe $(O, \vec{z}_0)$ de moment d'inertie $J$ et de vitesse angulaire $\omega$** : **$E_c(S/\mathcal{R}_0) = \frac{1}{2}\,J\,\omega^2$**.
+* **Inertie équivalente $J_{\text{eq}}$ ramenée sur l'arbre moteur ($\omega_m$)** : Pour une chaîne cinématique à 1 degré de liberté comprenant des solides en rotation ($J_i, \omega_i$) et des solides en translation ($m_k, v_k$), la somme des énergies cinétiques s'écrit :
 $$E_c(\Sigma/\mathcal{R}_0) = \sum_i \frac{1}{2}J_i\omega_i^2 + \sum_k \frac{1}{2}m_k v_k^2 = \frac{1}{2}\,J_{\text{eq}}\,\omega_m^2 \implies J_{\text{eq}} = \sum_i J_i\left(\frac{\omega_i}{\omega_m}\right)^2 + \sum_k m_k\left(\frac{v_k}{\omega_m}\right)^2$$
-* **Théorème de l'Énergie Cinétique (TEC)** : Dans un référentiel galiléen $\mathcal{R}_0$, pour un ensemble de solides $\Sigma$[cite: 45, 47, 126] :
+* **Théorème de l'Énergie Cinétique (TEC)** : Dans un référentiel galiléen $\mathcal{R}_0$, pour un ensemble de solides $\Sigma$ :
 $$\frac{\mathrm{d}E_c(\Sigma/\mathcal{R}_0)}{\mathrm{d}t} = \mathcal{P}_{\text{ext}}(\bar{\Sigma} \to \Sigma/\mathcal{R}_0) + \mathcal{P}_{\text{int}}(\Sigma) \iff J_{\text{eq}}\,\omega_m\,\frac{\mathrm{d}\omega_m}{\mathrm{d}t} = \mathcal{P}_{\text{ext}} + \mathcal{P}_{\text{int}}$$
 </CriticalFormula>
 
@@ -76,22 +76,22 @@ $$\frac{\mathrm{d}E_c(\Sigma/\mathcal{R}_0)}{\mathrm{d}t} = \mathcal{P}_{\text{e
 
 ## 4. Résistance des Matériaux (RDM) : Modèle poutre
 
-Une **poutre** droite d'axe $(Ox)$ est un solide déformable engendré par une **section droite $S$** dont le centre de surface $G$ décrit la **ligne moyenne (ou fibre neutre)** $(Ox)$[cite: 42, 47].
+Une **poutre** droite d'axe $(Ox)$ est un solide déformable engendré par une **section droite $S$** dont le centre de surface $G$ décrit la **ligne moyenne (ou fibre neutre)** $(Ox)$.
 
 ### Méthode des coupures et Torseur de cohésion
-Pour déterminer les efforts internes en un point $G(x)$ d'abscisse $x$ le long de la poutre, on effectue une **coupure** fictive par le plan de la section droite d'abscisse $x$, qui sépare la poutre en deux tronçons : $E_1 = [0, x]$ (à gauche) et $E_2 = [x, L]$ (à droite)[cite: 46, 47].
+Pour déterminer les efforts internes en un point $G(x)$ d'abscisse $x$ le long de la poutre, on effectue une **coupure** fictive par le plan de la section droite d'abscisse $x$, qui sépare la poutre en deux tronçons : $E_1 = [0, x]$ (à gauche) et $E_2 = [x, L]$ (à droite).
 
 <SchemaPlaceholder alt="Poutre sur appuis coupée en l'abscisse x montrant les tronçons E1 et E2 ainsi que l'effort normal N, l'effort tranchant Ty et le moment fléchissant Mfz au centre de surface G" caption="Figure 3.1 : Méthode des coupures sur une poutre et éléments de réduction du torseur de cohésion en G(x)." src="/images/sii/rdm-coupure-torseur-cohesion.png"/>
 
 <CriticalFormula title="Torseur de cohésion, Traction simple et Flexion plane simple">
-Le **torseur de cohésion** $\mathcal{T}_{\text{coh}}(x)$ est le torseur des actions internes exercées par le tronçon de droite $E_2$ sur le tronçon de gauche $E_1$ au centre de surface $G(x)$, obtenu en appliquant le PFS à l'un des deux tronçons[cite: 42, 46, 47] :
+Le **torseur de cohésion** $\mathcal{T}_{\text{coh}}(x)$ est le torseur des actions internes exercées par le tronçon de droite $E_2$ sur le tronçon de gauche $E_1$ au centre de surface $G(x)$, obtenu en appliquant le PFS à l'un des deux tronçons :
 $$\mathcal{T}_{\text{coh}}(x) = \mathcal{T}(E_2 \to E_1) = -\mathcal{T}(\text{ext} \to E_1) = +\mathcal{T}(\text{ext} \to E_2) = \left\{ \begin{array}{cc} N(x) & M_t(x) \\ T_y(x) & M_{fy}(x) \\ T_z(x) & M_{fz}(x) \end{array} \right\}_{G(x), (\vec{x}, \vec{y}, \vec{z})}$$
-En ATS, le programme se limite aux deux sollicitations simples non combinées suivantes (l'effet du cisaillement est hors programme)[cite: 42, 46, 47] :
-1. **Traction - Compression simple** (seul l'effort normal $N(x) \neq 0$, pour une section d'aire $S$ et un matériau de module d'Young $E$)[cite: 42, 47] :
-   * **Contrainte normale** (en $\text{Pa}$ ou $\text{MPa} = \text{N}\cdot\text{mm}^{-2}$) : **$\sigma(x) = \frac{N(x)}{S}$**[cite: 47].
-   * **Loi de Hooke et allongement** d'un tronçon de longueur $L$ : $\sigma = E\,\varepsilon = E\,\frac{\Delta L}{L} \implies$ **$\Delta L = \frac{N\,L}{E\,S}$**[cite: 47].
-2. **Flexion plane simple** dans le plan $(Oxy)$ (seuls l'effort tranchant $T_y(x)$ et le moment fléchissant $M_{fz}(x)$ sont non nuls, avec $\frac{\mathrm{d}M_{fz}}{\mathrm{d}x} = -T_y(x)$ et $I_{Gz}$ le moment quadratique de la section droite autour de $(Gz)$ en $\text{m}^4$ ou $\text{mm}^4$)[cite: 42, 47] :
-   * **Contrainte normale de flexion** à la distance $y$ de la fibre neutre : **$\sigma(x, y) = -\frac{M_{fz}(x)}{I_{Gz}}\,y$** (maximale sur les fibres extrêmes en $|y| = y_{\max} = v$)[cite: 47].
-   * **Équation de la déformée (flèche $y(x)$)** : **$E\,I_{Gz}\,y''(x) = M_{fz}(x)$** (que l'on intègre deux fois en utilisant les conditions aux limites : $y = 0$ sur un appui simple ; $y = 0$ et $y' = 0$ sur un encastrement)[cite: 47, 52].
-* **Condition de résistance mécanique** (avec $R_e$ la limite d'élasticité du matériau et $s \ge 1$ le coefficient de sécurité) : **$\sigma_{\max} \le R_{pe} = \frac{R_e}{s}$**[cite: 47, 52].
+En ATS, le programme se limite aux deux sollicitations simples non combinées suivantes (l'effet du cisaillement est hors programme) :
+1. **Traction - Compression simple** (seul l'effort normal $N(x) \neq 0$, pour une section d'aire $S$ et un matériau de module d'Young $E$) :
+   * **Contrainte normale** (en $\text{Pa}$ ou $\text{MPa} = \text{N}\cdot\text{mm}^{-2}$) : **$\sigma(x) = \frac{N(x)}{S}$**.
+   * **Loi de Hooke et allongement** d'un tronçon de longueur $L$ : $\sigma = E\,\varepsilon = E\,\frac{\Delta L}{L} \implies$ **$\Delta L = \frac{N\,L}{E\,S}$**.
+2. **Flexion plane simple** dans le plan $(Oxy)$ (seuls l'effort tranchant $T_y(x)$ et le moment fléchissant $M_{fz}(x)$ sont non nuls, avec $\frac{\mathrm{d}M_{fz}}{\mathrm{d}x} = -T_y(x)$ et $I_{Gz}$ le moment quadratique de la section droite autour de $(Gz)$ en $\text{m}^4$ ou $\text{mm}^4$) :
+   * **Contrainte normale de flexion** à la distance $y$ de la fibre neutre : **$\sigma(x, y) = -\frac{M_{fz}(x)}{I_{Gz}}\,y$** (maximale sur les fibres extrêmes en $|y| = y_{\max} = v$).
+   * **Équation de la déformée (flèche $y(x)$)** : **$E\,I_{Gz}\,y''(x) = M_{fz}(x)$** (que l'on intègre deux fois en utilisant les conditions aux limites : $y = 0$ sur un appui simple ; $y = 0$ et $y' = 0$ sur un encastrement).
+* **Condition de résistance mécanique** (avec $R_e$ la limite d'élasticité du matériau et $s \ge 1$ le coefficient de sécurité) : **$\sigma_{\max} \le R_{pe} = \frac{R_e}{s}$**.
 </CriticalFormula>

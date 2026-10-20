@@ -8,29 +8,29 @@ description: "Forme algébrique, trigonométrique et exponentielle, formules d'E
 
 # Nombres complexes et trigonométrie
 
-Ce chapitre consolide et approfondit les acquis de BTS/BUT autour de trois axes majeurs : la résolution d'équations algébriques dans $\mathbb{C}$ (second degré, racines $n$-ièmes), l'exponentielle complexe appliquée à la trigonométrie, et l'interprétation géométrique des transformations du plan[cite: 79, 80].
+Ce chapitre consolide et approfondit les acquis de BTS/BUT autour de trois axes majeurs : la résolution d'équations algébriques dans $\mathbb{C}$ (second degré, racines $n$-ièmes), l'exponentielle complexe appliquée à la trigonométrie, et l'interprétation géométrique des transformations du plan.
 
 ---
 
 ## 1. L'ensemble $\mathbb{C}$ : forme algébrique, conjugué et module
 
 ### Forme algébrique et représentation géométrique
-Tout nombre complexe $z \in \mathbb{C}$ s'écrit de manière unique sous **forme algébrique** $z = x + iy$, où $x = \text{Re}(z) \in \mathbb{R}$ est la partie réelle, $y = \text{Im}(z) \in \mathbb{R}$ est la partie imaginaire, et $i^2 = -1$[cite: 79].
+Tout nombre complexe $z \in \mathbb{C}$ s'écrit de manière unique sous **forme algébrique** $z = x + iy$, où $x = \text{Re}(z) \in \mathbb{R}$ est la partie réelle, $y = \text{Im}(z) \in \mathbb{R}$ est la partie imaginaire, et $i^2 = -1$.
 
-Dans le plan complexe muni d'un repère orthonormal direct $(O, \vec{u}, \vec{v})$, on identifie $\mathbb{C}$ au plan usuel[cite: 79] :
-* Le point $M(x, y)$ est appelé **point image** de $z$, et $z$ est l'**affixe** du point $M$ (ou du vecteur $\vec{OM}$)[cite: 79].
-* Pour deux points $A(z_A)$ et $B(z_B)$, le vecteur $\vec{AB}$ a pour affixe $z_{\vec{AB}} = z_B - z_A$[cite: 79, 80].
+Dans le plan complexe muni d'un repère orthonormal direct $(O, \vec{u}, \vec{v})$, on identifie $\mathbb{C}$ au plan usuel :
+* Le point $M(x, y)$ est appelé **point image** de $z$, et $z$ est l'**affixe** du point $M$ (ou du vecteur $\vec{OM}$).
+* Pour deux points $A(z_A)$ et $B(z_B)$, le vecteur $\vec{AB}$ a pour affixe $z_{\vec{AB}} = z_B - z_A$.
 
 ### Conjugaison et Module
-* **Conjugué** : Le conjugué de $z = x + iy$ est noté $\bar{z} = x - iy$[cite: 79]. Géométriquement, le point d'affixe $\bar{z}$ est le symétrique du point d'affixe $z$ par rapport à l'axe des abscisses (axe réel)[cite: 79, 80]. La conjugaison est compatible avec la somme, le produit et le quotient : $\overline{z_1 + z_2} = \bar{z}_1 + \bar{z}_2$ et $\overline{z_1 z_2} = \bar{z}_1 \bar{z}_2$[cite: 79].
-* **Module** : Le module de $z = x + iy$ est le réel positif $|z| = \sqrt{x^2 + y^2}$[cite: 29, 79]. Géométriquement, $|z|$ représente la distance $OM$, et pour tous $a, z \in \mathbb{C}$, **$|z - a|$ représente la distance entre les points d'affixes $z$ et $a$**[cite: 79].
+* **Conjugué** : Le conjugué de $z = x + iy$ est noté $\bar{z} = x - iy$. Géométriquement, le point d'affixe $\bar{z}$ est le symétrique du point d'affixe $z$ par rapport à l'axe des abscisses (axe réel). La conjugaison est compatible avec la somme, le produit et le quotient : $\overline{z_1 + z_2} = \bar{z}_1 + \bar{z}_2$ et $\overline{z_1 z_2} = \bar{z}_1 \bar{z}_2$.
+* **Module** : Le module de $z = x + iy$ est le réel positif $|z| = \sqrt{x^2 + y^2}$. Géométriquement, $|z|$ représente la distance $OM$, et pour tous $a, z \in \mathbb{C}$, **$|z - a|$ représente la distance entre les points d'affixes $z$ et $a$**.
 
 <CriticalFormula title="Relations fondamentales du module et Inégalité triangulaire">
-Pour tous nombres complexes $z, z_1, z_2 \in \mathbb{C}$[cite: 79] :
+Pour tous nombres complexes $z, z_1, z_2 \in \mathbb{C}$ :
 $$|z|^2 = z\bar{z} \quad ; \quad |z_1 z_2| = |z_1|\,|z_2| \quad ; \quad \left|\frac{z_1}{z_2}\right| = \frac{|z_1|}{|z_2|} \text{ (si } z_2 \neq 0\text{)}$$
 **Inégalité triangulaire** :
 $$\big||z_1| - |z_2|\big| \le |z_1 + z_2| \le |z_1| + |z_2|$$
-Le cas d'égalité $|z_1 + z_2| = |z_1| + |z_2|$ a lieu si et seulement si $z_1$ et $z_2$ sont positivement colinéaires ($z_1 = 0$ ou $z_2 = \lambda z_1$ avec $\lambda \in \mathbb{R}_+$)[cite: 79].
+Le cas d'égalité $|z_1 + z_2| = |z_1| + |z_2|$ a lieu si et seulement si $z_1$ et $z_2$ sont positivement colinéaires ($z_1 = 0$ ou $z_2 = \lambda z_1$ avec $\lambda \in \mathbb{R}_+$).
 </CriticalFormula>
 
 ---
@@ -38,35 +38,35 @@ Le cas d'égalité $|z_1 + z_2| = |z_1| + |z_2|$ a lieu si et seulement si $z_1$
 ## 2. Nombres complexes de module 1 et Trigonométrie
 
 ### L'ensemble $\mathbb{U}$, formules d'Euler et de Moivre
-On note $\mathbb{U}$ l'ensemble des nombres complexes de module $1$ (identifié géométriquement au cercle trigonométrique de centre $O$ et de rayon $1$)[cite: 79]. Tout élément de $\mathbb{U}$ s'écrit sous la forme $e^{i\theta} = \cos(\theta) + i\sin(\theta)$ avec $\theta \in \mathbb{R}$, vérifiant la relation fonctionnelle $e^{ia}e^{ib} = e^{i(a+b)}$[cite: 79].
+On note $\mathbb{U}$ l'ensemble des nombres complexes de module $1$ (identifié géométriquement au cercle trigonométrique de centre $O$ et de rayon $1$). Tout élément de $\mathbb{U}$ s'écrit sous la forme $e^{i\theta} = \cos(\theta) + i\sin(\theta)$ avec $\theta \in \mathbb{R}$, vérifiant la relation fonctionnelle $e^{ia}e^{ib} = e^{i(a+b)}$.
 
 <CriticalFormula title="Formules d'Euler et Formule de Moivre">
-Pour tout $\theta \in \mathbb{R}$ et tout entier $n \in \mathbb{Z}$[cite: 79] :
+Pour tout $\theta \in \mathbb{R}$ et tout entier $n \in \mathbb{Z}$ :
 $$\cos(\theta) = \frac{e^{i\theta} + e^{-i\theta}}{2} \quad \text{et} \quad \sin(\theta) = \frac{e^{i\theta} - e^{-i\theta}}{2i} \quad \text{(Formules d'Euler)}$$
 $$\left(e^{i\theta}\right)^n = e^{in\theta} \iff (\cos\theta + i\sin\theta)^n = \cos(n\theta) + i\sin(n\theta) \quad \text{(Formule de Moivre)}$$
 </CriticalFormula>
 
 ### Applications trigonométriques exigibles
-1. **Technique de l'angle moitié** : Factoriser $1 \pm e^{i\theta}$ (ou $e^{ia} \pm e^{ib}$) en mettant en facteur l'exponentielle de la demi-somme des angles[cite: 79] :
+1. **Technique de l'angle moitié** : Factoriser $1 \pm e^{i\theta}$ (ou $e^{ia} \pm e^{ib}$) en mettant en facteur l'exponentielle de la demi-somme des angles :
 $$1 + e^{i\theta} = e^{i\frac{\theta}{2}}\left(e^{-i\frac{\theta}{2}} + e^{i\frac{\theta}{2}}\right) = 2\cos\left(\frac{\theta}{2}\right)e^{i\frac{\theta}{2}}$$
 $$1 - e^{i\theta} = e^{i\frac{\theta}{2}}\left(e^{-i\frac{\theta}{2}} - e^{i\frac{\theta}{2}}\right) = -2i\sin\left(\frac{\theta}{2}\right)e^{i\frac{\theta}{2}}$$
-2. **Linéarisation** : Transformer un produit $\cos^p(t)\sin^q(t)$ en somme de termes du type $\cos(kt)$ et $\sin(kt)$ à l'aide des formules d'Euler et de la formule du binôme de Newton (indispensable pour le calcul de primitives ou de valeurs moyennes en physique)[cite: 68, 78, 79].
-3. **Polynômes trigonométriques** : Exprimer $\cos(nt)$ et $\sin(nt)$ en fonction de $\cos(t)$ et $\sin(t)$ en développant $(\cos t + i\sin t)^n$ par le binôme de Newton et en identifiant les parties réelle et imaginaire avec la formule de Moivre[cite: 78, 79].
+2. **Linéarisation** : Transformer un produit $\cos^p(t)\sin^q(t)$ en somme de termes du type $\cos(kt)$ et $\sin(kt)$ à l'aide des formules d'Euler et de la formule du binôme de Newton (indispensable pour le calcul de primitives ou de valeurs moyennes en physique).
+3. **Polynômes trigonométriques** : Exprimer $\cos(nt)$ et $\sin(nt)$ en fonction de $\cos(t)$ et $\sin(t)$ en développant $(\cos t + i\sin t)^n$ par le binôme de Newton et en identifiant les parties réelle et imaginaire avec la formule de Moivre.
 
 ---
 
 ## 3. Argument, Forme trigonométrique et Signaux sinusoïdaux
 
 ### Forme trigonométrique et exponentielle complexe
-Tout nombre complexe non nul $z \in \mathbb{C}^*$ s'écrit sous **forme trigonométrique** $z = \rho e^{i\theta} = \rho(\cos\theta + i\sin\theta)$, où $\rho = |z| > 0$ est le module et $\theta = \arg(z) \in \mathbb{R}$ est un argument de $z$ (défini à $2k\pi$ près, $k \in \mathbb{Z}$)[cite: 79]. Géométriquement, $(\rho, \theta)$ sont les coordonnées polaires du point image $M$[cite: 79, 80].
+Tout nombre complexe non nul $z \in \mathbb{C}^*$ s'écrit sous **forme trigonométrique** $z = \rho e^{i\theta} = \rho(\cos\theta + i\sin\theta)$, où $\rho = |z| > 0$ est le module et $\theta = \arg(z) \in \mathbb{R}$ est un argument de $z$ (défini à $2k\pi$ près, $k \in \mathbb{Z}$). Géométriquement, $(\rho, \theta)$ sont les coordonnées polaires du point image $M$.
 
-Propriétés des arguments ($z_1, z_2 \in \mathbb{C}^*$)[cite: 79] :
+Propriétés des arguments ($z_1, z_2 \in \mathbb{C}^*$) :
 $$\arg(z_1 z_2) \equiv \arg(z_1) + \arg(z_2) \pmod{2\pi} \quad ; \quad \arg\left(\frac{z_1}{z_2}\right) \equiv \arg(z_1) - \arg(z_2) \pmod{2\pi}$$
 
-Plus généralement, pour tout nombre complexe $z = x + iy$ ($x, y \in \mathbb{R}$), l'**exponentielle complexe** est définie par **$e^z = e^x e^{iy}$**, de module $e^x$ et d'argument $y \pmod{2\pi}$[cite: 79].
+Plus généralement, pour tout nombre complexe $z = x + iy$ ($x, y \in \mathbb{R}$), l'**exponentielle complexe** est définie par **$e^z = e^x e^{iy}$**, de module $e^x$ et d'argument $y \pmod{2\pi}$.
 
 <CriticalFormula title="Transformation de a cos(t) + b sin(t) en A cos(t - φ) (Lien Physique & SII)">
-Pour tous réels $(a, b) \neq (0, 0)$, on transforme une combinaison linéaire de cosinus et sinus de même pulsation en une seule fonction sinusoïdale d'amplitude $A$ et de phase $\varphi$ en posant $a + ib = A e^{i\varphi}$[cite: 29, 70, 79, 135] :
+Pour tous réels $(a, b) \neq (0, 0)$, on transforme une combinaison linéaire de cosinus et sinus de même pulsation en une seule fonction sinusoïdale d'amplitude $A$ et de phase $\varphi$ en posant $a + ib = A e^{i\varphi}$ :
 $$a\cos(\omega t) + b\sin(\omega t) = A\cos(\omega t - \varphi) \quad \text{avec} \quad A = \sqrt{a^2 + b^2} \quad \text{et} \quad \begin{cases} \cos\varphi = \frac{a}{A} \\ \sin\varphi = \frac{b}{A} \end{cases}$$
 </CriticalFormula>
 
@@ -75,18 +75,18 @@ $$a\cos(\omega t) + b\sin(\omega t) = A\cos(\omega t - \varphi) \quad \text{avec
 ## 4. Équations du second degré et Racines $n$-ièmes dans $\mathbb{C}$
 
 ### Racines carrées et équations du second degré
-Pour chercher les racines carrées $\delta = x + iy$ ($(x,y) \in \mathbb{R}^2$) d'un nombre complexe $\Delta = a + ib$ sous forme algébrique, on résout le système équivalent à $\delta^2 = \Delta$ et $|\delta|^2 = |\Delta|$[cite: 79] :
+Pour chercher les racines carrées $\delta = x + iy$ ($(x,y) \in \mathbb{R}^2$) d'un nombre complexe $\Delta = a + ib$ sous forme algébrique, on résout le système équivalent à $\delta^2 = \Delta$ et $|\delta|^2 = |\Delta|$ :
 $$\begin{cases} x^2 - y^2 = a \\ x^2 + y^2 = \sqrt{a^2 + b^2} \\ 2xy = b \text{ (donne le signe du produit } xy\text{)} \end{cases}$$
 
-Toute équation du second degré $az^2 + bz + c = 0$ ($a \in \mathbb{C}^*, b, c \in \mathbb{C}$) de discriminant $\Delta = b^2 - 4ac$ admet deux racines dans $\mathbb{C}$ (confondues si $\Delta = 0$) : **$z_{1,2} = \frac{-b \pm \delta}{2a}$**, où $\delta$ est l'une des racines carrées complexes de $\Delta$[cite: 79].
+Toute équation du second degré $az^2 + bz + c = 0$ ($a \in \mathbb{C}^*, b, c \in \mathbb{C}$) de discriminant $\Delta = b^2 - 4ac$ admet deux racines dans $\mathbb{C}$ (confondues si $\Delta = 0$) : **$z_{1,2} = \frac{-b \pm \delta}{2a}$**, où $\delta$ est l'une des racines carrées complexes de $\Delta$.
 
 ### Racines $n$-ièmes de l'unité et d'un nombre complexe
-Soit $n \in \mathbb{N}^*$. On appelle **racine $n$-ième de l'unité** tout nombre complexe $z \in \mathbb{C}$ vérifiant $z^n = 1$[cite: 80]. Leur ensemble est noté $\mathbb{U}_n$[cite: 80].
+Soit $n \in \mathbb{N}^*$. On appelle **racine $n$-ième de l'unité** tout nombre complexe $z \in \mathbb{C}$ vérifiant $z^n = 1$. Leur ensemble est noté $\mathbb{U}_n$.
 
 <CriticalFormula title="Description de Un et résolution de z^n = λ">
-* L'ensemble $\mathbb{U}_n$ contient exactement $n$ éléments distincts qui forment les sommets d'un polygone régulier à $n$ côtés inscrit dans le cercle trigonométrique[cite: 80] :
+* L'ensemble $\mathbb{U}_n$ contient exactement $n$ éléments distincts qui forment les sommets d'un polygone régulier à $n$ côtés inscrit dans le cercle trigonométrique :
 $$\mathbb{U}_n = \left\{ \omega_k = e^{\frac{2ik\pi}{n}} \;\middle|\; k \in \{0, 1, \dots, n-1\} \right\}$$
-* La somme des racines $n$-ièmes de l'unité est nulle pour $n \ge 2$ : $\sum_{k=0}^{n-1} e^{\frac{2ik\pi}{n}} = 0$ (en particulier, en électrotechnique triphasée pour $n=3$ avec $\underline{a} = j = e^{i\frac{2\pi}{3}}$, on a **$1 + \underline{a} + \underline{a}^2 = 0$**)[cite: 80, 135].
+* La somme des racines $n$-ièmes de l'unité est nulle pour $n \ge 2$ : $\sum_{k=0}^{n-1} e^{\frac{2ik\pi}{n}} = 0$ (en particulier, en électrotechnique triphasée pour $n=3$ avec $\underline{a} = j = e^{i\frac{2\pi}{3}}$, on a **$1 + \underline{a} + \underline{a}^2 = 0$**).
 * Pour résoudre **$z^n = \lambda$** avec $\lambda = r e^{i\alpha} \in \mathbb{C}^*$ ($r > 0$), les $n$ solutions distinctes sont :
 $$z_k = \sqrt[n]{r}\,e^{i\left(\frac{\alpha}{n} + \frac{2k\pi}{n}\right)} \quad \text{pour } k \in \{0, 1, \dots, n-1\}$$
 </CriticalFormula>
@@ -102,12 +102,12 @@ $$z_k = \sqrt[n]{r}\,e^{i\left(\frac{\alpha}{n} + \frac{2k\pi}{n}\right)} \quad 
 ## 5. Transformations affines du plan complexe
 
 <WarningBox title="Transformations géométriques exigibles au programme ATS">
-Vous devez savoir identifier immédiatement l'interprétation géométrique des trois transformations suivantes du plan complexe ($a, b \in \mathbb{C}$)[cite: 80] :
+Vous devez savoir identifier immédiatement l'interprétation géométrique des trois transformations suivantes du plan complexe ($a, b \in \mathbb{C}$) :
 </WarningBox>
 
-* **$z \mapsto z + b$** : **Translation** de vecteur d'affixe $b$[cite: 80].
-* **$z \mapsto \bar{z}$** : **Symétrie orthogonale** par rapport à l'axe réel $(Ox)$[cite: 79, 80].
+* **$z \mapsto z + b$** : **Translation** de vecteur d'affixe $b$.
+* **$z \mapsto \bar{z}$** : **Symétrie orthogonale** par rapport à l'axe réel $(Ox)$.
 * **$z \mapsto a z$** (avec $a = |a|e^{i\theta} \in \mathbb{C}^*$) :
-  * Si $a \in \mathbb{R}^*$, c'est une **homothétie** de centre $O$ et de rapport $a$[cite: 80].
-  * Si $|a| = 1$ ($a = e^{i\theta}$), c'est une **rotation** de centre $O$ et d'angle $\theta$[cite: 80].
-  * Dans le cas général, c'est la composée commutative d'une homothétie de centre $O$ de rapport $|a|$ et d'une rotation de centre $O$ d'angle $\arg(a)$ (similitude directe de centre $O$)[cite: 80].
+  * Si $a \in \mathbb{R}^*$, c'est une **homothétie** de centre $O$ et de rapport $a$.
+  * Si $|a| = 1$ ($a = e^{i\theta}$), c'est une **rotation** de centre $O$ et d'angle $\theta$.
+  * Dans le cas général, c'est la composée commutative d'une homothétie de centre $O$ de rapport $|a|$ et d'une rotation de centre $O$ d'angle $\arg(a)$ (similitude directe de centre $O$).

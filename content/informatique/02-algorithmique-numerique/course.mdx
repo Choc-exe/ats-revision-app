@@ -8,19 +8,19 @@ description: "Nombres flottants, dérivation discrète par différence avant, in
 
 # Algorithmique numérique
 
-Ce chapitre applique les structures de la programmation impérative aux méthodes numériques utilisées en mathématiques, en physique-chimie et en sciences industrielles de l'ingénieur[cite: 112, 114]. Toute utilisation de la bibliothèque `numpy` est strictement hors programme : seules les listes standards de taille fixe construites avec `append` sont autorisées[cite: 113, 114, 115].
+Ce chapitre applique les structures de la programmation impérative aux méthodes numériques utilisées en mathématiques, en physique-chimie et en sciences industrielles de l'ingénieur. Toute utilisation de la bibliothèque `numpy` est strictement hors programme : seules les listes standards de taille fixe construites avec `append` sont autorisées.
 
 ---
 
 ## 1. Calculs en virgule flottante et précision
 
 ### Représentation finie et erreurs d'arrondi
-En machine, les nombres réels sont représentés par le type `float` (nombres en virgule flottante) sur un nombre fini de bits[cite: 112, 114, 115]. De nombreux décimaux simples en base 10 (comme $0{,}1$) ont un développement binaire infini périodique et subissent une erreur d'arrondi dès leur stockage en mémoire[cite: 114].
+En machine, les nombres réels sont représentés par le type `float` (nombres en virgule flottante) sur un nombre fini de bits. De nombreux décimaux simples en base 10 (comme $0{,}1$) ont un développement binaire infini périodique et subissent une erreur d'arrondi dès leur stockage en mémoire.
 
 Ainsi, l'évaluation de `0.1 + 0.2` en Python donne `0.30000000000000004` et non `0.3`.
 
 <WarningBox title="Règle d'or : Ne jamais utiliser == entre deux flottants">
-À cause des erreurs d'arrondi en virgule flottante, le test d'égalité directe `a == b` entre deux variables de type `float` est proscrit[cite: 114]. Pour comparer deux flottants $a$ et $b$ à une précision $\varepsilon > 0$ donnée (par exemple $\varepsilon = 10^{-9}$), on teste systématiquement si l'écart absolu $\vert{}a - b\vert{}$ est inférieur à $\varepsilon$[cite: 77, 114] :
+À cause des erreurs d'arrondi en virgule flottante, le test d'égalité directe `a == b` entre deux variables de type `float` est proscrit. Pour comparer deux flottants $a$ et $b$ à une précision $\varepsilon > 0$ donnée (par exemple $\varepsilon = 10^{-9}$), on teste systématiquement si l'écart absolu $\vert{}a - b\vert{}$ est inférieur à $\varepsilon$ :
 </WarningBox>
 
 ```python
@@ -36,9 +36,9 @@ def sont_proches(a, b, eps):
 ## 2. Représentation d'une fonction et Dérivée discrète
 
 ### Les deux modes de représentation d'une fonction
-En algorithmique numérique, une fonction mathématique $f$ sur un intervalle $[a, b]$ peut être représentée de deux manières distinctes qu'il faut savoir manipuler[cite: 114] :
-1. **Sous forme d'une fonction Python de calcul** : `def f(x):` qui renvoie l'image $f(x)$ à la volée pour tout flottant $x$[cite: 114, 115].
-2. **Sous forme tabulée (échantillonnée)** : deux tableaux `X` (abscisses $[x_0, x_1, \dots, x_{n-1}]$) et `Y` (ordonnées $[y_0, y_1, \dots, y_{n-1}]$ avec $y_i = f(x_i)$) de même longueur $n$, issus par exemple d'une acquisition expérimentale en TP[cite: 6, 114].
+En algorithmique numérique, une fonction mathématique $f$ sur un intervalle $[a, b]$ peut être représentée de deux manières distinctes qu'il faut savoir manipuler :
+1. **Sous forme d'une fonction Python de calcul** : `def f(x):` qui renvoie l'image $f(x)$ à la volée pour tout flottant $x$.
+2. **Sous forme tabulée (échantillonnée)** : deux tableaux `X` (abscisses $[x_0, x_1, \dots, x_{n-1}]$) et `Y` (ordonnées $[y_0, y_1, \dots, y_{n-1}]$ avec $y_i = f(x_i)$) de même longueur $n$, issus par exemple d'une acquisition expérimentale en TP.
 
 Pour tabuler une fonction `f` en $n$ points régulièrement espacés sur $[a, b]$ avec un pas $h = \frac{b - a}{n - 1}$ :
 
@@ -57,10 +57,10 @@ def tabuler_fonction(f, a, b, n):
 
 ### Calcul de la dérivée discrète (Convention par différence avant)
 <CriticalFormula title="Convention officielle ATS : Dérivée discrète par différence avant">
-Par convention stricte du programme officiel, le calcul de la dérivée discrète s'effectue **par différence avant** (taux d'accroissement à droite)[cite: 114] :
+Par convention stricte du programme officiel, le calcul de la dérivée discrète s'effectue **par différence avant** (taux d'accroissement à droite) :
 * **Pour une fonction Python `f` avec un pas $h > 0$** :
 $$f'(x) \approx \frac{f(x + h) - f(x)}{h}$$
-* **Pour une fonction tabulée `(X, Y)` de taille $n$** : le tableau des dérivées `dY` possède une taille **$n - 1$** (car le dernier point d'indice $n-1$ n'a pas de successeur)[cite: 114, 128] :
+* **Pour une fonction tabulée `(X, Y)` de taille $n$** : le tableau des dérivées `dY` possède une taille **$n - 1$** (car le dernier point d'indice $n-1$ n'a pas de successeur) :
 $$dY[i] = \frac{Y[i+1] - Y[i]}{X[i+1] - X[i]} \quad \text{pour } i \in \{0, \dots, n-2\}$$
 </CriticalFormula>
 
@@ -84,15 +84,15 @@ def derivee_tabulee(X, Y):
 
 ## 3. Calcul approché d'intégrales
 
-Pour approcher numériquement l'intégrale $I = \int_a^b f(x)\,\mathrm{d}x$ (interprétée géométriquement comme l'aire algébrique sous la courbe), on subdivise le segment $[a, b]$ en $n$ sous-intervalles de largeur constante $h = \frac{b - a}{n}$[cite: 102, 114].
+Pour approcher numériquement l'intégrale $I = \int_a^b f(x)\,\mathrm{d}x$ (interprétée géométriquement comme l'aire algébrique sous la courbe), on subdivise le segment $[a, b]$ en $n$ sous-intervalles de largeur constante $h = \frac{b - a}{n}$.
 
 <SchemaPlaceholder alt="Comparaison géométrique de l'approximation de l'aire sous une courbe par des rectangles à gauche et par des trapèzes reliant deux points successifs" caption="Figure 2.1 : Approximation d'une intégrale sur [a, b] par la méthode des rectangles et la méthode des trapèzes." src="/images/informatique/integration-rectangles-trapezes.png"/>
 
 <CriticalFormula title="Méthode des Rectangles et Méthode des Trapèzes">
-Sur une subdivision régulière de $n$ sous-intervalles de pas $h = \frac{b - a}{n}$ avec $x_i = a + i\,h$[cite: 102, 114] :
+Sur une subdivision régulière de $n$ sous-intervalles de pas $h = \frac{b - a}{n}$ avec $x_i = a + i\,h$ :
 * **Méthode des rectangles (à gauche)** :
 $$I_{\text{rect}} = h \sum_{i=0}^{n-1} f(x_i)$$
-* **Méthode des trapèzes** : L'aire d'un trapèze sur $[x_i, x_{i+1}]$ vaut $h\,\frac{f(x_i) + f(x_{i+1})}{2}$[cite: 102, 114] :
+* **Méthode des trapèzes** : L'aire d'un trapèze sur $[x_i, x_{i+1}]$ vaut $h\,\frac{f(x_i) + f(x_{i+1})}{2}$ :
 $$I_{\text{trap}} = \sum_{i=0}^{n-1} h\,\frac{f(x_i) + f(x_{i+1})}{2} = h\left(\frac{f(a) + f(b)}{2} + \sum_{i=1}^{n-1} f(x_i)\right)$$
 </CriticalFormula>
 
@@ -133,7 +133,7 @@ def trapezes_tabulee(X, Y):
 ## 4. Recherche approchée des zéros d'une fonction ($f(x) = 0$)
 
 ### A. Méthode de Dichotomie
-Basée sur le **théorème des valeurs intermédiaires**, la dichotomie s'applique à une fonction continue $f$ sur $[a, b]$ changeant de signe aux bornes, c'est-à-dire vérifiant **$f(a) \times f(b) \le 0$**[cite: 98, 100, 114]. À chaque itération, on coupe l'intervalle en son milieu $m = \frac{a + b}{2}$ et on conserve la moitié sur laquelle $f$ change de signe, jusqu'à ce que la largeur $b - a$ soit inférieure ou égale à la précision `eps` souhaitée[cite: 98, 100, 114].
+Basée sur le **théorème des valeurs intermédiaires**, la dichotomie s'applique à une fonction continue $f$ sur $[a, b]$ changeant de signe aux bornes, c'est-à-dire vérifiant **$f(a) \times f(b) \le 0$**. À chaque itération, on coupe l'intervalle en son milieu $m = \frac{a + b}{2}$ et on conserve la moitié sur laquelle $f$ change de signe, jusqu'à ce que la largeur $b - a$ soit inférieure ou égale à la précision `eps` souhaitée.
 
 <CriticalFormula title="Algorithme de Dichotomie (Fonction Python et Fonction Tabulée)">
 ```python
@@ -168,10 +168,10 @@ def dichotomie_tabulee(X, Y):
 </CriticalFormula>
 
 ### B. Méthode de Newton
-Pour une fonction dérivable $f$, la méthode de Newton approche localement la courbe par sa **tangente** au point d'abscisse $x_k$ (d'équation $y = f(x_k) + f'(x_k)(x - x_k)$) et choisit comme nouvelle abscisse $x_{k+1}$ l'intersection de cette tangente avec l'axe des abscisses ($y = 0$)[cite: 100, 114].
+Pour une fonction dérivable $f$, la méthode de Newton approche localement la courbe par sa **tangente** au point d'abscisse $x_k$ (d'équation $y = f(x_k) + f'(x_k)(x - x_k)$) et choisit comme nouvelle abscisse $x_{k+1}$ l'intersection de cette tangente avec l'axe des abscisses ($y = 0$).
 
 <CriticalFormula title="Suite récurrente et Algorithme de la Méthode de Newton">
-À partir d'un point initial $x_0$, la suite de Newton est définie par la relation de récurrence[cite: 100, 114] :
+À partir d'un point initial $x_0$, la suite de Newton est définie par la relation de récurrence :
 $$x_{k+1} = x_k - \frac{f(x_k)}{f'(x_k)}$$
 ```python
 def newton(f, df, x0, eps):
@@ -189,7 +189,7 @@ def newton(f, df, x0, eps):
 
 ## 5. Complément transversal : Méthode d'Euler explicite
 
-En Physique-Chimie (statique des fluides, mécanique avec frottement non linéaire) et en Mathématiques (équations différentielles), la **méthode d'Euler** utilise l'approximation de la dérivée par différence avant $\frac{y(t+h) - y(t)}{h} \approx F(t, y(t))$ pour résoudre numériquement le problème de Cauchy $y'(t) = F(t, y(t))$ avec $y(t_0) = y_0$[cite: 17, 60, 109, 114] :
+En Physique-Chimie (statique des fluides, mécanique avec frottement non linéaire) et en Mathématiques (équations différentielles), la **méthode d'Euler** utilise l'approximation de la dérivée par différence avant $\frac{y(t+h) - y(t)}{h} \approx F(t, y(t))$ pour résoudre numériquement le problème de Cauchy $y'(t) = F(t, y(t))$ avec $y(t_0) = y_0$ :
 
 <CriticalFormula title="Schéma numérique de la Méthode d'Euler explicite">
 $$y_{i+1} = y_i + h \cdot F(t_i, y_i) \quad \text{avec} \quad t_{i+1} = t_i + h$$

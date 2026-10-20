@@ -8,52 +8,52 @@ description: "Liaisons normalisées, schéma cinématique, dérivation vectoriel
 
 # Modélisation cinématique des mécanismes
 
-L'étude cinématique consiste à modéliser la structure géométrique d'un mécanisme réel ou virtuel (maquette 3D) et à déterminer ses lois de mouvement (positions, vitesses, accélérations, lois entrée-sortie) indépendamment des causes (forces et couples) qui les produisent[cite: 41, 45, 46].
+L'étude cinématique consiste à modéliser la structure géométrique d'un mécanisme réel ou virtuel (maquette 3D) et à déterminer ses lois de mouvement (positions, vitesses, accélérations, lois entrée-sortie) indépendamment des causes (forces et couples) qui les produisent.
 
 ---
 
 ## 1. Solide indéformable, Liaisons normalisées et Schématisation
 
 ### Solide indéformable et Classes d'équivalence cinématique
-* **Solide indéformable** : Ensemble de points deux à deux à distance constante au cours du temps[cite: 41]. À chaque solide indéformable $S_k$ (ou **classe d'équivalence cinématique** regroupant les pièces solidaires sans mouvement relatif entre elles), on associe de manière équivalente un **repère orthonormé direct** $\mathcal{R}_k = (O_k, \vec{x}_k, \vec{y}_k, \vec{z}_k)$[cite: 41, 134].
-* **Degrés de liberté d'une liaison** : Dans l'espace 3D, le mouvement relatif d'un solide $S_2$ par rapport à un solide $S_1$ comporte au maximum **6 degrés de liberté** élémentaires : **3 translations** ($T_x, T_y, T_z$) et **3 rotations** ($R_x, R_y, R_z$)[cite: 41]. Une liaison mécanique résulte de la géométrie des surfaces de contact (ponctuel, linéique, surfacique) qui supprime certains degrés de liberté[cite: 41, 124].
+* **Solide indéformable** : Ensemble de points deux à deux à distance constante au cours du temps. À chaque solide indéformable $S_k$ (ou **classe d'équivalence cinématique** regroupant les pièces solidaires sans mouvement relatif entre elles), on associe de manière équivalente un **repère orthonormé direct** $\mathcal{R}_k = (O_k, \vec{x}_k, \vec{y}_k, \vec{z}_k)$.
+* **Degrés de liberté d'une liaison** : Dans l'espace 3D, le mouvement relatif d'un solide $S_2$ par rapport à un solide $S_1$ comporte au maximum **6 degrés de liberté** élémentaires : **3 translations** ($T_x, T_y, T_z$) et **3 rotations** ($R_x, R_y, R_z$). Une liaison mécanique résulte de la géométrie des surfaces de contact (ponctuel, linéique, surfacique) qui supprime certains degrés de liberté.
 
 ### Les liaisons normalisées usuelles
 <CriticalFormula title="Tableau des liaisons normalisées et Degrés de liberté (Mobilités)">
-Pour chaque liaison normalisée de centre $A$ et d'axe ou de normale privilégiée, on distingue les **degrés de liberté** (mobilités $m$, vitesses non nulles) des degrés de liaison ($6 - m$ vitesses nulles)[cite: 41] :
-* **Encastrement (ou liaison fixe)** : $0$ degré de liberté ($0T, 0R$)[cite: 41].
-* **Glissière d'axe $(A, \vec{x})$** : $1$ degré de liberté ($T_x = 1$, $0R$) — paramètre linéaire $x(t)$[cite: 41].
-* **Pivot d'axe $(A, \vec{z})$** : $1$ degré de liberté ($0T$, $R_z = 1$) — paramètre angulaire $\theta(t)$[cite: 41].
-* **Hélicoïdale d'axe $(A, \vec{x})$ de pas $p$** : $1$ degré de liberté couplé ($T_x$ et $R_x$ liés par **$x = \pm \frac{p}{2\pi}\theta$**, soit **$v_x = \pm \frac{p}{2\pi}\omega_x$**)[cite: 41, 46].
-* **Pivot glissant d'axe $(A, \vec{x})$** : $2$ degrés de liberté indépendants ($T_x = 1, R_x = 1$)[cite: 41].
-* **Appui plan de normale $\vec{z}$** : $3$ degrés de liberté ($T_x = 1, T_y = 1, R_z = 1$)[cite: 41].
-* **Sphérique (ou Rotule) de centre $A$** : $3$ degrés de liberté ($0T$, $R_x = 1, R_y = 1, R_z = 1$)[cite: 41].
-* **Linéaire annulaire (Sphère-cylindre) d'axe $(A, \vec{x})$** : $4$ degrés de liberté ($T_x = 1, R_x = 1, R_y = 1, R_z = 1$)[cite: 41].
-* **Linéaire rectiligne de ligne $(A, \vec{y})$ et normale $\vec{z}$** : $4$ degrés de liberté ($T_x = 1, T_y = 1, R_x = 1, R_z = 1$)[cite: 41].
-* **Ponctuelle (Sphère-plan) de normale $(A, \vec{z})$** : $5$ degrés de liberté (seule la translation $T_z$ est bloquée : $V_z(A \in 2/1) = 0$)[cite: 41].
+Pour chaque liaison normalisée de centre $A$ et d'axe ou de normale privilégiée, on distingue les **degrés de liberté** (mobilités $m$, vitesses non nulles) des degrés de liaison ($6 - m$ vitesses nulles) :
+* **Encastrement (ou liaison fixe)** : $0$ degré de liberté ($0T, 0R$).
+* **Glissière d'axe $(A, \vec{x})$** : $1$ degré de liberté ($T_x = 1$, $0R$) — paramètre linéaire $x(t)$.
+* **Pivot d'axe $(A, \vec{z})$** : $1$ degré de liberté ($0T$, $R_z = 1$) — paramètre angulaire $\theta(t)$.
+* **Hélicoïdale d'axe $(A, \vec{x})$ de pas $p$** : $1$ degré de liberté couplé ($T_x$ et $R_x$ liés par **$x = \pm \frac{p}{2\pi}\theta$**, soit **$v_x = \pm \frac{p}{2\pi}\omega_x$**).
+* **Pivot glissant d'axe $(A, \vec{x})$** : $2$ degrés de liberté indépendants ($T_x = 1, R_x = 1$).
+* **Appui plan de normale $\vec{z}$** : $3$ degrés de liberté ($T_x = 1, T_y = 1, R_z = 1$).
+* **Sphérique (ou Rotule) de centre $A$** : $3$ degrés de liberté ($0T$, $R_x = 1, R_y = 1, R_z = 1$).
+* **Linéaire annulaire (Sphère-cylindre) d'axe $(A, \vec{x})$** : $4$ degrés de liberté ($T_x = 1, R_x = 1, R_y = 1, R_z = 1$).
+* **Linéaire rectiligne de ligne $(A, \vec{y})$ et normale $\vec{z}$** : $4$ degrés de liberté ($T_x = 1, T_y = 1, R_x = 1, R_z = 1$).
+* **Ponctuelle (Sphère-plan) de normale $(A, \vec{z})$** : $5$ degrés de liberté (seule la translation $T_z$ est bloquée : $V_z(A \in 2/1) = 0$).
 </CriticalFormula>
 
-* **Graphe des liaisons et Schéma cinématique** : Le **graphe des liaisons** représente les classes d'équivalence par des sommets (cercles) et les liaisons mécaniques par des arcs étiquetés (nom, centre, axe/normale)[cite: 41, 124]. Le **schéma cinématique** traduit géométriquement ce graphe à l'aide des symboles normalisés en perspective ou en représentation plane[cite: 41, 124].
+* **Graphe des liaisons et Schéma cinématique** : Le **graphe des liaisons** représente les classes d'équivalence par des sommets (cercles) et les liaisons mécaniques par des arcs étiquetés (nom, centre, axe/normale). Le **schéma cinématique** traduit géométriquement ce graphe à l'aide des symboles normalisés en perspective ou en représentation plane.
 
 ---
 
 ## 2. Vecteurs Position, Vitesse, Accélération et Dérivation vectorielle
 
 <WarningBox title="Règle fondamentale de la dérivation d'un vecteur en base mobile">
-En cinématique du solide, il faut impérativement distinguer le **repère d'observation $\mathcal{R}_0$** (par rapport auquel on dérive) et la **base de projection $\mathcal{B}_1$** (dans laquelle on exprime les coordonnées du résultat)[cite: 126]. On ne dérive les coordonnées d'un vecteur que si ce vecteur est exprimé dans la base du repère par rapport auquel on dérive[cite: 126].
+En cinématique du solide, il faut impérativement distinguer le **repère d'observation $\mathcal{R}_0$** (par rapport auquel on dérive) et la **base de projection $\mathcal{B}_1$** (dans laquelle on exprime les coordonnées du résultat). On ne dérive les coordonnées d'un vecteur que si ce vecteur est exprimé dans la base du repère par rapport auquel on dérive.
 </WarningBox>
 
 ### Vecteur taux de rotation et Formule de dérivation vectorielle (Bour)
-Lorsqu'une base $\mathcal{B}_1(\vec{x}_1, \vec{y}_1, \vec{z}_1)$ tourne d'un angle $\theta(t)$ par rapport à une base $\mathcal{B}_0(\vec{x}_0, \vec{y}_0, \vec{z}_0)$ autour d'un axe commun $\vec{z}_0 = \vec{z}_1$, le **vecteur taux de rotation** (ou vecteur vitesse angulaire) est défini par **$\vec{\Omega}(\mathcal{R}_1/\mathcal{R}_0) = \dot{\theta}(t)\,\vec{z}_0$** (en $\text{rad}\cdot\text{s}^{-1}$)[cite: 41, 69].
+Lorsqu'une base $\mathcal{B}_1(\vec{x}_1, \vec{y}_1, \vec{z}_1)$ tourne d'un angle $\theta(t)$ par rapport à une base $\mathcal{B}_0(\vec{x}_0, \vec{y}_0, \vec{z}_0)$ autour d'un axe commun $\vec{z}_0 = \vec{z}_1$, le **vecteur taux de rotation** (ou vecteur vitesse angulaire) est défini par **$\vec{\Omega}(\mathcal{R}_1/\mathcal{R}_0) = \dot{\theta}(t)\,\vec{z}_0$** (en $\text{rad}\cdot\text{s}^{-1}$).
 
 <CriticalFormula title="Formule de dérivation vectorielle (Formule de Bour)">
-Pour tout vecteur $\vec{U}$ exprimé dans une base mobile $\mathcal{B}_1$, sa dérivée par rapport au repère d'observation $\mathcal{R}_0$ vaut[cite: 126, 134] :
+Pour tout vecteur $\vec{U}$ exprimé dans une base mobile $\mathcal{B}_1$, sa dérivée par rapport au repère d'observation $\mathcal{R}_0$ vaut :
 $$\left(\frac{\mathrm{d}\vec{U}}{\mathrm{d}t}\right)_{\mathcal{R}_0} = \left(\frac{\mathrm{d}\vec{U}}{\mathrm{d}t}\right)_{\mathcal{R}_1} + \vec{\Omega}(\mathcal{R}_1/\mathcal{R}_0) \wedge \vec{U}$$
-En particulier, pour dériver un vecteur unitaire $\vec{x}_1$ de la base $\mathcal{B}_1$ par rapport à $\mathcal{R}_0$ (car $\vec{x}_1$ est fixe dans $\mathcal{R}_1$)[cite: 134] :
+En particulier, pour dériver un vecteur unitaire $\vec{x}_1$ de la base $\mathcal{B}_1$ par rapport à $\mathcal{R}_0$ (car $\vec{x}_1$ est fixe dans $\mathcal{R}_1$) :
 $$\left(\frac{\mathrm{d}\vec{x}_1}{\mathrm{d}t}\right)_{\mathcal{R}_0} = \vec{\Omega}(\mathcal{R}_1/\mathcal{R}_0) \wedge \vec{x}_1 = \dot{\theta}\,\vec{z}_0 \wedge \vec{x}_1 = \dot{\theta}\,\vec{y}_1$$
 </CriticalFormula>
 
-* **Vecteur vitesse et vecteur accélération d'un point $M$ par rapport à $\mathcal{R}_0$** (d'origine fixe $O_0$)[cite: 41, 46, 126] :
+* **Vecteur vitesse et vecteur accélération d'un point $M$ par rapport à $\mathcal{R}_0$** (d'origine fixe $O_0$) :
 $$\vec{V}(M/\mathcal{R}_0) = \left(\frac{\mathrm{d}\vec{O_0 M}}{\mathrm{d}t}\right)_{\mathcal{R}_0} \quad \text{et} \quad \vec{\Gamma}(M/\mathcal{R}_0) = \left(\frac{\mathrm{d}\vec{V}(M/\mathcal{R}_0)}{\mathrm{d}t}\right)_{\mathcal{R}_0}$$
 
 ---
@@ -61,38 +61,38 @@ $$\vec{V}(M/\mathcal{R}_0) = \left(\frac{\mathrm{d}\vec{O_0 M}}{\mathrm{d}t}\rig
 ## 3. Torseur cinématique, Composition des mouvements et Glissement
 
 ### Champ des vecteurs vitesse d'un solide et Torseur cinématique
-Pour deux points quelconques $A$ et $B$ appartenant à un **même solide indéformable $S_k$** ($\vec{AB}$ fixe dans $\mathcal{R}_k$), la dérivation de $\vec{O_0 B} = \vec{O_0 A} + \vec{AB}$ par rapport à $\mathcal{R}_0$ donne la relation d'équiprojectivité (ou formule de changement de point de Varignon)[cite: 42, 46].
+Pour deux points quelconques $A$ et $B$ appartenant à un **même solide indéformable $S_k$** ($\vec{AB}$ fixe dans $\mathcal{R}_k$), la dérivation de $\vec{O_0 B} = \vec{O_0 A} + \vec{AB}$ par rapport à $\mathcal{R}_0$ donne la relation d'équiprojectivité (ou formule de changement de point de Varignon).
 
 <CriticalFormula title="Torseur cinématique et Relation de changement de point (Varignon)">
-L'état des vitesses d'un solide $S_2$ dans son mouvement par rapport à $S_1$ est entièrement caractérisé en un point $A$ par le **torseur cinématique** $\mathcal{V}(S_2/S_1)$[cite: 42, 46] :
+L'état des vitesses d'un solide $S_2$ dans son mouvement par rapport à $S_1$ est entièrement caractérisé en un point $A$ par le **torseur cinématique** $\mathcal{V}(S_2/S_1)$ :
 $$\mathcal{V}(S_2/S_1) = \left\{ \begin{array}{c} \vec{\Omega}(S_2/S_1) \\ \vec{V}(A \in S_2/S_1) \end{array} \right\}_A$$
-Pour passer du point $A$ à un autre point $B$, la résultante $\vec{\Omega}(S_2/S_1)$ est invariante et le moment (vecteur vitesse) vérifie la **formule de Varignon** (`BABAR`)[cite: 42, 46] :
+Pour passer du point $A$ à un autre point $B$, la résultante $\vec{\Omega}(S_2/S_1)$ est invariante et le moment (vecteur vitesse) vérifie la **formule de Varignon** (`BABAR`) :
 $$\vec{V}(B \in S_2/S_1) = \vec{V}(A \in S_2/S_1) + \vec{BA} \wedge \vec{\Omega}(S_2/S_1) = \vec{V}(A \in S_2/S_1) + \vec{\Omega}(S_2/S_1) \wedge \vec{AB}$$
 </CriticalFormula>
 
 ### Composition des mouvements et Vitesse de glissement
-* **Loi de composition des mouvements (Chasles sur les torseurs cinématiques)** : Pour trois solides $S_0, S_1, S_2$, au même point de réduction $A$[cite: 41, 42] :
+* **Loi de composition des mouvements (Chasles sur les torseurs cinématiques)** : Pour trois solides $S_0, S_1, S_2$, au même point de réduction $A$ :
 $$\mathcal{V}(S_2/S_0) = \mathcal{V}(S_2/S_1) + \mathcal{V}(S_1/S_0) \iff \begin{cases} \vec{\Omega}(S_2/S_0) = \vec{\Omega}(S_2/S_1) + \vec{\Omega}(S_1/S_0) \\ \vec{V}(A \in S_2/S_0) = \vec{V}(A \in S_2/S_1) + \vec{V}(A \in S_1/S_0) \end{cases}$$
-* **Contact ponctuel et Vitesse de glissement** : Soient deux solides $S_1$ et $S_2$ en contact ponctuel en $I$ de normale au plan tangent commun $\vec{n}$[cite: 41]. Par non-pénétration, $\vec{V}(I \in S_2/S_1) \cdot \vec{n} = 0$, de sorte que le vecteur **vitesse de glissement de $S_2$ par rapport à $S_1$ en $I$**, défini par $\vec{V}_g(I \in S_2/S_1) = \vec{V}(I \in S_2/S_1) = \vec{V}(I \in S_2/S_0) - \vec{V}(I \in S_1/S_0)$, appartient au plan tangent[cite: 41]. Il y a **roulement sans glissement (RSG)** en $I$ si et seulement si **$\vec{V}(I \in S_2/S_1) = \vec{0}$**[cite: 41].
+* **Contact ponctuel et Vitesse de glissement** : Soient deux solides $S_1$ et $S_2$ en contact ponctuel en $I$ de normale au plan tangent commun $\vec{n}$. Par non-pénétration, $\vec{V}(I \in S_2/S_1) \cdot \vec{n} = 0$, de sorte que le vecteur **vitesse de glissement de $S_2$ par rapport à $S_1$ en $I$**, défini par $\vec{V}_g(I \in S_2/S_1) = \vec{V}(I \in S_2/S_1) = \vec{V}(I \in S_2/S_0) - \vec{V}(I \in S_1/S_0)$, appartient au plan tangent. Il y a **roulement sans glissement (RSG)** en $I$ si et seulement si **$\vec{V}(I \in S_2/S_1) = \vec{0}$**.
 
 ---
 
 ## 4. Lois Entrée-Sortie et Transmetteurs de puissance
 
 ### Fermetures géométriques et cinématiques
-Pour déterminer la **loi entrée-sortie** d'un mécanisme à chaîne fermée (ex: système bielle-manivelle, pompe à pistons radiaux)[cite: 45, 46, 123, 126] :
-1. **Fermeture géométrique** : On écrit la relation de Chasles vectorielle sur une boucle fermée de points caractéristiques $\vec{AB} + \vec{BC} + \vec{CA} = \vec{0}$, puis on projette dans la base fixe $\mathcal{B}_0$ pour obtenir un système de 2 ou 3 équations scalaires reliant le paramètre de sortie au paramètre d'entrée[cite: 45, 46, 126].
-2. **Fermeture cinématique** : On écrit la composition des torseurs cinématiques sur la boucle fermée $\mathcal{V}(S_n/S_0) = \mathcal{V}(S_n/S_{n-1}) + \dots + \mathcal{V}(S_1/S_0) = \{0\}$ au même point, ce qui fournit un système linéaire entre les vitesses[cite: 45, 46, 126].
+Pour déterminer la **loi entrée-sortie** d'un mécanisme à chaîne fermée (ex: système bielle-manivelle, pompe à pistons radiaux) :
+1. **Fermeture géométrique** : On écrit la relation de Chasles vectorielle sur une boucle fermée de points caractéristiques $\vec{AB} + \vec{BC} + \vec{CA} = \vec{0}$, puis on projette dans la base fixe $\mathcal{B}_0$ pour obtenir un système de 2 ou 3 équations scalaires reliant le paramètre de sortie au paramètre d'entrée.
+2. **Fermeture cinématique** : On écrit la composition des torseurs cinématiques sur la boucle fermée $\mathcal{V}(S_n/S_0) = \mathcal{V}(S_n/S_{n-1}) + \dots + \mathcal{V}(S_1/S_0) = \{0\}$ au même point, ce qui fournit un système linéaire entre les vitesses.
 
 <SchemaPlaceholder alt="Schéma cinématique d'un mécanisme bielle-manivelle illustrant le triangle de fermeture géométrique OAB" caption="Figure 2.1 : Chaîne fermée de solides (bielle-manivelle) et contour de fermeture géométrique." src="/images/sii/fermeture-geometrique-bielle-manivelle.png"/>
 
 ### Rapport de transmission des transmetteurs de puissance usuels
 <CriticalFormula title="Lois entrée-sortie cinématiques des transmetteurs exigibles">
-Le programme officiel exige la maîtrise des 5 transmetteurs homocinétiques suivants (les trains épicycloïdaux sont hors programme 2025)[cite: 46] :
-* **Poulies-courroie** (rayons $R_e$ et $R_s$, sans glissement) : $v_{\text{courroie}} = R_e\,\omega_e = R_s\,\omega_s \implies$ **$r = \frac{\omega_s}{\omega_e} = \frac{R_e}{R_s} = \frac{D_e}{D_s}$**[cite: 46].
-* **Pignon-crémaillère** (pignon de rayon primitif $R$) : transformation rotation $\leftrightarrow$ translation **$v = R\,\omega$**[cite: 46].
-* **Système Vis-Écrou** (pas $p$ en $\text{m}\cdot\text{tr}^{-1}$ ou $\text{mm}\cdot\text{tr}^{-1}$) : pour un tour ($\Delta\theta = 2\pi\text{ rad}$), la course vaut $p$, soit **$v = \frac{p}{2\pi}\,\omega$**[cite: 46].
-* **Roue et vis sans fin** ($Z_{\text{vis}}$ filets sur la vis, $Z_{\text{roue}}$ dents sur la roue) : **$r = \frac{\omega_{\text{roue}}}{\omega_{\text{vis}}} = \frac{Z_{\text{vis}}}{Z_{\text{roue}}}$** (souvent irréversible si l'angle d'hélice est faible)[cite: 36, 46, 123].
-* **Train d'engrenages simple à axes parallèles** ($k$ contacts extérieurs entre roues dentées de nombres de dents $Z_i$)[cite: 46] :
+Le programme officiel exige la maîtrise des 5 transmetteurs homocinétiques suivants (les trains épicycloïdaux sont hors programme 2025) :
+* **Poulies-courroie** (rayons $R_e$ et $R_s$, sans glissement) : $v_{\text{courroie}} = R_e\,\omega_e = R_s\,\omega_s \implies$ **$r = \frac{\omega_s}{\omega_e} = \frac{R_e}{R_s} = \frac{D_e}{D_s}$**.
+* **Pignon-crémaillère** (pignon de rayon primitif $R$) : transformation rotation $\leftrightarrow$ translation **$v = R\,\omega$**.
+* **Système Vis-Écrou** (pas $p$ en $\text{m}\cdot\text{tr}^{-1}$ ou $\text{mm}\cdot\text{tr}^{-1}$) : pour un tour ($\Delta\theta = 2\pi\text{ rad}$), la course vaut $p$, soit **$v = \frac{p}{2\pi}\,\omega$**.
+* **Roue et vis sans fin** ($Z_{\text{vis}}$ filets sur la vis, $Z_{\text{roue}}$ dents sur la roue) : **$r = \frac{\omega_{\text{roue}}}{\omega_{\text{vis}}} = \frac{Z_{\text{vis}}}{Z_{\text{roue}}}$** (souvent irréversible si l'angle d'hélice est faible).
+* **Train d'engrenages simple à axes parallèles** ($k$ contacts extérieurs entre roues dentées de nombres de dents $Z_i$) :
 $$r = \frac{\omega_{\text{sortie}}}{\omega_{\text{entrée}}} = (-1)^k\,\frac{\prod Z_{\text{menantes}}}{\prod Z_{\text{menées}}}$$
 </CriticalFormula>

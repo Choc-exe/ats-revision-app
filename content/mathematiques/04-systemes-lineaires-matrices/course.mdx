@@ -8,31 +8,31 @@ description: "Algorithme du pivot de Gauss-Jordan, rang d'un système, polynôme
 
 # Systèmes linéaires, Polynômes et Calcul matriciel
 
-Ce chapitre introduit les outils algébriques et algorithmiques fondamentaux (méthode du pivot de Gauss-Jordan, calcul matriciel et factorisation polynomiale) indispensables pour l'algèbre linéaire abstraite ainsi que pour la mécanique et l'automatique en SII[cite: 86, 87, 89].
+Ce chapitre introduit les outils algébriques et algorithmiques fondamentaux (méthode du pivot de Gauss-Jordan, calcul matriciel et factorisation polynomiale) indispensables pour l'algèbre linéaire abstraite ainsi que pour la mécanique et l'automatique en SII.
 
 ---
 
 ## 1. Systèmes linéaires et Algorithme du pivot de Gauss-Jordan
 
 ### Écriture matricielle et Opérations élémentaires
-Un système linéaire de $n$ équations à $p$ inconnues $(x_1, \dots, x_p) \in \mathbb{K}^p$ ($\mathbb{K} = \mathbb{R}$ ou $\mathbb{C}$) s'écrit sous la forme matricielle **$A\,X = B$**, où $A \in \mathcal{M}_{n,p}(\mathbb{K})$ est la matrice du système, $X$ la colonne des inconnues et $B$ la colonne des seconds membres[cite: 86]. Le système homogène associé est $A\,X = 0$, et la **matrice augmentée** est notée $(A \mid B)$[cite: 86].
+Un système linéaire de $n$ équations à $p$ inconnues $(x_1, \dots, x_p) \in \mathbb{K}^p$ ($\mathbb{K} = \mathbb{R}$ ou $\mathbb{C}$) s'écrit sous la forme matricielle **$A\,X = B$**, où $A \in \mathcal{M}_{n,p}(\mathbb{K})$ est la matrice du système, $X$ la colonne des inconnues et $B$ la colonne des seconds membres. Le système homogène associé est $A\,X = 0$, et la **matrice augmentée** est notée $(A \mid B)$.
 
 <CriticalFormula title="Les 3 opérations élémentaires sur les lignes (Systèmes équivalents)">
-Deux systèmes linéaires sont **équivalents** (et possèdent donc exactement le **même ensemble de solutions**) si l'on passe de l'un à l'autre par une suite finie d'opérations élémentaires sur les lignes $L_i$[cite: 86] :
-1. **Échange de deux lignes** : $L_i \leftrightarrow L_j$[cite: 86].
-2. **Multiplication d'une ligne par un scalaire non nul** : $L_i \leftarrow \lambda\,L_i$ avec $\lambda \neq 0$[cite: 86].
-3. **Ajout à une ligne d'un multiple d'une autre ligne** : $L_i \leftarrow L_i + \lambda\,L_j$ avec $i \neq j$[cite: 86].
+Deux systèmes linéaires sont **équivalents** (et possèdent donc exactement le **même ensemble de solutions**) si l'on passe de l'un à l'autre par une suite finie d'opérations élémentaires sur les lignes $L_i$ :
+1. **Échange de deux lignes** : $L_i \leftrightarrow L_j$.
+2. **Multiplication d'une ligne par un scalaire non nul** : $L_i \leftarrow \lambda\,L_i$ avec $\lambda \neq 0$.
+3. **Ajout à une ligne d'un multiple d'une autre ligne** : $L_i \leftarrow L_i + \lambda\,L_j$ avec $i \neq j$.
 </CriticalFormula>
 
 ### Échelonnement, Rang et Familles de vecteurs dans $\mathbb{R}^n$
-Une matrice est dite **échelonnée en lignes** (schéma « en escalier ») si le nombre de zéros débutant une ligne croît strictement de ligne en ligne jusqu'aux éventuelles lignes nulles situées en bas[cite: 86]. Le premier coefficient non nul de chaque ligne non nulle est appelé un **pivot**[cite: 86].
-* **Rang d'un système** : Le rang $r$ d'un système linéaire est égal au **nombre de pivots** obtenus après échelonnement ($r \le \min(n, p)$)[cite: 87].
-* **Inconnues principales et secondaires** : Les $r$ inconnues correspondant aux colonnes des pivots sont les **inconnues principales** ; les $p - r$ autres inconnues sont les **inconnues secondaires** (ou paramètres libres, qui correspondent au nombre de degrés de liberté en mécanique)[cite: 86]. Si une ligne de la forme $(0 \; \dots \; 0 \mid b)$ avec $b \neq 0$ apparaît, le système est **incompatible** ($S = \emptyset$) ; sinon il est **compatible**[cite: 87].
+Une matrice est dite **échelonnée en lignes** (schéma « en escalier ») si le nombre de zéros débutant une ligne croît strictement de ligne en ligne jusqu'aux éventuelles lignes nulles situées en bas. Le premier coefficient non nul de chaque ligne non nulle est appelé un **pivot**.
+* **Rang d'un système** : Le rang $r$ d'un système linéaire est égal au **nombre de pivots** obtenus après échelonnement ($r \le \min(n, p)$).
+* **Inconnues principales et secondaires** : Les $r$ inconnues correspondant aux colonnes des pivots sont les **inconnues principales** ; les $p - r$ autres inconnues sont les **inconnues secondaires** (ou paramètres libres, qui correspondent au nombre de degrés de liberté en mécanique). Si une ligne de la forme $(0 \; \dots \; 0 \mid b)$ avec $b \neq 0$ apparaît, le système est **incompatible** ($S = \emptyset$) ; sinon il est **compatible**.
 
 <CriticalFormula title="Caractérisation d'une famille libre ou génératrice de p vecteurs dans R^n">
-Soit $A \in \mathcal{M}_{n,p}(\mathbb{R})$ la matrice dont les colonnes sont les coordonnées de $p$ vecteurs $(u_1, \dots, u_p)$ de $\mathbb{R}^n$[cite: 87] :
-* **Famille libre** : $(u_1, \dots, u_p)$ est libre $\iff$ le système homogène $A\,X = 0$ admet pour unique solution $X = 0$ $\iff$ **le nombre de pivots est égal à $p$** (nombre de colonnes)[cite: 87].
-* **Famille génératrice** : $(u_1, \dots, u_p)$ engendre $\mathbb{R}^n$ $\iff$ pour tout second membre $B$, le système $A\,X = B$ est compatible $\iff$ **le nombre de pivots est égal à $n$** (nombre de lignes)[cite: 87].
+Soit $A \in \mathcal{M}_{n,p}(\mathbb{R})$ la matrice dont les colonnes sont les coordonnées de $p$ vecteurs $(u_1, \dots, u_p)$ de $\mathbb{R}^n$ :
+* **Famille libre** : $(u_1, \dots, u_p)$ est libre $\iff$ le système homogène $A\,X = 0$ admet pour unique solution $X = 0$ $\iff$ **le nombre de pivots est égal à $p$** (nombre de colonnes).
+* **Famille génératrice** : $(u_1, \dots, u_p)$ engendre $\mathbb{R}^n$ $\iff$ pour tout second membre $B$, le système $A\,X = B$ est compatible $\iff$ **le nombre de pivots est égal à $n$** (nombre de lignes).
 </CriticalFormula>
 
 ---
@@ -40,22 +40,22 @@ Soit $A \in \mathcal{M}_{n,p}(\mathbb{R})$ la matrice dont les colonnes sont les
 ## 2. Polynômes et Fractions rationnelles
 
 ### Arithmétique dans $\mathbb{K}[X]$ et Racines
-Soit $\mathbb{K}[X]$ l'ensemble des polynômes à coefficients dans $\mathbb{K} = \mathbb{R}$ ou $\mathbb{C}$, et $\mathbb{K}_n[X]$ le sous-ensemble des polynômes de degré au plus $n$ (par convention, $\deg(0) = -\infty$)[cite: 87].
-* **Degré** : $\deg(P + Q) \le \max(\deg P, \deg Q)$ et $\deg(P \cdot Q) = \deg(P) + \deg(Q)$[cite: 87].
-* **Division euclidienne** : Pour tout $A \in \mathbb{K}[X]$ et tout $B \in \mathbb{K}[X] \setminus \{0\}$, il existe un unique couple $(Q, R)$ de polynômes (quotient et reste) tel que **$A = B\,Q + R$** avec **$\deg(R) < \deg(B)$**[cite: 88].
-* **Racines et multiplicité** : Un scalaire $a \in \mathbb{K}$ est une **racine** (ou zéro) de $P$ si $P(a) = 0$, ce qui équivaut à dire que $(X - a)$ divise $P$[cite: 88]. Plus généralement, $a$ est racine d'**ordre de multiplicité $\alpha \in \mathbb{N}^*$** si $(X - a)^\alpha$ divise $P$ et $(X - a)^{\alpha+1}$ ne divise pas $P$, ce qui est caractérisé par les dérivées successives[cite: 88] :
+Soit $\mathbb{K}[X]$ l'ensemble des polynômes à coefficients dans $\mathbb{K} = \mathbb{R}$ ou $\mathbb{C}$, et $\mathbb{K}_n[X]$ le sous-ensemble des polynômes de degré au plus $n$ (par convention, $\deg(0) = -\infty$).
+* **Degré** : $\deg(P + Q) \le \max(\deg P, \deg Q)$ et $\deg(P \cdot Q) = \deg(P) + \deg(Q)$.
+* **Division euclidienne** : Pour tout $A \in \mathbb{K}[X]$ et tout $B \in \mathbb{K}[X] \setminus \{0\}$, il existe un unique couple $(Q, R)$ de polynômes (quotient et reste) tel que **$A = B\,Q + R$** avec **$\deg(R) < \deg(B)$**.
+* **Racines et multiplicité** : Un scalaire $a \in \mathbb{K}$ est une **racine** (ou zéro) de $P$ si $P(a) = 0$, ce qui équivaut à dire que $(X - a)$ divise $P$. Plus généralement, $a$ est racine d'**ordre de multiplicité $\alpha \in \mathbb{N}^*$** si $(X - a)^\alpha$ divise $P$ et $(X - a)^{\alpha+1}$ ne divise pas $P$, ce qui est caractérisé par les dérivées successives :
 $$P(a) = P'(a) = \dots = P^{(\alpha - 1)}(a) = 0 \quad \text{et} \quad P^{(\alpha)}(a) \neq 0$$
 
 ### Factorisation irréductible, Relations coefficients-racines et Éléments simples
-* **Théorème de d'Alembert-Gauss** : Tout polynôme non constant de $\mathbb{C}[X]$ admet au moins une racine dans $\mathbb{C}$[cite: 88]. Par conséquent :
-  * Dans **$\mathbb{C}[X]$**, tout polynôme non constant est **scindé** ; les seuls polynômes irréductibles sont de **degré 1**[cite: 88].
-  * Dans **$\mathbb{R}[X]$**, les polynômes irréductibles sont les polynômes de **degré 1** et les polynômes de **degré 2 à discriminant strictement négatif** ($\Delta = b^2 - 4ac < 0$)[cite: 88].
-* **Somme et produit des racines** : Si $P(X) = a_n X^n + a_{n-1} X^{n-1} + \dots + a_0$ ($a_n \neq 0$) est scindé de racines $x_1, \dots, x_n$ (comptées avec leur multiplicité)[cite: 88] :
+* **Théorème de d'Alembert-Gauss** : Tout polynôme non constant de $\mathbb{C}[X]$ admet au moins une racine dans $\mathbb{C}$. Par conséquent :
+  * Dans **$\mathbb{C}[X]$**, tout polynôme non constant est **scindé** ; les seuls polynômes irréductibles sont de **degré 1**.
+  * Dans **$\mathbb{R}[X]$**, les polynômes irréductibles sont les polynômes de **degré 1** et les polynômes de **degré 2 à discriminant strictement négatif** ($\Delta = b^2 - 4ac < 0$).
+* **Somme et produit des racines** : Si $P(X) = a_n X^n + a_{n-1} X^{n-1} + \dots + a_0$ ($a_n \neq 0$) est scindé de racines $x_1, \dots, x_n$ (comptées avec leur multiplicité) :
 $$\sum_{k=1}^n x_k = -\frac{a_{n-1}}{a_n} \quad \text{et} \quad \prod_{k=1}^n x_k = (-1)^n\,\frac{a_0}{a_n}$$
-*(En particulier pour $aX^2 + bX + c = 0$ : $x_1 + x_2 = -\frac{b}{a}$ et $x_1 x_2 = \frac{c}{a}$)*[cite: 88].
+*(En particulier pour $aX^2 + bX + c = 0$ : $x_1 + x_2 = -\frac{b}{a}$ et $x_1 x_2 = \frac{c}{a}$)*.
 
 <CriticalFormula title="Décomposition en éléments simples d'une fraction rationnelle R = A / B">
-Si $\deg(A) \ge \deg(B)$, on effectue d'abord la division euclidienne $A = B\,E + A_1$ pour isoler la **partie entière $E$**[cite: 88]. Pour la partie polaire relative à un **pôle simple $a$** ($B(a) = 0$ et $B'(a) \neq 0$ avec $B(X) = (X - a)Q(X)$), le coefficient $\lambda$ de $\frac{\lambda}{X - a}$ s'obtient directement par multiplication par $(X - a)$ puis évaluation en $X = a$ (ou via la dérivée)[cite: 88] :
+Si $\deg(A) \ge \deg(B)$, on effectue d'abord la division euclidienne $A = B\,E + A_1$ pour isoler la **partie entière $E$**. Pour la partie polaire relative à un **pôle simple $a$** ($B(a) = 0$ et $B'(a) \neq 0$ avec $B(X) = (X - a)Q(X)$), le coefficient $\lambda$ de $\frac{\lambda}{X - a}$ s'obtient directement par multiplication par $(X - a)$ puis évaluation en $X = a$ (ou via la dérivée) :
 $$\lambda = \lim_{X \to a} (X - a)\frac{A(X)}{B(X)} = \frac{A(a)}{Q(a)} = \frac{A(a)}{B'(a)}$$
 </CriticalFormula>
 
@@ -64,26 +64,26 @@ $$\lambda = \lim_{X \to a} (X - a)\frac{A(X)}{B(X)} = \frac{A(a)}{Q(a)} = \frac{
 ## 3. Calcul matriciel et Inversion de matrices
 
 ### Produit matriciel et Formule du binôme
-Le produit $C = A\,B$ d'une matrice $A \in \mathcal{M}_{n,p}(\mathbb{K})$ par une matrice $B \in \mathcal{M}_{p,q}(\mathbb{K})$ est une matrice de taille $n \times q$ dont le coefficient $(i, j)$ vaut $c_{i,j} = \sum_{k=1}^p a_{i,k}\,b_{k,j}$[cite: 89].
+Le produit $C = A\,B$ d'une matrice $A \in \mathcal{M}_{n,p}(\mathbb{K})$ par une matrice $B \in \mathcal{M}_{p,q}(\mathbb{K})$ est une matrice de taille $n \times q$ dont le coefficient $(i, j)$ vaut $c_{i,j} = \sum_{k=1}^p a_{i,k}\,b_{k,j}$.
 
 <WarningBox title="Non-commutativité du produit matriciel et Formule du binôme">
-En général, pour deux matrices carrées $A, B \in \mathcal{M}_n(\mathbb{K})$, **$A\,B \neq B\,A$** et un produit de matrices non nulles peut être égal à la matrice nulle[cite: 89]. La **formule du binôme de Newton** ne s'applique que **si $A$ et $B$ commutent** ($A\,B = B\,A$)[cite: 78, 89] :
+En général, pour deux matrices carrées $A, B \in \mathcal{M}_n(\mathbb{K})$, **$A\,B \neq B\,A$** et un produit de matrices non nulles peut être égal à la matrice nulle. La **formule du binôme de Newton** ne s'applique que **si $A$ et $B$ commutent** ($A\,B = B\,A$) :
 $$\text{Si } A\,B = B\,A, \quad (A + B)^m = \sum_{k=0}^m \binom{m}{k} A^k\,B^{m-k}$$
 </WarningBox>
 
 ### Matrices inversibles et Groupe linéaire $GL_n(\mathbb{K})$
-Une matrice carrée $A \in \mathcal{M}_n(\mathbb{K})$ est dite **inversible** s'il existe une matrice $A^{-1} \in \mathcal{M}_n(\mathbb{K})$ telle que $A\,A^{-1} = A^{-1}\,A = I_n$[cite: 89]. L'ensemble des matrices inversibles de taille $n$ est le **groupe linéaire $GL_n(\mathbb{K})$**[cite: 89].
+Une matrice carrée $A \in \mathcal{M}_n(\mathbb{K})$ est dite **inversible** s'il existe une matrice $A^{-1} \in \mathcal{M}_n(\mathbb{K})$ telle que $A\,A^{-1} = A^{-1}\,A = I_n$. L'ensemble des matrices inversibles de taille $n$ est le **groupe linéaire $GL_n(\mathbb{K})$**.
 
 <CriticalFormula title="Caractérisations de l'inversibilité et Inverse d'un produit">
-* Pour une matrice carrée $A \in \mathcal{M}_n(\mathbb{K})$, les propriétés suivantes sont équivalentes[cite: 89] :
-  1. $A$ est inversible ($A \in GL_n(\mathbb{K})$)[cite: 89].
-  2. Pour toute colonne $B \in \mathcal{M}_{n,1}(\mathbb{K})$, le système $A\,X = B$ admet une unique solution ($X = A^{-1}B$)[cite: 89].
-  3. Le nombre de pivots de $A$ après échelonnement est égal à $n$[cite: 89].
-* **Inverse d'un produit** : Si $A, B \in GL_n(\mathbb{K})$, alors $A\,B$ est inversible et **$(A\,B)^{-1} = B^{-1}\,A^{-1}$** (inversion de l'ordre)[cite: 89].
-* **Méthode pratique de calcul de $A^{-1}$** : On résout le système $A\,X = Y$ (en exprimant $X$ en fonction de $Y$ pour lire $X = A^{-1}Y$) ou l'on applique l'algorithme de Gauss-Jordan sur la matrice augmentée $(A \mid I_n)$ jusqu'à obtenir $(I_n \mid A^{-1})$ (la notion de comatrice est non exigible)[cite: 86, 89].
+* Pour une matrice carrée $A \in \mathcal{M}_n(\mathbb{K})$, les propriétés suivantes sont équivalentes :
+  1. $A$ est inversible ($A \in GL_n(\mathbb{K})$).
+  2. Pour toute colonne $B \in \mathcal{M}_{n,1}(\mathbb{K})$, le système $A\,X = B$ admet une unique solution ($X = A^{-1}B$).
+  3. Le nombre de pivots de $A$ après échelonnement est égal à $n$.
+* **Inverse d'un produit** : Si $A, B \in GL_n(\mathbb{K})$, alors $A\,B$ est inversible et **$(A\,B)^{-1} = B^{-1}\,A^{-1}$** (inversion de l'ordre).
+* **Méthode pratique de calcul de $A^{-1}$** : On résout le système $A\,X = Y$ (en exprimant $X$ en fonction de $Y$ pour lire $X = A^{-1}Y$) ou l'on applique l'algorithme de Gauss-Jordan sur la matrice augmentée $(A \mid I_n)$ jusqu'à obtenir $(I_n \mid A^{-1})$ (la notion de comatrice est non exigible).
 </CriticalFormula>
 
 ### Application linéaire canoniquement associée : Noyau et Image d'une matrice
-À toute matrice $A \in \mathcal{M}_{n,p}(\mathbb{K})$, on associe l'application linéaire $X \mapsto A\,X$ de $\mathbb{K}^p$ dans $\mathbb{K}^n$[cite: 89] :
-* **Noyau de $A$** : $\text{Ker}(A) = \{X \in \mathcal{M}_{p,1}(\mathbb{K}) \mid A\,X = 0\}$ (ensemble des solutions du système homogène)[cite: 89, 92].
-* **Image de $A$** : $\text{Im}(A) = \{A\,X \mid X \in \mathcal{M}_{p,1}(\mathbb{K})\}$ est le sous-espace engendré par les colonnes de $A$ (car $A\,X$ est une combinaison linéaire des colonnes de $A$)[cite: 89].
+À toute matrice $A \in \mathcal{M}_{n,p}(\mathbb{K})$, on associe l'application linéaire $X \mapsto A\,X$ de $\mathbb{K}^p$ dans $\mathbb{K}^n$ :
+* **Noyau de $A$** : $\text{Ker}(A) = \{X \in \mathcal{M}_{p,1}(\mathbb{K}) \mid A\,X = 0\}$ (ensemble des solutions du système homogène).
+* **Image de $A$** : $\text{Im}(A) = \{A\,X \mid X \in \mathcal{M}_{p,1}(\mathbb{K})\}$ est le sous-espace engendré par les colonnes de $A$ (car $A\,X$ est une combinaison linéaire des colonnes de $A$).

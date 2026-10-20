@@ -7,16 +7,16 @@ chapterId: "03-statique-dynamique-pfd"
 ## L'Essentiel du Bulletin Officiel ATS
 
 * **Actions mécaniques & Statique (PFS)** :
-  * Changement de point de moment : **$\vec{M}_B = \vec{M}_A + \vec{BA} \wedge \vec{R}$** ; **Liaison parfaite** : composante de force/moment nulle sur chaque mobilité[cite: 42].
-  * **Frottement sec de Coulomb** : Adhérence ($\vec{V}_g = \vec{0}$) $\implies \|\vec{T}\| \le f\,N$ ; Glissement ($\vec{V}_g \neq \vec{0}$) $\implies$ **$\|\vec{T}\| = f\,N$** opposé à $\vec{V}_g$[cite: 42].
-  * **PFS** : $\sum \vec{R}_{\text{ext}} = \vec{0}$ et $\sum \vec{M}_{A,\text{ext}} = \vec{0}$[cite: 45, 46].
+  * Changement de point de moment : **$\vec{M}_B = \vec{M}_A + \vec{BA} \wedge \vec{R}$** ; **Liaison parfaite** : composante de force/moment nulle sur chaque mobilité.
+  * **Frottement sec de Coulomb** : Adhérence ($\vec{V}_g = \vec{0}$) $\implies \|\vec{T}\| \le f\,N$ ; Glissement ($\vec{V}_g \neq \vec{0}$) $\implies$ **$\|\vec{T}\| = f\,N$** opposé à $\vec{V}_g$.
+  * **PFS** : $\sum \vec{R}_{\text{ext}} = \vec{0}$ et $\sum \vec{M}_{A,\text{ext}} = \vec{0}$.
 * **Dynamique (PFD) & Approche énergétique (TEC)** :
-  * **PFD** : $\sum \vec{R}_{\text{ext}} = m\,\vec{\Gamma}(G/\mathcal{R}_0)$ et $\sum \vec{M}_{A,\text{ext}} = \vec{\delta}_A(S/\mathcal{R}_0)$ (calculé uniquement en $G$ ou en $O$ fixe : $\vec{\delta}_O\cdot\vec{z}_0 = J_{Oz}\ddot{\theta}$)[cite: 45, 46, 47].
-  * **Énergie cinétique** : Translation **$E_c = \frac{1}{2}mv^2$** ; Rotation d'axe fixe **$E_c = \frac{1}{2}J\omega^2$**[cite: 45, 47].
-  * **Inertie équivalente ramenée à $\omega_m$** : **$J_{\text{eq}} = \sum J_i\left(\frac{\omega_i}{\omega_m}\right)^2 + \sum m_k\left(\frac{v_k}{\omega_m}\right)^2$**[cite: 47].
-  * **Puissances & TEC** : $\mathcal{P} = \vec{R}\cdot\vec{V}(A) + \vec{M}_A\cdot\vec{\Omega}$ ($C\omega$ ou $Fv$) ; **$\frac{\mathrm{d}E_c}{\mathrm{d}t} = \mathcal{P}_{\text{ext}} + \mathcal{P}_{\text{int}}$** (avec $\mathcal{P}_{\text{int}} = 0$ si liaisons parfaites)[cite: 47].
+  * **PFD** : $\sum \vec{R}_{\text{ext}} = m\,\vec{\Gamma}(G/\mathcal{R}_0)$ et $\sum \vec{M}_{A,\text{ext}} = \vec{\delta}_A(S/\mathcal{R}_0)$ (calculé uniquement en $G$ ou en $O$ fixe : $\vec{\delta}_O\cdot\vec{z}_0 = J_{Oz}\ddot{\theta}$).
+  * **Énergie cinétique** : Translation **$E_c = \frac{1}{2}mv^2$** ; Rotation d'axe fixe **$E_c = \frac{1}{2}J\omega^2$**.
+  * **Inertie équivalente ramenée à $\omega_m$** : **$J_{\text{eq}} = \sum J_i\left(\frac{\omega_i}{\omega_m}\right)^2 + \sum m_k\left(\frac{v_k}{\omega_m}\right)^2$**.
+  * **Puissances & TEC** : $\mathcal{P} = \vec{R}\cdot\vec{V}(A) + \vec{M}_A\cdot\vec{\Omega}$ ($C\omega$ ou $Fv$) ; **$\frac{\mathrm{d}E_c}{\mathrm{d}t} = \mathcal{P}_{\text{ext}} + \mathcal{P}_{\text{int}}$** (avec $\mathcal{P}_{\text{int}} = 0$ si liaisons parfaites).
 * **Résistance des Matériaux (Modèle poutre — Traction & Flexion simples)** :
-  * **Torseur de cohésion en $G(x)$** : $\mathcal{T}_{\text{coh}}(x) = -\mathcal{T}(\text{ext} \to E_1) = +\mathcal{T}(\text{ext} \to E_2)$[cite: 46, 47].
-  * **Traction-compression** : **$\sigma = \frac{N}{S}$** et allongement **$\Delta L = \frac{N\,L}{E\,S}$**[cite: 47].
-  * **Flexion plane simple** : **$\sigma_{\max} = \frac{|M_{fz}|_{\max}}{I_{Gz}}\,y_{\max}$** et équation de la déformée **$E\,I_{Gz}\,y''(x) = M_{fz}(x)$**[cite: 47].
-  * **Critère de résistance** : **$\sigma_{\max} \le \frac{R_e}{s}$** ($1\text{ MPa} = 1\text{ N}\cdot\text{mm}^{-2}$)[cite: 47, 52].
+  * **Torseur de cohésion en $G(x)$** : $\mathcal{T}_{\text{coh}}(x) = -\mathcal{T}(\text{ext} \to E_1) = +\mathcal{T}(\text{ext} \to E_2)$.
+  * **Traction-compression** : **$\sigma = \frac{N}{S}$** et allongement **$\Delta L = \frac{N\,L}{E\,S}$**.
+  * **Flexion plane simple** : **$\sigma_{\max} = \frac{|M_{fz}|_{\max}}{I_{Gz}}\,y_{\max}$** et équation de la déformée **$E\,I_{Gz}\,y''(x) = M_{fz}(x)$**.
+  * **Critère de résistance** : **$\sigma_{\max} \le \frac{R_e}{s}$** ($1\text{ MPa} = 1\text{ N}\cdot\text{mm}^{-2}$).

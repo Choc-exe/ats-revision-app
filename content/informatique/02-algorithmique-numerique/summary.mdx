@@ -7,15 +7,15 @@ chapterId: "02-algorithmique-numerique"
 ## L'Essentiel du Bulletin Officiel ATS
 
 * **Calculs en virgule flottante (`float`)** :
-  * Représentation binaire finie $\implies$ erreurs d'arrondi inévitables (`0.1 + 0.2 != 0.3`)[cite: 114].
-  * **Interdiction de tester `a == b`** entre deux flottants : tester systématiquement **`abs(a - b) <= eps`**[cite: 77, 114].
+  * Représentation binaire finie $\implies$ erreurs d'arrondi inévitables (`0.1 + 0.2 != 0.3`).
+  * **Interdiction de tester `a == b`** entre deux flottants : tester systématiquement **`abs(a - b) <= eps`**.
 * **Représentation de fonction & Dérivée discrète** :
-  * Deux représentations : fonction Python `def f(x):` ou tableaux d'échantillons `(X, Y)` de taille $n$[cite: 114].
-  * **Convention officielle ATS (Différence avant)** : **$f'(x) \approx \frac{f(x+h) - f(x)}{h}$** et pour des tableaux, **$dY[i] = \frac{Y[i+1] - Y[i]}{X[i+1] - X[i]}$** sur `range(0, len(X) - 1)` (taille $n - 1$)[cite: 114, 128].
+  * Deux représentations : fonction Python `def f(x):` ou tableaux d'échantillons `(X, Y)` de taille $n$.
+  * **Convention officielle ATS (Différence avant)** : **$f'(x) \approx \frac{f(x+h) - f(x)}{h}$** et pour des tableaux, **$dY[i] = \frac{Y[i+1] - Y[i]}{X[i+1] - X[i]}$** sur `range(0, len(X) - 1)` (taille $n - 1$).
 * **Intégration numérique sur $[a, b]$ (pas $h = \frac{b-a}{n}$)** :
-  * **Méthode des rectangles** : $I_{\text{rect}} = h \sum_{i=0}^{n-1} f(a + i\,h)$[cite: 102, 114].
-  * **Méthode des trapèzes** : **$I_{\text{trap}} = \sum_{i=0}^{n-1} h\,\frac{f(x_i) + f(x_{i+1})}{2}$** (plus précise expérimentalement que les rectangles à nombre de pas $n$ identique)[cite: 102, 114].
+  * **Méthode des rectangles** : $I_{\text{rect}} = h \sum_{i=0}^{n-1} f(a + i\,h)$.
+  * **Méthode des trapèzes** : **$I_{\text{trap}} = \sum_{i=0}^{n-1} h\,\frac{f(x_i) + f(x_{i+1})}{2}$** (plus précise expérimentalement que les rectangles à nombre de pas $n$ identique).
 * **Recherche de zéros ($f(x) = 0$) & Équations différentielles** :
-  * **Dichotomie** : exige $f$ continue et $f(a)\times f(b) \le 0$ ; divise la largeur de l'intervalle par $2$ à chaque tour de boucle `while (d - g) > eps:`[cite: 98, 100, 114].
-  * **Méthode de Newton** : utilise la tangente via la récurrence **$x_{k+1} = x_k - \frac{f(x_k)}{f'(x_k)}$** (convergence très rapide mais exige $f'(x_k) \neq 0$ et un point $x_0$ proche de la racine)[cite: 100, 114].
-  * **Méthode d'Euler ($y' = F(t, y)$)** : **$y_{i+1} = y_i + h \cdot F(t_i, y_i)$**[cite: 17, 109].
+  * **Dichotomie** : exige $f$ continue et $f(a)\times f(b) \le 0$ ; divise la largeur de l'intervalle par $2$ à chaque tour de boucle `while (d - g) > eps:`.
+  * **Méthode de Newton** : utilise la tangente via la récurrence **$x_{k+1} = x_k - \frac{f(x_k)}{f'(x_k)}$** (convergence très rapide mais exige $f'(x_k) \neq 0$ et un point $x_0$ proche de la racine).
+  * **Méthode d'Euler ($y' = F(t, y)$)** : **$y_{i+1} = y_i + h \cdot F(t_i, y_i)$**.

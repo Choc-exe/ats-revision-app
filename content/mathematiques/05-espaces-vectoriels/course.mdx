@@ -8,50 +8,50 @@ description: "Sous-espaces vectoriels, sommes directes, bases et dimension finie
 
 # Espaces vectoriels et Applications linéaires
 
-Ce chapitre unifie dans un cadre géométrique abstrait les systèmes linéaires, les polynômes, les matrices et les fonctions autour des concepts d'espace vectoriel, de dimension (nombre de degrés de liberté) et d'application linéaire[cite: 90].
+Ce chapitre unifie dans un cadre géométrique abstrait les systèmes linéaires, les polynômes, les matrices et les fonctions autour des concepts d'espace vectoriel, de dimension (nombre de degrés de liberté) et d'application linéaire.
 
 ---
 
 ## 1. Espaces vectoriels, Sous-espaces et Sommes directes
 
 ### Espaces de référence et Caractérisation d'un sous-espace vectoriel
-Les quatre $\mathbb{K}$-espaces vectoriels ($\mathbb{K} = \mathbb{R}$ ou $\mathbb{C}$) de référence du programme sont : $\mathbb{K}^n$ ($n \in \mathbb{N}^*$), l'espace des polynômes $\mathbb{K}[X]$ (et $\mathbb{K}_n[X]$), l'espace des matrices $\mathcal{M}_{n,p}(\mathbb{K})$ et l'espace des fonctions $\mathbb{K}^\Omega = \mathcal{F}(\Omega, \mathbb{K})$ (notamment les suites $\mathbb{K}^{\mathbb{N}}$)[cite: 90].
+Les quatre $\mathbb{K}$-espaces vectoriels ($\mathbb{K} = \mathbb{R}$ ou $\mathbb{C}$) de référence du programme sont : $\mathbb{K}^n$ ($n \in \mathbb{N}^*$), l'espace des polynômes $\mathbb{K}[X]$ (et $\mathbb{K}_n[X]$), l'espace des matrices $\mathcal{M}_{n,p}(\mathbb{K})$ et l'espace des fonctions $\mathbb{K}^\Omega = \mathcal{F}(\Omega, \mathbb{K})$ (notamment les suites $\mathbb{K}^{\mathbb{N}}$).
 
 <CriticalFormula title="Caractérisation pratique d'un Sous-Espace Vectoriel (SEV)">
-Une partie $F$ d'un $\mathbb{K}$-espace vectoriel $E$ est un **sous-espace vectoriel** de $E$ si et seulement si[cite: 90] :
-1. **$0_E \in F$** ($F$ est non vide et contient le vecteur nul de $E$)[cite: 90].
-2. **Stabilité par combinaison linéaire** : $\forall (x, y) \in F^2, \forall (\lambda, \mu) \in \mathbb{K}^2, \quad \lambda\,x + \mu\,y \in F$[cite: 90].
-*Méthode encore plus rapide* : Reconnaître que $F$ est l'ensemble des solutions d'un système linéaire homogène, d'une équation différentielle linéaire homogène, ou un sous-espace engendré **$F = \text{Vect}(u_1, \dots, u_p)$**[cite: 90].
+Une partie $F$ d'un $\mathbb{K}$-espace vectoriel $E$ est un **sous-espace vectoriel** de $E$ si et seulement si :
+1. **$0_E \in F$** ($F$ est non vide et contient le vecteur nul de $E$).
+2. **Stabilité par combinaison linéaire** : $\forall (x, y) \in F^2, \forall (\lambda, \mu) \in \mathbb{K}^2, \quad \lambda\,x + \mu\,y \in F$.
+*Méthode encore plus rapide* : Reconnaître que $F$ est l'ensemble des solutions d'un système linéaire homogène, d'une équation différentielle linéaire homogène, ou un sous-espace engendré **$F = \text{Vect}(u_1, \dots, u_p)$**.
 </CriticalFormula>
 
 ### Intersection, Somme et Somme directe de deux sous-espaces
 Soient $F$ et $G$ deux sous-espaces vectoriels de $E$ :
-* **Intersection** : $F \cap G$ est toujours un sous-espace vectoriel de $E$ (*attention : la réunion $F \cup G$ n'est presque jamais un SEV !*)[cite: 90].
-* **Somme $F + G$** : C'est le sous-espace vectoriel constitué de tous les vecteurs de la forme $x_F + x_G$ avec $x_F \in F$ et $x_G \in G$[cite: 90].
-* **Somme directe $F \oplus G$** : La somme $F + G$ est dite **directe** (notée $F \oplus G$) si la décomposition de tout vecteur de $F + G$ sous la forme $x_F + x_G$ est **unique**, ce qui est caractérisé par la condition fondamentale[cite: 90] :
+* **Intersection** : $F \cap G$ est toujours un sous-espace vectoriel de $E$ (*attention : la réunion $F \cup G$ n'est presque jamais un SEV !*).
+* **Somme $F + G$** : C'est le sous-espace vectoriel constitué de tous les vecteurs de la forme $x_F + x_G$ avec $x_F \in F$ et $x_G \in G$.
+* **Somme directe $F \oplus G$** : La somme $F + G$ est dite **directe** (notée $F \oplus G$) si la décomposition de tout vecteur de $F + G$ sous la forme $x_F + x_G$ est **unique**, ce qui est caractérisé par la condition fondamentale :
 $$F \text{ et } G \text{ sont en somme directe} \iff F \cap G = \{0_E\}$$
-* **Sous-espaces supplémentaires** : $F$ et $G$ sont dits **supplémentaires dans $E$** si **$E = F \oplus G$**, c'est-à-dire si $F \cap G = \{0_E\}$ et $F + G = E$ (tout vecteur $x \in E$ se décompose alors de manière unique en $x = x_F + x_G$)[cite: 90].
+* **Sous-espaces supplémentaires** : $F$ et $G$ sont dits **supplémentaires dans $E$** si **$E = F \oplus G$**, c'est-à-dire si $F \cap G = \{0_E\}$ et $F + G = E$ (tout vecteur $x \in E$ se décompose alors de manière unique en $x = x_F + x_G$).
 
 ---
 
 ## 2. Familles de vecteurs, Bases et Dimension finie
 
 ### Familles libres, Familles génératrices et Bases
-Soit $\mathcal{F} = (e_1, \dots, e_n)$ une famille finie de vecteurs de $E$[cite: 91] :
-* **Famille libre** : $\forall (\lambda_1, \dots, \lambda_n) \in \mathbb{K}^n, \; \lambda_1 e_1 + \dots + \lambda_n e_n = 0_E \implies \lambda_1 = \dots = \lambda_n = 0$[cite: 91]. *(Propriété clé : toute famille de polynômes non nuls de **degrés échelonnés** — deux à deux distincts — est libre)*[cite: 91].
-* **Famille génératrice de $E$** : $E = \text{Vect}(e_1, \dots, e_n)$ (tout vecteur de $E$ s'écrit comme combinaison linéaire des $e_k$)[cite: 91].
-* **Base de $E$** : Une famille $\mathcal{B} = (e_1, \dots, e_n)$ est une **base** de $E$ si elle est à la fois **libre et génératrice**[cite: 91]. Tout vecteur $x \in E$ s'écrit alors de manière unique $x = \sum_{k=1}^n x_k\,e_k$, et la colonne de ses coordonnées est notée $\text{Mat}_{\mathcal{B}}(x)$[cite: 91].
+Soit $\mathcal{F} = (e_1, \dots, e_n)$ une famille finie de vecteurs de $E$ :
+* **Famille libre** : $\forall (\lambda_1, \dots, \lambda_n) \in \mathbb{K}^n, \; \lambda_1 e_1 + \dots + \lambda_n e_n = 0_E \implies \lambda_1 = \dots = \lambda_n = 0$. *(Propriété clé : toute famille de polynômes non nuls de **degrés échelonnés** — deux à deux distincts — est libre)*.
+* **Famille génératrice de $E$** : $E = \text{Vect}(e_1, \dots, e_n)$ (tout vecteur de $E$ s'écrit comme combinaison linéaire des $e_k$).
+* **Base de $E$** : Une famille $\mathcal{B} = (e_1, \dots, e_n)$ est une **base** de $E$ si elle est à la fois **libre et génératrice**. Tout vecteur $x \in E$ s'écrit alors de manière unique $x = \sum_{k=1}^n x_k\,e_k$, et la colonne de ses coordonnées est notée $\text{Mat}_{\mathcal{B}}(x)$.
 
 ### Théorèmes de la dimension finie
-Si $E$ admet une famille génératrice finie, toutes les bases de $E$ ont le même nombre d'éléments, appelé **dimension de $E$** et noté $\dim(E)$ (avec $\dim(\{0_E\}) = 0$)[cite: 91]. De toute famille génératrice on peut extraire une base (**théorème de la base extraite**), et toute famille libre peut être complétée en une base (**théorème de la base incomplète**)[cite: 91].
+Si $E$ admet une famille génératrice finie, toutes les bases de $E$ ont le même nombre d'éléments, appelé **dimension de $E$** et noté $\dim(E)$ (avec $\dim(\{0_E\}) = 0$). De toute famille génératrice on peut extraire une base (**théorème de la base extraite**), et toute famille libre peut être complétée en une base (**théorème de la base incomplète**).
 
 <CriticalFormula title="Dimensions de référence, Caractérisation des bases et Formule de Grassmann">
-* **Dimensions des espaces de référence**[cite: 91] :
+* **Dimensions des espaces de référence** :
 $$\dim(\mathbb{K}^n) = n \quad ; \quad \dim(\mathbb{K}_n[X]) = n + 1 \quad ; \quad \dim(\mathcal{M}_{n,p}(\mathbb{K})) = n \times p$$
-* **Théorème du cardinal (Argument de dimension)** : Si $\dim(E) = n$ et si $\mathcal{F}$ est une famille de **exactement $n$ vecteurs** de $E$[cite: 91] :
+* **Théorème du cardinal (Argument de dimension)** : Si $\dim(E) = n$ et si $\mathcal{F}$ est une famille de **exactement $n$ vecteurs** de $E$ :
 $$\mathcal{F} \text{ est une base de } E \iff \mathcal{F} \text{ est libre} \iff \mathcal{F} \text{ est génératrice de } E$$
-* **Sous-espaces et égalité** : Si $F$ est un SEV de $E$, alors $\dim(F) \le \dim(E)$, et **$F = E \iff \big(F \subset E \text{ et } \dim(F) = \dim(E)\big)$**[cite: 91].
-* **Formule de Grassmann** : Pour deux sous-espaces $F$ et $G$ de dimension finie[cite: 92] :
+* **Sous-espaces et égalité** : Si $F$ est un SEV de $E$, alors $\dim(F) \le \dim(E)$, et **$F = E \iff \big(F \subset E \text{ et } \dim(F) = \dim(E)\big)$**.
+* **Formule de Grassmann** : Pour deux sous-espaces $F$ et $G$ de dimension finie :
 $$\dim(F + G) = \dim(F) + \dim(G) - \dim(F \cap G)$$
 * **Caractérisation de deux supplémentaires en dimension finie** :
 $$E = F \oplus G \iff \begin{cases} F \cap G = \{0_E\} \\ \dim(F) + \dim(G) = \dim(E) \end{cases}$$
@@ -62,15 +62,15 @@ $$E = F \oplus G \iff \begin{cases} F \cap G = \{0_E\} \\ \dim(F) + \dim(G) = \d
 ## 3. Applications linéaires et Théorème du rang
 
 ### Noyau, Image, Injectivité et Surjectivité
-Une application $u : E \to F$ est **linéaire** ($u \in \mathcal{L}(E, F)$, ou un **endomorphisme** $u \in \mathcal{L}(E)$ si $E = F$) si $\forall (x, y) \in E^2, \forall (\lambda, \mu) \in \mathbb{K}^2, \; u(\lambda x + \mu y) = \lambda u(x) + \mu u(y)$[cite: 92].
-* **Noyau** : $\text{Ker}(u) = \{x \in E \mid u(x) = 0_F\}$ est un SEV de $E$[cite: 92]. **$u$ est injective $\iff \text{Ker}(u) = \{0_E\}$**[cite: 92].
-* **Image** : $\text{Im}(u) = \{u(x) \mid x \in E\}$ est un SEV de $F$[cite: 92]. Si $(e_1, \dots, e_n)$ engendre $E$, alors $(u(e_1), \dots, u(e_n))$ engendre $\text{Im}(u)$[cite: 92]. **$u$ est surjective $\iff \text{Im}(u) = F$**[cite: 92].
-* **Projecteurs et Symétries** : Si $E = F \oplus G$, tout $x \in E$ s'écrit de façon unique $x = x_F + x_G$[cite: 90, 93]. Le **projecteur $p$ sur $F$ parallèlement à $G$** est défini par $p(x) = x_F$ (caractérisé par $p \circ p = p$, avec $\text{Im}(p) = F = \text{Ker}(p - \text{Id}_E)$ et $\text{Ker}(p) = G$), et la **symétrie $s$ par rapport à $F$ parallèlement à $G$** par $s(x) = x_F - x_G = 2p(x) - x$ (caractérisée par $s \circ s = \text{Id}_E$)[cite: 93].
+Une application $u : E \to F$ est **linéaire** ($u \in \mathcal{L}(E, F)$, ou un **endomorphisme** $u \in \mathcal{L}(E)$ si $E = F$) si $\forall (x, y) \in E^2, \forall (\lambda, \mu) \in \mathbb{K}^2, \; u(\lambda x + \mu y) = \lambda u(x) + \mu u(y)$.
+* **Noyau** : $\text{Ker}(u) = \{x \in E \mid u(x) = 0_F\}$ est un SEV de $E$. **$u$ est injective $\iff \text{Ker}(u) = \{0_E\}$**.
+* **Image** : $\text{Im}(u) = \{u(x) \mid x \in E\}$ est un SEV de $F$. Si $(e_1, \dots, e_n)$ engendre $E$, alors $(u(e_1), \dots, u(e_n))$ engendre $\text{Im}(u)$. **$u$ est surjective $\iff \text{Im}(u) = F$**.
+* **Projecteurs et Symétries** : Si $E = F \oplus G$, tout $x \in E$ s'écrit de façon unique $x = x_F + x_G$. Le **projecteur $p$ sur $F$ parallèlement à $G$** est défini par $p(x) = x_F$ (caractérisé par $p \circ p = p$, avec $\text{Im}(p) = F = \text{Ker}(p - \text{Id}_E)$ et $\text{Ker}(p) = G$), et la **symétrie $s$ par rapport à $F$ parallèlement à $G$** par $s(x) = x_F - x_G = 2p(x) - x$ (caractérisée par $s \circ s = \text{Id}_E$).
 
 <CriticalFormula title="Théorème du Rang et Caractérisation des Isomorphismes">
-Si $E$ est de dimension finie et $u \in \mathcal{L}(E, F)$, on appelle **rang de $u$** l'entier $\text{rg}(u) = \dim(\text{Im}(u))$[cite: 93]. Le **théorème du rang** relie la dimension de l'espace de départ à celles du noyau et de l'image[cite: 93] :
+Si $E$ est de dimension finie et $u \in \mathcal{L}(E, F)$, on appelle **rang de $u$** l'entier $\text{rg}(u) = \dim(\text{Im}(u))$. Le **théorème du rang** relie la dimension de l'espace de départ à celles du noyau et de l'image :
 $$\dim(E) = \dim(\text{Ker}(u)) + \text{rg}(u)$$
-**Conséquence fondamentale lorsque $\dim(E) = \dim(F)$** (en particulier pour tout endomorphisme $u \in \mathcal{L}(E)$ en dimension finie)[cite: 92] :
+**Conséquence fondamentale lorsque $\dim(E) = \dim(F)$** (en particulier pour tout endomorphisme $u \in \mathcal{L}(E)$ en dimension finie) :
 $$u \text{ est bijective (isomorphisme)} \iff u \text{ est injective } (\text{Ker}(u) = \{0_E\}) \iff u \text{ est surjective } (\text{rg}(u) = \dim F)$$
 </CriticalFormula>
 
@@ -79,16 +79,16 @@ $$u \text{ est bijective (isomorphisme)} \iff u \text{ est injective } (\text{Ke
 ## 4. Représentations matricielles, Changement de base et Trace
 
 ### Matrice d'une application linéaire et Changement de base
-Soient $E$ muni d'une base $\mathcal{B} = (e_1, \dots, e_p)$ et $F$ muni d'une base $\mathcal{C} = (f_1, \dots, f_n)$. La matrice $\text{Mat}_{\mathcal{B}, \mathcal{C}}(u) \in \mathcal{M}_{n,p}(\mathbb{K})$ a pour $j$-ième colonne les coordonnées du vecteur image $u(e_j)$ exprimées dans la base d'arrivée $\mathcal{C}$[cite: 93]. Si $X = \text{Mat}_{\mathcal{B}}(x)$ et $Y = \text{Mat}_{\mathcal{C}}(u(x))$, alors **$Y = A\,X$**, et la matrice d'une composée $v \circ u$ est le produit des matrices[cite: 93].
+Soient $E$ muni d'une base $\mathcal{B} = (e_1, \dots, e_p)$ et $F$ muni d'une base $\mathcal{C} = (f_1, \dots, f_n)$. La matrice $\text{Mat}_{\mathcal{B}, \mathcal{C}}(u) \in \mathcal{M}_{n,p}(\mathbb{K})$ a pour $j$-ième colonne les coordonnées du vecteur image $u(e_j)$ exprimées dans la base d'arrivée $\mathcal{C}$. Si $X = \text{Mat}_{\mathcal{B}}(x)$ et $Y = \text{Mat}_{\mathcal{C}}(u(x))$, alors **$Y = A\,X$**, et la matrice d'une composée $v \circ u$ est le produit des matrices.
 
 <CriticalFormula title="Matrice de passage, Changement de base et Matrices semblables">
-Soient $\mathcal{B}$ l'ancienne base de $E$ et $\mathcal{B}'$ la nouvelle base de $E$. La **matrice de passage $P$ de $\mathcal{B}$ à $\mathcal{B}'$** contient en colonnes les coordonnées des nouveaux vecteurs de $\mathcal{B}'$ exprimés dans l'ancienne base $\mathcal{B}$ ($P \in GL_n(\mathbb{K})$)[cite: 93] :
-* **Changement de coordonnées d'un vecteur $x \in E$** : **$X = P\,X'$** $\iff X' = P^{-1}\,X$[cite: 93].
-* **Changement de base pour un endomorphisme $u \in \mathcal{L}(E)$** : Si $A = \text{Mat}_{\mathcal{B}}(u)$ et $A' = \text{Mat}_{\mathcal{B}'}(u)$, alors[cite: 93] :
+Soient $\mathcal{B}$ l'ancienne base de $E$ et $\mathcal{B}'$ la nouvelle base de $E$. La **matrice de passage $P$ de $\mathcal{B}$ à $\mathcal{B}'$** contient en colonnes les coordonnées des nouveaux vecteurs de $\mathcal{B}'$ exprimés dans l'ancienne base $\mathcal{B}$ ($P \in GL_n(\mathbb{K})$) :
+* **Changement de coordonnées d'un vecteur $x \in E$** : **$X = P\,X'$** $\iff X' = P^{-1}\,X$.
+* **Changement de base pour un endomorphisme $u \in \mathcal{L}(E)$** : Si $A = \text{Mat}_{\mathcal{B}}(u)$ et $A' = \text{Mat}_{\mathcal{B}'}(u)$, alors :
 $$A' = P^{-1}\,A\,P$$
-Deux matrices carrées $A$ et $A'$ vérifiant $A' = P^{-1}AP$ (avec $P$ inversible) sont dites **semblables** ; elles ont même rang et même trace[cite: 93].
+Deux matrices carrées $A$ et $A'$ vérifiant $A' = P^{-1}AP$ (avec $P$ inversible) sont dites **semblables** ; elles ont même rang et même trace.
 </CriticalFormula>
 
 ### Trace et Transposée d'une matrice
-* **Trace d'une matrice carrée $A = (a_{i,j}) \in \mathcal{M}_n(\mathbb{K})$** : Somme des coefficients diagonaux $\text{Tr}(A) = \sum_{i=1}^n a_{i,i}$[cite: 93]. La trace est linéaire et vérifie pour toutes matrices $A, B$ : **$\text{Tr}(A\,B) = \text{Tr}(B\,A)$**, d'où l'invariance par similitude $\text{Tr}(P^{-1}AP) = \text{Tr}(A)$[cite: 93].
-* **Transposée $A^\top$** (ou ${}^t A$) : S'obtient en échangeant lignes et colonnes, et vérifie **$(A\,B)^\top = B^\top\,A^\top$** et **$(A^{-1})^\top = (A^\top)^{-1}$**[cite: 94]. Une matrice carrée est **symétrique** si $A^\top = A$, et **antisymétrique** si $A^\top = -A$[cite: 94].
+* **Trace d'une matrice carrée $A = (a_{i,j}) \in \mathcal{M}_n(\mathbb{K})$** : Somme des coefficients diagonaux $\text{Tr}(A) = \sum_{i=1}^n a_{i,i}$. La trace est linéaire et vérifie pour toutes matrices $A, B$ : **$\text{Tr}(A\,B) = \text{Tr}(B\,A)$**, d'où l'invariance par similitude $\text{Tr}(P^{-1}AP) = \text{Tr}(A)$.
+* **Transposée $A^\top$** (ou ${}^t A$) : S'obtient en échangeant lignes et colonnes, et vérifie **$(A\,B)^\top = B^\top\,A^\top$** et **$(A^{-1})^\top = (A^\top)^{-1}$**. Une matrice carrée est **symétrique** si $A^\top = A$, et **antisymétrique** si $A^\top = -A$.

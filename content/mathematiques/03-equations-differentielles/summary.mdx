@@ -7,17 +7,17 @@ chapterId: "03-equations-differentielles"
 ## L'Essentiel du Bulletin Officiel ATS
 
 * **Équations linéaires du 1er ordre : $y' + a(x)y = b(x)$** :
-  * Toujours normaliser le coefficient devant $y'$ à $1$ sur un intervalle $I$ où il ne s'annule pas[cite: 85].
-  * **Solution homogène ($b = 0$)** : **$y_H(x) = \lambda\,e^{-A(x)}$** avec $A'(x) = a(x)$ et $\lambda \in \mathbb{K}$[cite: 85].
-  * **Variation de la constante** : Poser $y_P(x) = \lambda(x)\,e^{-A(x)} \implies$ **$\lambda'(x) = b(x)\,e^{A(x)}$**[cite: 85].
-  * **Problème de Cauchy** : Une unique solution vérifiant $y(x_0) = y_0$[cite: 85].
+  * Toujours normaliser le coefficient devant $y'$ à $1$ sur un intervalle $I$ où il ne s'annule pas.
+  * **Solution homogène ($b = 0$)** : **$y_H(x) = \lambda\,e^{-A(x)}$** avec $A'(x) = a(x)$ et $\lambda \in \mathbb{K}$.
+  * **Variation de la constante** : Poser $y_P(x) = \lambda(x)\,e^{-A(x)} \implies$ **$\lambda'(x) = b(x)\,e^{A(x)}$**.
+  * **Problème de Cauchy** : Une unique solution vérifiant $y(x_0) = y_0$.
 * **Équations linéaires du 2nd ordre à coefficients constants : $y'' + ay' + by = f(x)$** :
-  * **Équation caractéristique** : **$r^2 + ar + b = 0$**, discriminant $\Delta = a^2 - 4b$[cite: 85].
+  * **Équation caractéristique** : **$r^2 + ar + b = 0$**, discriminant $\Delta = a^2 - 4b$.
   * **Solutions homogènes réelles** :
-    * $\Delta > 0$ (racines $r_1, r_2$) : $y_H(x) = \lambda e^{r_1 x} + \mu e^{r_2 x}$[cite: 85].
-    * $\Delta = 0$ (racine double $r_0$) : **$y_H(x) = (\lambda + \mu x)e^{r_0 x}$**[cite: 85].
-    * $\Delta < 0$ (racines $\alpha \pm i\omega$) : **$y_H(x) = e^{\alpha x}(\lambda\cos(\omega x) + \mu\sin(\omega x))$**[cite: 85].
-  * **Solution particulière pour $f(x) = P(x)e^{\omega x}$** : chercher $y_P(x) = Q(x)e^{\omega x}$ (si $\omega$ non racine), $xQ(x)e^{\omega x}$ (si $\omega$ racine simple) ou $x^2 Q(x)e^{\omega x}$ (si $\omega$ racine double), avec $\deg Q = \deg P$[cite: 85].
-  * **Problème de Cauchy** : Une unique solution vérifiant $y(x_0) = y_0$ **et** $y'(x_0) = y_0'$[cite: 85].
+    * $\Delta > 0$ (racines $r_1, r_2$) : $y_H(x) = \lambda e^{r_1 x} + \mu e^{r_2 x}$.
+    * $\Delta = 0$ (racine double $r_0$) : **$y_H(x) = (\lambda + \mu x)e^{r_0 x}$**.
+    * $\Delta < 0$ (racines $\alpha \pm i\omega$) : **$y_H(x) = e^{\alpha x}(\lambda\cos(\omega x) + \mu\sin(\omega x))$**.
+  * **Solution particulière pour $f(x) = P(x)e^{\omega x}$** : chercher $y_P(x) = Q(x)e^{\omega x}$ (si $\omega$ non racine), $xQ(x)e^{\omega x}$ (si $\omega$ racine simple) ou $x^2 Q(x)e^{\omega x}$ (si $\omega$ racine double), avec $\deg Q = \deg P$.
+  * **Problème de Cauchy** : Une unique solution vérifiant $y(x_0) = y_0$ **et** $y'(x_0) = y_0'$.
 * **Systèmes différentiels $X' = A\,X$** :
-  * Si $A = P\,D\,P^{-1}$ est diagonalisable de valeurs propres $\lambda_k$ et vecteurs propres $V_k$ : poser $X = P\,Y \iff Y' = D\,Y$, soit **$X(t) = \sum_{k=1}^n c_k\,e^{\lambda_k t}\,V_k$**[cite: 109].
+  * Si $A = P\,D\,P^{-1}$ est diagonalisable de valeurs propres $\lambda_k$ et vecteurs propres $V_k$ : poser $X = P\,Y \iff Y' = D\,Y$, soit **$X(t) = \sum_{k=1}^n c_k\,e^{\lambda_k t}\,V_k$**.

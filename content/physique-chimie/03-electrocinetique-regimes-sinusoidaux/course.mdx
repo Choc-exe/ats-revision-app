@@ -8,120 +8,120 @@ description: "Lois de Kirchhoff en ARQS, dipôles linéaires, régimes transitoi
 
 # Électrocinétique - Régimes sinusoïdaux
 
-Ce thème généralise les lois élémentaires des circuits électriques à l'approximation des régimes quasi stationnaires (ARQS), analyse les régimes transitoires d'ordre 1 et 2, puis introduit la représentation complexe et les bilans de puissance en régime sinusoïdal établi[cite: 14].
+Ce thème généralise les lois élémentaires des circuits électriques à l'approximation des régimes quasi stationnaires (ARQS), analyse les régimes transitoires d'ordre 1 et 2, puis introduit la représentation complexe et les bilans de puissance en régime sinusoïdal établi.
 
 ---
 
 ## 1. Circuits électriques dans l'Approximation des Régimes Quasi Stationnaires (ARQS)
 
 ### Critère de validité de l'ARQS et lois de Kirchhoff
-L'**Approximation des Régimes Quasi Stationnaires (ARQS)** consiste à négliger le temps de propagation des ondes électromagnétiques (à la célérité $c \approx 3{,}00 \times 10^8\text{ m}\cdot\text{s}^{-1}$) devant la période $T = \frac{1}{f}$ des variations des signaux électriques[cite: 14, 65].
-* **Critère de validité** : La taille caractéristique $L_{\text{circuit}}$ du circuit doit être très inférieure à la longueur d'onde $\lambda = \frac{c}{f}$, soit **$L_{\text{circuit}} \ll \frac{c}{f}$** (ou $\tau_{\text{prop}} = \frac{L_{\text{circuit}}}{c} \ll T$)[cite: 14, 65].
-* Sous cette hypothèse, l'intensité $i(t)$ est la même en tout point d'une même branche à un instant $t$ donné, ce qui valide les deux **lois de Kirchhoff**[cite: 14] :
-  1. **Loi des nœuds** : $\sum_{k} \varepsilon_k\,i_k(t) = 0$ (avec $\varepsilon_k = +1$ si le courant arrive au nœud, $-1$ s'il en repart)[cite: 14, 22].
-  2. **Loi des mailles** : $\sum_{k} \varepsilon_k\,u_k(t) = 0$ le long de tout contour fermé orienté[cite: 14].
+L'**Approximation des Régimes Quasi Stationnaires (ARQS)** consiste à négliger le temps de propagation des ondes électromagnétiques (à la célérité $c \approx 3{,}00 \times 10^8\text{ m}\cdot\text{s}^{-1}$) devant la période $T = \frac{1}{f}$ des variations des signaux électriques.
+* **Critère de validité** : La taille caractéristique $L_{\text{circuit}}$ du circuit doit être très inférieure à la longueur d'onde $\lambda = \frac{c}{f}$, soit **$L_{\text{circuit}} \ll \frac{c}{f}$** (ou $\tau_{\text{prop}} = \frac{L_{\text{circuit}}}{c} \ll T$).
+* Sous cette hypothèse, l'intensité $i(t)$ est la même en tout point d'une même branche à un instant $t$ donné, ce qui valide les deux **lois de Kirchhoff** :
+  1. **Loi des nœuds** : $\sum_{k} \varepsilon_k\,i_k(t) = 0$ (avec $\varepsilon_k = +1$ si le courant arrive au nœud, $-1$ s'il en repart).
+  2. **Loi des mailles** : $\sum_{k} \varepsilon_k\,u_k(t) = 0$ le long de tout contour fermé orienté.
 
 ### Conventions et puissance électrique
-Pour un dipôle parcouru par un courant $i(t)$ avec une tension $u(t)$ entre ses bornes[cite: 14] :
-* **Convention récepteur** : Les flèches de $u(t)$ et $i(t)$ sont de **sens opposés**. La puissance algébrique **reçue** par le dipôle vaut **$\mathcal{P}_{\text{reçue}}(t) = u(t)\,i(t)$**[cite: 14].
-* **Convention générateur** : Les flèches de $u(t)$ et $i(t)$ sont de **même sens**. La puissance algébrique **fournie** par le dipôle vaut **$\mathcal{P}_{\text{fournie}}(t) = u(t)\,i(t)$**[cite: 14].
+Pour un dipôle parcouru par un courant $i(t)$ avec une tension $u(t)$ entre ses bornes :
+* **Convention récepteur** : Les flèches de $u(t)$ et $i(t)$ sont de **sens opposés**. La puissance algébrique **reçue** par le dipôle vaut **$\mathcal{P}_{\text{reçue}}(t) = u(t)\,i(t)$**.
+* **Convention générateur** : Les flèches de $u(t)$ et $i(t)$ sont de **même sens**. La puissance algébrique **fournie** par le dipôle vaut **$\mathcal{P}_{\text{fournie}}(t) = u(t)\,i(t)$**.
 
 ### Dipôles linéaires passifs, sources réelles et piles
 <CriticalFormula title="Relations courant-tension (Convention récepteur) et Associations">
-En régime dépendant du temps, les trois dipôles linéaires passifs fondamentaux vérifient[cite: 15] :
-* **Résistance $R$** : $u(t) = R\,i(t)$ — En série : $R_{\text{eq}} = R_1 + R_2$ ; en parallèle : $\frac{1}{R_{\text{eq}}} = \frac{1}{R_1} + \frac{1}{R_2}$[cite: 15].
-* **Condensateur de capacité $C$** : $q(t) = C\,u(t)$ et **$i(t) = C\frac{\mathrm{d}u(t)}{\mathrm{d}t}$** — En parallèle : $C_{\text{eq}} = C_1 + C_2$ ; en série : $\frac{1}{C_{\text{eq}}} = \frac{1}{C_1} + \frac{1}{C_2}$[cite: 15].
-* **Bobine idéale d'inductance propre $L$** : **$u(t) = L\frac{\mathrm{d}i(t)}{\mathrm{d}t}$** — En série : $L_{\text{eq}} = L_1 + L_2$ ; en parallèle : $\frac{1}{L_{\text{eq}}} = \frac{1}{L_1} + \frac{1}{L_2}$[cite: 15].
+En régime dépendant du temps, les trois dipôles linéaires passifs fondamentaux vérifient :
+* **Résistance $R$** : $u(t) = R\,i(t)$ — En série : $R_{\text{eq}} = R_1 + R_2$ ; en parallèle : $\frac{1}{R_{\text{eq}}} = \frac{1}{R_1} + \frac{1}{R_2}$.
+* **Condensateur de capacité $C$** : $q(t) = C\,u(t)$ et **$i(t) = C\frac{\mathrm{d}u(t)}{\mathrm{d}t}$** — En parallèle : $C_{\text{eq}} = C_1 + C_2$ ; en série : $\frac{1}{C_{\text{eq}}} = \frac{1}{C_1} + \frac{1}{C_2}$.
+* **Bobine idéale d'inductance propre $L$** : **$u(t) = L\frac{\mathrm{d}i(t)}{\mathrm{d}t}$** — En série : $L_{\text{eq}} = L_1 + L_2$ ; en parallèle : $\frac{1}{L_{\text{eq}}} = \frac{1}{L_1} + \frac{1}{L_2}$.
 </CriticalFormula>
 
-* **Source de tension réelle** : Modélisée par l'association en série d'une source idéale de tension (f.é.m. $E$) et d'une résistance interne $r$, soit $u(t) = E - r\,i(t)$ en convention générateur[cite: 15]. Le **point de fonctionnement** d'un circuit en régime continu s'obtient à l'intersection des caractéristiques courant-tension $u = f(i)$ des dipôles connectés[cite: 15].
-* **Capacité électrique d'une pile** : La capacité $Q_{\max}$ (exprimée en Coulombs $\text{C}$ ou en Ampères-heures $\text{A}\cdot\text{h}$, avec **$1\text{ A}\cdot\text{h} = 3\,600\text{ C}$**) relie l'intensité constante $I$ débitée à la durée de fonctionnement $\Delta t$ par **$Q_{\max} = I\,\Delta t$**[cite: 15]. L'énergie totale stockée par une pile de tension $U$ vaut **$E_{\text{pile}} = Q_{\max}\,U = U\,I\,\Delta t$**[cite: 15].
+* **Source de tension réelle** : Modélisée par l'association en série d'une source idéale de tension (f.é.m. $E$) et d'une résistance interne $r$, soit $u(t) = E - r\,i(t)$ en convention générateur. Le **point de fonctionnement** d'un circuit en régime continu s'obtient à l'intersection des caractéristiques courant-tension $u = f(i)$ des dipôles connectés.
+* **Capacité électrique d'une pile** : La capacité $Q_{\max}$ (exprimée en Coulombs $\text{C}$ ou en Ampères-heures $\text{A}\cdot\text{h}$, avec **$1\text{ A}\cdot\text{h} = 3\,600\text{ C}$**) relie l'intensité constante $I$ débitée à la durée de fonctionnement $\Delta t$ par **$Q_{\max} = I\,\Delta t$**. L'énergie totale stockée par une pile de tension $U$ vaut **$E_{\text{pile}} = Q_{\max}\,U = U\,I\,\Delta t$**.
 
 ---
 
 ## 2. Circuits linéaires en régime transitoire
 
 <WarningBox title="Continuité des grandeurs énergétiques">
-L'énergie stockée dans un composant ne pouvant pas varier de manière discontinue (ce qui correspondrait à une puissance infinie), on admet deux relations de continuité fondamentales à tout instant $t_0$ de commutation[cite: 14, 15] :
-* **La tension $u_C(t)$ aux bornes d'un condensateur est toujours continue** : $u_C(t_0^+) = u_C(t_0^-)$[cite: 14, 15].
-* **L'intensité $i_L(t)$ traversant une bobine est toujours continue** : $i_L(t_0^+) = i_L(t_0^-)$[cite: 14, 15].
+L'énergie stockée dans un composant ne pouvant pas varier de manière discontinue (ce qui correspondrait à une puissance infinie), on admet deux relations de continuité fondamentales à tout instant $t_0$ de commutation :
+* **La tension $u_C(t)$ aux bornes d'un condensateur est toujours continue** : $u_C(t_0^+) = u_C(t_0^-)$.
+* **L'intensité $i_L(t)$ traversant une bobine est toujours continue** : $i_L(t_0^+) = i_L(t_0^-)$.
 </WarningBox>
 
 ### Circuit RC série (Premier ordre)
-Pour un condensateur initialement déchargé ($u_C(0^-) = 0$) soumis à un échelon de tension $E$ à travers une résistance $R$, la loi des mailles $u_R + u_C = E$ avec $i = C\frac{\mathrm{d}u_C}{\mathrm{d}t}$ donne l'équation différentielle canonique[cite: 15] :
+Pour un condensateur initialement déchargé ($u_C(0^-) = 0$) soumis à un échelon de tension $E$ à travers une résistance $R$, la loi des mailles $u_R + u_C = E$ avec $i = C\frac{\mathrm{d}u_C}{\mathrm{d}t}$ donne l'équation différentielle canonique :
 $$\tau\frac{\mathrm{d}u_C}{\mathrm{d}t} + u_C = E \quad \text{avec} \quad \tau = R\,C$$
-* **Charge ($u_C(0) = 0$)** : $u_C(t) = E\left(1 - e^{-\frac{t}{\tau}}\right)$[cite: 15].
-* **Décharge ($E = 0$, $u_C(0) = U_0$)** : $\tau\frac{\mathrm{d}u_C}{\mathrm{d}t} + u_C = 0 \implies u_C(t) = U_0\,e^{-\frac{t}{\tau}}$[cite: 15].
-* La durée du régime transitoire est de l'ordre de **$3\tau$ à $5\tau$** (à $t = 3\tau$, $95\,\%$ de l'évolution est accomplie ; à $t = 5\tau$, $99\,\%$)[cite: 15].
+* **Charge ($u_C(0) = 0$)** : $u_C(t) = E\left(1 - e^{-\frac{t}{\tau}}\right)$.
+* **Décharge ($E = 0$, $u_C(0) = U_0$)** : $\tau\frac{\mathrm{d}u_C}{\mathrm{d}t} + u_C = 0 \implies u_C(t) = U_0\,e^{-\frac{t}{\tau}}$.
+* La durée du régime transitoire est de l'ordre de **$3\tau$ à $5\tau$** (à $t = 3\tau$, $95\,\%$ de l'évolution est accomplie ; à $t = 5\tau$, $99\,\%$).
 
 ### Circuit RL série (Premier ordre)
-Lors de l'établissement du courant ($i(0) = 0$) sous un échelon de tension $E$, la loi des mailles $R\,i + L\frac{\mathrm{d}i}{\mathrm{d}t} = E$ conduit à une constante de temps **$\tau = \frac{L}{R}$**, soit $i(t) = \frac{E}{R}\left(1 - e^{-\frac{t}{\tau}}\right)$ et une tension aux bornes de la bobine $u_L(t) = E\,e^{-\frac{t}{\tau}}$[cite: 15].
+Lors de l'établissement du courant ($i(0) = 0$) sous un échelon de tension $E$, la loi des mailles $R\,i + L\frac{\mathrm{d}i}{\mathrm{d}t} = E$ conduit à une constante de temps **$\tau = \frac{L}{R}$**, soit $i(t) = \frac{E}{R}\left(1 - e^{-\frac{t}{\tau}}\right)$ et une tension aux bornes de la bobine $u_L(t) = E\,e^{-\frac{t}{\tau}}$.
 
 <CriticalFormula title="Démonstrations exigibles : Énergie stockée dans un condensateur et une bobine">
-* **Condensateur** : La puissance reçue est $\mathcal{P}_C = u_C\,i = u_C\,C\frac{\mathrm{d}u_C}{\mathrm{d}t} = \frac{\mathrm{d}}{\mathrm{d}t}\left(\frac{1}{2}C\,u_C^2\right)$. Par intégration depuis l'état déchargé, l'énergie électrostatique stockée vaut[cite: 15] :
+* **Condensateur** : La puissance reçue est $\mathcal{P}_C = u_C\,i = u_C\,C\frac{\mathrm{d}u_C}{\mathrm{d}t} = \frac{\mathrm{d}}{\mathrm{d}t}\left(\frac{1}{2}C\,u_C^2\right)$. Par intégration depuis l'état déchargé, l'énergie électrostatique stockée vaut :
 $$E_C = \frac{1}{2}C\,u_C^2 = \frac{1}{2}\frac{q^2}{C}$$
-* **Bobine** : La puissance reçue est $\mathcal{P}_L = u_L\,i = L\frac{\mathrm{d}i}{\mathrm{d}t}\,i = \frac{\mathrm{d}}{\mathrm{d}t}\left(\frac{1}{2}L\,i^2\right)$. L'énergie magnétique stockée vaut[cite: 15] :
+* **Bobine** : La puissance reçue est $\mathcal{P}_L = u_L\,i = L\frac{\mathrm{d}i}{\mathrm{d}t}\,i = \frac{\mathrm{d}}{\mathrm{d}t}\left(\frac{1}{2}L\,i^2\right)$. L'énergie magnétique stockée vaut :
 $$E_L = \frac{1}{2}L\,i^2$$
 </CriticalFormula>
 
 ### Circuit RLC série et Analogie électromécanique (Second ordre)
-En appliquant la loi des mailles $L\frac{\mathrm{d}i}{\mathrm{d}t} + R\,i + u_C = E$ avec $i = C\frac{\mathrm{d}u_C}{\mathrm{d}t}$, on obtient l'équation différentielle du second ordre vérifiée par $u_C(t)$[cite: 15] :
+En appliquant la loi des mailles $L\frac{\mathrm{d}i}{\mathrm{d}t} + R\,i + u_C = E$ avec $i = C\frac{\mathrm{d}u_C}{\mathrm{d}t}$, on obtient l'équation différentielle du second ordre vérifiée par $u_C(t)$ :
 $$L\,C\frac{\mathrm{d}^2 u_C}{\mathrm{d}t^2} + R\,C\frac{\mathrm{d}u_C}{\mathrm{d}t} + u_C = E$$
 
 <CriticalFormula title="Forme canonique du circuit RLC série et Analogie mécanique">
-En divisant par $LC$, on identifie la pulsation propre $\omega_0$ et le facteur de qualité $Q$[cite: 15, 28] :
+En divisant par $LC$, on identifie la pulsation propre $\omega_0$ et le facteur de qualité $Q$ :
 $$\frac{\mathrm{d}^2 u_C}{\mathrm{d}t^2} + \frac{\omega_0}{Q}\frac{\mathrm{d}u_C}{\mathrm{d}t} + \omega_0^2\,u_C = \omega_0^2\,E \quad \text{avec} \quad \omega_0 = \frac{1}{\sqrt{L\,C}} \quad \text{et} \quad Q = \frac{1}{R}\sqrt{\frac{L}{C}} = \frac{L\,\omega_0}{R} = \frac{1}{R\,C\,\omega_0}$$
-Comme en mécanique, trois régimes transitoires existent selon la valeur de $Q$ par rapport à $\frac{1}{2}$ : **pseudopériodique** ($Q > \frac{1}{2}$, soit $R < 2\sqrt{\frac{L}{C}}$), **critique** ($Q = \frac{1}{2}$) et **apériodique** ($Q < \frac{1}{2}$)[cite: 9, 15].
+Comme en mécanique, trois régimes transitoires existent selon la valeur de $Q$ par rapport à $\frac{1}{2}$ : **pseudopériodique** ($Q > \frac{1}{2}$, soit $R < 2\sqrt{\frac{L}{C}}$), **critique** ($Q = \frac{1}{2}$) et **apériodique** ($Q < \frac{1}{2}$).
 </CriticalFormula>
 
 | Grandeur Mécanique (Masse-Ressort amorti) | Grandeur Électrique (Circuit RLC série) |
 | :--- | :--- |
-| Position $x(t)$ (ou élongation) | Charge $q(t)$ (ou tension $u_C(t) = q/C$)[cite: 15] |
-| Vitesse $v(t) = \dot{x}(t)$ | Intensité $i(t) = \dot{q}(t)$[cite: 15] |
-| Masse $m$ (inertie cinétique) | Inductance $L$ (inertie magnétique)[cite: 15] |
-| Raideur du ressort $k$ | Inverse de la capacité $\frac{1}{C}$[cite: 15] |
-| Coefficient de frottement visqueux $h$ | Résistance électrique $R$[cite: 15] |
+| Position $x(t)$ (ou élongation) | Charge $q(t)$ (ou tension $u_C(t) = q/C$) |
+| Vitesse $v(t) = \dot{x}(t)$ | Intensité $i(t) = \dot{q}(t)$ |
+| Masse $m$ (inertie cinétique) | Inductance $L$ (inertie magnétique) |
+| Raideur du ressort $k$ | Inverse de la capacité $\frac{1}{C}$ |
+| Coefficient de frottement visqueux $h$ | Résistance électrique $R$ |
 
 ---
 
 ## 3. Circuits linéaires en régime sinusoïdal établi (RSE)
 
 ### Représentation complexe et Impédances
-À un signal sinusoïdal réel $s(t) = S_m \cos(\omega t + \varphi_s)$ de pulsation $\omega = 2\pi f$, on associe le **signal complexe** $\underline{s}(t) = \underline{S}\,e^{j\omega t}$ (avec $j^2 = -1$ et $s(t) = \text{Re}[\underline{s}(t)]$), où $\underline{S} = S_m\,e^{j\varphi_s}$ est l'amplitude complexe (ou $S_{\text{eff}}\,e^{j\varphi_s}$ avec $S_{\text{eff}} = \frac{S_m}{\sqrt{2}}$)[cite: 16, 28]. Dans ce formalisme, dériver par rapport au temps revient à **multiplier par $j\omega$**, et intégrer revient à **diviser par $j\omega$**[cite: 16, 28].
+À un signal sinusoïdal réel $s(t) = S_m \cos(\omega t + \varphi_s)$ de pulsation $\omega = 2\pi f$, on associe le **signal complexe** $\underline{s}(t) = \underline{S}\,e^{j\omega t}$ (avec $j^2 = -1$ et $s(t) = \text{Re}[\underline{s}(t)]$), où $\underline{S} = S_m\,e^{j\varphi_s}$ est l'amplitude complexe (ou $S_{\text{eff}}\,e^{j\varphi_s}$ avec $S_{\text{eff}} = \frac{S_m}{\sqrt{2}}$). Dans ce formalisme, dériver par rapport au temps revient à **multiplier par $j\omega$**, et intégrer revient à **diviser par $j\omega$**.
 
 <CriticalFormula title="Impédances complexes des dipôles élémentaires">
-L'impédance complexe d'un dipôle passif est définie par $\underline{Z} = \frac{\underline{u}(t)}{\underline{i}(t)} = Z\,e^{j\varphi}$, où $Z = |\underline{Z}| = \frac{U_m}{I_m} = \frac{U_{\text{eff}}}{I_{\text{eff}}}$ et $\varphi = \arg(\underline{Z}) = \varphi_u - \varphi_i$ est l'avance de phase de la tension sur le courant[cite: 16, 28] :
-* **Résistance $R$** : $\underline{Z}_R = R$ ($Z_R = R$, déphasage $\varphi = 0$)[cite: 16].
-* **Bobine $L$** : **$\underline{Z}_L = j\,L\,\omega$** ($Z_L = L\omega$, tension en avance de $\varphi = +\frac{\pi}{2}$ sur le courant)[cite: 16].
-* **Condensateur $C$** : **$\underline{Z}_C = \frac{1}{j\,C\,\omega} = -\frac{j}{C\,\omega}$** ($Z_C = \frac{1}{C\omega}$, tension en retard de $\varphi = -\frac{\pi}{2}$ sur le courant)[cite: 16].
-* **Associations** : En série, $\underline{Z}_{\text{eq}} = \underline{Z}_1 + \underline{Z}_2$ ; en parallèle, $\frac{1}{\underline{Z}_{\text{eq}}} = \frac{1}{\underline{Z}_1} + \frac{1}{\underline{Z}_2}$[cite: 16].
+L'impédance complexe d'un dipôle passif est définie par $\underline{Z} = \frac{\underline{u}(t)}{\underline{i}(t)} = Z\,e^{j\varphi}$, où $Z = |\underline{Z}| = \frac{U_m}{I_m} = \frac{U_{\text{eff}}}{I_{\text{eff}}}$ et $\varphi = \arg(\underline{Z}) = \varphi_u - \varphi_i$ est l'avance de phase de la tension sur le courant :
+* **Résistance $R$** : $\underline{Z}_R = R$ ($Z_R = R$, déphasage $\varphi = 0$).
+* **Bobine $L$** : **$\underline{Z}_L = j\,L\,\omega$** ($Z_L = L\omega$, tension en avance de $\varphi = +\frac{\pi}{2}$ sur le courant).
+* **Condensateur $C$** : **$\underline{Z}_C = \frac{1}{j\,C\,\omega} = -\frac{j}{C\,\omega}$** ($Z_C = \frac{1}{C\omega}$, tension en retard de $\varphi = -\frac{\pi}{2}$ sur le courant).
+* **Associations** : En série, $\underline{Z}_{\text{eq}} = \underline{Z}_1 + \underline{Z}_2$ ; en parallèle, $\frac{1}{\underline{Z}_{\text{eq}}} = \frac{1}{\underline{Z}_1} + \frac{1}{\underline{Z}_2}$.
 </CriticalFormula>
 
 ### Puissance moyenne, Facteur de puissance et Transport d'énergie
-En régime sinusoïdal établi, la valeur efficace d'un signal sinusoïdal d'amplitude $X_m$ vaut **$X_{\text{eff}} = \frac{X_m}{\sqrt{2}}$**[cite: 16].
+En régime sinusoïdal établi, la valeur efficace d'un signal sinusoïdal d'amplitude $X_m$ vaut **$X_{\text{eff}} = \frac{X_m}{\sqrt{2}}$**.
 
 <CriticalFormula title="Puissance active moyenne et Facteur de puissance">
-La puissance moyenne (ou puissance active $P$) reçue sur une période par un dipôle linéaire soumis à $u(t) = U_m\cos(\omega t + \varphi_u)$ et parcouru par $i(t) = I_m\cos(\omega t + \varphi_i)$ s'établit par linéarisation trigonométrique[cite: 16, 29] :
+La puissance moyenne (ou puissance active $P$) reçue sur une période par un dipôle linéaire soumis à $u(t) = U_m\cos(\omega t + \varphi_u)$ et parcouru par $i(t) = I_m\cos(\omega t + \varphi_i)$ s'établit par linéarisation trigonométrique :
 $$P = \langle u(t)\,i(t) \rangle = \frac{1}{2}U_m\,I_m\cos(\varphi) = U_{\text{eff}}\,I_{\text{eff}}\cos(\varphi)$$
-où $\varphi = \varphi_u - \varphi_i = \arg(\underline{Z})$ est le déphasage et **$k = \cos(\varphi) = \frac{\text{Re}(\underline{Z})}{|\underline{Z}|}$** est le **facteur de puissance** du dipôle[cite: 16].
+où $\varphi = \varphi_u - \varphi_i = \arg(\underline{Z})$ est le déphasage et **$k = \cos(\varphi) = \frac{\text{Re}(\underline{Z})}{|\underline{Z}|}$** est le **facteur de puissance** du dipôle.
 </CriticalFormula>
 
-* **Application au transport d'énergie électrique** : Soit une ligne électrique de résistance $R_{\text{ligne}}$ alimentant une installation sous la tension efficace $U_{\text{eff}}$ qui consomme une puissance active donnée $P = U_{\text{eff}}\,I_{\text{eff}}\cos\varphi$[cite: 16]. L'intensité efficace en ligne vaut $I_{\text{eff}} = \frac{P}{U_{\text{eff}}\cos\varphi}$, de sorte que les **pertes par effet Joule dans la ligne** s'écrivent[cite: 16] :
+* **Application au transport d'énergie électrique** : Soit une ligne électrique de résistance $R_{\text{ligne}}$ alimentant une installation sous la tension efficace $U_{\text{eff}}$ qui consomme une puissance active donnée $P = U_{\text{eff}}\,I_{\text{eff}}\cos\varphi$. L'intensité efficace en ligne vaut $I_{\text{eff}} = \frac{P}{U_{\text{eff}}\cos\varphi}$, de sorte que les **pertes par effet Joule dans la ligne** s'écrivent :
 $$P_{\text{Joule}} = R_{\text{ligne}}\,I_{\text{eff}}^2 = \frac{R_{\text{ligne}}\,P^2}{U_{\text{eff}}^2\cos^2(\varphi)}$$
 Pour minimiser ces pertes lors du transport d'une puissance $P$ fixée, il faut donc :
-1. Utiliser des **lignes à très haute tension** ($U_{\text{eff}}$ grand réduit $P_{\text{Joule}}$ en $1/U_{\text{eff}}^2$)[cite: 16].
-2. Relever le **facteur de puissance $\cos\varphi$ le plus proche possible de $1$** chez l'utilisateur[cite: 16].
+1. Utiliser des **lignes à très haute tension** ($U_{\text{eff}}$ grand réduit $P_{\text{Joule}}$ en $1/U_{\text{eff}}^2$).
+2. Relever le **facteur de puissance $\cos\varphi$ le plus proche possible de $1$** chez l'utilisateur.
 
 ### Résonance de courant dans un circuit RLC série
-Dans un circuit RLC série alimenté par un générateur sinusoïdal de tension d'amplitude $E_m$, l'impédance complexe totale vaut $\underline{Z} = R + j\left(L\omega - \frac{1}{C\omega}\right) = R\left[1 + jQ\left(\frac{\omega}{\omega_0} - \frac{\omega_0}{\omega}\right)\right]$[cite: 16].
+Dans un circuit RLC série alimenté par un générateur sinusoïdal de tension d'amplitude $E_m$, l'impédance complexe totale vaut $\underline{Z} = R + j\left(L\omega - \frac{1}{C\omega}\right) = R\left[1 + jQ\left(\frac{\omega}{\omega_0} - \frac{\omega_0}{\omega}\right)\right]$.
 
 <SchemaPlaceholder alt="Courbe en cloche de résonance en intensité Im(omega) ou d'amplitude URm(omega) d'un circuit RLC série avec bande passante à Im,max / racine de 2 autour de omega0" caption="Figure 3.1 : Phénomène de résonance de courant (et de tension aux bornes de R) dans un circuit RLC série pour deux facteurs de qualité Q." src="/images/physique-chimie/resonance-courant-rlc.png"/>
 
 <CriticalFormula title="Résonance de courant et Bande passante à -3 dB">
-L'amplitude du courant $I_m(\omega)$ (et celle de la tension aux bornes de la résistance $U_{Rm}(\omega) = R\,I_m(\omega)$) s'écrit[cite: 16] :
+L'amplitude du courant $I_m(\omega)$ (et celle de la tension aux bornes de la résistance $U_{Rm}(\omega) = R\,I_m(\omega)$) s'écrit :
 $$I_m(\omega) = \frac{E_m}{\sqrt{R^2 + \left(L\omega - \frac{1}{C\omega}\right)^2}} = \frac{E_m / R}{\sqrt{1 + Q^2\left(\frac{\omega}{\omega_0} - \frac{\omega_0}{\omega}\right)^2}}$$
-* **À la résonance ($\omega = \omega_0 = \frac{1}{\sqrt{LC}}$)** : L'impédance de la bobine et du condensateur se compensent ($L\omega_0 = \frac{1}{C\omega_0}$). Le circuit est purement résistif ($\underline{Z}(\omega_0) = R$, $\varphi = 0$), l'amplitude du courant est maximale **$I_{m,\max} = \frac{E_m}{R}$** ($U_{Rm,\max} = E_m$), et il apparaît une **surtension** aux bornes de $L$ et de $C$ d'amplitude **$U_{Lm}(\omega_0) = U_{Cm}(\omega_0) = Q\,E_m$**[cite: 16].
-* **Largeur du pic de résonance (Bande passante à $I_{m,\max}/\sqrt{2}$)** : Les pulsations de coupure $\omega_1$ et $\omega_2$ vérifient $I_m(\omega) = \frac{I_{m,\max}}{\sqrt{2}} \iff Q\left|\frac{\omega}{\omega_0} - \frac{\omega_0}{\omega}\right| = 1$. La largeur de la bande passante vaut[cite: 16] :
+* **À la résonance ($\omega = \omega_0 = \frac{1}{\sqrt{LC}}$)** : L'impédance de la bobine et du condensateur se compensent ($L\omega_0 = \frac{1}{C\omega_0}$). Le circuit est purement résistif ($\underline{Z}(\omega_0) = R$, $\varphi = 0$), l'amplitude du courant est maximale **$I_{m,\max} = \frac{E_m}{R}$** ($U_{Rm,\max} = E_m$), et il apparaît une **surtension** aux bornes de $L$ et de $C$ d'amplitude **$U_{Lm}(\omega_0) = U_{Cm}(\omega_0) = Q\,E_m$**.
+* **Largeur du pic de résonance (Bande passante à $I_{m,\max}/\sqrt{2}$)** : Les pulsations de coupure $\omega_1$ et $\omega_2$ vérifient $I_m(\omega) = \frac{I_{m,\max}}{\sqrt{2}} \iff Q\left|\frac{\omega}{\omega_0} - \frac{\omega_0}{\omega}\right| = 1$. La largeur de la bande passante vaut :
 $$\Delta\omega = \omega_2 - \omega_1 = \frac{\omega_0}{Q} = \frac{R}{L} \quad \text{soit} \quad Q = \frac{\omega_0}{\Delta\omega} = \frac{f_0}{\Delta f}$$
-Plus le facteur de qualité $Q$ est élevé, plus la résonance est aiguë (sélective)[cite: 16].
+Plus le facteur de qualité $Q$ est élevé, plus la résonance est aiguë (sélective).
 </CriticalFormula>

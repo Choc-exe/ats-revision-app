@@ -7,16 +7,16 @@ chapterId: "02-geometrie-plan-espace"
 ## L'Essentiel du Bulletin Officiel ATS
 
 * **Outils vectoriels en base orthonormale directe** :
-  * **Produit scalaire** : $\vec{u}\cdot\vec{v} = xx' + yy' (+ zz') = \|\vec{u}\|\|\vec{v}\|\cos(\vec{u}, \vec{v})$ ; **$\vec{u} \perp \vec{v} \iff \vec{u}\cdot\vec{v} = 0$**[cite: 80, 82].
-  * **Déterminant 2D** : $[\vec{u}, \vec{v}] = xy' - yx' = \|\vec{u}\|\|\vec{v}\|\sin(\vec{u}, \vec{v})$ ; colinéarité 2D $\iff [\vec{u}, \vec{v}] = 0$[cite: 81].
-  * **Produit vectoriel 3D** : $\vec{u}\wedge\vec{v} = (yz' - zy',\, zx' - xz',\, xy' - yx')^\top$ ; colinéarité 3D $\iff \vec{u}\wedge\vec{v} = \vec{0}$[cite: 82].
-  * **Produit mixte 3D** : $[\vec{u}, \vec{v}, \vec{w}] = (\vec{u}\wedge\vec{v})\cdot\vec{w}$ ; **coplanarité $\iff [\vec{u}, \vec{v}, \vec{w}] = 0$**[cite: 82].
+  * **Produit scalaire** : $\vec{u}\cdot\vec{v} = xx' + yy' (+ zz') = \|\vec{u}\|\|\vec{v}\|\cos(\vec{u}, \vec{v})$ ; **$\vec{u} \perp \vec{v} \iff \vec{u}\cdot\vec{v} = 0$**.
+  * **Déterminant 2D** : $[\vec{u}, \vec{v}] = xy' - yx' = \|\vec{u}\|\|\vec{v}\|\sin(\vec{u}, \vec{v})$ ; colinéarité 2D $\iff [\vec{u}, \vec{v}] = 0$.
+  * **Produit vectoriel 3D** : $\vec{u}\wedge\vec{v} = (yz' - zy',\, zx' - xz',\, xy' - yx')^\top$ ; colinéarité 3D $\iff \vec{u}\wedge\vec{v} = \vec{0}$.
+  * **Produit mixte 3D** : $[\vec{u}, \vec{v}, \vec{w}] = (\vec{u}\wedge\vec{v})\cdot\vec{w}$ ; **coplanarité $\iff [\vec{u}, \vec{v}, \vec{w}] = 0$**.
 * **Droites et Plans (Équations cartésiennes & Paramétriques)** :
-  * **Droite dans le plan (2D)** : $ax + by + c = 0$ (vecteur normal $\vec{n}(a, b)$, directeur $\vec{u}(-b, a)$)[cite: 81].
-  * **Plan dans l'espace (3D)** : **$ax + by + cz + d = 0$** (vecteur normal $\vec{n}(a, b, c)$)[cite: 82]. Pour un plan passant par $A, B, C$ non alignés : **$\vec{n} = \vec{AB}\wedge\vec{AC}$**[cite: 82].
-  * **Droite dans l'espace (3D)** : Représentation paramétrique $M(t) = A + t\vec{u}$, ou système de 2 plans $\mathcal{P}_1 \cap \mathcal{P}_2$ avec vecteur directeur **$\vec{u} = \vec{n}_1 \wedge \vec{n}_2$**[cite: 83].
+  * **Droite dans le plan (2D)** : $ax + by + c = 0$ (vecteur normal $\vec{n}(a, b)$, directeur $\vec{u}(-b, a)$).
+  * **Plan dans l'espace (3D)** : **$ax + by + cz + d = 0$** (vecteur normal $\vec{n}(a, b, c)$). Pour un plan passant par $A, B, C$ non alignés : **$\vec{n} = \vec{AB}\wedge\vec{AC}$**.
+  * **Droite dans l'espace (3D)** : Représentation paramétrique $M(t) = A + t\vec{u}$, ou système de 2 plans $\mathcal{P}_1 \cap \mathcal{P}_2$ avec vecteur directeur **$\vec{u} = \vec{n}_1 \wedge \vec{n}_2$**.
 * **Distances, Cercles et Sphères** :
-  * **Distance point-droite (2D)** : $d(M_0, \mathcal{D}) = \frac{|ax_0 + by_0 + c|}{\sqrt{a^2 + b^2}}$[cite: 81].
-  * **Distance point-plan (3D)** : **$d(M_0, \mathcal{P}) = \frac{|ax_0 + by_0 + cz_0 + d|}{\sqrt{a^2 + b^2 + c^2}}$**[cite: 83].
-  * **Distance point-droite (3D)** : **$d(M_0, \mathcal{D}) = \frac{\|\vec{AM_0}\wedge\vec{u}\|}{\|\vec{u}\|}$**[cite: 83].
-  * **Cercle / Sphère** : $(x-x_0)^2 + (y-y_0)^2 (+ (z-z_0)^2) = R^2$ ; intersection sphère-plan si $d(\Omega, \mathcal{P}) < R$ : cercle de rayon $r = \sqrt{R^2 - d^2}$[cite: 81, 83].
+  * **Distance point-droite (2D)** : $d(M_0, \mathcal{D}) = \frac{|ax_0 + by_0 + c|}{\sqrt{a^2 + b^2}}$.
+  * **Distance point-plan (3D)** : **$d(M_0, \mathcal{P}) = \frac{|ax_0 + by_0 + cz_0 + d|}{\sqrt{a^2 + b^2 + c^2}}$**.
+  * **Distance point-droite (3D)** : **$d(M_0, \mathcal{D}) = \frac{\|\vec{AM_0}\wedge\vec{u}\|}{\|\vec{u}\|}$**.
+  * **Cercle / Sphère** : $(x-x_0)^2 + (y-y_0)^2 (+ (z-z_0)^2) = R^2$ ; intersection sphère-plan si $d(\Omega, \mathcal{P}) < R$ : cercle de rayon $r = \sqrt{R^2 - d^2}$.

@@ -8,77 +8,77 @@ description: "Câble coaxial et équation de d'Alembert, ondes progressives et s
 
 # Ondes : propagation et aspects énergétiques
 
-Ce chapitre établit l'équation d'onde de d'Alembert à partir de la modélisation d'un câble coaxial, étudie les ondes progressives et stationnaires, puis analyse la structure et le transport d'énergie des ondes électromagnétiques dans le vide à partir des équations de Maxwell[cite: 24].
+Ce chapitre établit l'équation d'onde de d'Alembert à partir de la modélisation d'un câble coaxial, étudie les ondes progressives et stationnaires, puis analyse la structure et le transport d'énergie des ondes électromagnétiques dans le vide à partir des équations de Maxwell.
 
 ---
 
 ## 1. Propagation unidimensionnelle d'un signal
 
 ### Équation de d'Alembert dans un câble coaxial sans pertes (Seule démonstration exigible)
-Un câble coaxial sans pertes dirigé selon $(Ox)$ est modélisé comme un milieu continu caractérisé par une **inductance linéique $\Lambda$** (en $\text{H}\cdot\text{m}^{-1}$) et une **capacité linéique $\Gamma$** (en $\text{F}\cdot\text{m}^{-1}$)[cite: 24, 25]. Sur un tronçon élémentaire $[x, x+\mathrm{d}x]$ contenant une bobine $\Lambda\,\mathrm{d}x$ en série et un condensateur $\Gamma\,\mathrm{d}x$ en dérivation[cite: 24, 25] :
-1. **Loi des mailles** : $u(x, t) - u(x+\mathrm{d}x, t) = \Lambda\,\mathrm{d}x\,\frac{\partial i}{\partial t} \implies \frac{\partial u}{\partial x} = -\Lambda\,\frac{\partial i}{\partial t}$[cite: 24, 25].
-2. **Loi des nœuds** : $i(x, t) - i(x+\mathrm{d}x, t) = \Gamma\,\mathrm{d}x\,\frac{\partial u}{\partial t} \implies \frac{\partial i}{\partial x} = -\Gamma\,\frac{\partial u}{\partial t}$[cite: 24, 25].
+Un câble coaxial sans pertes dirigé selon $(Ox)$ est modélisé comme un milieu continu caractérisé par une **inductance linéique $\Lambda$** (en $\text{H}\cdot\text{m}^{-1}$) et une **capacité linéique $\Gamma$** (en $\text{F}\cdot\text{m}^{-1}$). Sur un tronçon élémentaire $[x, x+\mathrm{d}x]$ contenant une bobine $\Lambda\,\mathrm{d}x$ en série et un condensateur $\Gamma\,\mathrm{d}x$ en dérivation :
+1. **Loi des mailles** : $u(x, t) - u(x+\mathrm{d}x, t) = \Lambda\,\mathrm{d}x\,\frac{\partial i}{\partial t} \implies \frac{\partial u}{\partial x} = -\Lambda\,\frac{\partial i}{\partial t}$.
+2. **Loi des nœuds** : $i(x, t) - i(x+\mathrm{d}x, t) = \Gamma\,\mathrm{d}x\,\frac{\partial u}{\partial t} \implies \frac{\partial i}{\partial x} = -\Gamma\,\frac{\partial u}{\partial t}$.
 
-En dérivant la première équation par rapport à $x$ et la seconde par rapport à $t$ (théorème de Schwarz), on obtient l'**équation de d'Alembert unidimensionnelle** (vérifiée à la fois par $u(x,t)$ et $i(x,t)$)[cite: 24, 25, 110] :
+En dérivant la première équation par rapport à $x$ et la seconde par rapport à $t$ (théorème de Schwarz), on obtient l'**équation de d'Alembert unidimensionnelle** (vérifiée à la fois par $u(x,t)$ et $i(x,t)$) :
 
 <CriticalFormula title="Équation de d'Alembert 1D et Célérités (Câble coaxial et Corde vibrante)">
 $$\frac{\partial^2 u}{\partial x^2} - \frac{1}{c^2}\frac{\partial^2 u}{\partial t^2} = 0 \quad \text{avec} \quad c = \frac{1}{\sqrt{\Lambda\,\Gamma}} \quad (\text{câble coaxial sans pertes})$$
-Pour les petits mouvements transversaux $y(x,t)$ d'une corde tendue sous la tension $T_0$ et de masse linéique $\mu$ (équation fournie), l'identification donne la célérité **$c = \sqrt{\frac{T_0}{\mu}}$**[cite: 25].
+Pour les petits mouvements transversaux $y(x,t)$ d'une corde tendue sous la tension $T_0$ et de masse linéique $\mu$ (équation fournie), l'identification donne la célérité **$c = \sqrt{\frac{T_0}{\mu}}$**.
 </CriticalFormula>
 
 ### Solutions progressives et Ondes progressives sinusoïdales
-* **Forme générale des solutions de d'Alembert** : Toute solution s'écrit comme la superposition d'une onde progressive se propageant dans le sens des $x$ croissants à la célérité $c$ et d'une onde se propageant dans le sens des $x$ décroissants[cite: 25, 28] :
+* **Forme générale des solutions de d'Alembert** : Toute solution s'écrit comme la superposition d'une onde progressive se propageant dans le sens des $x$ croissants à la célérité $c$ et d'une onde se propageant dans le sens des $x$ décroissants :
 $$s(x, t) = f(x - c\,t) + g(x + c\,t) = F\!\left(t - \frac{x}{c}\right) + G\!\left(t + \frac{x}{c}\right)$$
-Pour une onde progressive $F(t - x/c)$ seule, le signal observé en $x_2 > x_1$ reproduit à l'identique celui de $x_1$ avec un **retard temporel** $\tau = \frac{x_2 - x_1}{c}$[cite: 25].
-* **Onde progressive sinusoïdale (OPPH)** : S'écrit $s(x,t) = A\cos(\omega t - kx + \varphi_0)$ et présente une **double périodicité**[cite: 25] :
-  * **Périodicité temporelle $T = \frac{1}{f} = \frac{2\pi}{\omega}$** (à position $x$ fixée)[cite: 25].
-  * **Périodicité spatiale ou longueur d'onde $\lambda = \frac{2\pi}{k}$** (à instant $t$ fixé), reliée à la célérité et à la fréquence par la relation fondamentale[cite: 25] :
+Pour une onde progressive $F(t - x/c)$ seule, le signal observé en $x_2 > x_1$ reproduit à l'identique celui de $x_1$ avec un **retard temporel** $\tau = \frac{x_2 - x_1}{c}$.
+* **Onde progressive sinusoïdale (OPPH)** : S'écrit $s(x,t) = A\cos(\omega t - kx + \varphi_0)$ et présente une **double périodicité** :
+  * **Périodicité temporelle $T = \frac{1}{f} = \frac{2\pi}{\omega}$** (à position $x$ fixée).
+  * **Périodicité spatiale ou longueur d'onde $\lambda = \frac{2\pi}{k}$** (à instant $t$ fixé), reliée à la célérité et à la fréquence par la relation fondamentale :
 $$\lambda = c\,T = \frac{c}{f} \quad \Longleftrightarrow \quad \omega = c\,k$$
 
 ### Ondes stationnaires : Nœuds et Ventres
-La superposition de deux ondes progressives sinusoïdales de **même fréquence**, de **même amplitude $A$** et se propageant en **sens opposés** donne une **onde stationnaire** où les variables d'espace et de temps sont découplées[cite: 25] :
+La superposition de deux ondes progressives sinusoïdales de **même fréquence**, de **même amplitude $A$** et se propageant en **sens opposés** donne une **onde stationnaire** où les variables d'espace et de temps sont découplées :
 $$s(x, t) = A\cos(\omega t - kx) + A\cos(\omega t + kx) = 2A\cos(kx)\,\cos(\omega t)$$
 * **Nœuds de vibration** : Points d'amplitude constamment nulle ($\cos(kx_N) = 0 \iff kx_N = \frac{\pi}{2} + p\pi$).
 * **Ventres de vibration** : Points d'amplitude maximale $2A$ ($|\cos(kx_V)| = 1 \iff kx_V = p\pi$).
-* La distance entre **deux nœuds consécutifs** (ou entre **deux ventres consécutifs**) est toujours égale à **$\frac{\lambda}{2}$** (et la distance entre un nœud et le ventre voisin vaut $\frac{\lambda}{4}$)[cite: 25].
+* La distance entre **deux nœuds consécutifs** (ou entre **deux ventres consécutifs**) est toujours égale à **$\frac{\lambda}{2}$** (et la distance entre un nœud et le ventre voisin vaut $\frac{\lambda}{4}$).
 
 ---
 
 ## 2. Équations de Maxwell et Ondes électromagnétiques dans le vide
 
 ### Force de Lorentz et Équations locales de Maxwell
-Le champ électromagnétique $(\vec{E}, \vec{B})$ est défini par la **force de Lorentz** exercée sur une particule de charge $q$ animée d'une vitesse $\vec{v}$ : **$\vec{F} = q\,(\vec{E} + \vec{v}\wedge\vec{B})$**[cite: 24, 25].
+Le champ électromagnétique $(\vec{E}, \vec{B})$ est défini par la **force de Lorentz** exercée sur une particule de charge $q$ animée d'une vitesse $\vec{v}$ : **$\vec{F} = q\,(\vec{E} + \vec{v}\wedge\vec{B})$**.
 
-Dans le vide, l'évolution locale des champs est régie par les quatre **équations de Maxwell** (fournies aux concours)[cite: 24, 25] :
+Dans le vide, l'évolution locale des champs est régie par les quatre **équations de Maxwell** (fournies aux concours) :
 
 | Équation de Maxwell | Avec charges ($\rho$) et courants ($\vec{j}$) | Dans le vide sans source ($\rho = 0, \vec{j} = \vec{0}$) |
 | :--- | :--- | :--- |
-| **Maxwell-Gauss** (couplage $\vec{E} \leftrightarrow \rho$) | $\text{div}(\vec{E}) = \frac{\rho}{\varepsilon_0}$[cite: 25] | $\text{div}(\vec{E}) = 0$[cite: 25] |
-| **Maxwell-Flux** (conservation du flux de $\vec{B}$) | $\text{div}(\vec{B}) = 0$[cite: 25] | $\text{div}(\vec{B}) = 0$[cite: 25] |
-| **Maxwell-Faraday** (couplage $\vec{E} \leftrightarrow \vec{B}$) | $\overrightarrow{\text{rot}}(\vec{E}) = -\frac{\partial \vec{B}}{\partial t}$[cite: 25] | $\overrightarrow{\text{rot}}(\vec{E}) = -\frac{\partial \vec{B}}{\partial t}$[cite: 25] |
-| **Maxwell-Ampère** (couplage $\vec{B} \leftrightarrow \vec{j}, \vec{E}$) | $\overrightarrow{\text{rot}}(\vec{B}) = \mu_0\,\vec{j} + \mu_0\varepsilon_0\frac{\partial \vec{E}}{\partial t}$[cite: 25] | $\overrightarrow{\text{rot}}(\vec{B}) = \mu_0\varepsilon_0\frac{\partial \vec{E}}{\partial t}$[cite: 25] |
+| **Maxwell-Gauss** (couplage $\vec{E} \leftrightarrow \rho$) | $\text{div}(\vec{E}) = \frac{\rho}{\varepsilon_0}$ | $\text{div}(\vec{E}) = 0$ |
+| **Maxwell-Flux** (conservation du flux de $\vec{B}$) | $\text{div}(\vec{B}) = 0$ | $\text{div}(\vec{B}) = 0$ |
+| **Maxwell-Faraday** (couplage $\vec{E} \leftrightarrow \vec{B}$) | $\overrightarrow{\text{rot}}(\vec{E}) = -\frac{\partial \vec{B}}{\partial t}$ | $\overrightarrow{\text{rot}}(\vec{E}) = -\frac{\partial \vec{B}}{\partial t}$ |
+| **Maxwell-Ampère** (couplage $\vec{B} \leftrightarrow \vec{j}, \vec{E}$) | $\overrightarrow{\text{rot}}(\vec{B}) = \mu_0\,\vec{j} + \mu_0\varepsilon_0\frac{\partial \vec{E}}{\partial t}$ | $\overrightarrow{\text{rot}}(\vec{B}) = \mu_0\varepsilon_0\frac{\partial \vec{E}}{\partial t}$ |
 
-Dans une zone de l'espace vide de charge et de courant, le couplage entre les dérivées spatiales et temporelles de $\vec{E}$ et $\vec{B}$ (via Maxwell-Faraday et Maxwell-Ampère) conduit pour une onde plane dépendant de $x$ et $t$ à l'équation de d'Alembert 1D : $\frac{\partial^2 \vec{E}}{\partial x^2} - \mu_0\varepsilon_0\frac{\partial^2 \vec{E}}{\partial t^2} = \vec{0}$[cite: 25].
-* **Célérité de la lumière dans le vide** : **$c = \frac{1}{\sqrt{\varepsilon_0\,\mu_0}} \approx 3{,}00 \times 10^8\text{ m}\cdot\text{s}^{-1}$**[cite: 25].
-* **Relation de dispersion dans le vide** : En injectant une solution harmonique en $\cos(\omega t - kx)$, on obtient $\left(-k^2 + \frac{\omega^2}{c^2}\right)\vec{E} = \vec{0} \implies$ **$k = \frac{\omega}{c}$** (le vide est un milieu non dispersif)[cite: 25].
+Dans une zone de l'espace vide de charge et de courant, le couplage entre les dérivées spatiales et temporelles de $\vec{E}$ et $\vec{B}$ (via Maxwell-Faraday et Maxwell-Ampère) conduit pour une onde plane dépendant de $x$ et $t$ à l'équation de d'Alembert 1D : $\frac{\partial^2 \vec{E}}{\partial x^2} - \mu_0\varepsilon_0\frac{\partial^2 \vec{E}}{\partial t^2} = \vec{0}$.
+* **Célérité de la lumière dans le vide** : **$c = \frac{1}{\sqrt{\varepsilon_0\,\mu_0}} \approx 3{,}00 \times 10^8\text{ m}\cdot\text{s}^{-1}$**.
+* **Relation de dispersion dans le vide** : En injectant une solution harmonique en $\cos(\omega t - kx)$, on obtient $\left(-k^2 + \frac{\omega^2}{c^2}\right)\vec{E} = \vec{0} \implies$ **$k = \frac{\omega}{c}$** (le vide est un milieu non dispersif).
 
 ---
 
 ## 3. Structure d'une OPPM polarisée rectilignement
 
-Considérons une **Onde Électromagnétique Plane Progressive Monochromatique (OPPM)** se propageant dans le vide selon la direction de son **vecteur d'onde** $\vec{k} = k\,\vec{u}_x$ (avec $k = \frac{2\pi}{\lambda} = \frac{\omega}{c}$), **polarisée rectilignement** selon $(Oy)$ (direction du champ électrique)[cite: 25, 26] :
+Considérons une **Onde Électromagnétique Plane Progressive Monochromatique (OPPM)** se propageant dans le vide selon la direction de son **vecteur d'onde** $\vec{k} = k\,\vec{u}_x$ (avec $k = \frac{2\pi}{\lambda} = \frac{\omega}{c}$), **polarisée rectilignement** selon $(Oy)$ (direction du champ électrique) :
 $$\vec{E}(x, t) = E_0\cos(\omega t - kx)\,\vec{u}_y$$
 
 <SchemaPlaceholder alt="Représentation spatiale d'une onde électromagnétique plane progressive polarisée rectilignement montrant le trièdre direct (k, E, B)" caption="Figure 7.1 : Structure transverse d'une OPPM polarisée rectilignement : le trièdre (k, E, B) est orthogonal et direct." src="/images/physique-chimie/structure-oppm-triedre.png"/>
 
 <CriticalFormula title="Caractère transverse et Relation de structure d'une OPPM">
-1. **Caractère transverse des champs** : Pour une onde plane ne dépendant que de $x$ et $t$, les équations $\text{div}(\vec{E}) = \frac{\partial E_x}{\partial x} = 0$ et $\text{div}(\vec{B}) = \frac{\partial B_x}{\partial x} = 0$ imposent $E_x = 0$ et $B_x = 0$ (pour la partie variable) : **les champs $\vec{E}$ et $\vec{B}$ sont tous deux orthogonaux à la direction de propagation $\vec{k}$**[cite: 26].
-2. **Relation de structure** : L'équation de Maxwell-Faraday $\overrightarrow{\text{rot}}(\vec{E}) = -\frac{\partial \vec{B}}{\partial t}$ donne $\frac{\partial E_y}{\partial x}\,\vec{u}_z = -\frac{\partial \vec{B}}{\partial t}$, soit après intégration temporelle avec $\frac{\omega}{k} = c$[cite: 26] :
+1. **Caractère transverse des champs** : Pour une onde plane ne dépendant que de $x$ et $t$, les équations $\text{div}(\vec{E}) = \frac{\partial E_x}{\partial x} = 0$ et $\text{div}(\vec{B}) = \frac{\partial B_x}{\partial x} = 0$ imposent $E_x = 0$ et $B_x = 0$ (pour la partie variable) : **les champs $\vec{E}$ et $\vec{B}$ sont tous deux orthogonaux à la direction de propagation $\vec{k}$**.
+2. **Relation de structure** : L'équation de Maxwell-Faraday $\overrightarrow{\text{rot}}(\vec{E}) = -\frac{\partial \vec{B}}{\partial t}$ donne $\frac{\partial E_y}{\partial x}\,\vec{u}_z = -\frac{\partial \vec{B}}{\partial t}$, soit après intégration temporelle avec $\frac{\omega}{k} = c$ :
 $$\vec{B} = \frac{\vec{u}_x \wedge \vec{E}}{c} = \frac{\vec{k} \wedge \vec{E}}{\omega} \quad \implies \quad \vec{B}(x,t) = \frac{E_0}{c}\cos(\omega t - kx)\,\vec{u}_z$$
-En tout point et à tout instant, le trièdre $(\vec{k}, \vec{E}, \vec{B})$ est **orthogonal direct**, $\vec{E}$ et $\vec{B}$ sont en phase, et leurs normes vérifient **$E = c\,B$**[cite: 26].
+En tout point et à tout instant, le trièdre $(\vec{k}, \vec{E}, \vec{B})$ est **orthogonal direct**, $\vec{E}$ et $\vec{B}$ sont en phase, et leurs normes vérifient **$E = c\,B$**.
 </CriticalFormula>
 
-* **Domaines du spectre électromagnétique (ordres de grandeur à connaître)**[cite: 26] :
+* **Domaines du spectre électromagnétique (ordres de grandeur à connaître)** :
   * **Ondes radio / micro-ondes** : $\lambda > 1\text{ mm}$ ($f < 300\text{ GHz}$).
   * **Infrarouge (IR)** : $750\text{ nm} < \lambda < 1\text{ mm}$ (rayonnement thermique ambiant autour de $10\,\mu\text{m}$).
   * **Visible** : **$400\text{ nm}$ (violet) $< \lambda < 750\text{ nm}$ (rouge)** ($f \sim 4 \times 10^{14}$ à $7{,}5 \times 10^{14}\text{ Hz}$).
@@ -90,19 +90,19 @@ En tout point et à tout instant, le trièdre $(\vec{k}, \vec{E}, \vec{B})$ est 
 ## 4. Aspect énergétique : Vecteur de Poynting et Photovoltaïque
 
 ### Vecteur de Poynting et Équation locale de conservation
-La densité volumique d'énergie électromagnétique dans le vide est la somme des densités électrique et magnétique : $w_{\text{em}} = \frac{1}{2}\varepsilon_0 E^2 + \frac{B^2}{2\mu_0}$ (pour une OPPM où $E = cB$ et $\varepsilon_0\mu_0 c^2 = 1$, il y a **équipartition** : $w_e = w_m$ et $w_{\text{em}} = \varepsilon_0 E^2$)[cite: 26].
+La densité volumique d'énergie électromagnétique dans le vide est la somme des densités électrique et magnétique : $w_{\text{em}} = \frac{1}{2}\varepsilon_0 E^2 + \frac{B^2}{2\mu_0}$ (pour une OPPM où $E = cB$ et $\varepsilon_0\mu_0 c^2 = 1$, il y a **équipartition** : $w_e = w_m$ et $w_{\text{em}} = \varepsilon_0 E^2$).
 
 <CriticalFormula title="Vecteur de Poynting, Bilan local et Puissance surfacique moyenne">
-* **Vecteur de Poynting $\vec{\Pi}$** (en $\text{W}\cdot\text{m}^{-2}$, analogue à $\vec{j}_{\text{th}}$ ou $\vec{j}$) : Son flux à travers une surface $S$ donne la puissance électromagnétique rayonnée $\mathcal{P}_{\text{ray}} = \iint_S \vec{\Pi}\cdot\mathrm{d}\vec{S}$, et sa direction indique la direction de propagation de l'énergie[cite: 26] :
+* **Vecteur de Poynting $\vec{\Pi}$** (en $\text{W}\cdot\text{m}^{-2}$, analogue à $\vec{j}_{\text{th}}$ ou $\vec{j}$) : Son flux à travers une surface $S$ donne la puissance électromagnétique rayonnée $\mathcal{P}_{\text{ray}} = \iint_S \vec{\Pi}\cdot\mathrm{d}\vec{S}$, et sa direction indique la direction de propagation de l'énergie :
 $$\vec{\Pi} = \frac{\vec{E} \wedge \vec{B}}{\mu_0}$$
-* **Équation locale de Poynting (dans le vide sans charge ni courant)** : Par analogie avec la conservation de la masse ou de la charge, la conservation de l'énergie électromagnétique s'écrit[cite: 26] :
+* **Équation locale de Poynting (dans le vide sans charge ni courant)** : Par analogie avec la conservation de la masse ou de la charge, la conservation de l'énergie électromagnétique s'écrit :
 $$\frac{\partial w_{\text{em}}}{\partial t} + \text{div}(\vec{\Pi}) = 0 \quad \left(\text{soit en 1D : } \frac{\partial w_{\text{em}}}{\partial t} + \frac{\partial \Pi_x}{\partial x} = 0\right)$$
-* **Puissance surfacique moyenne d'une OPPM** : Pour $\vec{E} = E_0\cos(\omega t - kx)\vec{u}_y$, on a $\vec{\Pi} = \frac{E_0^2}{\mu_0 c}\cos^2(\omega t - kx)\vec{u}_x = \varepsilon_0 c E_0^2\cos^2(\omega t - kx)\vec{u}_x$. Comme $\langle \cos^2 \rangle = \frac{1}{2}$[cite: 26, 27] :
+* **Puissance surfacique moyenne d'une OPPM** : Pour $\vec{E} = E_0\cos(\omega t - kx)\vec{u}_y$, on a $\vec{\Pi} = \frac{E_0^2}{\mu_0 c}\cos^2(\omega t - kx)\vec{u}_x = \varepsilon_0 c E_0^2\cos^2(\omega t - kx)\vec{u}_x$. Comme $\langle \cos^2 \rangle = \frac{1}{2}$ :
 $$\langle \Pi \rangle = \frac{1}{2}\,\varepsilon_0\,c\,E_0^2 = \frac{E_0^2}{2\,\mu_0\,c}$$
-*(Ordres de grandeur : flux solaire sur Terre $\approx 1\,000\text{ W}\cdot\text{m}^{-2}$ ; faisceau laser Hélium-Néon de $1\text{ mW}$ sur $1\text{ mm}^2$ $\approx 1\,000\text{ W}\cdot\text{m}^{-2}$)*[cite: 26].
+*(Ordres de grandeur : flux solaire sur Terre $\approx 1\,000\text{ W}\cdot\text{m}^{-2}$ ; faisceau laser Hélium-Néon de $1\text{ mW}$ sur $1\text{ mm}^2$ $\approx 1\,000\text{ W}\cdot\text{m}^{-2}$)*.
 </CriticalFormula>
 
 ### Conversion photovoltaïque
-* **Effet photovoltaïque** : Dans une jonction semi-conductrice éclairée, l'absorption de photons d'énergie suffisante crée des paires électron-trou qui sont séparées par le champ électrique interne de la jonction, générant un courant électrique continu : l'énergie électromagnétique est directement convertie en énergie électrique[cite: 26].
-* **Point de puissance maximale (MPP) et Rendement** : Sur la caractéristique courant-tension $I = f(U)$ d'une cellule photovoltaïque éclairée (en convention générateur, entre la tension à vide $U_{\text{co}}$ et le courant de court-circuit $I_{\text{cc}}$), la puissance électrique fournie est $P_{\text{élec}}(U) = U \cdot I(U)$[cite: 26]. Elle passe par un maximum **$P_{\max} = U_m\,I_m$** au point de fonctionnement optimal $(U_m, I_m)$[cite: 26]. Si la cellule de surface utile $S$ reçoit une puissance surfacique lumineuse $\varphi_{\text{inc}}$, son **rendement de conversion maximal** vaut[cite: 26] :
+* **Effet photovoltaïque** : Dans une jonction semi-conductrice éclairée, l'absorption de photons d'énergie suffisante crée des paires électron-trou qui sont séparées par le champ électrique interne de la jonction, générant un courant électrique continu : l'énergie électromagnétique est directement convertie en énergie électrique.
+* **Point de puissance maximale (MPP) et Rendement** : Sur la caractéristique courant-tension $I = f(U)$ d'une cellule photovoltaïque éclairée (en convention générateur, entre la tension à vide $U_{\text{co}}$ et le courant de court-circuit $I_{\text{cc}}$), la puissance électrique fournie est $P_{\text{élec}}(U) = U \cdot I(U)$. Elle passe par un maximum **$P_{\max} = U_m\,I_m$** au point de fonctionnement optimal $(U_m, I_m)$. Si la cellule de surface utile $S$ reçoit une puissance surfacique lumineuse $\varphi_{\text{inc}}$, son **rendement de conversion maximal** vaut :
 $$\eta_{\max} = \frac{P_{\max}}{\mathcal{P}_{\text{reçue}}} = \frac{U_m\,I_m}{\varphi_{\text{inc}}\,S}$$

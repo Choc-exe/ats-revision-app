@@ -8,37 +8,37 @@ description: "Thermodynamique macroscopique, premier et second principes, gaz pa
 
 # Énergie - conversion et transferts
 
-Ce thème propose une approche macroscopique des principes de la thermodynamique et de leurs applications industrielles dans les machines thermiques (moteurs, pompes à chaleur, machines frigorifiques)[cite: 10]. Les systèmes réels sont modélisés par des **gaz parfaits idéaux** ou des **phases condensées incompressibles et indilatables**[cite: 10].
+Ce thème propose une approche macroscopique des principes de la thermodynamique et de leurs applications industrielles dans les machines thermiques (moteurs, pompes à chaleur, machines frigorifiques). Les systèmes réels sont modélisés par des **gaz parfaits idéaux** ou des **phases condensées incompressibles et indilatables**.
 
 ---
 
 ## 1. Systèmes thermodynamiques et états de la matière
 
 ### Paramètres d'état et équation d'un gaz parfait
-Un **système thermodynamique** est une portion de l'espace délimitée par une frontière (fermée si aucun échange de matière n'a lieu avec l'extérieur, ou ouverte dans le cas contraire)[cite: 10]. L'état d'équilibre thermodynamique est caractérisé par des **paramètres d'état** macroscopiques intensifs (pression $P$, température $T$) et extensifs (volume $V$, nombre de moles $n$)[cite: 10, 11].
+Un **système thermodynamique** est une portion de l'espace délimitée par une frontière (fermée si aucun échange de matière n'a lieu avec l'extérieur, ou ouverte dans le cas contraire). L'état d'équilibre thermodynamique est caractérisé par des **paramètres d'état** macroscopiques intensifs (pression $P$, température $T$) et extensifs (volume $V$, nombre de moles $n$).
 
 <CriticalFormula title="Modèle du gaz parfait">
-Dans le modèle du gaz parfait, l'équation d'état reliant les variables macroscopiques s'écrit[cite: 11] :
+Dans le modèle du gaz parfait, l'équation d'état reliant les variables macroscopiques s'écrit :
 $$P\,V = n\,R\,T \quad \text{ou} \quad P = \rho\,r\,T$$
 où $R = 8{,}314\text{ J}\cdot\text{mol}^{-1}\cdot\text{K}^{-1}$ est la constante universelle des gaz parfaits et $r = \frac{R}{M}$ la constante massique.
 </CriticalFormula>
 
-Pour une **phase condensée (liquide ou solide)**, le modèle de la phase incompressible et indilatable pose que le volume $V$ (ou le volume molaire $v$) est rigoureusement constant, indépendant de $P$ et de $T$[cite: 11].
+Pour une **phase condensée (liquide ou solide)**, le modèle de la phase incompressible et indilatable pose que le volume $V$ (ou le volume molaire $v$) est rigoureusement constant, indépendant de $P$ et de $T$.
 
 ---
 
 ## 2. Premier principe de la thermodynamique et Énergie interne
 
 ### Énergie interne et premier principe en système fermé
-L'**énergie interne $U$** d'un système est une fonction d'état extensive dont la variation au cours d'une transformation entre un état initial et un état final ne dépend pas du chemin suivi[cite: 11, 12, 61].
+L'**énergie interne $U$** d'un système est une fonction d'état extensive dont la variation au cours d'une transformation entre un état initial et un état final ne dépend pas du chemin suivi.
 
 <CriticalFormula title="Premier principe de la thermodynamique (Système fermé)">
-Le premier principe est un principe de conservation de l'énergie. Pour une transformation fermée menant d'un état 1 à un état 2, la variation d'énergie interne est égale à la somme de l'énergie reçue sous forme de travail $W$ et de transfert thermique $Q$[cite: 12, 62] :
+Le premier principe est un principe de conservation de l'énergie. Pour une transformation fermée menant d'un état 1 à un état 2, la variation d'énergie interne est égale à la somme de l'énergie reçue sous forme de travail $W$ et de transfert thermique $Q$ :
 $$\Delta U = U_2 - U_1 = W + Q$$
 </CriticalFormula>
 
-* **Travail des forces de pression** : Au cours d'une transformation mécaniquement réversible (où la pression du système reste à chaque instant égale à la pression extérieure $P_{\text{ext}}$), le travail élémentaire reçu s'exprime par $\delta W = -P_{\text{ext}}\,\mathrm{d}V$[cite: 11, 12]. Dans un **diagramme de Watt $(P,V)$**, le travail reçu lors d'un cycle ou d'une transformation correspond à l'opposé de l'aire sous la courbe[cite: 11].
-* **Capacités thermiques** : Pour un gaz parfait ou une phase condensée inconstante, la variation d'énergie interne élémentaire s'exprime à l'aide de la capacité thermique à volume constant $C_v$[cite: 12] :
+* **Travail des forces de pression** : Au cours d'une transformation mécaniquement réversible (où la pression du système reste à chaque instant égale à la pression extérieure $P_{\text{ext}}$), le travail élémentaire reçu s'exprime par $\delta W = -P_{\text{ext}}\,\mathrm{d}V$. Dans un **diagramme de Watt $(P,V)$**, le travail reçu lors d'un cycle ou d'une transformation correspond à l'opposé de l'aire sous la courbe.
+* **Capacités thermiques** : Pour un gaz parfait ou une phase condensée inconstante, la variation d'énergie interne élémentaire s'exprime à l'aide de la capacité thermique à volume constant $C_v$ :
 $$\mathrm{d}U = C_v\,\mathrm{d}T$$
 
 ---
@@ -46,50 +46,50 @@ $$\mathrm{d}U = C_v\,\mathrm{d}T$$
 ## 3. Bilan enthalpique et Changements d'état
 
 ### Enthalpie $H$ et transformations monobares
-Pour simplifier l'analyse des transformations se déroulant à pression extérieure constante (dites **monobares**), on introduit la fonction d'état **enthalpie $H$** définie par[cite: 11, 12, 62] :
+Pour simplifier l'analyse des transformations se déroulant à pression extérieure constante (dites **monobares**), on introduit la fonction d'état **enthalpie $H$** définie par :
 $$H = U + P\,V$$
 
 <CriticalFormula title="Premier principe sous forme enthalpique (Transformation monobare)">
-Au cours d'une transformation monobare (avec $P_{\text{ext}} = P_2 = P_1$ constant), la variation d'enthalpie est exactement égale au transfert thermique reçu par le système[cite: 12, 62] :
+Au cours d'une transformation monobare (avec $P_{\text{ext}} = P_2 = P_1$ constant), la variation d'enthalpie est exactement égale au transfert thermique reçu par le système :
 $$\Delta H = Q_{\text{monobare}}$$
-La variation élémentaire s'exprime à l'aide de la capacité thermique à pression constante $C_p$ : $\mathrm{d}H = C_p\,\mathrm{d}T$. Pour un gaz parfait, la relation de Mayer relie les capacités molaires : $C_{p,\text{m}} - C_{v,\text{m}} = R$[cite: 14, 62].
+La variation élémentaire s'exprime à l'aide de la capacité thermique à pression constante $C_p$ : $\mathrm{d}H = C_p\,\mathrm{d}T$. Pour un gaz parfait, la relation de Mayer relie les capacités molaires : $C_{p,\text{m}} - C_{v,\text{m}} = R$.
 </CriticalFormula>
 
 ### Changements d'état d'un corps pur
-Lors d'un changement d'état à pression constante (fusion, vaporisation, sublimation), la température du corps pur reste constante (palier de température)[cite: 12]. Le transfert thermique reçu s'exprime par[cite: 12] :
+Lors d'un changement d'état à pression constante (fusion, vaporisation, sublimation), la température du corps pur reste constante (palier de température). Le transfert thermique reçu s'exprime par :
 $$Q = m\,\ell \quad \text{ou} \quad Q = n\,L$$
-où $\ell$ (resp. $L$) désigne l'enthalpie massique (resp. molaire) de changement d'état[cite: 12]. 
+où $\ell$ (resp. $L$) désigne l'enthalpie massique (resp. molaire) de changement d'état. 
 
-Dans le diagramme de Clapeyron $(P,v)$ d'un corps pur diphasé liquide-vapeur, la courbe délimitant la zone diphasée comprend la **courbe de liquide saturé (courbe de rosée/d'ébullition)** et le **point critique**[cite: 12]. Le **théorème des moments** permet de déterminer la composition massique (titre en vapeur $x_v$) d'un mélange diphasé[cite: 12, 62].
+Dans le diagramme de Clapeyron $(P,v)$ d'un corps pur diphasé liquide-vapeur, la courbe délimitant la zone diphasée comprend la **courbe de liquide saturé (courbe de rosée/d'ébullition)** et le **point critique**. Le **théorème des moments** permet de déterminer la composition massique (titre en vapeur $x_v$) d'un mélange diphasé.
 
 ---
 
 ## 4. Second principe de la thermodynamique et Entropie
 
 ### Fonction entropie et irréversibilité
-L'**entropie $S$** est une fonction d'état extensive qui traduit le caractère orienté et irréversible des phénomènes physiques[cite: 12, 13].
+L'**entropie $S$** est une fonction d'état extensive qui traduit le caractère orienté et irréversible des phénomènes physiques.
 
 <CriticalFormula title="Second principe de la thermodynamique et Entropie créée">
-Pour toute transformation thermodynamique, la variation d'entropie $\Delta S$ du système se décompose en une entropie échangée $S_{\text{ech}}$ avec l'extérieur et une **entropie créée $S_{\text{cre}}$** (due aux irréversibilités internes comme les frottements ou les transferts thermiques avec gradient de température)[cite: 13, 14] :
+Pour toute transformation thermodynamique, la variation d'entropie $\Delta S$ du système se décompose en une entropie échangée $S_{\text{ech}}$ avec l'extérieur et une **entropie créée $S_{\text{cre}}$** (due aux irréversibilités internes comme les frottements ou les transferts thermiques avec gradient de température) :
 $$\Delta S = S_{\text{ech}} + S_{\text{cre}} \quad \text{avec} \quad S_{\text{cre}} \ge 0$$
 * Transformation **réversible** (idéale) : $S_{\text{cre}} = 0$ et $\Delta S = S_{\text{ech}}$.
 * Transformation **irréversible** (réelle) : $S_{\text{cre}} > 0$ et $\Delta S > S_{\text{ech}}$.
 </CriticalFormula>
 
-Si le système échange de la chaleur avec un thermostat unique de température constante $T_0$, l'entropie échangée vaut $S_{\text{ech}} = \frac{Q}{T_0}$[cite: 13]. Pour un gaz parfait subissant une transformation adiabatique et réversible (isentropique, $S_{\text{cre}} = 0$), les **lois de Laplace** s'appliquent[cite: 13, 14] :
+Si le système échange de la chaleur avec un thermostat unique de température constante $T_0$, l'entropie échangée vaut $S_{\text{ech}} = \frac{Q}{T_0}$. Pour un gaz parfait subissant une transformation adiabatique et réversible (isentropique, $S_{\text{cre}} = 0$), les **lois de Laplace** s'appliquent :
 $$P^{1-\gamma}T^\gamma = \text{cte} \quad ; \quad P\,V^\gamma = \text{cte} \quad ; \quad T\,V^{\gamma-1} = \text{cte}$$
-où $\gamma = \frac{C_p}{C_v}$ est le coefficient isentropique[cite: 13, 14].
+où $\gamma = \frac{C_p}{C_v}$ est le coefficient isentropique.
 
 ---
 
 ## 5. Machines cycliques dithermes et Théorème de Carnot
 
-Une machine cyclique ditherme évolue entre deux thermostats de températures extrêmes $T_C$ (chaud) et $T_F$ (froid), en échangeant des transferts thermiques $Q_C$ et $Q_F$ et un travail global $W$[cite: 13, 14].
+Une machine cyclique ditherme évolue entre deux thermostats de températures extrêmes $T_C$ (chaud) et $T_F$ (froid), en échangeant des transferts thermiques $Q_C$ et $Q_F$ et un travail global $W$.
 
 <SchemaPlaceholder alt="Schéma de principe d'une machine ditherme échangeant QC avec la source chaude TC et QF avec la source froide TF tout en fournissant un travail W" caption="Figure 2.1 : Représentation schématique d'une machine cyclique ditherme (Moteur, Pompe à chaleur ou Réfrigérateur)." src="/images/physique-chimie/machine-ditherme.png"/>
 
 <CriticalFormula title="Rendement et Efficacités maximales (Théorème de Carnot)">
-D'après le premier et le second principe (inégalité de Clausius), les performances de ces machines sont bornées par les **cycles de Carnot réversibles**[cite: 13, 14] :
+D'après le premier et le second principe (inégalité de Clausius), les performances de ces machines sont bornées par les **cycles de Carnot réversibles** :
 * **Moteur thermique** (fournit du travail $W < 0$ à partir de $Q_C > 0$) : 
   $$\eta = \frac{-W}{Q_C} \le \eta_{\text{Carnot}} = 1 - \frac{T_F}{T_C}$$
 * **Machine frigorifique** (extrayant de la chaleur de la source froide $Q_F > 0$) : 
@@ -102,11 +102,11 @@ D'après le premier et le second principe (inégalité de Clausius), les perform
 
 ## 6. Machines thermiques en système ouvert (Écoulements)
 
-Pour les machines industrielles traversées par un écoulement de fluide en **régime stationnaire** (compresseurs, turbines, détendeurs, pompes, échangeurs), on applique le premier principe sous forme massique ou par unité de temps[cite: 14] :
+Pour les machines industrielles traversées par un écoulement de fluide en **régime stationnaire** (compresseurs, turbines, détendeurs, pompes, échangeurs), on applique le premier principe sous forme massique ou par unité de temps :
 
 <CriticalFormula title="Premier principe en système ouvert (Régime stationnaire)">
 $$\Delta h + \Delta e_c + \Delta e_p = w_{\text{indiqué}} + q_{\text{ext}}$$
-où $h$ est l'enthalpie massique et $w_{\text{indiqué}}$ le travail indiqué reçu par unité de masse sur les parties mobiles[cite: 14]. 
-* **Détendeur adiabatique** : $q_{\text{ext}} = 0$, $w_{\text{indiqué}} = 0$, et les variations cinétiques/potentielles sont négligeables $\implies \Delta h = 0$ : la détente est **isenthalpique**[cite: 14].
-* **Turbine / Compresseur** : l'analyse s'effectue à l'aide des diagrammes thermodynamiques d'état de l'eau ou des fluides frigorigènes ((T,s), (p,h))[cite: 14].
+où $h$ est l'enthalpie massique et $w_{\text{indiqué}}$ le travail indiqué reçu par unité de masse sur les parties mobiles. 
+* **Détendeur adiabatique** : $q_{\text{ext}} = 0$, $w_{\text{indiqué}} = 0$, et les variations cinétiques/potentielles sont négligeables $\implies \Delta h = 0$ : la détente est **isenthalpique**.
+* **Turbine / Compresseur** : l'analyse s'effectue à l'aide des diagrammes thermodynamiques d'état de l'eau ou des fluides frigorigènes ((T,s), (p,h)).
 </CriticalFormula>

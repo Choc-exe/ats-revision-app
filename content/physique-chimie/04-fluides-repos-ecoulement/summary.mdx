@@ -7,15 +7,15 @@ chapterId: "04-fluides-repos-ecoulement"
 ## L'Essentiel du Bulletin Officiel ATS
 
 * **Statique des fluides (Hydrostatique)** :
-  * Force de pression sur une surface : $\vec{F} = P\,S\,\vec{n}$ ; Équivalent volumique : **$\vec{f}_p = -\overrightarrow{\text{grad}}\,P$**[cite: 17].
-  * **Relation fondamentale de l'hydrostatique** : **$\overrightarrow{\text{grad}}\,P = \rho\,\vec{g} \iff \frac{\mathrm{d}P}{\mathrm{d}z} = -\rho\,g$** ($Oz$ vers le haut)[cite: 17, 63].
-  * Fluide incompressible ($\rho = \text{cte}$) : **$P(z) + \rho\,g\,z = \text{cte}$**[cite: 17].
-  * Atmosphère isotherme GP ($T_0 = \text{cte}$) : **$P(z) = P_0\,\exp\left(-\frac{M g z}{R T_0}\right)$**[cite: 17, 63].
-  * **Poussée d'Archimède** : **$\vec{\Pi}_A = -\rho_{\text{fluide}}\,V_{\text{imm}}\,\vec{g}$**[cite: 18].
+  * Force de pression sur une surface : $\vec{F} = P\,S\,\vec{n}$ ; Équivalent volumique : **$\vec{f}_p = -\overrightarrow{\text{grad}}\,P$**.
+  * **Relation fondamentale de l'hydrostatique** : **$\overrightarrow{\text{grad}}\,P = \rho\,\vec{g} \iff \frac{\mathrm{d}P}{\mathrm{d}z} = -\rho\,g$** ($Oz$ vers le haut).
+  * Fluide incompressible ($\rho = \text{cte}$) : **$P(z) + \rho\,g\,z = \text{cte}$**.
+  * Atmosphère isotherme GP ($T_0 = \text{cte}$) : **$P(z) = P_0\,\exp\left(-\frac{M g z}{R T_0}\right)$**.
+  * **Poussée d'Archimède** : **$\vec{\Pi}_A = -\rho_{\text{fluide}}\,V_{\text{imm}}\,\vec{g}$**.
 * **Cinématique eulérienne & Conservation de la masse** :
-  * **Débits** : $D_v = v\,S$ ($\text{m}^3\cdot\text{s}^{-1}$) et $D_m = \rho\,D_v = \rho\,v\,S$ ($\text{kg}\cdot\text{s}^{-1}$, flux de $\vec{j}_m = \rho\vec{v}$)[cite: 18, 63].
-  * Écoulement stationnaire $\implies D_m = \text{cte}$ ; Fluide incompressible $\implies$ **$D_v = S_1 v_1 = S_2 v_2 = \text{cte}$**[cite: 18].
-  * **Équation locale de continuité** : $\frac{\partial \rho}{\partial t} + \text{div}(\rho\vec{v}) = 0$ ; si fluide incompressible : **$\text{div}(\vec{v}) = 0$**[cite: 18, 63].
+  * **Débits** : $D_v = v\,S$ ($\text{m}^3\cdot\text{s}^{-1}$) et $D_m = \rho\,D_v = \rho\,v\,S$ ($\text{kg}\cdot\text{s}^{-1}$, flux de $\vec{j}_m = \rho\vec{v}$).
+  * Écoulement stationnaire $\implies D_m = \text{cte}$ ; Fluide incompressible $\implies$ **$D_v = S_1 v_1 = S_2 v_2 = \text{cte}$**.
+  * **Équation locale de continuité** : $\frac{\partial \rho}{\partial t} + \text{div}(\rho\vec{v}) = 0$ ; si fluide incompressible : **$\text{div}(\vec{v}) = 0$**.
 * **Bilans énergétiques (Régime stationnaire)** :
-  * **Relation de Bernoulli** (fluide parfait, incompressible, stationnaire, sur une ligne de courant) : **$\frac{1}{2}\rho v^2 + \rho g z + P = \text{cte}$**[cite: 18, 19, 63].
-  * **Avec pertes de charge ($\Delta P_{\text{pertes}} > 0$) et machine ($\mathcal{P}_u$)** : $\Delta\left(\frac{1}{2}\rho v^2 + \rho g z + P\right)_{A \to B} = \frac{\mathcal{P}_u}{D_v} - \Delta P_{\text{pertes}}$[cite: 19, 63, 64].
+  * **Relation de Bernoulli** (fluide parfait, incompressible, stationnaire, sur une ligne de courant) : **$\frac{1}{2}\rho v^2 + \rho g z + P = \text{cte}$**.
+  * **Avec pertes de charge ($\Delta P_{\text{pertes}} > 0$) et machine ($\mathcal{P}_u$)** : $\Delta\left(\frac{1}{2}\rho v^2 + \rho g z + P\right)_{A \to B} = \frac{\mathcal{P}_u}{D_v} - \Delta P_{\text{pertes}}$.
