@@ -1,0 +1,112 @@
+{
+  "chapterId": "05-transferts-thermiques",
+  "subject": "physique-chimie",
+  "title": "QCM d'entraînement : Transferts thermiques",
+  "questions": [
+    {
+      "id": "qcm-phys-05-01",
+      "difficulty": "Application directe",
+      "questionText": "Un double vitrage de surface $S = 2{,}0\\text{ m}^2$ est constitué de deux plaques de verre d'épaisseur $e_v = 4{,}0\\text{ mm}$ chacune ($\\lambda_v = 1{,}0\\text{ W}\\cdot\\text{m}^{-1}\\cdot\\text{K}^{-1}$) séparées par une lame d'air immobile d'épaisseur $e_a = 12\\text{ mm}$ ($\\lambda_a = 0{,}024\\text{ W}\\cdot\\text{m}^{-1}\\cdot\\text{K}^{-1}$). Que valent la résistance thermique d'une seule plaque de verre $R_v$, celle de la lame d'air $R_a$, et la résistance thermique totale de conduction $R_{\\text{tot}}$ du double vitrage ?",
+      "options": [
+        { "id": "A", "text": "$R_v = 0{,}002\\text{ K}\\cdot\\text{W}^{-1}$, $R_a = 0{,}250\\text{ K}\\cdot\\text{W}^{-1}$ et $R_{\\text{tot}} = 0{,}254\\text{ K}\\cdot\\text{W}^{-1}$" },
+        { "id": "B", "text": "$R_v = 0{,}004\\text{ K}\\cdot\\text{W}^{-1}$, $R_a = 0{,}500\\text{ K}\\cdot\\text{W}^{-1}$ et $R_{\\text{tot}} = 0{,}508\\text{ K}\\cdot\\text{W}^{-1}$" },
+        { "id": "C", "text": "$R_v = 0{,}002\\text{ K}\\cdot\\text{W}^{-1}$, $R_a = 0{,}250\\text{ K}\\cdot\\text{W}^{-1}$ et $R_{\\text{tot}} \\approx 0{,}001\\text{ K}\\cdot\\text{W}^{-1}$" },
+        { "id": "D", "text": "$R_v = 2{,}0\\text{ K}\\cdot\\text{W}^{-1}$, $R_a = 250\\text{ K}\\cdot\\text{W}^{-1}$ et $R_{\\text{tot}} = 254\\text{ K}\\cdot\\text{W}^{-1}$" }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. Pour une plaque de verre ($e_v = 4{,}0 \\times 10^{-3}\\text{ m}$) : $R_v = \\frac{e_v}{\\lambda_v\\,S} = \\frac{4{,}0 \\times 10^{-3}}{1{,}0 \\times 2{,}0} = 0{,}002\\text{ K}\\cdot\\text{W}^{-1}$.",
+          "2. Pour la lame d'air ($e_a = 12 \\times 10^{-3}\\text{ m}$) : $R_a = \\frac{e_a}{\\lambda_a\\,S} = \\frac{12 \\times 10^{-3}}{0{,}024 \\times 2{,}0} = \\frac{0{,}5}{2{,}0} = 0{,}250\\text{ K}\\cdot\\text{W}^{-1}$.",
+          "3. Les trois couches étant traversées par le même flux thermique, leurs résistances thermiques sont en **série** : $R_{\\text{tot}} = 2\\,R_v + R_a = 2 \\times 0{,}002 + 0{,}250 = 0{,}254\\text{ K}\\cdot\\text{W}^{-1}$ (on constate que la lame d'air assure plus de $98\\%$ de l'isolation)."
+        ],
+        "keyFormula": "$$R_{\\text{th}} = \\frac{e}{\\lambda\\,S} \\quad \\text{et en série :} \\quad R_{\\text{tot}} = R_{v1} + R_a + R_{v2}$$",
+        "commonTrap": "La réponse B oublie de diviser par l'aire $S = 2{,}0\\text{ m}^2$. La réponse C associe les résistances en parallèle au lieu de les additionner en série. La réponse D oublie de convertir les millimètres en mètres."
+      }
+    },
+    {
+      "id": "qcm-phys-05-02",
+      "difficulty": "Calculatoire",
+      "questionText": "La façade d'une maison donne sur l'extérieur ($T_{\\text{ext}} = 0^\\circ\\text{C}$) alors que l'intérieur est maintenu à $T_{\\text{int}} = 20^\\circ\\text{C}$. Cette façade est composée d'un mur plein de résistance thermique $R_{\\text{mur}} = 0{,}040\\text{ K}\\cdot\\text{W}^{-1}$ dans lequel est insérée une baie vitrée de résistance thermique $R_{\\text{vitre}} = 0{,}010\\text{ K}\\cdot\\text{W}^{-1}$. Quelle est la résistance thermique équivalente $R_{\\text{eq}}$ de la façade complète et quelle est la puissance thermique totale $\\Phi_{\\text{tot}}$ perdue à travers elle ?",
+      "options": [
+        { "id": "A", "text": "$R_{\\text{eq}} = 0{,}050\\text{ K}\\cdot\\text{W}^{-1}$ et $\\Phi_{\\text{tot}} = 400\\text{ W}$" },
+        { "id": "B", "text": "$R_{\\text{eq}} = 0{,}008\\text{ K}\\cdot\\text{W}^{-1}$ et $\\Phi_{\\text{tot}} = 2\\,500\\text{ W}$" },
+        { "id": "C", "text": "$R_{\\text{eq}} = 125\\text{ K}\\cdot\\text{W}^{-1}$ et $\\Phi_{\\text{tot}} = 0{,}16\\text{ W}$" },
+        { "id": "D", "text": "$R_{\\text{eq}} = 0{,}008\\text{ K}\\cdot\\text{W}^{-1}$ et $\\Phi_{\\text{tot}} = 1\\,600\\text{ W}$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. Le mur et la baie vitrée sont juxtaposés et soumis au **même écart de température** $\\Delta T = T_{\\text{int}} - T_{\\text{ext}} = 20\\text{ K}$ : leurs résistances thermiques sont donc associées en **parallèle**.",
+          "2. On calcule $R_{\\text{eq}}$ : $\\frac{1}{R_{\\text{eq}}} = \\frac{1}{R_{\\text{mur}}} + \\frac{1}{R_{\\text{vitre}}} = \\frac{1}{0{,}040} + \\frac{1}{0{,}010} = 25 + 100 = 125\\text{ W}\\cdot\\text{K}^{-1} \\implies R_{\\text{eq}} = \\frac{1}{125} = 0{,}008\\text{ K}\\cdot\\text{W}^{-1}$.",
+          "3. La puissance thermique totale perdue vaut $\\Phi_{\\text{tot}} = \\frac{\\Delta T}{R_{\\text{eq}}} = \\frac{20}{0{,}008} = 20 \\times 125 = 2\\,500\\text{ W}$ (soit $\\Phi_{\\text{mur}} = 500\\text{ W}$ et $\\Phi_{\\text{vitre}} = 2\\,000\\text{ W}$)."
+        ],
+        "keyFormula": "$$\\text{En parallèle (même } \\Delta T\\text{) :} \\quad \\frac{1}{R_{\\text{eq}}} = \\frac{1}{R_{\\text{mur}}} + \\frac{1}{R_{\\text{vitre}}} \\quad \\text{et} \\quad \\Phi_{\\text{tot}} = \\Phi_{\\text{mur}} + \\Phi_{\\text{vitre}}$$",
+        "commonTrap": "La réponse A additionne les résistances comme si le mur et la fenêtre étaient en série l'un derrière l'autre. La réponse C oublie d'inverser $\\frac{1}{R_{\\text{eq}}} = 125\\text{ W}\\cdot\\text{K}^{-1}$."
+      }
+    },
+    {
+      "id": "qcm-phys-05-03",
+      "difficulty": "Calculatoire",
+      "questionText": "Une bille métallique de capacité thermique $C = 50\\text{ J}\\cdot\\text{K}^{-1}$, initialement portée à $T_0 = 120^\\circ\\text{C}$, est plongée à $t = 0$ dans un grand bain d'air maintenu à $T_f = 20^\\circ\\text{C}$. L'échange conducto-convectif à sa surface ($S = 25\\text{ cm}^2 = 2{,}5 \\times 10^{-3}\\text{ m}^2$) obéit à la loi de Newton avec un coefficient $h = 200\\text{ W}\\cdot\\text{m}^{-2}\\cdot\\text{K}^{-1}$. Que valent la résistance thermique convective $R_{\\text{th}}$ et le temps caractéristique $\\tau$ de refroidissement en régime quasi stationnaire ?",
+      "options": [
+        { "id": "A", "text": "$R_{\\text{th}} = 2{,}0\\text{ K}\\cdot\\text{W}^{-1}$ et $\\tau = 100\\text{ s}$" },
+        { "id": "B", "text": "$R_{\\text{th}} = 0{,}50\\text{ K}\\cdot\\text{W}^{-1}$ et $\\tau = 25\\text{ s}$" },
+        { "id": "C", "text": "$R_{\\text{th}} = 2{,}0\\text{ K}\\cdot\\text{W}^{-1}$ et $\\tau = 25\\text{ s}$" },
+        { "id": "D", "text": "$R_{\\text{th}} = 0{,}002\\text{ K}\\cdot\\text{W}^{-1}$ et $\\tau = 0{,}10\\text{ s}$" }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. La résistance thermique conducto-convective associée à la loi de Newton vaut $R_{\\text{th}} = \\frac{1}{h\\,S} = \\frac{1}{200 \\times 2{,}5 \\times 10^{-3}} = \\frac{1}{0{,}50} = 2{,}0\\text{ K}\\cdot\\text{W}^{-1}$.",
+          "2. Le bilan énergétique $C\\frac{\\mathrm{d}T}{\\mathrm{d}t} = -\\frac{T - T_f}{R_{\\text{th}}}$ s'écrit sous forme canonique $R_{\\text{th}}C\\frac{\\mathrm{d}T}{\\mathrm{d}t} + T = T_f$.",
+          "3. La constante de temps vaut donc $\\tau = R_{\\text{th}}\\,C = 2{,}0 \\times 50 = 100\\text{ s}$."
+        ],
+        "keyFormula": "$$R_{\\text{th, conv}} = \\frac{1}{h\\,S} \\quad \\text{et} \\quad \\tau = R_{\\text{th}}\\,C = \\frac{C}{h\\,S}$$",
+        "commonTrap": "La réponse B confond la conductance thermique $G_{\\text{th}} = hS = 0{,}50\\text{ W}\\cdot\\text{K}^{-1}$ avec la résistance thermique $R_{\\text{th}} = \\frac{1}{hS} = 2{,}0\\text{ K}\\cdot\\text{W}^{-1}$."
+      }
+    },
+    {
+      "id": "qcm-phys-05-04",
+      "difficulty": "Application directe",
+      "questionText": "Une caméra thermique infrarouge observe une pièce mécanique assimilée à un corps noir dont le maximum d'émission spectrale est mesuré à la longueur d'onde $\\lambda_{\\max} = 5{,}0\\,\\mu\\text{m} = 5{,}0 \\times 10^{-6}\\text{ m}$. On donne la constante de la loi de Wien $\\sigma_W = 2{,}90 \\times 10^{-3}\\text{ m}\\cdot\\text{K}$ et la constante de Stefan $\\sigma = 5{,}67 \\times 10^{-8}\\text{ W}\\cdot\\text{m}^{-2}\\cdot\\text{K}^{-4}$. Quelle est la température absolue $T$ de la pièce et comment évolue la puissance rayonnée si cette température absolue double ?",
+      "options": [
+        { "id": "A", "text": "$T = 580\\text{ K}$ et la puissance rayonnée est multipliée par $4$." },
+        { "id": "B", "text": "$T = 580\\text{ K}$ et la puissance rayonnée est multipliée par $16$." },
+        { "id": "C", "text": "$T = 307\\text{ K}$ et la puissance rayonnée est multipliée par $16$." },
+        { "id": "D", "text": "$T = 580^\\circ\\text{C}$ et la puissance rayonnée est multipliée par $2$." }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. D'après la loi de Wien ($\\lambda_{\\max}\\cdot T = \\sigma_W$), la température absolue vaut $T = \\frac{\\sigma_W}{\\lambda_{\\max}} = \\frac{2{,}90 \\times 10^{-3}}{5{,}0 \\times 10^{-6}} = 580\\text{ K}$ (soit environ $307^\\circ\\text{C}$).",
+          "2. D'après la loi de Stefan, la puissance surfacique rayonnée par un corps noir vaut $\\varphi = \\sigma\\,T^4$.",
+          "3. Si la température absolue $T$ est multipliée par $2$, la puissance rayonnée est multipliée par $2^4 = 16$."
+        ],
+        "keyFormula": "$$T = \\frac{\\sigma_W}{\\lambda_{\\max}} \\quad \\text{et} \\quad \\varphi(2T) = \\sigma\\,(2T)^4 = 16\\,\\varphi(T)$$",
+        "commonTrap": "Ne pas confondre la température en Kelvins ($580\\text{ K}$) et en degrés Celsius ($307^\\circ\\text{C}$), et bien élever le facteur $2$ à la puissance $4$ ($2^4 = 16$ et non $2 \\times 4$ ou $2^2 = 4$)."
+      }
+    },
+    {
+      "id": "qcm-phys-05-05",
+      "difficulty": "Type Concours",
+      "questionText": "Dans le modèle climatique d'effet de serre à une couche, le sol terrestre (corps noir à la température $T_s$) absorbe le flux solaire moyen $\\varphi_{\\text{abs}} = \\frac{1 - A}{4}\\varphi_S = 240\\text{ W}\\cdot\\text{m}^{-2}$ ainsi que le flux infrarouge descendant $\\varphi_a = \\sigma\\,T_a^4$ émis par la couche atmosphérique. Sachant que l'équilibre radiatif global de la planète impose $\\sigma\\,T_a^4 = \\varphi_{\\text{abs}} = 240\\text{ W}\\cdot\\text{m}^{-2}$, que vaut le flux thermique $\\varphi_s = \\sigma\\,T_s^4$ émis par la surface terrestre ?",
+      "options": [
+        { "id": "A", "text": "$\\varphi_s = 240\\text{ W}\\cdot\\text{m}^{-2}$" },
+        { "id": "B", "text": "$\\varphi_s = 480\\text{ W}\\cdot\\text{m}^{-2}$" },
+        { "id": "C", "text": "$\\varphi_s = 120\\text{ W}\\cdot\\text{m}^{-2}$" },
+        { "id": "D", "text": "$\\varphi_s = 960\\text{ W}\\cdot\\text{m}^{-2}$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. On effectue le bilan énergétique surfacique du sol terrestre en régime stationnaire : la puissance surfacique émise par le sol ($\\varphi_s = \\sigma T_s^4$) est égale à la somme des puissances surfaciques reçues.",
+          "2. Le sol reçoit d'une part le flux solaire transmis par l'atmosphère ($\\varphi_{\\text{abs}} = 240\\text{ W}\\cdot\\text{m}^{-2}$) et d'autre part le rayonnement infrarouge renvoyé vers le bas par l'atmosphère ($\\varphi_a = \\sigma T_a^4 = 240\\text{ W}\\cdot\\text{m}^{-2}$).",
+          "3. À l'équilibre : $\\varphi_s = \\sigma T_s^4 = \\varphi_{\\text{abs}} + \\sigma T_a^4 = 240 + 240 = 480\\text{ W}\\cdot\\text{m}^{-2}$ (ce qui explique que la température du sol $T_s$ soit nettement plus élevée qu'en l'absence d'atmosphère)."
+        ],
+        "keyFormula": "$$\\text{Bilan du sol : } \\sigma\\,T_s^4 = \\varphi_{\\text{abs}} + \\sigma\\,T_a^4 = 2\\,\\varphi_{\\text{abs}}$$",
+        "commonTrap": "La réponse A ($240\\text{ W}\\cdot\\text{m}^{-2}$) correspond au bilan radiatif d'une planète **sans effet de serre** (où le sol ne reçoit aucun rayonnement infrarouge en retour de son atmosphère)."
+      }
+    }
+  ]
+}

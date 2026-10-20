@@ -1,0 +1,62 @@
+{
+  "chapterId": "04-fluides-repos-ecoulement",
+  "subject": "physique-chimie",
+  "title": "Étude des fluides au repos ou en écoulement",
+  "cards": [
+    {
+      "id": "fc-phys-04-01",
+      "category": "Formule Critique",
+      "difficulty": 1,
+      "front": "Quelle est l'expression de la résultante volumique $\\vec{f}_p$ des forces de pression, et comment s'écrit la relation fondamentale de la statique des fluides ?",
+      "back": {
+        "mainAnswer": "Les forces de pression poussent des hautes pressions vers les basses pressions (signe moins devant le gradient). À l'équilibre dans le champ de pesanteur uniforme, elles compensent exactement le poids volumique.",
+        "criticalFormula": "$$\\vec{f}_p = -\\overrightarrow{\\text{grad}}\\,P \\quad \\text{et} \\quad \\overrightarrow{\\text{grad}}\\,P = \\rho\\,\\vec{g} \\iff \\frac{\\mathrm{d}P}{\\mathrm{d}z} = -\\rho\\,g \\; (Oz \\uparrow)$$",
+        "mnemonicOrTip": "Vérifiez toujours le signe selon l'orientation de l'axe vertical : si l'axe Oz est orienté vers le haut (altitude), dP/dz = -rho*g ; s'il est orienté vers le bas (profondeur h), dP/dh = +rho*g."
+      }
+    },
+    {
+      "id": "fc-phys-04-02",
+      "category": "Méthode",
+      "difficulty": 2,
+      "front": "Comment évolue la pression $P(z)$ avec l'altitude $z$ dans une atmosphère isotherme ($T = T_0$) assimilée à un gaz parfait de masse molaire $M$ ?",
+      "back": {
+        "mainAnswer": "Contrairement à un liquide incompressible où $\\rho$ est constante, la masse volumique d'un gaz parfait dépend de la pression : $\\rho = \\frac{P M}{R T_0}$. En remplaçant dans $\\frac{\\mathrm{d}P}{\\mathrm{d}z} = -\\rho g$, on obtient une décroissance exponentielle.",
+        "criticalFormula": "$$\\frac{\\mathrm{d}P}{\\mathrm{d}z} = -\\frac{M\\,g}{R\\,T_0}P \\implies P(z) = P_0\\,\\exp\\left(-\\frac{M\\,g\\,z}{R\\,T_0}\\right)$$",
+        "mnemonicOrTip": "La quantité $H = \\frac{R T_0}{M g}$ est homogène à une longueur (environ $8\\text{ km}$ sur Terre) et représente la hauteur caractéristique sur laquelle la pression est divisée par $e \\approx 2{,}72$."
+      }
+    },
+    {
+      "id": "fc-phys-04-03",
+      "category": "Théorème",
+      "difficulty": 2,
+      "front": "Quelle est l'équation locale de conservation de la masse d'un fluide en écoulement, et que devient-elle pour un fluide incompressible ?",
+      "back": {
+        "mainAnswer": "Le bilan local de masse relie la dérivée temporelle de la masse volumique à la divergence du vecteur densité de courant de masse $\\vec{j}_m = \\rho\\vec{v}$. Si le fluide est incompressible ($\\rho = \\text{cte}$), la divergence du champ des vitesses est nulle en tout point.",
+        "criticalFormula": "$$\\frac{\\partial \\rho}{\\partial t} + \\text{div}(\\rho\\,\\vec{v}) = 0 \\quad \\xrightarrow{\\rho = \\text{cte}} \\quad \\text{div}(\\vec{v}) = \\frac{\\partial v_x}{\\partial x} + \\frac{\\partial v_y}{\\partial y} + \\frac{\\partial v_z}{\\partial z} = 0$$",
+        "mnemonicOrTip": "Un champ de vecteurs de divergence nulle ($\\text{div}(\\vec{v}) = 0$) est un champ à flux conservatif : le débit volumique $D_v = v S$ se conserve donc le long de tout tube de courant."
+      }
+    },
+    {
+      "id": "fc-phys-04-04",
+      "category": "Formule Critique",
+      "difficulty": 1,
+      "front": "Énoncer la relation de Bernoulli entre deux points $A$ et $B$ en précisant impérativement ses **4 conditions d'application**.",
+      "back": {
+        "mainAnswer": "La relation de Bernoulli traduit la conservation de la densité volumique d'énergie mécanique du fluide en l'absence de viscosité et de machine hydraulique.",
+        "criticalFormula": "$$\\frac{1}{2}\\rho\\,v_A^2 + \\rho\\,g\\,z_A + P_A = \\frac{1}{2}\\rho\\,v_B^2 + \\rho\\,g\\,z_B + P_B$$\nHypothèses : 1. Écoulement parfait, 2. Fluide incompressible ($\\rho = \\text{cte}$), 3. Régime stationnaire, 4. Sur une même ligne de courant (sans pompe ni turbine).",
+        "mnemonicOrTip": "Aux concours ATS, citer explicitement ces 4 hypothèses avant d'écrire l'équation de Bernoulli rapporte systématiquement des points dans le barème."
+      }
+    },
+    {
+      "id": "fc-phys-04-05",
+      "category": "Méthode",
+      "difficulty": 3,
+      "front": "Comment modifie-t-on la relation de Bernoulli entre l'entrée $A$ et la sortie $B$ d'une conduite de débit volumique $D_v$ comportant une machine hydraulique de puissance utile $\\mathcal{P}_u$ et des pertes de charge $\\Delta P_{\\text{pertes}} > 0$ ?",
+      "back": {
+        "mainAnswer": "La variation de la charge totale entre la sortie $B$ et l'entrée $A$ est égale à l'apport énergétique de la machine ($\\mathcal{P}_u / D_v$) diminué de la dissipation par frottement ($\\Delta P_{\\text{pertes}}$).",
+        "criticalFormula": "$$\\left(\\frac{1}{2}\\rho\\,v_B^2 + \\rho\\,g\\,z_B + P_B\\right) - \\left(\\frac{1}{2}\\rho\\,v_A^2 + \\rho\\,g\\,z_A + P_A\\right) = \\frac{\\mathcal{P}_u}{D_v} - \\Delta P_{\\text{pertes}}$$",
+        "mnemonicOrTip": "Pour une pompe, $\\mathcal{P}_u > 0$ (elle fournit de l'énergie au fluide). Pour une turbine, $\\mathcal{P}_u < 0$ (le fluide cède de l'énergie à la turbine)."
+      }
+    }
+  ]
+}

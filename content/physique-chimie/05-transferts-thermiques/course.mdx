@@ -1,0 +1,117 @@
+---
+title: "Thème E : Transferts thermiques"
+subject: "physique-chimie"
+chapterId: "05-transferts-thermiques"
+semester: 2
+description: "Conduction thermique, loi de Fourier, résistance thermique, analogie électrique, régime quasi-stationnaire, convection (loi de Newton), rayonnement du corps noir et effet de serre."
+---
+
+# Transferts thermiques
+
+Ce thème aborde de façon phénoménologique les trois modes de transferts thermiques (conduction, convection, rayonnement) dans des situations stationnaires ou quasi stationnaires[cite: 11, 19]. Il développe les analogies avec l'électrocinétique et analyse le rôle du rayonnement et de l'effet de serre sur le climat terrestre.
+
+<WarningBox title="Limite stricte du programme officiel 2025">
+Toutes les situations étudiées dans ce chapitre relèvent du régime stationnaire ou quasi stationnaire[cite: 19]. **L'établissement et la résolution de l'équation aux dérivées partielles de la diffusion thermique sont hors programme**[cite: 19].
+</WarningBox>
+
+---
+
+## 1. Conduction thermique et Loi de Fourier
+
+### Puissance thermique et vecteur densité de flux thermique
+* **Puissance thermique (ou flux thermique $\Phi$)** : La puissance thermique $\Phi$ (exprimée en Watts, $\text{W}$) traversant une surface orientée représente un **débit d'énergie thermique** transféré à travers cette surface par unité de temps ($\delta Q = \Phi\,\mathrm{d}t$)[cite: 19, 64].
+* **Vecteur densité de flux thermique $\vec{j}_{\text{th}}$** (ou $\vec{\varphi}$, en $\text{W}\cdot\text{m}^{-2}$) : La puissance thermique $\Phi$ traversant une surface $S$ orientée par sa normale unitaire $\vec{n}$ est égale au flux du vecteur densité de flux thermique à travers celle-ci[cite: 19] :
+$$\Phi = \iint_S \vec{j}_{\text{th}} \cdot \vec{n}\,\mathrm{d}S$$
+Dans le cas d'un transfert thermique unidirectionnel uniforme à travers une section plane d'aire $S$ perpendiculaire aux lignes de flux, on a simplement **$\Phi = j_{\text{th}}\,S$**[cite: 19].
+
+### Loi de Fourier et conductivité thermique
+L'existence d'un flux thermique par conduction est directement liée à la **non-uniformité spatiale de la température** $T(M)$ au sein du matériau[cite: 19, 64]. Conformément au second principe de la thermodynamique, le transfert thermique s'effectue spontanément des zones de hautes températures vers les zones de basses températures[cite: 11, 19, 64].
+
+<CriticalFormula title="Loi de Fourier (Forme vectorielle et forme 1D cartésienne)">
+Dans un milieu isotrope de **conductivité thermique $\lambda$** ($\text{W}\cdot\text{m}^{-1}\cdot\text{K}^{-1}$), le vecteur densité de flux thermique est proportionnel et opposé au gradient de température[cite: 19, 69] :
+$$\vec{j}_{\text{th}} = -\lambda\,\overrightarrow{\text{grad}}\,T$$
+Pour un transfert thermique unidirectionnel selon l'axe $(Ox)$ où $T = T(x)$[cite: 19] :
+$$\vec{j}_{\text{th}} = -\lambda\frac{\mathrm{d}T}{\mathrm{d}x}\,\vec{u}_x \quad \text{et} \quad \Phi(x) = -\lambda\,S\frac{\mathrm{d}T}{\mathrm{d}x}$$
+</CriticalFormula>
+
+* **Ordres de grandeur de conductivité thermique $\lambda$ (notamment dans l'habitat)**[cite: 19, 64] :
+  * **Bons conducteurs thermiques (métaux)** : cuivre ($\lambda \approx 400\text{ W}\cdot\text{m}^{-1}\cdot\text{K}^{-1}$), aluminium ($\lambda \approx 230\text{ W}\cdot\text{m}^{-1}\cdot\text{K}^{-1}$), acier ($\lambda \approx 50\text{ W}\cdot\text{m}^{-1}\cdot\text{K}^{-1}$).
+  * **Matériaux de construction courants** : béton ($\lambda \approx 1{,}5\text{ W}\cdot\text{m}^{-1}\cdot\text{K}^{-1}$), verre ($\lambda \approx 1{,}0\text{ W}\cdot\text{m}^{-1}\cdot\text{K}^{-1}$), bois ($\lambda \approx 0{,}15\text{ W}\cdot\text{m}^{-1}\cdot\text{K}^{-1}$).
+  * **Isolants thermiques d'habitat** : laine de verre, polystyrène expansé, polyuréthane ($\lambda \approx 0{,}03\text{ à }0{,}04\text{ W}\cdot\text{m}^{-1}\cdot\text{K}^{-1}$), air immobile ($\lambda \approx 0{,}025\text{ W}\cdot\text{m}^{-1}\cdot\text{K}^{-1}$).
+
+---
+
+## 2. Régime stationnaire, Résistance thermique et Analogie électrique
+
+### Profil de température et Résistance thermique de conduction (Démonstration exigible)
+Considérons un mur plan homogène d'épaisseur $e$ (entre $x = 0$ à la température $T_1$ et $x = e$ à la température $T_2$), de section droite $S$ et de conductivité $\lambda$, siège d'un transfert thermique unidirectionnel selon $(Ox)$ en **régime stationnaire** sans terme source interne[cite: 19, 64].
+1. En régime stationnaire, il n'y a pas d'accumulation d'énergie dans une tranche comprise entre $x$ et $x + \mathrm{d}x$ : le flux thermique est conservatif tout au long du conducteur, soit **$\Phi(x) = \Phi_0 = \text{cte}$**[cite: 19].
+2. D'après la loi de Fourier, $-\lambda\,S\frac{\mathrm{d}T}{\mathrm{d}x} = \Phi_0 \implies \frac{\mathrm{d}T}{\mathrm{d}x} = -\frac{\Phi_0}{\lambda\,S} = \text{cte}$[cite: 19]. Le **profil de température $T(x)$ est donc affine**[cite: 19] :
+$$T(x) = T_1 - \frac{T_1 - T_2}{e}\,x$$
+3. En remplaçant la pente $\frac{\mathrm{d}T}{\mathrm{d}x} = \frac{T_2 - T_1}{e}$ dans l'expression de $\Phi_0$, on obtient $\Phi_0 = \frac{\lambda\,S}{e}(T_1 - T_2)$[cite: 19].
+
+<CriticalFormula title="Résistance thermique d'un conducteur plan en transfert 1D">
+La relation entre l'écart de température $\Delta T = T_1 - T_2$ et la puissance thermique $\Phi$ traversant le matériau de $1$ vers $2$ s'écrit[cite: 19] :
+$$T_1 - T_2 = R_{\text{th}}\,\Phi \quad \text{avec} \quad R_{\text{th}} = \frac{e}{\lambda\,S} \quad (\text{en }\text{K}\cdot\text{W}^{-1})$$
+</CriticalFormula>
+
+### Analogie électrique et Associations de résistances thermiques
+En régime stationnaire (ou quasi stationnaire), la loi de Fourier intégrée est formellement analogue à la loi d'Ohm $U_1 - U_2 = R_{\text{élec}}\,I$[cite: 19, 22, 64] :
+
+| Conduction Thermique | Conduction Électrique |
+| :--- | :--- |
+| Température $T$ (en $\text{K}$) | Potentiel électrique $V$ (en $\text{V}$)[cite: 19] |
+| Écart de température $T_1 - T_2$ (en $\text{K}$) | Tension électrique $U = V_1 - V_2$ (en $\text{V}$)[cite: 19] |
+| Puissance / Flux thermique $\Phi$ (en $\text{W}$) | Intensité du courant $I$ (en $\text{A}$)[cite: 19] |
+| Conductivité thermique $\lambda$ ($\text{W}\cdot\text{m}^{-1}\cdot\text{K}^{-1}$) | Conductivité électrique $\sigma$ ($\text{S}\cdot\text{m}^{-1}$)[cite: 19, 22] |
+| Résistance thermique $R_{\text{th}} = \frac{e}{\lambda\,S}$ ($\text{K}\cdot\text{W}^{-1}$) | Résistance électrique $R = \frac{\ell}{\sigma\,S}$ ($\Omega$)[cite: 19, 22] |
+
+* **Association en série** (couches superposées traversées par le **même flux thermique $\Phi$**, ex: double vitrage ou mur isolé) : **$R_{\text{th, eq}} = \sum_i R_{\text{th}, i}$**[cite: 15, 19].
+* **Association en parallèle** (parois juxtaposées soumises au **même écart de température $T_1 - T_2$**, ex: mur contenant une fenêtre) : les flux s'ajoutent et **$\frac{1}{R_{\text{th, eq}}} = \sum_i \frac{1}{R_{\text{th}, i}}$**[cite: 15, 19].
+
+<SchemaPlaceholder alt="Schéma d'une paroi multicouche (brique, isolant, plâtre) et son schéma électrique équivalent de résistances thermiques en série" caption="Figure 5.1 : Paroi composite en régime stationnaire et schéma électrique équivalent de résistances thermiques en série." src="/images/physique-chimie/resistances-thermiques-serie.png"/>
+
+---
+
+## 3. Transfert conducto-convectif pariétal et Régime quasi stationnaire
+
+### Loi phénoménologique de Newton (Convection à une paroi)
+À l'interface d'aire $S$ entre la surface d'un solide à la température $T_p$ et un fluide en mouvement (air ou eau) de température loin de la paroi $T_f$, le transfert thermique conducto-convectif est modélisé par la **loi de Newton** (dont l'expression est fournie aux concours)[cite: 19, 64] :
+
+<CriticalFormula title="Loi de Newton et Résistance thermique conducto-convective">
+La puissance thermique $\Phi$ cédée par la paroi (à $T_p$) au fluide (à $T_f$) vaut[cite: 19] :
+$$\Phi = h\,S\,(T_p - T_f) = \frac{T_p - T_f}{R_{\text{th, conv}}} \quad \text{avec} \quad R_{\text{th, conv}} = \frac{1}{h\,S}$$
+où $h$ (en $\text{W}\cdot\text{m}^{-2}\cdot\text{K}^{-1}$) est le coefficient de transfert thermique conducto-convectif pariétal[cite: 19].
+</CriticalFormula>
+
+### Bilan d'énergie en régime quasi stationnaire (ARQS thermique)
+Considérons un système condensé de capacité thermique $C$ et de température uniforme $T(t)$ relié par une résistance thermique globale $R_{\text{th}}$ à un thermostat de température constante $T_{\text{ext}}$[cite: 19].
+* En appliquant le premier principe sur une durée $\mathrm{d}t$ : $\mathrm{d}U = C\,\mathrm{d}T = \delta Q_{\text{reçu}} = \Phi_{\text{reçu}}\,\mathrm{d}t = \frac{T_{\text{ext}} - T(t)}{R_{\text{th}}}\,\mathrm{d}t$[cite: 12, 19].
+* On obtient une équation différentielle linéaire du premier ordre à coefficients constants[cite: 19, 28] :
+$$\tau\frac{\mathrm{d}T}{\mathrm{d}t} + T(t) = T_{\text{ext}} \quad \text{avec} \quad \tau = R_{\text{th}}\,C$$
+La température évolue exponentiellement vers $T_{\text{ext}}$ selon la loi **$T(t) = T_{\text{ext}} + \big(T(0) - T_{\text{ext}}\big)\,e^{-\frac{t}{\tau}}$**[cite: 19, 28].
+
+---
+
+## 4. Rayonnement thermique, Effet de serre et Climat
+
+### Rayonnement du corps noir : Lois de Wien et de Stefan
+Un **corps noir** est un corps idéal qui absorbe intégralement tout le rayonnement électromagnétique qu'il reçoit, quelle que soit sa longueur d'onde[cite: 20]. À l'équilibre thermodynamique à la température absolue $T$ (en Kelvins), il émet un rayonnement thermique dont le spectre ne dépend que de $T$[cite: 20].
+
+<CriticalFormula title="Lois du rayonnement du corps noir (Expressions fournies)">
+* **Loi du déplacement de Wien** : La longueur d'onde $\lambda_{\max}$ correspondant au maximum d'émission spectrale est inversement proportionnelle à la température absolue $T$[cite: 20] :
+$$\lambda_{\max} \cdot T = \sigma_W \approx 2{,}898 \times 10^{-3}\text{ m}\cdot\text{K}$$
+* **Loi de Stefan-Boltzmann** : La puissance thermique rayonnée par unité de surface (émittance ou flux surfacique $\varphi$, en $\text{W}\cdot\text{m}^{-2}$) par un corps noir à la température $T$ vaut[cite: 20] :
+$$\varphi = \sigma\,T^4 \quad \implies \quad \Phi_{\text{émis}} = S\,\sigma\,T^4 \quad \text{avec } \sigma \approx 5{,}67 \times 10^{-8}\text{ W}\cdot\text{m}^{-2}\cdot\text{K}^{-4}$$
+</CriticalFormula>
+
+*Application* : Le Soleil ($T_S \approx 5\,800\text{ K}$) émet principalement dans le domaine **visible** ($\lambda_{\max} \approx 500\text{ nm}$), tandis que la Terre ($T_T \approx 288\text{ K} = 15^\circ\text{C}$) émet dans l'**infrarouge lointain** ($\lambda_{\max} \approx 10\,\mu\text{m}$), ce qui permet l'utilisation de caméras thermiques infrarouges[cite: 6, 20, 26].
+
+### Bilan radiatif de la Terre : Albédo et Effet de serre
+* **Albédo $A$** : Fraction de la puissance solaire incidente qui est directement réfléchie ou diffusée vers l'espace par la Terre (nuages, glaces, océans, sols) sans être absorbée ($0 \le A \le 1$, avec $A \approx 0{,}30$ pour la Terre)[cite: 20].
+  * La Terre de rayon $R_T$ intercepte le flux solaire $\varphi_S \approx 1\,360\text{ W}\cdot\text{m}^{-2}$ sur sa section droite apparente (disque d'aire $\pi R_T^2$) mais réémet par toute sa surface sphérique ($4\pi R_T^2$)[cite: 20, 29]. La puissance solaire moyenne absorbée par unité de surface terrestre vaut donc **$\varphi_{\text{abs}} = \frac{\pi R_T^2(1 - A)\varphi_S}{4\pi R_T^2} = \frac{1 - A}{4}\varphi_S \approx 238\text{ W}\cdot\text{m}^{-2}$**[cite: 20].
+  * **Sans atmosphère** : Le bilan radiatif à l'équilibre ($\sigma T_e^4 = \frac{1 - A}{4}\varphi_S$) donnerait une température de surface glaciale $T_e \approx 255\text{ K} = -18^\circ\text{C}$[cite: 20].
+* **Modèle d'effet de serre à une couche** : L'atmosphère est transparente au rayonnement solaire visible mais opaque (absorbante) au rayonnement infrarouge thermique émis par le sol terrestre[cite: 20, 26]. Dans le modèle idéal où une couche atmosphérique unique à la température $T_a$ absorbe la totalité du flux infrarouge $\sigma T_s^4$ du sol et réémet $\sigma T_a^4$ à la fois vers le haut (espace) et vers le bas (sol)[cite: 20] :
+  1. Bilan du système global {Terre + Atmosphère} : $\sigma T_a^4 = \frac{1 - A}{4}\varphi_S$[cite: 20].
+  2. Bilan de la couche atmosphérique seule : $\sigma T_s^4 = 2\,\sigma T_a^4 \implies$ **$T_s = 2^{1/4}\,T_a \approx 303\text{ K}$** ($+30^\circ\text{C}$)[cite: 20].
+* **Influence climatique** : L'augmentation de la concentration des gaz à effet de serre ($CO_2$, $CH_4$, vapeur d'eau) accroît l'absorption infrarouge de l'atmosphère et augmente la température de surface $T_s$ ; par ailleurs, la fonte des glaces diminue l'albédo $A$, ce qui augmente la fraction absorbée $(1 - A)$ et amplifie le réchauffement climatique (rétroaction positive)[cite: 12, 20].

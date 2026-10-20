@@ -1,0 +1,62 @@
+{
+  "chapterId": "05-transferts-thermiques",
+  "subject": "physique-chimie",
+  "title": "Transferts thermiques : Conduction, Convection et Rayonnement",
+  "cards": [
+    {
+      "id": "fc-phys-05-01",
+      "category": "Formule Critique",
+      "difficulty": 1,
+      "front": "Énoncer la loi de Fourier (sous forme vectorielle et 1D) et donner l'expression de la résistance thermique de conduction d'un mur plan d'épaisseur $e$, de surface $S$ et de conductivité $\\lambda$.",
+      "back": {
+        "mainAnswer": "Le vecteur densité de flux thermique est opposé au gradient de température (la chaleur va du chaud vers le froid). En régime stationnaire 1D, le flux $\\Phi$ est constant et proportionnel à l'écart de température.",
+        "criticalFormula": "$$\\vec{j}_{\\text{th}} = -\\lambda\\,\\overrightarrow{\\text{grad}}\\,T \\quad ; \\quad T_1 - T_2 = R_{\\text{th}}\\,\\Phi \\quad \\text{avec} \\quad R_{\\text{th}} = \\frac{e}{\\lambda\\,S}$$",
+        "mnemonicOrTip": "Unité de la résistance thermique : $\\text{K}\\cdot\\text{W}^{-1}$. Plus un matériau est épais ($e$ grand) et isolant ($\\lambda$ petit), plus sa résistance thermique est élevée."
+      }
+    },
+    {
+      "id": "fc-phys-05-02",
+      "category": "Formule Critique",
+      "difficulty": 1,
+      "front": "Comment s'écrit la loi de Newton pour le transfert thermique conducto-convectif à une paroi d'aire $S$, et quelle est la résistance thermique associée ?",
+      "back": {
+        "mainAnswer": "La puissance thermique échangée entre une paroi solide à $T_p$ et un fluide à $T_f$ est proportionnelle à l'aire $S$ et à l'écart de température $T_p - T_f$ via le coefficient d'échange $h$.",
+        "criticalFormula": "$$\\Phi = h\\,S\\,(T_p - T_f) \\quad \\implies \\quad R_{\\text{th, conv}} = \\frac{1}{h\\,S}$$",
+        "mnemonicOrTip": "Lors du bilan thermique complet d'un mur séparant l'air intérieur ($h_i$) de l'air extérieur ($h_e$), la résistance totale met en série les deux résistances convectives et la résistance de conduction : $R_{\\text{tot}} = \\frac{1}{h_i S} + \\frac{e}{\\lambda S} + \\frac{1}{h_e S}$."
+      }
+    },
+    {
+      "id": "fc-phys-05-03",
+      "category": "Méthode",
+      "difficulty": 2,
+      "front": "Un solide de capacité thermique $C$ et de température $T(t)$ est relié à un thermostat à $T_{\\text{ext}}$ par une résistance thermique $R_{\\text{th}}$. Quelle équation différentielle régit $T(t)$ en régime quasi stationnaire ?",
+      "back": {
+        "mainAnswer": "On applique le premier principe sur $\\mathrm{d}t$ : $\\mathrm{d}U = C\\,\\mathrm{d}T = \\Phi_{\\text{reçu}}\\,\\mathrm{d}t = \\frac{T_{\\text{ext}} - T(t)}{R_{\\text{th}}}\\,\\mathrm{d}t$. On obtient une équation du 1er ordre analogue à la décharge d'un condensateur.",
+        "criticalFormula": "$$\\tau\\frac{\\mathrm{d}T}{\\mathrm{d}t} + T(t) = T_{\\text{ext}} \\quad \\text{avec} \\quad \\tau = R_{\\text{th}}\\,C$$",
+        "mnemonicOrTip": "Attention au signe du flux : si l'on écrit le flux sortant $\\Phi_{\\text{sortant}} = \\frac{T(t) - T_{\\text{ext}}}{R_{\\text{th}}}$, le bilan s'écrit $C\\frac{\\mathrm{d}T}{\\mathrm{d}t} = -\\Phi_{\\text{sortant}}$."
+      }
+    },
+    {
+      "id": "fc-phys-05-04",
+      "category": "Théorème",
+      "difficulty": 1,
+      "front": "Quelles sont les deux lois fondamentales caractérisant le rayonnement thermique d'un corps noir à la température absolue $T$ ?",
+      "back": {
+        "mainAnswer": "La loi de Wien donne la longueur d'onde du maximum d'émission en fonction de $T$, et la loi de Stefan donne la puissance totale rayonnée par unité de surface.",
+        "criticalFormula": "• Loi de Wien : $\\lambda_{\\max}\\cdot T = \\sigma_W \\approx 2{,}90 \\times 10^{-3}\\text{ m}\\cdot\\text{K}$\n• Loi de Stefan : $\\varphi = \\sigma\\,T^4$ ($\\text{W}\\cdot\\text{m}^{-2}$)",
+        "mnemonicOrTip": "Comme la puissance rayonnée varie en $T^4$, doubler la température absolue (en Kelvins) multiplie la puissance thermique émise par $2^4 = 16$ !"
+      }
+    },
+    {
+      "id": "fc-phys-05-05",
+      "category": "Définition",
+      "difficulty": 2,
+      "front": "Qu'est-ce que l'albédo $A$ d'une planète, et pourquoi un facteur $1/4$ apparaît-il dans le flux solaire moyen absorbé par unité de surface terrestre $\\varphi_{\\text{abs}} = \\frac{1 - A}{4}\\varphi_S$ ?",
+      "back": {
+        "mainAnswer": "L'albédo $A$ est la proportion du flux solaire incident directement réfléchie vers l'espace ($1 - A$ est la fraction absorbée). Le facteur $1/4$ provient du rapport entre l'aire du disque apparent qui intercepte les rayons solaires ($\\pi R_T^2$) et l'aire totale de la sphère terrestre ($4\\pi R_T^2$).",
+        "criticalFormula": "$$\\varphi_{\\text{abs}} = \\frac{\\pi R_T^2\\,(1 - A)\\,\\varphi_S}{4\\pi R_T^2} = \\frac{1 - A}{4}\\,\\varphi_S$$",
+        "mnemonicOrTip": "En l'absence d'atmosphère, l'équilibre radiatif s'écrit $\\sigma T_e^4 = \\frac{1 - A}{4}\\varphi_S$."
+      }
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "chapterId": "04-fluides-repos-ecoulement",
+  "subject": "physique-chimie",
+  "title": "QCM d'entraînement : Fluides au repos ou en écoulement",
+  "questions": [
+    {
+      "id": "qcm-phys-04-01",
+      "difficulty": "Application directe",
+      "questionText": "Un sous-marin d'observation se trouve à une profondeur $h = 30\\text{ m}$ sous la surface libre de la mer (eau supposée incompressible de masse volumique $\\rho = 1\\,000\\text{ kg}\\cdot\\text{m}^{-3}$, $g = 10\\text{ m}\\cdot\\text{s}^{-2}$ et pression atmosphérique en surface $P_0 = 1{,}0\\text{ bar} = 1{,}0 \\times 10^5\\text{ Pa}$). Quelle est la pression absolue $P$ régnant à cette profondeur, et quelle est la norme de la force pressante exercée par l'eau sur un hublot circulaire plan de surface $S = 0{,}20\\text{ m}^2$ ?",
+      "options": [
+        { "id": "A", "text": "$P = 3{,}0\\text{ bar}$ et $F = 60\\text{ kN}$" },
+        { "id": "B", "text": "$P = 4{,}0\\text{ bar}$ et $F = 80\\text{ kN}$" },
+        { "id": "C", "text": "$P = 4{,}0\\text{ bar}$ et $F = 2\\,000\\text{ kN}$" },
+        { "id": "D", "text": "$P = 31\\text{ bar}$ et $F = 620\\text{ kN}$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. D'après la loi de l'hydrostatique pour un fluide incompressible, la pression absolue à la profondeur $h$ vaut $P = P_0 + \\rho\\,g\\,h$.",
+          "2. On calcule la surpression hydrostatique : $\\rho\\,g\\,h = 1\\,000 \\times 10 \\times 30 = 3{,}0 \\times 10^5\\text{ Pa} = 3{,}0\\text{ bar}$, d'où la pression absolue $P = 1{,}0 + 3{,}0 = 4{,}0\\text{ bar} = 4{,}0 \\times 10^5\\text{ Pa}$.",
+          "3. La force pressante sur le hublot de surface $S = 0{,}20\\text{ m}^2$ vaut $F = P\\,S = 4{,}0 \\times 10^5 \\times 0{,}20 = 8{,}0 \\times 10^4\\text{ N} = 80\\text{ kN}$."
+        ],
+        "keyFormula": "$$P = P_0 + \\rho\\,g\\,h \\quad \\text{et} \\quad F = P\\,S$$",
+        "commonTrap": "La réponse A oublie d'additionner la pression atmosphérique de surface $P_0 = 1{,}0\\text{ bar}$ (elle calcule la pression relative/différentielle au lieu de la pression absolue). La réponse C divise par $S$ au lieu de multiplier."
+      }
+    },
+    {
+      "id": "qcm-phys-04-02",
+      "difficulty": "Application directe",
+      "questionText": "De l'eau (fluide incompressible) s'écoule en régime stationnaire dans une conduite cylindrique. Dans la section d'entrée (1) de diamètre $d_1 = 10\\text{ cm}$, la vitesse moyenne d'écoulement est $v_1 = 1{,}5\\text{ m}\\cdot\\text{s}^{-1}$. La conduite subit un rétrécissement vers une section (2) de diamètre moitié $d_2 = 5{,}0\\text{ cm}$. Quelle est la vitesse d'écoulement $v_2$ dans la section rétrécie ?",
+      "options": [
+        { "id": "A", "text": "$v_2 = 3{,}0\\text{ m}\\cdot\\text{s}^{-1}$" },
+        { "id": "B", "text": "$v_2 = 6{,}0\\text{ m}\\cdot\\text{s}^{-1}$" },
+        { "id": "C", "text": "$v_2 = 0{,}75\\text{ m}\\cdot\\text{s}^{-1}$" },
+        { "id": "D", "text": "$v_2 = 1{,}5\\text{ m}\\cdot\\text{s}^{-1}$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. Le fluide étant incompressible en écoulement stationnaire, le débit volumique $D_v = S\\,v$ se conserve le long du tube de courant : $S_1\\,v_1 = S_2\\,v_2$.",
+          "2. L'aire d'une section circulaire est proportionnelle au carré du diamètre : $S = \\frac{\\pi\\,d^2}{4}$.",
+          "3. On a donc $v_2 = v_1 \\frac{S_1}{S_2} = v_1 \\left(\\frac{d_1}{d_2}\\right)^2 = 1{,}5 \\times 2^2 = 1{,}5 \\times 4 = 6{,}0\\text{ m}\\cdot\\text{s}^{-1}$."
+        ],
+        "keyFormula": "$$D_{v1} = D_{v2} \\iff S_1\\,v_1 = S_2\\,v_2 \\implies v_2 = v_1\\left(\\frac{d_1}{d_2}\\right)^2$$",
+        "commonTrap": "La réponse A ($3{,}0\\text{ m}\\cdot\\text{s}^{-1}$) confond le rapport des diamètres ($2$) avec le rapport des sections ($2^2 = 4$)."
+      }
+    },
+    {
+      "id": "qcm-phys-04-03",
+      "difficulty": "Calculatoire",
+      "questionText": "Dans un tube de Venturi **horizontal** ($z_1 = z_2$) traversé par de l'eau ($\rho = 1\\,000\\text{ kg}\\cdot\\text{m}^{-3}$) en écoulement parfait et stationnaire, la vitesse et la pression à l'entrée valent $v_1 = 2{,}0\\text{ m}\\cdot\\text{s}^{-1}$ et $P_1 = 2{,}00\\text{ bar} = 2{,}00 \\times 10^5\\text{ Pa}$. Dans l'étranglement (2), la vitesse vaut $v_2 = 6{,}0\\text{ m}\\cdot\\text{s}^{-1}$. Quelle est la pression $P_2$ dans l'étranglement ?",
+      "options": [
+        { "id": "A", "text": "$P_2 = 1{,}84\\text{ bar}$ ($1{,}84 \\times 10^5\\text{ Pa}$)" },
+        { "id": "B", "text": "$P_2 = 2{,}16\\text{ bar}$ ($2{,}16 \\times 10^5\\text{ Pa}$)" },
+        { "id": "C", "text": "$P_2 = 1{,}68\\text{ bar}$ ($1{,}68 \\times 10^5\\text{ Pa}$)" },
+        { "id": "D", "text": "$P_2 = 0{,}67\\text{ bar}$ ($0{,}67 \\times 10^5\\text{ Pa}$)" }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. On applique la relation de Bernoulli sur une ligne de courant horizontale ($z_1 = z_2$) : $P_1 + \\frac{1}{2}\\rho\\,v_1^2 = P_2 + \\frac{1}{2}\\rho\\,v_2^2$.",
+          "2. On isole $P_2$ : $P_2 = P_1 + \\frac{1}{2}\\rho\\,(v_1^2 - v_2^2)$.",
+          "3. Application numérique : $\\frac{1}{2}\\rho\\,(v_1^2 - v_2^2) = \\frac{1}{2} \\times 1\\,000 \\times (2{,}0^2 - 6{,}0^2) = 500 \\times (4 - 36) = -16\\,000\\text{ Pa} = -0{,}16\\text{ bar}$.",
+          "4. On obtient $P_2 = 2{,}00 - 0{,}16 = 1{,}84\\text{ bar}$ ($1{,}84 \\times 10^5\\text{ Pa}$)."
+        ],
+        "keyFormula": "$$P_2 = P_1 - \\frac{1}{2}\\rho\\,(v_2^2 - v_1^2)$$",
+        "commonTrap": "L'effet Venturi est parfois contre-intuitif (réponse B) : lorsque la section rétrécit, la vitesse augmente ($v_2 > v_1$) et la pression statique **diminue** ($P_2 < P_1$). La réponse C oublie le facteur $1/2$ dans l'énergie cinétique volumique."
+      }
+    },
+    {
+      "id": "qcm-phys-04-04",
+      "difficulty": "Calculatoire",
+      "questionText": "En coordonnées cartésiennes, le champ des vitesses d'un écoulement est modélisé par $\\vec{v}(x, y, z) = 2x\\,\\vec{u}_x + \\alpha y\\,\\vec{u}_y - 5z\\,\\vec{u}_z$ (où $\\alpha$ est une constante). Sachant que l'opérateur divergence s'écrit $\\text{div}(\\vec{v}) = \\frac{\\partial v_x}{\\partial x} + \\frac{\\partial v_y}{\\partial y} + \\frac{\\partial v_z}{\\partial z}$, quelle doit être la valeur de $\\alpha$ pour que cet écoulement puisse correspondre à un **fluide incompressible** ?",
+      "options": [
+        { "id": "A", "text": "$\\alpha = 0$" },
+        { "id": "B", "text": "$\\alpha = -3$" },
+        { "id": "C", "text": "$\\alpha = 3$" },
+        { "id": "D", "text": "$\\alpha = 7$" }
+      ],
+      "correctOptionId": "C",
+      "explanation": {
+        "steps": [
+          "1. Pour un fluide incompressible et homogène ($\\rho = \\text{cte}$), l'équation locale de conservation de la masse impose que la divergence du champ des vitesses soit nulle en tout point : $\\text{div}(\\vec{v}) = 0$.",
+          "2. On calcule les dérivées partielles des trois composantes : $\\frac{\\partial v_x}{\\partial x} = 2$, $\\frac{\\partial v_y}{\\partial y} = \\alpha$ et $\\frac{\\partial v_z}{\\partial z} = -5$.",
+          "3. On résout $\\text{div}(\\vec{v}) = 2 + \\alpha - 5 = 0 \\iff \\alpha - 3 = 0 \\implies \\alpha = 3$."
+        ],
+        "keyFormula": "$$\\text{Fluide incompressible} \\implies \\text{div}(\\vec{v}) = \\frac{\\partial v_x}{\\partial x} + \\frac{\\partial v_y}{\\partial y} + \\frac{\\partial v_z}{\\partial z} = 0$$",
+        "commonTrap": "Une erreur de signe dans la résolution de $2 + \\alpha - 5 = 0$ conduit au distracteur B ($\\alpha = -3$)."
+      }
+    },
+    {
+      "id": "qcm-phys-04-05",
+      "difficulty": "Type Concours",
+      "questionText": "Une pompe hydraulique achemine de l'eau ($\\rho = 1\\,000\\text{ kg}\\cdot\\text{m}^{-3}$, $g = 10\\text{ m}\\cdot\\text{s}^{-2}$) avec un débit volumique $D_v = 20\\text{ L}\\cdot\\text{s}^{-1} = 0{,}020\\text{ m}^3\\cdot\\text{s}^{-1}$ depuis un bassin inférieur (1) jusqu'à un réservoir supérieur (2) situé à une hauteur $H = z_2 - z_1 = 15\\text{ m}$ au-dessus. Les deux bassins sont de grandes dimensions et ouverts à l'air libre ($P_1 = P_2 = P_{\\text{atm}}$, $v_1 \\approx v_2 \\approx 0$). Les pertes de charge totales dans la conduite valent $\\Delta P_{\\text{pertes}} = 50\\text{ kPa}$. Quelle puissance mécanique utile $\\mathcal{P}_u$ la pompe doit-elle fournir au fluide ?",
+      "options": [
+        { "id": "A", "text": "$\\mathcal{P}_u = 3{,}0\\text{ kW}$" },
+        { "id": "B", "text": "$\\mathcal{P}_u = 4{,}0\\text{ kW}$" },
+        { "id": "C", "text": "$\\mathcal{P}_u = 2{,}0\\text{ kW}$" },
+        { "id": "D", "text": "$\\mathcal{P}_u = 4\\,000\\text{ kW}$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. On écrit la relation de Bernoulli généralisée entre la surface du bassin inférieur (1) et celle du bassin supérieur (2) : $\\left(\\frac{1}{2}\\rho v_2^2 + \\rho g z_2 + P_2\\right) - \\left(\\frac{1}{2}\\rho v_1^2 + \\rho g z_1 + P_1\\right) = \\frac{\\mathcal{P}_u}{D_v} - \\Delta P_{\\text{pertes}}$.",
+          "2. Comme $P_1 = P_2 = P_{\\text{atm}}$ et $v_1 \\approx v_2 \\approx 0$, l'équation se simplifie en : $\\rho\\,g\\,(z_2 - z_1) = \\frac{\\mathcal{P}_u}{D_v} - \\Delta P_{\\text{pertes}} \\implies \\mathcal{P}_u = D_v\\,\\big(\\rho\\,g\\,H + \\Delta P_{\\text{pertes}}\\big)$.",
+          "3. On calcule la différence de pression hydrostatique à vaincre : $\\rho\\,g\\,H = 1\\,000 \\times 10 \\times 15 = 150\\,000\\text{ Pa} = 150\\text{ kPa}$.",
+          "4. En ajoutant les pertes de charge ($50\\text{ kPa}$), la pompe doit fournir une surpression totale de $150 + 50 = 200\\text{ kPa} = 2{,}0 \\times 10^5\\text{ Pa}$, soit une puissance utile $\\mathcal{P}_u = 0{,}020 \\times 2{,}0 \\times 10^5 = 4\\,000\\text{ W} = 4{,}0\\text{ kW}$."
+        ],
+        "keyFormula": "$$\\mathcal{P}_u = D_v\\,\\big(\\rho\\,g\\,H + \\Delta P_{\\text{pertes}}\\big)$$",
+        "commonTrap": "La réponse A ($3{,}0\\text{ kW}$) oublie les pertes de charge. La réponse C ($2{,}0\\text{ kW}$) soustrait les pertes de charge au lieu de les ajouter : une pompe doit fournir à la fois l'énergie potentielle d'élévation **et** compenser l'énergie dissipée par frottement. La réponse D oublie de convertir les litres en $\\text{m}^3$ ($1\\text{ m}^3 = 1\\,000\\text{ L}$)."
+      }
+    }
+  ]
+}

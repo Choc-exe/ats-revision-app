@@ -1,0 +1,21 @@
+---
+title: "Fiche Synthèse : Électrocinétique et régimes sinusoïdaux"
+subject: "physique-chimie"
+chapterId: "03-electrocinetique-regimes-sinusoidaux"
+---
+
+## L'Essentiel du Bulletin Officiel ATS
+
+* **ARQS, Dipôles et Énergies stockées (Convention récepteur)** :
+  * **Résistance** : $u = R\,i$ ; **Condensateur** : $i = C\frac{\mathrm{d}u_C}{\mathrm{d}t}$ et **$E_C = \frac{1}{2}Cu_C^2$** ($u_C$ continue) ; **Bobine** : $u_L = L\frac{\mathrm{d}i_L}{\mathrm{d}t}$ et **$E_L = \frac{1}{2}Li_L^2$** ($i_L$ continue)[cite: 14, 15].
+  * **Pile électrique** : Capacité $Q_{\max} = I\,\Delta t$ ($1\text{ A}\cdot\text{h} = 3\,600\text{ C}$) et énergie $E_{\text{pile}} = Q_{\max}\,U$[cite: 15].
+* **Régimes Transitoires (Ordre 1 et Ordre 2)** :
+  * **Circuit RC série** : $\tau\frac{\mathrm{d}u_C}{\mathrm{d}t} + u_C = E$ avec **$\tau = R\,C$**[cite: 15].
+  * **Circuit RL série** : $\tau\frac{\mathrm{d}i}{\mathrm{d}t} + i = \frac{E}{R}$ avec **$\tau = \frac{L}{R}$** (durée du transitoire $\approx 3\tau$ à $5\tau$)[cite: 15].
+  * **Circuit RLC série** : **$\ddot{u}_C + \frac{\omega_0}{Q}\dot{u}_C + \omega_0^2 u_C = \omega_0^2 E$** avec **$\omega_0 = \frac{1}{\sqrt{LC}}$** et **$Q = \frac{1}{R}\sqrt{\frac{L}{C}}$**[cite: 15].
+  * **Analogie mécanique** : $q \leftrightarrow x$, $i \leftrightarrow v$, $L \leftrightarrow m$, $\frac{1}{C} \leftrightarrow k$, $R \leftrightarrow h$[cite: 15].
+* **Régime Sinusoïdal Établi (RSE) & Résonance** :
+  * **Impédances complexes** : $\underline{Z}_R = R$, **$\underline{Z}_L = jL\omega$**, **$\underline{Z}_C = \frac{1}{jC\omega} = -\frac{j}{C\omega}$**[cite: 16].
+  * **Puissance moyenne** : **$P = U_{\text{eff}}\,I_{\text{eff}}\cos(\varphi)$** avec $X_{\text{eff}} = \frac{X_m}{\sqrt{2}}$ et le facteur de puissance $\cos\varphi = \frac{\text{Re}(\underline{Z})}{|\underline{Z}|}$[cite: 16].
+  * **Pertes Joule en ligne** : $P_{\text{Joule}} = \frac{R_{\text{ligne}}\,P^2}{U_{\text{eff}}^2 \cos^2\varphi}$ (minimisées à haute tension $U_{\text{eff}}$ et $\cos\varphi \to 1$)[cite: 16].
+  * **Résonance de courant RLC série** : Toujours à $\omega = \omega_0 = \frac{1}{\sqrt{LC}}$ ($I_{m,\max} = \frac{E_m}{R}$, $\varphi = 0$), bande passante à $1/\sqrt{2}$ : **$\Delta\omega = \frac{\omega_0}{Q} = \frac{R}{L}$**[cite: 16].

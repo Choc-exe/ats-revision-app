@@ -1,0 +1,113 @@
+{
+  "chapterId": "03-electrocinetique-regimes-sinusoidaux",
+  "subject": "physique-chimie",
+  "title": "QCM d'entraînement : Électrocinétique et régimes sinusoïdaux",
+  "questions": [
+    {
+      "id": "qcm-phys-03-01",
+      "difficulty": "Application directe",
+      "questionText": "Une batterie d'accumulateurs de tension nominale $U = 12\\text{ V}$ possède une capacité électrique $Q_{\\max} = 50\\text{ A}\\cdot\\text{h}$. Quelle est la durée d'utilisation $\\Delta t$ si elle débite un courant constant $I = 2{,}5\\text{ A}$, et quelle est l'énergie électrique totale stockée en Joules ?",
+      "options": [
+        { "id": "A", "text": "$\\Delta t = 20\\text{ h}$ et $E = 600\\text{ J}$" },
+        { "id": "B", "text": "$\\Delta t = 20\\text{ h}$ et $E = 2{,}16 \\times 10^6\\text{ J}$" },
+        { "id": "C", "text": "$\\Delta t = 125\\text{ h}$ et $E = 2{,}16 \\times 10^6\\text{ J}$" },
+        { "id": "D", "text": "$\\Delta t = 20\\text{ h}$ et $E = 1{,}80 \\times 10^5\\text{ J}$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. La relation liant la capacité électrique, le courant et la durée d'utilisation est $Q_{\\max} = I\\,\\Delta t$, d'où $\\Delta t = \\frac{Q_{\\max}}{I} = \\frac{50\\text{ A}\\cdot\\text{h}}{2{,}5\\text{ A}} = 20\\text{ h}$.",
+          "2. Pour obtenir l'énergie en Joules (unité SI), on convertit d'abord la charge en Coulombs ($1\\text{ A}\\cdot\\text{h} = 3\\,600\\text{ C}$) : $Q_{\\max} = 50 \\times 3\\,600 = 1{,}80 \\times 10^5\\text{ C}$.",
+          "3. L'énergie stockée vaut $E = Q_{\\max}\\,U = 1{,}80 \\times 10^5 \\times 12 = 2{,}16 \\times 10^6\\text{ J} = 2{,}16\\text{ MJ}$ (soit $600\\text{ W}\\cdot\\text{h}$)."
+        ],
+        "keyFormula": "$$Q_{\\max} = I\\,\\Delta t \\quad \\text{et} \\quad E = Q_{\\max}\\,U \\quad (1\\text{ A}\\cdot\\text{h} = 3\\,600\\text{ C})$$",
+        "commonTrap": "La réponse A ($600\\text{ J}$) oublie de convertir les heures en secondes ($600\\text{ W}\\cdot\\text{h} \\neq 600\\text{ J}$). La réponse D donne la valeur de la charge en Coulombs au lieu de l'énergie en Joules."
+      }
+    },
+    {
+      "id": "qcm-phys-03-02",
+      "difficulty": "Calculatoire",
+      "questionText": "Dans un circuit RL série ($R = 50\\,\\Omega$, $L = 0{,}10\\text{ H}$) initialement parcouru par un courant nul, on ferme l'interrupteur à $t = 0$ sur une source idéale de tension $E = 10\\text{ V}$. Que valent la constante de temps $\\tau$, la tension $u_L(0^+)$ aux bornes de la bobine juste après la fermeture, et l'énergie magnétique $E_{L,\\infty}$ stockée en régime permanent ?",
+      "options": [
+        { "id": "A", "text": "$\\tau = 5\\text{ s}$, $u_L(0^+) = 0\\text{ V}$ et $E_{L,\\infty} = 2{,}0\\text{ mJ}$" },
+        { "id": "B", "text": "$\\tau = 2\\text{ ms}$, $u_L(0^+) = 10\\text{ V}$ et $E_{L,\\infty} = 2{,}0\\text{ mJ}$" },
+        { "id": "C", "text": "$\\tau = 2\\text{ ms}$, $u_L(0^+) = 0\\text{ V}$ et $E_{L,\\infty} = 5{,}0\\text{ J}$" },
+        { "id": "D", "text": "$\\tau = 2\\text{ ms}$, $u_L(0^+) = 10\\text{ V}$ et $E_{L,\\infty} = 20\\text{ mJ}$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. La constante de temps d'un circuit RL série vaut $\\tau = \\frac{L}{R} = \\frac{0{,}10}{50} = 2 \\times 10^{-3}\\text{ s} = 2\\text{ ms}$.",
+          "2. Par continuité du courant traversant une bobine, $i(0^+) = i(0^-) = 0\\text{ A}$. La loi des mailles à $t = 0^+$ donne $u_L(0^+) + R\\,i(0^+) = E \\implies u_L(0^+) = E = 10\\text{ V}$.",
+          "3. En régime permanent ($t \\to \\infty$), la bobine se comporte comme un fil ($u_L(\\infty) = 0$), donc $I_\\infty = \\frac{E}{R} = \\frac{10}{50} = 0{,}20\\text{ A}$.",
+          "4. L'énergie stockée vaut $E_{L,\\infty} = \\frac{1}{2}L\\,I_\\infty^2 = 0{,}5 \\times 0{,}10 \\times (0{,}20)^2 = 2{,}0 \\times 10^{-3}\\text{ J} = 2{,}0\\text{ mJ}$."
+        ],
+        "keyFormula": "$$\\tau = \\frac{L}{R} \\quad ; \\quad i(0^+) = i(0^-) \\quad ; \\quad E_L = \\frac{1}{2}L\\,i^2$$",
+        "commonTrap": "La réponse A calcule $\\tau = L \\times R$ ou $\\frac{R}{L}$ au lieu de $\\frac{L}{R}$ et suppose à tort que la tension $u_L$ est continue alors que c'est l'intensité $i_L$ qui est continue dans une bobine."
+      }
+    },
+    {
+      "id": "qcm-phys-03-03",
+      "difficulty": "Calculatoire",
+      "questionText": "Un circuit RLC série comporte une bobine d'inductance $L = 40\\text{ mH}$ et un condensateur de capacité $C = 10\\,\\mu\\text{F}$. Quelle doit être la valeur maximale de la résistance $R$ pour que la réponse indicielle en régime transitoire soit **pseudopériodique** ?",
+      "options": [
+        { "id": "A", "text": "$R < 63{,}2\\,\\Omega$" },
+        { "id": "B", "text": "$R < 126{,}5\\,\\Omega$" },
+        { "id": "C", "text": "$R > 126{,}5\\,\\Omega$" },
+        { "id": "D", "text": "$R < 4\\,000\\,\\Omega$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. Le régime transitoire d'un circuit RLC série est pseudopériodique si et seulement si son facteur de qualité vérifie $Q > \\frac{1}{2}$.",
+          "2. Sachant que $Q = \\frac{1}{R}\\sqrt{\\frac{L}{C}}$, la condition s'écrit $\\frac{1}{R}\\sqrt{\\frac{L}{C}} > \\frac{1}{2} \\iff R < 2\\sqrt{\\frac{L}{C}}$.",
+          "3. Application numérique : $\\sqrt{\\frac{L}{C}} = \\sqrt{\\frac{40 \\times 10^{-3}}{10 \\times 10^{-6}}} = \\sqrt{4\\,000} \\approx 63{,}25\\,\\Omega$, d'où $R < 2 \\times 63{,}25 \\approx 126{,}5\\,\\Omega$."
+        ],
+        "keyFormula": "$$\\text{Régime pseudopériodique} \\iff Q = \\frac{1}{R}\\sqrt{\\frac{L}{C}} > \\frac{1}{2} \\iff R < 2\\sqrt{\\frac{L}{C}}$$",
+        "commonTrap": "La réponse A ($63{,}2\\,\\Omega$) oublie le facteur $2$ de la condition critique $Q = 1/2$ (en résolvant $Q > 1$ au lieu de $Q > 0{,}5$)."
+      }
+    },
+    {
+      "id": "qcm-phys-03-04",
+      "difficulty": "Type Concours",
+      "questionText": "Lors d'un TP sur la résonance de courant d'un circuit RLC série alimenté par une tension sinusoïdale d'amplitude $E_m = 5{,}0\\text{ V}$, on relève aux bornes d'une résistance $R = 100\\,\\Omega$ un pic de résonance centré sur la fréquence $f_0 = 1{,}0\\text{ kHz}$ avec une largeur de bande passante à $U_{Rm,\\max}/\\sqrt{2}$ égale à $\\Delta f = 50\\text{ Hz}$. Que valent le facteur de qualité $Q$ et l'inductance $L$ de la bobine ?",
+      "options": [
+        { "id": "A", "text": "$Q = 20$ et $L \\approx 0{,}32\\text{ H}$" },
+        { "id": "B", "text": "$Q = 0{,}05$ et $L \\approx 1{,}6\\text{ mH}$" },
+        { "id": "C", "text": "$Q = 20$ et $L = 2{,}0\\text{ H}$" },
+        { "id": "D", "text": "$Q = 50$ et $L \\approx 0{,}80\\text{ H}$" }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. Le facteur de qualité est relié à la finesse du pic de résonance en courant par la relation $Q = \\frac{f_0}{\\Delta f} = \\frac{1\\,000\\text{ Hz}}{50\\text{ Hz}} = 20$.",
+          "2. Or, à la résonance, le facteur de qualité s'exprime aussi par $Q = \\frac{L\\,\\omega_0}{R} = \\frac{2\\pi\\,f_0\\,L}{R}$.",
+          "3. On isole l'inductance $L$ : $L = \\frac{Q\\,R}{2\\pi\\,f_0} = \\frac{20 \\times 100}{2\\pi \\times 1\\,000} = \\frac{2}{2\\pi} = \\frac{1}{\\pi} \\approx 0{,}318\\text{ H} \\approx 0{,}32\\text{ H}$."
+        ],
+        "keyFormula": "$$Q = \\frac{\\omega_0}{\\Delta\\omega} = \\frac{f_0}{\\Delta f} \\quad \\text{et} \\quad L = \\frac{Q\\,R}{2\\pi\\,f_0}$$",
+        "commonTrap": "La réponse C oublie le facteur $2\\pi$ lors de la conversion entre la fréquence $f_0$ et la pulsation $\\omega_0 = 2\\pi f_0$ ($L = \\frac{QR}{f_0} = 2\\text{ H}$, ce qui est faux)."
+      }
+    },
+    {
+      "id": "qcm-phys-03-05",
+      "difficulty": "Type Concours",
+      "questionText": "Une installation industrielle alimentée sous une tension efficace $U_{\\text{eff}}$ fixe consomme une puissance active moyenne $P$ constante. Initialement, son facteur de puissance vaut $\\cos(\\varphi_1) = 0{,}70$. Si l'industriel relève son facteur de puissance à $\\cos(\\varphi_2) = 1{,}00$ (en ajoutant des condensateurs de compensation), de quel pourcentage diminue-t-on les pertes par effet Joule $P_{\\text{Joule}}$ dans la ligne d'alimentation ?",
+      "options": [
+        { "id": "A", "text": "Les pertes par effet Joule diminuent de $30\\%$." },
+        { "id": "B", "text": "Les pertes par effet Joule diminuent de $51\\%$ (elles sont divisées par environ $2$)." },
+        { "id": "C", "text": "Les pertes par effet Joule restent inchangées car la puissance active $P$ est constante." },
+        { "id": "D", "text": "Les pertes par effet Joule augmentent de $43\\%$." }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. Pour une puissance active $P = U_{\\text{eff}}\\,I_{\\text{eff}}\\cos\\varphi$ et une tension $U_{\\text{eff}}$ fixées, les pertes par effet Joule dans la ligne de résistance $R_{\\text{ligne}}$ valent $P_{\\text{Joule}} = R_{\\text{ligne}}\\,I_{\\text{eff}}^2 = \\frac{R_{\\text{ligne}}\\,P^2}{U_{\\text{eff}}^2\\,\\cos^2(\\varphi)}$.",
+          "2. Le rapport entre les nouvelles pertes $P_{J2}$ et les anciennes pertes $P_{J1}$ vaut donc $\\frac{P_{J2}}{P_{J1}} = \\frac{\\cos^2(\\varphi_1)}{\\cos^2(\\varphi_2)} = \\frac{0{,}70^2}{1{,}00^2} = 0{,}49$.",
+          "3. Les nouvelles pertes représentent $49\\%$ des pertes initiales, ce qui correspond à une réduction de $100\\% - 49\\% = 51\\%$ (soit une division par plus de $2$)."
+        ],
+        "keyFormula": "$$P_{\\text{Joule}} = \\frac{R_{\\text{ligne}}\\,P^2}{U_{\\text{eff}}^2\\,\\cos^2(\\varphi)} \\implies \\frac{P_{J2}}{P_{J1}} = \\left(\\frac{\\cos\\varphi_1}{\\cos\\varphi_2}\\right)^2$$",
+        "commonTrap": "La réponse A ($30\\%$) oublie que l'effet Joule est proportionnel au **carré** de l'intensité efficace ($I_{\\text{eff}}^2$), donc inversement proportionnel au carré du facteur de puissance $\\cos^2\\varphi$."
+      }
+    }
+  ]
+}

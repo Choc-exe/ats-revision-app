@@ -1,0 +1,62 @@
+{
+  "chapterId": "03-electrocinetique-regimes-sinusoidaux",
+  "subject": "physique-chimie",
+  "title": "Électrocinétique : Régimes transitoires et sinusoïdaux",
+  "cards": [
+    {
+      "id": "fc-phys-03-01",
+      "category": "Formule Critique",
+      "difficulty": 1,
+      "front": "Quelles sont les relations courant-tension (en convention récepteur), les énergies stockées et les propriétés de continuité d'un condensateur $C$ et d'une bobine $L$ ?",
+      "back": {
+        "mainAnswer": "Le condensateur stocke de l'énergie électrostatique (sa tension est continue), tandis que la bobine stocke de l'énergie magnétique (son courant est continu).",
+        "criticalFormula": "• Condensateur : $i = C\\frac{\\mathrm{d}u_C}{\\mathrm{d}t}$, $E_C = \\frac{1}{2}C\\,u_C^2$ ($u_C$ continue)\n• Bobine : $u_L = L\\frac{\\mathrm{d}i_L}{\\mathrm{d}t}$, $E_L = \\frac{1}{2}L\\,i_L^2$ ($i_L$ continue)",
+        "mnemonicOrTip": "En régime permanent continu ($\\mathrm{d}/\\mathrm{d}t = 0$), un condensateur se comporte comme un interrupteur ouvert ($i = 0$) et une bobine idéale comme un fil ($u_L = 0$)."
+      }
+    },
+    {
+      "id": "fc-phys-03-02",
+      "category": "Formule Critique",
+      "difficulty": 1,
+      "front": "Quelles sont les expressions des constantes de temps $\\tau$ d'un circuit RC série et d'un circuit RL série, et quelle est la durée caractéristique du régime transitoire ?",
+      "back": {
+        "mainAnswer": "On identifie $\\tau$ en mettant l'équation différentielle du premier ordre sous la forme canonique $\\tau\\frac{\\mathrm{d}y}{\\mathrm{d}t} + y = y_\\infty$. Le régime permanent est atteint à $95\\%$ au bout de $3\\tau$ et à $99\\%$ au bout de $5\\tau$.",
+        "criticalFormula": "$\\tau_{RC} = R\\,C \\quad ; \\quad \\tau_{RL} = \\frac{L}{R} \\quad ; \\quad \\Delta t_{\\text{transitoire}} \\approx 3\\tau \\text{ à } 5\\tau$",
+        "mnemonicOrTip": "Attention à ne pas inverser $L$ et $R$ dans $\\tau_{RL} = \\frac{L}{R}$ : plus la résistance $R$ dissipe d'énergie, plus l'établissement ou la rupture du courant dans la bobine est rapide."
+      }
+    },
+    {
+      "id": "fc-phys-03-03",
+      "category": "Méthode",
+      "difficulty": 2,
+      "front": "Dans l'analogie électromécanique entre un oscillateur mécanique amorti ($m, k, h$) et un circuit RLC série, quelles sont les grandeurs homologues et l'expression du facteur de qualité $Q$ ?",
+      "back": {
+        "mainAnswer": "L'équation $L\\ddot{q} + R\\dot{q} + \\frac{1}{C}q = E$ est mathématiquement identique à $m\\ddot{x} + h\\dot{x} + kx = F$. L'inductance $L$ joue le rôle de la masse $m$, $R$ celui du frottement $h$, et $1/C$ celui de la raideur $k$.",
+        "criticalFormula": "$$\\omega_0 = \\frac{1}{\\sqrt{L\\,C}} \\quad \\text{et} \\quad Q = \\frac{1}{R}\\sqrt{\\frac{L}{C}} = \\frac{L\\,\\omega_0}{R} = \\frac{1}{R\\,C\\,\\omega_0}$$",
+        "mnemonicOrTip": "Contrairement au cas mécanique où $k$ est au numérateur de $\\omega_0 = \\sqrt{k/m}$, la capacité $C$ est l'analogue de la souplesse $1/k$, donc $C$ se trouve au dénominateur dans $\\omega_0$ et $Q$."
+      }
+    },
+    {
+      "id": "fc-phys-03-04",
+      "category": "Formule Critique",
+      "difficulty": 2,
+      "front": "En régime sinusoïdal établi pour un circuit RLC série, à quelle pulsation a lieu la **résonance de courant**, que vaut alors l'impédance du circuit, et comment s'exprime la largeur $\\Delta\\omega$ du pic à $I_{\\max}/\\sqrt{2}$ ?",
+      "back": {
+        "mainAnswer": "À la résonance d'intensité ($\\omega = \\omega_0$), les réactances de la bobine et du condensateur s'annulent mutuellement ($jL\\omega_0 + \\frac{1}{jC\\omega_0} = 0$). Le circuit équivaut à la seule résistance $R$.",
+        "criticalFormula": "$$\\omega_{\\text{rés}} = \\omega_0 = \\frac{1}{\\sqrt{L\\,C}} \\quad ; \\quad \\underline{Z}(\\omega_0) = R \\quad ; \\quad \\Delta\\omega = \\frac{\\omega_0}{Q} = \\frac{R}{L}$$",
+        "mnemonicOrTip": "À la résonance de courant, la tension aux bornes de $R$ est en phase avec le générateur ($\\varphi = 0$) et d'amplitude maximale $E_m$, tandis que la bobine et le condensateur subissent une surtension d'amplitude $Q\\,E_m$."
+      }
+    },
+    {
+      "id": "fc-phys-03-05",
+      "category": "Théorème",
+      "difficulty": 2,
+      "front": "Quelle est l'expression de la puissance moyenne reçue par un dipôle en régime sinusoïdal établi, et pourquoi transporte-t-on l'électricité à haute tension avec un facteur de puissance proche de $1$ ?",
+      "back": {
+        "mainAnswer": "La puissance active vaut $P = U_{\\text{eff}}\\,I_{\\text{eff}}\\cos\\varphi$. Pour transporter une puissance $P$ donnée, l'intensité en ligne vaut $I_{\\text{eff}} = \\frac{P}{U_{\\text{eff}}\\cos\\varphi}$, ce qui détermine les pertes par effet Joule dans les câbles.",
+        "criticalFormula": "$$P = U_{\\text{eff}}\\,I_{\\text{eff}}\\cos(\\varphi) \\quad \\implies \\quad P_{\\text{Joule}} = R_{\\text{ligne}}\\,I_{\\text{eff}}^2 = \\frac{R_{\\text{ligne}}\\,P^2}{U_{\\text{eff}}^2\\cos^2(\\varphi)}$$",
+        "mnemonicOrTip": "Multiplier la tension de transport $U_{\\text{eff}}$ par $10$ divise l'intensité par $10$, et divise donc les pertes par effet Joule dans les lignes par $100$ !"
+      }
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+---
+title: "Thème D : Étude des fluides au repos ou en écoulement"
+subject: "physique-chimie"
+chapterId: "04-fluides-repos-ecoulement"
+semester: 2
+description: "Statique des fluides, opérateur gradient, poussée d'Archimède, cinématique eulérienne, conservation de la masse, opérateur divergence, relation de Bernoulli et pertes de charge."
+---
+
+# Étude des fluides au repos ou en écoulement
+
+Ce chapitre présente les propriétés mécaniques et énergétiques des fluides au repos (hydrostatique) ou en mouvement (dynamique des fluides) dans une approche orientée vers la réalisation de bilans globaux et locaux[cite: 17].
+
+---
+
+## 1. Description d'un fluide statique (Hydrostatique)
+
+### Échelle mésoscopique et Champ de pression
+L'étude macroscopique des fluides repose sur la définition d'une **échelle mésoscopique** (particule de fluide) : un volume élémentaire $\mathrm{d}\tau$ doit être à la fois **suffisamment grand** à l'échelle microscopique pour contenir un très grand nombre de molécules (permettant de définir des moyennes statistiques continues comme la pression $P$ ou la masse volumique $\rho$) et **suffisamment petit** à l'échelle macroscopique pour être assimilé à un point géométrique $M(x, y, z)$[cite: 17, 63].
+* **Ordre de grandeur de la taille mésoscopique** : typiquement de l'ordre du micromètre ($0{,}1\,\mu\text{m}$ à $10\,\mu\text{m}$) dans les liquides et les gaz aux conditions usuelles[cite: 17, 63].
+* **Ordres de grandeur de pression** : pression atmosphérique normale $P_{\text{atm}} \approx 1{,}013 \times 10^5\text{ Pa} = 1{,}013\text{ bar}$ ; pression dans un circuit hydraulique industriel : $100\text{ bar}$ à $300\text{ bar}$ ; augmentation de pression dans l'eau : environ $+1\text{ bar}$ tous les $10\text{ m}$ de profondeur[cite: 17, 63].
+
+### Forces de pression surfaciques et volumiques
+* **Force pressante sur une paroi plane** : Sur une surface plane d'aire $S$ où la pression $P$ est uniforme, le fluide exerce une force normale à la paroi, dirigée du fluide vers la paroi : **$\vec{F} = P\,S\,\vec{n}_{\text{ext}}$**[cite: 17, 63].
+* **Équivalent volumique des forces de pression (Démonstration 1D exigible)** : Considérons un parallélépipède élémentaire de fluide de volume $\mathrm{d}\tau = \mathrm{d}x\,\mathrm{d}y\,\mathrm{d}z$ dans un champ de pression ne dépendant que de $x$, soit $P(x)$[cite: 17]. La résultante des forces de pression selon $(Ox)$ s'exerçant sur les faces d'abscisses $x$ et $x + \mathrm{d}x$ (d'aire $\mathrm{d}S = \mathrm{d}y\,\mathrm{d}z$) vaut[cite: 17] :
+$$\mathrm{d}F_x = P(x)\,\mathrm{d}S - P(x + \mathrm{d}x)\,\mathrm{d}S = -\frac{\mathrm{d}P}{\mathrm{d}x}\,\mathrm{d}x\,\mathrm{d}S = -\frac{\mathrm{d}P}{\mathrm{d}x}\,\mathrm{d}\tau$$
+
+<CriticalFormula title="Force volumique de pression et Relation fondamentale de la statique des fluides">
+En généralisant à trois dimensions à l'aide de l'**opérateur gradient** ($\overrightarrow{\text{grad}}\,P = \frac{\partial P}{\partial x}\vec{u}_x + \frac{\partial P}{\partial y}\vec{u}_y + \frac{\partial P}{\partial z}\vec{u}_z$ en coordonnées cartésiennes), la résultante volumique des forces de pression s'écrit[cite: 17, 69] :
+$$\vec{f}_p = \frac{\mathrm{d}\vec{F}_p}{\mathrm{d}\tau} = -\overrightarrow{\text{grad}}\,P$$
+Pour un fluide au repos soumis uniquement au champ de pesanteur uniforme $\vec{g}$, la condition d'équilibre locale $\vec{f}_p + \rho\,\vec{g} = \vec{0}$ donne la **relation fondamentale de la statique des fluides**[cite: 17, 63] :
+$$\overrightarrow{\text{grad}}\,P = \rho\,\vec{g} \quad \Longleftrightarrow \quad \frac{\mathrm{d}P}{\mathrm{d}z} = -\rho\,g \quad \text{(axe } Oz \text{ vertical ascendant)}$$
+</CriticalFormula>
+
+### Applications de la statique des fluides et Poussée d'Archimède
+1. **Fluide incompressible et homogène ($\rho = \rho_0 = \text{cte}$)** : Par intégration directe entre deux altitudes $z_0$ et $z$ (axe $Oz$ vers le haut)[cite: 17, 63] :
+$$P(z) = P(z_0) - \rho_0\,g\,(z - z_0) \quad \text{soit} \quad P + \rho_0\,g\,z = \text{cte}$$
+*Applications pratiques* : barrage hydroélectrique, presse hydraulique, manomètre en U, baromètre à mercure[cite: 17].
+2. **Atmosphère isotherme dans le modèle du gaz parfait ($T = T_0 = \text{cte}$)** : L'équation d'état $P\,V = n\,R\,T_0$ donne la masse volumique $\rho(P) = \frac{P\,M}{R\,T_0}$[cite: 11, 17]. L'équation hydrostatique devient une équation différentielle à variables séparables[cite: 17, 63] :
+$$\frac{\mathrm{d}P}{\mathrm{d}z} = -\frac{M\,g}{R\,T_0}P \implies P(z) = P_0\,\exp\left(-\frac{M\,g}{R\,T_0}z\right) = P_0\,\exp\left(-\frac{z}{H}\right)$$
+où $H = \frac{R\,T_0}{M\,g} \approx 8\text{ km}$ est la hauteur caractéristique d'échelle de l'atmosphère[cite: 17]. *(Si l'atmosphère n'est pas isotherme, c'est-à-dire si $T(z)$ varie avec l'altitude, on intègre numériquement $\frac{\mathrm{d}P}{\mathrm{d}z} = -\frac{M g}{R T(z)}P$ en Python par la **méthode d'Euler**)*[cite: 17, 18].
+3. **Poussée d'Archimède** : Elle a pour origine la résultante des forces de pression exercées par le fluide statique sur la surface fermée d'un corps immergé (la pression étant plus forte sur la partie inférieure que sur la partie supérieure)[cite: 18]. Tout corps totalement ou partiellement immergé dans un fluide au repos subit une force verticale ascendante opposée au poids du volume $V_{\text{imm}}$ de fluide déplacé[cite: 18] :
+$$\vec{\Pi}_A = -\rho_{\text{fluide}}\,V_{\text{imm}}\,\vec{g}$$
+
+---
+
+## 2. Description cinématique d'un fluide en écoulement
+
+### Approche eulérienne, lignes de courant et débits
+En mécanique des fluides, on privilégie la **description eulérienne** : au lieu de suivre individuellement chaque particule au cours du temps, on définit en chaque point fixe $M(x,y,z)$ de l'espace le **champ des vitesses** $\vec{v}(M, t)$ et le champ de masse volumique $\rho(M, t)$[cite: 17, 18, 63].
+* **Écoulement stationnaire (ou permanent)** : Les grandeurs locales en un point fixe ne dépendent pas explicitement du temps : $\frac{\partial \vec{v}}{\partial t} = \vec{0}$ et $\frac{\partial \rho}{\partial t} = 0$[cite: 18, 63].
+* **Ligne de courant et tube de courant** : Une **ligne de courant** est une courbe qui, à un instant donné, est en tout point tangente au vecteur vitesse $\vec{v}(M, t)$ (en régime stationnaire, les lignes de courant coïncident avec les trajectoires des particules)[cite: 18, 63]. Un **tube de courant** est la surface tubulaire formée par l'ensemble des lignes de courant s'appuyant sur un contour fermé : aucun fluide ne traverse la paroi latérale d'un tube de courant[cite: 18, 63].
+
+<CriticalFormula title="Débit volumique, Débit massique et Vecteur densité de courant de masse">
+À travers une section droite d'aire $S$ (de vecteur normal unitaire $\vec{n}$ orienté dans le sens de l'écoulement) sur laquelle la vitesse $\vec{v}$ est uniforme[cite: 18, 63] :
+* **Débit volumique $D_v$** (en $\text{m}^3\cdot\text{s}^{-1}$, flux du vecteur vitesse $\vec{v}$) :
+$$D_v = \iint_S \vec{v}\cdot\vec{n}\,\mathrm{d}S = \vec{v}\cdot\vec{S} = v\,S\,\cos\alpha \quad (\text{soit } D_v = v\,S \text{ si } \vec{v} \perp S)$$
+* **Débit massique $D_m$** (en $\text{kg}\cdot\text{s}^{-1}$, flux du **vecteur densité de courant de masse** $\vec{j}_m = \rho\,\vec{v}$) :
+$$D_m = \iint_S \vec{j}_m\cdot\vec{n}\,\mathrm{d}S = \rho\,D_v = \rho\,v\,S$$
+</CriticalFormula>
+
+### Bilans de masse et Équation locale de conservation
+* **Conservation globale le long d'un tube de courant** :
+  1. Dans tout **écoulement stationnaire**, il n'y a ni accumulation ni perte de masse entre l'entrée $S_1$ et la sortie $S_2$ d'un tube de courant : **le débit massique se conserve** ($D_{m1} = D_{m2} \iff \rho_1 v_1 S_1 = \rho_2 v_2 S_2$)[cite: 18].
+  2. Dans un **écoulement de fluide incompressible** ($\rho = \text{cte}$), **le débit volumique se conserve** le long d'un tube de courant[cite: 18] :
+$$D_{v1} = D_{v2} \iff S_1\,v_1 = S_2\,v_2$$
+  *Conséquence topographique* : Pour un fluide incompressible, là où les lignes de courant se resserrent ($S$ diminue), la norme de la vitesse $v$ augmente (effet Venturi)[cite: 18].
+
+<SchemaPlaceholder alt="Tube de courant présentant un rétrécissement de section S1 vers S2 avec resserrement des lignes de courant et augmentation de la vitesse v2 > v1" caption="Figure 4.1 : Conservation du débit volumique le long d'un tube de courant et resserrement des lignes de courant." src="/images/physique-chimie/tube-de-courant-venturi.png"/>
+
+* **Équation locale de conservation de la masse (Démonstration 1D exigible)** : Considérons une tranche de fluide comprise entre $x$ et $x + \mathrm{d}x$ de section $S$ dans un écoulement unidirectionnel selon $(Ox)$[cite: 18]. Pendant $\mathrm{d}t$, la variation de la masse $\mathrm{d}m = \rho(x,t)\,S\,\mathrm{d}x$ contenue dans la tranche est égale à la masse entrante en $x$ moins la masse sortante en $x + \mathrm{d}x$[cite: 18] :
+$$\frac{\partial (\rho\,S\,\mathrm{d}x)}{\partial t}\mathrm{d}t = \big[j_{mx}(x,t)\,S - j_{mx}(x+\mathrm{d}x,t)\,S\big]\mathrm{d}t \implies \frac{\partial \rho}{\partial t} + \frac{\partial (\rho\,v_x)}{\partial x} = 0$$
+
+<CriticalFormula title="Équation de continuité 3D et Opérateur Divergence">
+En généralisant à trois dimensions à l'aide de l'**opérateur divergence** ($\text{div}(\vec{A}) = \frac{\partial A_x}{\partial x} + \frac{\partial A_y}{\partial y} + \frac{\partial A_z}{\partial z}$ en coordonnées cartésiennes), l'équation locale de conservation de la masse s'écrit[cite: 18, 28, 69] :
+$$\frac{\partial \rho}{\partial t} + \text{div}(\rho\,\vec{v}) = 0$$
+Pour un **fluide incompressible et homogène** ($\rho = \text{cte}$), cette relation se simplifie en tout point par[cite: 18, 63] :
+$$\text{div}(\vec{v}) = 0 \quad \text{(le champ des vitesses est à flux conservatif)}$$
+</CriticalFormula>
+
+---
+
+## 3. Aspect énergétique d'un écoulement stationnaire
+
+### Écoulement parfait et Relation de Bernoulli
+Un **écoulement parfait** est un écoulement exempt de toute dissipation d'énergie mécanique (viscosité nulle, aucun frottement) et exempt d'échange thermique interne ou externe[cite: 17, 18, 63].
+
+Pour établir la **relation de Bernoulli** entre deux points $A$ et $B$ d'une même ligne de courant (pour un écoulement **parfait, incompressible, homogène et stationnaire**), on applique le premier principe de la thermodynamique en système ouvert $\Delta h + \Delta e_c + \Delta e_p = w_i + q_e$[cite: 14, 18, 19, 63]. Sans machine hydraulique ($w_i = 0$), sans transfert thermique ($q_e = 0$) ni dissipation (donc $\Delta u = 0$), avec $h = u + \frac{P}{\rho}$, il vient $\Delta\left(\frac{P}{\rho} + \frac{1}{2}v^2 + g\,z\right) = 0$[cite: 11, 18, 19].
+
+<CriticalFormula title="Relation de Bernoulli (Écoulement parfait, incompressible, stationnaire)">
+Le long d'une même ligne de courant orientée de $A$ vers $B$, sous les **4 hypothèses strictes** (fluide **parfait**, **incompressible**, écoulement **stationnaire**, **sans machine hydraulique**)[cite: 18, 19, 63] :
+$$\frac{1}{2}\rho\,v_A^2 + \rho\,g\,z_A + P_A = \frac{1}{2}\rho\,v_B^2 + \rho\,g\,z_B + P_B = \text{cte}$$
+</CriticalFormula>
+
+<WarningBox title="Homogénéité et applications de la relation de Bernoulli">
+* Chaque terme de la relation de Bernoulli sous la forme $\frac{1}{2}\rho v^2 + \rho g z + P$ est homogène à une **pression** (en Pascals $\text{Pa}$) ou à une **densité volumique d'énergie** ($\text{J}\cdot\text{m}^{-3}$)[cite: 3, 18].
+* Applications classiques exigibles : **formule de Torricelli** (vidange d'un réservoir : $v = \sqrt{2gh}$), **tube de Venturi** (mesure de débit par dépression dans un étranglement) et **sonde de Pitot** (mesure d'une vitesse d'écoulement via le point d'arrêt où $v_A = 0 \implies P_A - P_B = \frac{1}{2}\rho v_\infty^2$)[cite: 6, 18, 19].
+</WarningBox>
+
+### Écoulements réels : Pertes de charge et Machines hydrauliques
+Dans une conduite réelle, les frottements visqueux dissipent de l'énergie mécanique : on distingue les **pertes de charge régulières** (dues au frottement tout au long d'une conduite rectiligne de longueur $L$) et les **pertes de charge singulières** (dues aux coudes, vannes, rétrécissements ou élargissements brusques)[cite: 17, 19, 64].
+
+Si la conduite allant de l'entrée $A$ vers la sortie $B$ comporte en outre une machine hydraulique (une **pompe** qui fournit une puissance mécanique utile $\mathcal{P}_u > 0$ au fluide, ou une **turbine** qui reçoit du fluide une puissance $\mathcal{P}_u < 0$) et subit une chute de pression par frottement $\Delta P_{\text{pertes}} > 0$, le bilan énergétique (ou bilan de puissance en multipliant par le débit volumique $D_v$) s'écrit[cite: 19, 63, 64] :
+
+<CriticalFormula title="Relation de Bernoulli généralisée (Pertes de charge et Pompe / Turbine)">
+En termes de pression (entre l'entrée $A$ et la sortie $B$ dans le sens de l'écoulement, avec $\Delta P_{\text{pertes}} > 0$)[cite: 19, 64] :
+$$\left(\frac{1}{2}\rho\,v_B^2 + \rho\,g\,z_B + P_B\right) - \left(\frac{1}{2}\rho\,v_A^2 + \rho\,g\,z_A + P_A\right) = \frac{\mathcal{P}_u}{D_v} - \Delta P_{\text{pertes}}$$
+En multipliant par le débit volumique $D_v$, on obtient le **bilan de puissance** de la conduite[cite: 19, 63] :
+$$\mathcal{P}_u = D_v\,\Delta\left(\frac{1}{2}\rho\,v^2 + \rho\,g\,z + P\right)_{A \to B} + \mathcal{P}_{\text{dissipée}} \quad \text{avec} \quad \mathcal{P}_{\text{dissipée}} = D_v\,\Delta P_{\text{pertes}} > 0$$
+</CriticalFormula>
