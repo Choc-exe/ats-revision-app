@@ -47,10 +47,11 @@ export default function Sidebar() {
           <GraduationCap className="w-5 h-5" />
         </div>
         <div>
-          <span className="font-bold text-slate-900 tracking-tight block leading-none">
-            CPGE ATS
+          <span className="font-extrabold text-slate-900 tracking-tight text-[15px] leading-tight flex items-center gap-1.5">
+            Prépa ATS
+            <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse" />
           </span>
-          <span className="text-xs text-slate-500 font-medium">
+          <span className="text-[11px] text-slate-500 font-semibold uppercase tracking-wider truncate">
             Ingénierie Industrielle
           </span>
         </div>
