@@ -1,0 +1,62 @@
+{
+  "chapterId": "04-convertisseurs-machines",
+  "subject": "sii",
+  "title": "Modulateurs d'énergie, Machines électriques et Chaîne d'information",
+  "cards": [
+    {
+      "id": "fc-sii-04-01",
+      "category": "Théorème",
+      "difficulty": 1,
+      "front": "Quelles sont les règles d'interconnexion des sources parfaites de tension et de courant en électronique de puissance, et qu'imposent-elles aux deux interrupteurs d'une cellule de commutation ?",
+      "back": {
+        "mainAnswer": "Il est interdit de court-circuiter une source de tension et il est interdit d'ouvrir le circuit d'une source de courant. Un modulateur direct connecte donc une source de tension à une source de courant.",
+        "criticalFormula": "• Les 2 interrupteurs $K_1, K_2$ d'une cellule ne doivent jamais être fermés simultanément (court-circuit de $U_e$)\n• Ils ne doivent jamais être ouverts simultanément (ouverture de $I_s$)\n$\\implies$ Commandes strictement complémentaires !",
+        "mnemonicOrTip": "C'est pour respecter la continuité du courant dans la bobine d'induit d'un moteur (source de courant) que l'on place obligatoirement une diode de roue libre en parallèle dans un hacheur série."
+      }
+    },
+    {
+      "id": "fc-sii-04-02",
+      "category": "Formule Critique",
+      "difficulty": 1,
+      "front": "Quelles sont les expressions de la tension moyenne de sortie $\\langle u_s \\rangle$ d'un **hacheur série**, d'un **hacheur 4 quadrants** (en commande bipolaire) et d'un **redresseur monophasé PD2** ?",
+      "back": {
+        "mainAnswer": "Les hacheurs règlent la tension moyenne via le rapport cyclique $\\alpha \\in [0, 1]$, tandis que le pont de Graëtz PD2 redresse les deux alternances d'une tension sinusoïdale d'amplitude $V_{\\max}$.",
+        "criticalFormula": "• Hacheur série : $\\langle u_s \\rangle = \\alpha\\,U_e$\n• Hacheur 4 quadrants : $\\langle u_s \\rangle = (2\\alpha - 1)\\,U_e$\n• Redresseur PD2 : $\\langle u_s \\rangle = \\frac{2}{\\pi}\\,V_{\\max} = \\frac{2\\sqrt{2}}{\\pi}\\,V_{\\text{eff}}$",
+        "mnemonicOrTip": "Pour le hacheur 4 quadrants en commande bipolaire : $\\alpha = 0{,}5 \\implies \\langle u_s \\rangle = 0\\text{ V}$ (arrêt) ; $\\alpha > 0{,}5 \\implies \\langle u_s \\rangle > 0$ ; $\\alpha < 0{,}5 \\implies \\langle u_s \\rangle < 0$."
+      }
+    },
+    {
+      "id": "fc-sii-04-03",
+      "category": "Formule Critique",
+      "difficulty": 1,
+      "front": "Quelles sont les 4 équations fondamentales modélisant une **Machine à Courant Continu (MCC)** à flux constant en régime dynamique ?",
+      "back": {
+        "mainAnswer": "Le modèle associe l'équation électrique de l'induit (R-L-E), l'équation mécanique du rotor et les deux équations de couplage électromécanique de constante $K_\\Phi$.",
+        "criticalFormula": "$$u(t) = e(t) + R\\,i(t) + L\\frac{\\mathrm{d}i(t)}{\\mathrm{d}t} \\quad ; \\quad J\\frac{\\mathrm{d}\\omega(t)}{\\mathrm{d}t} = C_{\\text{em}}(t) - C_r(t)$$\n$$e(t) = K_\\Phi\\,\\omega(t) \\quad \\text{et} \\quad C_{\\text{em}}(t) = K_\\Phi\\,i(t)$$",
+        "mnemonicOrTip": "Dans le système international d'unités (SI), la constante de f.é.m. $k_e$ (en $\\text{V}\\cdot\\text{s}\\cdot\\text{rad}^{-1}$) et la constante de couple $k_c$ (en $\\text{N}\\cdot\\text{m}\\cdot\\text{A}^{-1}$) ont exactement la même valeur numérique $K_\\Phi$ !"
+      }
+    },
+    {
+      "id": "fc-sii-04-04",
+      "category": "Méthode",
+      "difficulty": 2,
+      "front": "Comment vérifie-t-on le dimensionnement thermique d'un actionneur électrique soumis à un cycle de fonctionnement périodique de période $T$ comportant différentes phases de couple $C_k$ de durées $\\Delta t_k$ ?",
+      "back": {
+        "mainAnswer": "Les pertes thermiques par effet Joule ($R I^2$) étant proportionnelles au carré du couple ($C = K_\\Phi I$), on calcule le couple thermique quadratique équivalent (valeur efficace du couple sur le cycle) et on le compare au couple nominal permanent $C_{\\text{nom}}$.",
+        "criticalFormula": "$$C_{\\text{th, eq}} = \\sqrt{\\frac{1}{T}\\int_0^T C^2(t)\\,\\mathrm{d}t} = \\sqrt{\\frac{\\sum_k C_k^2\\,\\Delta t_k}{T}} \\le C_{\\text{nom}}$$",
+        "mnemonicOrTip": "Un moteur électrique peut fournir un couple de pointe supérieur à $C_{\\text{nom}}$ pendant une courte phase d'accélération, tant que le couple quadratique moyen sur l'ensemble du cycle (incluant les temps de repos) reste inférieur à $C_{\\text{nom}}$ !"
+      }
+    },
+    {
+      "id": "fc-sii-04-05",
+      "category": "Formule Critique",
+      "difficulty": 1,
+      "front": "Dans une chaîne d'acquisition numérique, quelle est la condition du théorème de Shannon sur la fréquence d'échantillonnage $f_e$, et quelle est la résolution (quantum $q$) d'un CAN de $n$ bits sur une plage $\\Delta U$ ?",
+      "back": {
+        "mainAnswer": "La fréquence d'échantillonnage doit être strictement supérieure au double de la fréquence maximale du signal utile. Un CAN de $n$ bits découpe la plage pleine échelle $\\Delta U$ en $2^n$ intervalles.",
+        "criticalFormula": "$$f_e > 2\\,f_{\\max} \\qquad \\text{et} \\qquad q = \\frac{\\Delta U}{2^n}$$",
+        "mnemonicOrTip": "Pour garantir le respect de la condition de Shannon avant l'échantillonnage, on place toujours un filtre analogique passe-bas dit **filtre anti-repliement** de fréquence de coupure $f_c \\le f_e / 2$."
+      }
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "chapterId": "02-cinematique-solide",
+  "subject": "sii",
+  "title": "Modélisation cinématique des mécanismes",
+  "cards": [
+    {
+      "id": "fc-sii-02-01",
+      "category": "Formule Critique",
+      "difficulty": 1,
+      "front": "Énoncer la formule de dérivation vectorielle (formule de Bour) permettant de dériver un vecteur $\\vec{U}$ exprimé dans une base mobile $\\mathcal{B}_1$ par rapport à un repère d'observation $\\mathcal{R}_0$.",
+      "back": {
+        "mainAnswer": "La dérivée dans $\\mathcal{R}_0$ est égale à la dérivée locale dans $\\mathcal{R}_1$ (en dérivant uniquement les composantes) augmentée du produit vectoriel du vecteur taux de rotation $\\vec{\\Omega}(\\mathcal{R}_1/\\mathcal{R}_0)$ par $\\vec{U}$.",
+        "criticalFormula": "$$\\left(\\frac{\\mathrm{d}\\vec{U}}{\\mathrm{d}t}\\right)_{\\mathcal{R}_0} = \\left(\\frac{\\mathrm{d}\\vec{U}}{\\mathrm{d}t}\\right)_{\\mathcal{R}_1} + \\vec{\\Omega}(\\mathcal{R}_1/\\mathcal{R}_0) \\wedge \\vec{U}$$",
+        "mnemonicOrTip": "Si $\\vec{U}$ a des coordonnées constantes dans la base $\\mathcal{B}_1$ (ex: un vecteur unitaire $\\vec{x}_1$ ou un vecteur $\\vec{AB}$ fixe sur le solide $S_1$), alors $\\left(\\frac{\\mathrm{d}\\vec{U}}{\\mathrm{d}t}\\right)_{\\mathcal{R}_1} = \\vec{0}$ !"
+      }
+    },
+    {
+      "id": "fc-sii-02-02",
+      "category": "Formule Critique",
+      "difficulty": 1,
+      "front": "Quelle est la relation de changement de point (formule de Varignon) pour le champ des vecteurs vitesse d'un solide $S_2$ en mouvement par rapport à $S_1$ ?",
+      "back": {
+        "mainAnswer": "Le moment du torseur cinématique obéit à la relation de changement de point d'un champ de moments : la vitesse en $B$ se déduit de la vitesse en $A$ et du taux de rotation $\\vec{\\Omega}(S_2/S_1)$.",
+        "criticalFormula": "$$\\vec{V}(B \\in S_2/S_1) = \\vec{V}(A \\in S_2/S_1) + \\vec{BA} \\wedge \\vec{\\Omega}(S_2/S_1) = \\vec{V}(A \\in S_2/S_1) + \\vec{\\Omega}(S_2/S_1) \\wedge \\vec{AB}$$",
+        "mnemonicOrTip": "Moyen mnémotechnique `BABAR` : $\\vec{V}(B) = \\vec{V}(A) + \\vec{BA} \\wedge \\vec{R}$ (où $\\vec{R} = \\vec{\\Omega}$ est la résultante du torseur cinématique)."
+      }
+    },
+    {
+      "id": "fc-sii-02-03",
+      "category": "Définition",
+      "difficulty": 2,
+      "front": "Comment définit-on le vecteur vitesse de glissement de $S_2$ par rapport à $S_1$ au point de contact $I$, et comment se traduit l'hypothèse de **roulement sans glissement (RSG)** ?",
+      "back": {
+        "mainAnswer": "La vitesse de glissement est la vitesse du point géométrique $I$ appartenant à $S_2$ dans son mouvement par rapport à $S_1$. Il y a roulement sans glissement en $I$ si cette vitesse est nulle.",
+        "criticalFormula": "$$\\vec{V}_g(I \\in S_2/S_1) = \\vec{V}(I \\in S_2/S_1) = \\vec{V}(I \\in S_2/S_0) - \\vec{V}(I \\in S_1/S_0) \\quad ; \\quad \\text{RSG} \\iff \\vec{V}(I \\in S_2/S_1) = \\vec{0}$$",
+        "mnemonicOrTip": "Pour une roue $S_1$ de rayon $R$ et de centre $C$ roulant sans glisser en $I$ sur un sol fixe $S_0$ ($\\vec{V}(I \\in S_1/S_0) = \\vec{0}$), Varignon entre $C$ et $I$ donne directement la vitesse d'avance $v_C = R\\,\\omega$."
+      }
+    },
+    {
+      "id": "fc-sii-02-04",
+      "category": "Formule Critique",
+      "difficulty": 1,
+      "front": "Quelles sont les lois entrée-sortie cinématiques d'un transmetteur **vis-écrou** de pas $p$ et d'un **train d'engrenages simple** comportant $k$ contacts extérieurs ?",
+      "back": {
+        "mainAnswer": "Dans un système vis-écrou, un tour complet ($2\\pi\\text{ rad}$) provoque une translation égale au pas $p$. Dans un train d'engrenages simple, le rapport de réduction est le produit des dents menantes sur le produit des dents menées.",
+        "criticalFormula": "$$\\text{Vis-écrou : } v = \\frac{p}{2\\pi}\\,\\omega \\qquad ; \\qquad \\text{Engrenages : } r = \\frac{\\omega_s}{\\omega_e} = (-1)^k\\,\\frac{\\prod Z_{\\text{menantes}}}{\\prod Z_{\\text{menées}}}$$",
+        "mnemonicOrTip": "Attention aux unités en SII : si la vitesse de rotation est donnée en tours par minute ($N$ en $\\text{tr}\\cdot\\text{min}^{-1}$), pensez à convertir avec $\\omega = \\frac{2\\pi\\,N}{60} = \\frac{\\pi\\,N}{30}\\text{ rad}\\cdot\\text{s}^{-1}$ (et $v = p \\times \\frac{N}{60}$)."
+      }
+    },
+    {
+      "id": "fc-sii-02-05",
+      "category": "Méthode",
+      "difficulty": 2,
+      "front": "Quelle est la forme du torseur cinématique d'une **liaison appui plan** de normale $\\vec{z}$ et d'une **liaison pivot glissant** d'axe $(A, \\vec{x})$ au point $A$ ?",
+      "back": {
+        "mainAnswer": "Dans une liaison appui plan de normale $\\vec{z}$, seuls les mouvements dans le plan $(Oxy)$ sont autorisés ($T_x, T_y$ et $R_z$). Dans un pivot glissant d'axe $(A, \\vec{x})$, seules la translation $T_x$ et la rotation $R_x$ sont autorisées.",
+        "criticalFormula": "$$\\text{Appui plan } (\\vec{z}) : \\left\\{ \\begin{array}{cc} 0 & u \\\\\\\\ 0 & v \\\\\\\\ \\omega_z & 0 \\end{array} \\right\\}_{\\forall A, (\\vec{x},\\vec{y},\\vec{z})} \\quad ; \\quad \\text{Pivot glissant } (A,\\vec{x}) : \\left\\{ \\begin{array}{cc} \\omega_x & u \\\\\\\\ 0 & 0 \\\\\\\\ 0 & 0 \\end{array} \\right\\}_{A, (\\vec{x},\\vec{y},\\vec{z})}$$",
+        "mnemonicOrTip": "Dans la notation en colonnes d'un torseur cinématique, la colonne de gauche contient toujours les 3 composantes de rotation $(\\vec{\\Omega})$ et la colonne de droite les 3 composantes de vitesse de translation $(\\vec{V}(A))$."
+      }
+    }
+  ]
+}

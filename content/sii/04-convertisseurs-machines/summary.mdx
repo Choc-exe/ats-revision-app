@@ -1,0 +1,22 @@
+---
+title: "Fiche Synthèse : Modulateurs d'énergie et Machines électriques"
+subject: "sii"
+chapterId: "04-convertisseurs-machines"
+---
+
+## L'Essentiel du Bulletin Officiel ATS
+
+* **Chaîne d'information (CAN, Shannon & Réseaux)** :
+  * **Condition de Shannon** : **$f_e > 2\,f_{\max}$** (filtre passe-bas anti-repliement en amont du CAN)[cite: 37, 122].
+  * **CAN ($n$ bits, plage $\Delta U$)** : $2^n$ valeurs codées, résolution (quantum) **$q = \frac{\Delta U}{2^n}$**[cite: 37, 52].
+  * **Trame série** : Débit utile $D_{\text{utile}} = D_b \times \frac{N_{\text{bits utiles}}}{N_{\text{bits total trame}}}$[cite: 37, 51].
+* **Modulateurs statiques d'énergie (Électronique de puissance)** :
+  * Règles : Ne jamais court-circuiter une source de tension ; ne jamais ouvrir une source de courant ; commandes complémentaires sur une cellule de commutation[cite: 42, 43].
+  * **Hacheur série** : **$\langle u_s \rangle = \alpha\,U_e$** ; **Hacheur 4 quadrants** (bipolaire) : **$\langle u_s \rangle = (2\alpha - 1)\,U_e$**[cite: 43, 47].
+  * **Pont redresseur PD2** : $u_s(t) = |v_e(t)|$ et **$\langle u_s \rangle = \frac{2}{\pi}V_{\max} = \frac{2\sqrt{2}}{\pi}V_{\text{eff}}$**[cite: 43, 47].
+* **Machines électriques & Commande** :
+  * **MCC à flux constant** : $u = E + R i + L\frac{\mathrm{d}i}{\mathrm{d}t}$, **$E = K_\Phi\,\Omega$**, **$C_{\text{em}} = K_\Phi\,I$** et $J\frac{\mathrm{d}\omega}{\mathrm{d}t} = C_{\text{em}} - C_r$[cite: 43, 44, 127].
+  * **4 Quadrants $(\Omega, C_{\text{em}})$** : Q1 et Q3 ($\mathcal{P}_{\text{em}} > 0$) = Moteur ; Q2 et Q4 ($\mathcal{P}_{\text{em}} < 0$) = Génératrice / Freinage[cite: 43, 48].
+  * **Triphasé équilibré** : $U = \sqrt{3}\,V$, **$P = \sqrt{3}\,U\,I\cos\varphi$**, $Q = \sqrt{3}\,U\,I\sin\varphi$, $S = \sqrt{3}\,U\,I = \sqrt{P^2 + Q^2}$[cite: 47].
+  * **Machines alternatives ($p$ paires de pôles)** : Synchronisme **$\Omega_s = \frac{2\pi f}{p}$** ($N_s = \frac{60 f}{p}$) ; glissement MAS **$g = \frac{\Omega_s - \Omega}{\Omega_s}$** (commande scalaire $V/f = \text{cte}$)[cite: 43, 127].
+  * **Dimensionnement thermique** : Couple quadratique moyen **$C_{\text{th, eq}} = \sqrt{\frac{1}{T}\sum C_k^2 \Delta t_k} \le C_{\text{nom}}$**[cite: 52, 130].

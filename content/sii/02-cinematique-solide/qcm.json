@@ -1,0 +1,112 @@
+{
+  "chapterId": "02-cinematique-solide",
+  "subject": "sii",
+  "title": "QCM d'entraînement : Modélisation cinématique des mécanismes",
+  "questions": [
+    {
+      "id": "qcm-sii-02-01",
+      "difficulty": "Application directe",
+      "questionText": "Un bras manipulateur $S_1$ est en liaison pivot d'axe $(O, \\vec{z}_0)$ avec le bâti fixe $S_0$, paramétrée par l'angle $\\theta(t) = (\\vec{x}_0, \\vec{x}_1)$ (avec $\\vec{z}_0 = \\vec{z}_1$). Un point $A$ lié au bras $S_1$ est défini par $\\vec{OA} = L\\,\\vec{x}_1$ où $L$ est une longueur constante. Quelles sont les expressions du vecteur vitesse $\\vec{V}(A \\in S_1/S_0)$ et du vecteur accélération $\\vec{\\Gamma}(A \\in S_1/S_0)$ exprimées dans la base mobile $(\\vec{x}_1, \\vec{y}_1, \\vec{z}_0)$ ?",
+      "options": [
+        { "id": "A", "text": "$\\vec{V}(A \\in S_1/S_0) = L\\,\\dot{\\theta}\\,\\vec{y}_1$ et $\\vec{\\Gamma}(A \\in S_1/S_0) = L\\,\\ddot{\\theta}\\,\\vec{y}_1$" },
+        { "id": "B", "text": "$\\vec{V}(A \\in S_1/S_0) = L\\,\\dot{\\theta}\\,\\vec{y}_1$ et $\\vec{\\Gamma}(A \\in S_1/S_0) = -L\\,\\dot{\\theta}^2\\,\\vec{x}_1 + L\\,\\ddot{\\theta}\\,\\vec{y}_1$" },
+        { "id": "C", "text": "$\\vec{V}(A \\in S_1/S_0) = -L\\,\\dot{\\theta}\\,\\vec{y}_1$ et $\\vec{\\Gamma}(A \\in S_1/S_0) = -L\\,\\dot{\\theta}^2\\,\\vec{x}_1 - L\\,\\ddot{\\theta}\\,\\vec{y}_1$" },
+        { "id": "D", "text": "$\\vec{V}(A \\in S_1/S_0) = \\vec{0}$ car $L$ est constante." }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. On dérive $\\vec{OA} = L\\,\\vec{x}_1$ par rapport à $\\mathcal{R}_0$ avec la formule de Bour ($\\vec{\\Omega}(S_1/S_0) = \\dot{\\theta}\\,\\vec{z}_0$ et $L = \\text{cte}$) : $\\vec{V}(A \\in S_1/S_0) = \\vec{\\Omega}(S_1/S_0) \\wedge (L\\,\\vec{x}_1) = L\\,\\dot{\\theta}\\,(\\vec{z}_0 \\wedge \\vec{x}_1) = L\\,\\dot{\\theta}\\,\\vec{y}_1$.",
+          "2. Pour l'accélération, on dérive $\\vec{V}(A \\in S_1/S_0) = L\\,\\dot{\\theta}\\,\\vec{y}_1$ par rapport à $\\mathcal{R}_0$ en appliquant à nouveau la formule de Bour : $\\vec{\\Gamma}(A \\in S_1/S_0) = \\left(\\frac{\\mathrm{d}(L\\dot{\\theta}\\vec{y}_1)}{\\mathrm{d}t}\\right)_{\\mathcal{R}_1} + \\vec{\\Omega}(S_1/S_0) \\wedge (L\\,\\dot{\\theta}\\,\\vec{y}_1)$.",
+          "3. Comme $\\vec{z}_0 \\wedge \\vec{y}_1 = -\\vec{x}_1$, on obtient $\\vec{\\Gamma}(A \\in S_1/S_0) = L\\,\\ddot{\\theta}\\,\\vec{y}_1 - L\\,\\dot{\\theta}^2\\,\\vec{x}_1$ (somme de l'accélération orthoradiale et de l'accélération centripète)."
+        ],
+        "keyFormula": "$$\\left(\\frac{\\mathrm{d}\\vec{x}_1}{\\mathrm{d}t}\\right)_{\\mathcal{R}_0} = \\dot{\\theta}\\,\\vec{y}_1 \\quad \\text{et} \\quad \\left(\\frac{\\mathrm{d}\\vec{y}_1}{\\mathrm{d}t}\\right)_{\\mathcal{R}_0} = -\\dot{\\theta}\\,\\vec{x}_1$$",
+        "commonTrap": "La réponse A oublie de dériver le vecteur unitaire tournant $\\vec{y}_1$ (qui engendre le terme centripète $-L\\dot{\\theta}^2\\vec{x}_1$). La réponse D dérive dans $\\mathcal{R}_1$ au lieu de $\\mathcal{R}_0$."
+      }
+    },
+    {
+      "id": "qcm-sii-02-02",
+      "difficulty": "Calculatoire",
+      "questionText": "Dans une base orthonormée directe $(\\vec{x}, \\vec{y}, \\vec{z})$, le torseur cinématique du mouvement d'un solide $S_1$ par rapport à $S_0$ est donné au point $A(0, 0, 0)$ par $\\vec{\\Omega}(S_1/S_0) = 2\\,\\vec{z}$ (en $\\text{rad}\\cdot\\text{s}^{-1}$) et $\\vec{V}(A \\in S_1/S_0) = 3\\,\\vec{x}$ (en $\\text{m}\\cdot\\text{s}^{-1}$). Quel est le vecteur vitesse $\\vec{V}(B \\in S_1/S_0)$ au point $B$ tel que $\\vec{AB} = 4\\,\\vec{y}$ (en $\\text{m}$) ?",
+      "options": [
+        { "id": "A", "text": "$\\vec{V}(B \\in S_1/S_0) = -5\\,\\vec{x}\\text{ m}\\cdot\\text{s}^{-1}$" },
+        { "id": "B", "text": "$\\vec{V}(B \\in S_1/S_0) = 11\\,\\vec{x}\\text{ m}\\cdot\\text{s}^{-1}$" },
+        { "id": "C", "text": "$\\vec{V}(B \\in S_1/S_0) = 3\\,\\vec{x} + 8\\,\\vec{y}\\text{ m}\\cdot\\text{s}^{-1}$" },
+        { "id": "D", "text": "$\\vec{V}(B \\in S_1/S_0) = 3\\,\\vec{x}\\text{ m}\\cdot\\text{s}^{-1}$" }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. On applique la formule de changement de point (Varignon) au torseur cinématique : $\\vec{V}(B \\in S_1/S_0) = \\vec{V}(A \\in S_1/S_0) + \\vec{BA} \\wedge \\vec{\\Omega}(S_1/S_0) = \\vec{V}(A \\in S_1/S_0) + \\vec{\\Omega}(S_1/S_0) \\wedge \\vec{AB}$.",
+          "2. On calcule le produit vectoriel dans la base directe $(\\vec{x}, \\vec{y}, \\vec{z})$ : $\\vec{\\Omega}(S_1/S_0) \\wedge \\vec{AB} = (2\\,\\vec{z}) \\wedge (4\\,\\vec{y}) = 8\\,(\\vec{z} \\wedge \\vec{y}) = -8\\,\\vec{x}$.",
+          "3. En additionnant avec $\\vec{V}(A \\in S_1/S_0) = 3\\,\\vec{x}$, on obtient $\\vec{V}(B \\in S_1/S_0) = 3\\,\\vec{x} - 8\\,\\vec{x} = -5\\,\\vec{x}\\text{ m}\\cdot\\text{s}^{-1}$."
+        ],
+        "keyFormula": "$$\\vec{V}(B \\in S_1/S_0) = \\vec{V}(A \\in S_1/S_0) + \\vec{\\Omega}(S_1/S_0) \\wedge \\vec{AB}$$",
+        "commonTrap": "La réponse B ($11\\,\\vec{x}$) se trompe de signe dans le produit vectoriel $\\vec{z} \\wedge \\vec{y} = -\\vec{x}$ (ou confond $\\vec{AB}$ et $\\vec{BA}$ dans la formule `BABAR`)."
+      }
+    },
+    {
+      "id": "qcm-sii-02-03",
+      "difficulty": "Application directe",
+      "questionText": "Un axe linéaire de machine-outil est entraîné par un moteur électrique tournant à la fréquence de rotation $N_m = 1\\,500\\text{ tr}\\cdot\\text{min}^{-1}$. Le moteur attaque un réducteur à engrenages de rapport $r = \\frac{\\omega_{\\text{vis}}}{\\omega_m} = \\frac{1}{5}$, dont la sortie entraîne directement une **vis à billes** de pas $p = 10\\text{ mm}\\cdot\\text{tr}^{-1}$. Quelle est la vitesse linéaire $v$ de l'écrou (table mobile) en $\\text{mm}\\cdot\\text{s}^{-1}$ ?",
+      "options": [
+        { "id": "A", "text": "$v = 50\\text{ mm}\\cdot\\text{s}^{-1}$" },
+        { "id": "B", "text": "$v = 3\\,000\\text{ mm}\\cdot\\text{s}^{-1}$" },
+        { "id": "C", "text": "$v = 250\\text{ mm}\\cdot\\text{s}^{-1}$" },
+        { "id": "D", "text": "$v = 50\\,\\pi\\text{ mm}\\cdot\\text{s}^{-1}$" }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. La fréquence de rotation de la vis en sortie du réducteur vaut $N_{\\text{vis}} = r \\times N_m = \\frac{1}{5} \\times 1\\,500 = 300\\text{ tr}\\cdot\\text{min}^{-1}$.",
+          "2. On convertit cette vitesse de rotation en tours par seconde : $n_{\\text{vis}} = \\frac{N_{\\text{vis}}}{60} = \\frac{300}{60} = 5\\text{ tr}\\cdot\\text{s}^{-1}$ (soit $\\omega_{\\text{vis}} = 2\\pi \\times 5 = 10\\pi\\text{ rad}\\cdot\\text{s}^{-1}$).",
+          "3. La loi entrée-sortie du système vis-écrou de pas $p = 10\\text{ mm}\\cdot\\text{tr}^{-1}$ donne $v = \\frac{p}{2\\pi}\\,\\omega_{\\text{vis}} = p \\times n_{\\text{vis}} = 10\\text{ mm}\\cdot\\text{tr}^{-1} \\times 5\\text{ tr}\\cdot\\text{s}^{-1} = 50\\text{ mm}\\cdot\\text{s}^{-1}$."
+        ],
+        "keyFormula": "$$v = \\frac{p}{2\\pi}\\,\\omega_{\\text{vis}} = p\\,\\frac{N_{\\text{vis}}}{60} = p\\,r\\,\\frac{N_m}{60}$$",
+        "commonTrap": "La réponse B oublie de diviser par $60$ pour passer des minutes aux secondes. La réponse D oublie que le facteur $2\\pi$ se simplifie entre $\\omega = \\frac{2\\pi N}{60}$ et $v = \\frac{p}{2\\pi}\\omega$."
+      }
+    },
+    {
+      "id": "qcm-sii-02-04",
+      "difficulty": "Calculatoire",
+      "questionText": "Un réducteur à train d'engrenages simple à axes parallèles comporte deux étages ($k = 2$ contacts extérieurs) : un pignon moteur $1$ ($Z_1 = 18$ dents) engrène avec une roue $2$ ($Z_2 = 72$ dents) solidaire d'un pignon $2'$ ($Z_{2'} = 20$ dents) qui engrène avec la roue de sortie $3$ ($Z_3 = 60$ dents). Que vaut le rapport de transmission global $r = \\frac{\\omega_{3/0}}{\\omega_{1/0}}$ ?",
+      "options": [
+        { "id": "A", "text": "$r = -\\frac{1}{12}$" },
+        { "id": "B", "text": "$r = +\\frac{1}{12}$" },
+        { "id": "C", "text": "$r = +12$" },
+        { "id": "D", "text": "$r = +\\frac{1}{7}$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. Les roues menantes sont les pignons $1$ et $2'$, et les roues menées sont les roues $2$ et $3$.",
+          "2. Il y a $k = 2$ contacts extérieurs, donc le signe du rapport est $(-1)^2 = +1$ (l'arbre de sortie tourne dans le même sens que l'arbre d'entrée).",
+          "3. On applique la formule des trains simples : $r = \\frac{\\omega_{3/0}}{\\omega_{1/0}} = (-1)^2 \\frac{Z_1 \\times Z_{2'}}{Z_2 \\times Z_3} = +\\frac{18 \\times 20}{72 \\times 60} = +\\frac{1}{4} \\times \\frac{1}{3} = +\\frac{1}{12}$."
+        ],
+        "keyFormula": "$$r = \\frac{\\omega_s}{\\omega_e} = (-1)^k\\,\\frac{\\prod Z_{\\text{menantes}}}{\\prod Z_{\\text{menées}}}$$",
+        "commonTrap": "La réponse A se trompe sur le signe $(-1)^k$ avec $k = 2$, et la réponse C inverse les roues menantes et les roues menées."
+      }
+    },
+    {
+      "id": "qcm-sii-02-05",
+      "difficulty": "Type Concours",
+      "questionText": "Une roue cylindrique $S_1$ de centre $C$ et de rayon $R$, animée d'un mouvement plan dans $(O_0, \\vec{x}_0, \\vec{y}_0)$ avec $\\vec{\\Omega}(S_1/S_0) = -\\omega\\,\\vec{z}_0$ et $\\vec{V}(C \\in S_1/S_0) = v_C\\,\\vec{x}_0$, est en contact ponctuel en $I$ (tel que $\\vec{CI} = -R\\,\\vec{y}_0$) avec le sol fixe $S_0$. Quelle est l'expression du vecteur vitesse de glissement $\\vec{V}(I \\in S_1/S_0)$, et quelle condition relie $v_C$ et $\\omega$ en cas de **roulement sans glissement** en $I$ ?",
+      "options": [
+        { "id": "A", "text": "$\\vec{V}(I \\in S_1/S_0) = (v_C - R\\,\\omega)\\,\\vec{x}_0$ et RSG $\\iff v_C = R\\,\\omega$" },
+        { "id": "B", "text": "$\\vec{V}(I \\in S_1/S_0) = (v_C + R\\,\\omega)\\,\\vec{x}_0$ et RSG $\\iff v_C = -R\\,\\omega$" },
+        { "id": "C", "text": "$\\vec{V}(I \\in S_1/S_0) = v_C\\,\\vec{x}_0$ et RSG $\\iff v_C = 0$" },
+        { "id": "D", "text": "$\\vec{V}(I \\in S_1/S_0) = -R\\,\\omega\\,\\vec{y}_0$ et RSG $\\iff \\omega = 0$" }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. On transporte la vitesse du centre $C$ de la roue au point de contact $I$ par la formule de Varignon : $\\vec{V}(I \\in S_1/S_0) = \\vec{V}(C \\in S_1/S_0) + \\vec{\\Omega}(S_1/S_0) \\wedge \\vec{CI}$.",
+          "2. Avec $\\vec{\\Omega}(S_1/S_0) = -\\omega\\,\\vec{z}_0$ et $\\vec{CI} = -R\\,\\vec{y}_0$, on calcule le produit vectoriel : $(-\\omega\\,\\vec{z}_0) \\wedge (-R\\,\\vec{y}_0) = +R\\,\\omega\\,(\\vec{z}_0 \\wedge \\vec{y}_0) = -R\\,\\omega\\,\\vec{x}_0$.",
+          "3. On obtient $\\vec{V}(I \\in S_1/S_0) = (v_C - R\\,\\omega)\\,\\vec{x}_0$. La condition de roulement sans glissement ($\\vec{V}(I \\in S_1/S_0) = \\vec{0}$) impose donc $v_C - R\\,\\omega = 0 \\iff v_C = R\\,\\omega$."
+        ],
+        "keyFormula": "$$\\vec{V}(I \\in S_1/S_0) = \\vec{V}(C \\in S_1/S_0) + \\vec{\\Omega}(S_1/S_0) \\wedge \\vec{CI} = \\vec{0}$$",
+        "commonTrap": "La réponse B résulte d'une erreur d'orientation du trièdre lors du calcul de $\\vec{z}_0 \\wedge \\vec{y}_0 = -\\vec{x}_0$ : physiquement, si la roue avance selon $+\\vec{x}_0$ ($v_C > 0$), elle doit tourner dans le sens horaire ($-\\vec{z}_0$, donc $\\omega > 0$)."
+      }
+    }
+  ]
+}

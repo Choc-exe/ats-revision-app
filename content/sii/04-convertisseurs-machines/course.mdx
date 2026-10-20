@@ -1,0 +1,90 @@
+---
+title: "Chapitre 04 : Modulateurs d'énergie et Machines électriques"
+subject: "sii"
+chapterId: "04-convertisseurs-machines"
+semester: 2
+description: "Chaînes d'information et de puissance, électronique de puissance (hacheurs, onduleur MLI, PD2), machines électriques (MCC, MS, MAS) et commande."
+---
+
+# Modulateurs d'énergie, Machines électriques et Chaînes fonctionnelles
+
+Ce chapitre étudie les constituants de la **chaîne de puissance** (modulateurs statiques d'énergie et convertisseurs électromécaniques) ainsi que leur pilotage par la **chaîne d'information** au sein d'un système pluritechnologique[cite: 36, 37, 43, 44].
+
+---
+
+## 1. Chaîne d'information, Échantillonnage et Communication
+
+Dans l'architecture fonctionnelle d'un système, la **chaîne d'information** assure les fonctions **Acquérir** (capteurs), **Traiter** (filtres, CAN, microcontrôleur/automate) et **Communiquer** (liaisons série, réseaux, IHM)[cite: 36, 37].
+* **Échantillonnage et Théorème de Shannon** : Pour numériser un signal analogique de fréquence maximale $f_{\max}$ sans perte d'information par repliement de spectre, la fréquence d'échantillonnage $f_e = \frac{1}{T_e}$ doit vérifier la **condition de Shannon** (admise) : **$f_e > 2\,f_{\max}$**[cite: 37, 50, 122]. Un **filtre passe-bas anti-repliement** est placé en amont du Convertisseur Analogique-Numérique (CAN) pour éliminer les hautes fréquences parasites supérieures à $f_e / 2$[cite: 37, 122].
+* **Convertisseur Analogique-Numérique (CAN)** : Caractérisé par sa plage de tension d'entrée $\Delta U = U_{\max} - U_{\min}$ et son nombre de bits $n$ (codant $2^n$ valeurs distinctes, de $0$ à $2^n - 1$ en binaire naturel non signé)[cite: 37, 52]. La **résolution analogique (ou quantum $q$)** vaut[cite: 37, 52] :
+$$q = \frac{\Delta U}{2^n} \quad (\text{ou } \frac{\Delta U}{2^n - 1})$$
+* **Transmission série (type RS232)** : Dans une liaison asynchrone de débit binaire $D_b$ (en $\text{bits}\cdot\text{s}^{-1}$, durée d'un bit $T_b = \frac{1}{D_b}$), une trame encapsule les bits de données utiles ($N_{\text{utile}}$, ex: $8\text{ bits}$) entre un bit de départ (*Start*), un éventuel bit de parité et un ou deux bits d'arrêt (*Stop*), soit $N_{\text{total}}$ bits par trame[cite: 37, 51]. Le **débit utile** vaut **$D_{\text{utile}} = D_b \times \frac{N_{\text{utile}}}{N_{\text{total}}}$**[cite: 37, 51].
+
+---
+
+## 2. Modulateurs statiques d'énergie (Électronique de puissance)
+
+### Règles d'interconnexion des sources et Cellule de commutation
+Un modulateur d'énergie (préactionneur) adapte l'énergie électrique entre une source d'entrée et une charge de sortie à l'aide d'interrupteurs électroniques (diodes, transistors MOSFET/IGBT) supposés parfaits (pertes hors programme)[cite: 42, 43].
+
+<CriticalFormula title="Règles d'interconnexion des sources parfaites et Cellule de commutation">
+* **Règles d'interconnexion** :
+  1. Une **source de tension** (ex: batterie, réseau, condensateur) ne doit **jamais être court-circuitée**, mais peut être mise en circuit ouvert[cite: 42, 43].
+  2. Une **source de courant** (ex: bobine d'inductance $L$ ou induit de moteur) ne doit **jamais être mise en circuit ouvert**, mais peut être court-circuitée[cite: 42, 43].
+  3. Un convertisseur direct sans stockage connecte obligatoirement **une source de tension d'un côté et une source de courant de l'autre**[cite: 42, 43, 124].
+* **Cellule élémentaire de commutation** (reliant une source de tension $U_e$ à une source de courant $I_s$ via deux interrupteurs $K_1$ et $K_2$) : Pour éviter à la fois le court-circuit de $U_e$ et l'ouverture de $I_s$, les deux interrupteurs $K_1$ et $K_2$ ont impérativement des **commandes strictement complémentaires** (à tout instant, l'un est fermé et l'autre est ouvert)[cite: 43].
+</CriticalFormula>
+
+### Les 4 convertisseurs statiques au programme ATS
+1. **Hacheur série (Continu $\to$ Continu, 1 ou 2 quadrants)** : Sur une période de découpage $T$, l'interrupteur commandé $K$ est fermé sur $[0, \alpha T]$ ($u_s = U_e$) et la diode de roue libre conduit sur $[\alpha T, T]$ ($u_s = 0$), où $\alpha \in [0, 1]$ est le **rapport cyclique**[cite: 43, 124]. La valeur moyenne de la tension de sortie vaut[cite: 43, 47, 133] :
+$$\langle u_s \rangle = \frac{1}{T}\int_0^{\alpha T} U_e\,\mathrm{d}t = \alpha\,U_e$$
+2. **Hacheur 4 quadrants en pont en H (Continu $\to$ Continu réversible)** : Permet d'inverser à la fois le signe de la tension moyenne $\langle u_s \rangle$ et celui du courant $\langle i_s \rangle$[cite: 43, 124]. En commande bipolaire de rapport cyclique $\alpha \in [0, 1]$ ($u_s = +U_e$ sur $[0, \alpha T]$ et $u_s = -U_e$ sur $[\alpha T, T]$)[cite: 43, 47] :
+$$\langle u_s \rangle = (2\alpha - 1)\,U_e \quad (\text{s'annule pour } \alpha = 0{,}5)$$
+3. **Pont redresseur monophasé non commandé PD2 (Alternatif $\to$ Continu)** : Constitué de 4 diodes alimentées par $v_e(t) = V_{\max}\sin(\omega t)$ et débitant dans une source de courant constant $I_c$[cite: 43, 124]. La tension redressée vaut $u_s(t) = |v_e(t)|$, de période $\frac{T}{2}$ et de **valeur moyenne** **$\langle u_s \rangle = \frac{2}{\pi}\,V_{\max} = \frac{2\sqrt{2}}{\pi}\,V_{\text{eff}}$**[cite: 43, 47].
+4. **Onduleur de tension (Continu $\to$ Alternatif) et commande MLI** : La commande par **Modulation de Largeur d'Impulsion (MLI)** découpe la tension de sortie à une fréquence porteuse élevée afin de repousser les harmoniques de tension vers les hautes fréquences, qui sont ensuite naturellement filtrés par l'inductance de la machine électrique (le courant absorbé devient quasi sinusoïdal)[cite: 43, 124].
+
+---
+
+## 3. Convertisseurs électromécaniques : Machine à Courant Continu (MCC)
+
+<SchemaPlaceholder alt="Schéma électrique équivalent R-L-E de l'induit d'une machine à courant continu et représentation des 4 quadrants de fonctionnement (Couple, Vitesse)" caption="Figure 4.1 : Modèle dynamique R-L-E d'une Machine à Courant Continu et fonctionnement réversible dans les 4 quadrants." src="/images/sii/modele-mcc-4-quadrants.png"/>
+
+<CriticalFormula title="Équations électriques, mécaniques et électromécaniques de la MCC à flux constant">
+Pour une Machine à Courant Continu (MCC) à aimants permanents ou à excitation constante (constante de couplage $k_e = k_c = K_\Phi$ en $\text{V}\cdot\text{s}\cdot\text{rad}^{-1}$ ou $\text{N}\cdot\text{m}\cdot\text{A}^{-1}$)[cite: 43, 44, 127] :
+* **Équation électrique de l'induit (Modèle R-L-E)** :
+$$u(t) = e(t) + R\,i(t) + L\frac{\mathrm{d}i(t)}{\mathrm{d}t} \quad \text{soit en régime permanent continu :} \quad U = E + R\,I$$
+* **Relations de couplage électromécanique parfait** ($\mathcal{P}_{\text{em}} = E\,I = C_{\text{em}}\,\Omega$)[cite: 43, 127] :
+$$e(t) = K_\Phi\,\omega(t) \quad \text{et} \quad C_{\text{em}}(t) = K_\Phi\,i(t)$$
+* **Équation mécanique sur l'arbre** (inertie totale $J$, couple résistant $C_r$ incluant les pertes mécaniques) :
+$$J\frac{\mathrm{d}\omega(t)}{\mathrm{d}t} = C_{\text{em}}(t) - C_r(t) \quad \text{soit en régime permanent :} \quad C_{\text{em}} = C_r$$
+* **Bilan de puissance et Rendement en moteur** : Puissance absorbée $P_{\text{abs}} = U\,I$, pertes par effet Joule $P_J = R\,I^2$, puissance électromécanique $P_{\text{em}} = E\,I = C_{\text{em}}\,\Omega$, puissance mécanique utile $P_u = C_u\,\Omega = P_{\text{em}} - P_{\text{méca}}$, et rendement **$\eta = \frac{P_u}{P_{\text{abs}}} = \frac{C_u\,\Omega}{U\,I}$**[cite: 43, 47, 127].
+</CriticalFormula>
+
+* **Caractéristique mécanique et Point de fonctionnement** : En éliminant $I = \frac{U - K_\Phi \Omega}{R}$, la caractéristique mécanique en régime permanent est une droite affine **$C_{\text{em}}(\Omega) = \frac{K_\Phi}{R}U - \frac{K_\Phi^2}{R}\Omega$**[cite: 47, 127]. Le **point de fonctionnement** $(\Omega_0, C_0)$ de l'association actionneur-charge s'obtient à l'intersection $C_u(\Omega_0) = C_{\text{charge}}(\Omega_0)$[cite: 47, 48, 127].
+* **Les 4 quadrants dans le plan $(\Omega, C_{\text{em}})$** :
+  * **Quadrants 1 ($\Omega > 0, C_{\text{em}} > 0$) et 3 ($\Omega < 0, C_{\text{em}} < 0$)** : Puissance $\mathcal{P}_{\text{em}} = C_{\text{em}}\,\Omega > 0 \implies$ fonctionnement en **Moteur** (sens avant Q1, sens arrière Q3)[cite: 43, 48].
+  * **Quadrants 2 ($\Omega > 0, C_{\text{em}} < 0$) et 4 ($\Omega < 0, C_{\text{em}} > 0$)** : Puissance $\mathcal{P}_{\text{em}} = C_{\text{em}}\,\Omega < 0 \implies$ fonctionnement en **Génératrice / Freinage récupératif**[cite: 43, 48].
+
+---
+
+## 4. Machines à courant alternatif, Puissances et Dimensionnement
+
+### Puissances en régime sinusoïdal monophasé et triphasé équilibré
+Pour un système triphasé équilibré de tension simple efficace $V$ (entre phase et neutre), de tension composée efficace $U = \sqrt{3}\,V$ (entre deux phases), d'intensité en ligne $I$ et de déphasage $\varphi$[cite: 47, 124] :
+
+<CriticalFormula title="Puissances Active (P), Réactive (Q) et Apparente (S) en Monophasé et Triphasé">
+* **En monophasé** : $P = V\,I\cos\varphi$ (en $\text{W}$), $Q = V\,I\sin\varphi$ (en $\text{var}$), $S = V\,I = \sqrt{P^2 + Q^2}$ (en $\text{VA}$)[cite: 47].
+* **En triphasé équilibré** :
+$$P = 3\,V\,I\cos\varphi = \sqrt{3}\,U\,I\cos\varphi \quad ; \quad Q = \sqrt{3}\,U\,I\sin\varphi \quad ; \quad S = \sqrt{3}\,U\,I = \sqrt{P^2 + Q^2}$$
+et le facteur de puissance vaut toujours **$k = \frac{P}{S} = \cos\varphi$** (en régime sinusoïdal)[cite: 47].
+</CriticalFormula>
+
+### Machines Synchrone (MS) et Asynchrone (MAS) et Commande
+*(Les modèles électriques des machines alternatives sont fournis aux concours)*[cite: 43, 127] :
+* **Champ tournant et vitesse de synchronisme** : Alimenté à la fréquence électrique $f$ (pulsation $\omega = 2\pi f$), un stator comportant $p$ paires de pôles crée un champ magnétique tournant à la **vitesse de synchronisme** **$\Omega_s = \frac{\omega}{p} = \frac{2\pi\,f}{p}$** (soit $N_s = \frac{60\,f}{p}\text{ tr}\cdot\text{min}^{-1}$)[cite: 43, 127].
+* **Machine Synchrone (MS)** : Le rotor tourne exactement au synchronisme ($\Omega = \Omega_s$). Le modèle monophasé de **Behn-Eschenburg** par phase s'écrit en complexe $\underline{V} = \underline{E}_v + (R_s + j\,L_s\,\omega)\,\underline{I}$ (diagramme de Fresnel)[cite: 43, 47, 127]. Munie d'un capteur de position rotorique (**autopilotage**), la MS se commande en couple comme une MCC ($C_{\text{em}} = K_T\,I$)[cite: 44].
+* **Machine Asynchrone (MAS) à cage** : Le rotor tourne à une vitesse $\Omega \neq \Omega_s$ caractérisée par le **glissement** **$g = \frac{\Omega_s - \Omega}{\Omega_s} = \frac{N_s - N}{N_s}$**[cite: 43, 127]. Pour faire varier la vitesse à flux statorique constant sans saturer le circuit magnétique, on utilise la **commande scalaire à $\frac{V}{f} = \text{cte}$**[cite: 43, 127].
+* **Architecture de commande et Dimensionnement thermique** :
+  * Pour asservir un axe motorisé en vitesse (ou en position), on imbrique une **boucle interne rapide d'asservissement de courant (donc de couple $C_{\text{em}}$)** à l'intérieur de la boucle externe de vitesse[cite: 44, 124].
+  * Pour vérifier qu'un moteur supporte l'échauffement par effet Joule ($\propto I^2 \propto C^2$) sur un cycle périodique de durée $T$ comportant des phases de couples $C_k$ pendant $\Delta t_k$, on calcule le **couple thermique quadratique équivalent** et on vérifie qu'il reste inférieur au couple nominal permanent $C_{\text{nom}}$ de la documentation constructeur[cite: 52, 130] :
+$$C_{\text{th, eq}} = \sqrt{\frac{1}{T}\int_0^T C^2(t)\,\mathrm{d}t} = \sqrt{\frac{\sum_k C_k^2\,\Delta t_k}{T}} \le C_{\text{nom}}$$

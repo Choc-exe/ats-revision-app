@@ -1,0 +1,112 @@
+{
+  "chapterId": "04-convertisseurs-machines",
+  "subject": "sii",
+  "title": "QCM d'entraînement : Modulateurs d'énergie et Machines électriques",
+  "questions": [
+    {
+      "id": "qcm-sii-04-01",
+      "difficulty": "Application directe",
+      "questionText": "Un hacheur 4 quadrants en pont en H, alimenté par une batterie de tension continue $U_e = 48\\text{ V}$ et piloté en commande bipolaire de rapport cyclique $\\alpha \\in [0, 1]$, alimente l'induit d'une machine à courant continu. Quelle valeur du rapport cyclique $\\alpha$ le correcteur doit-il imposer pour obtenir une tension moyenne aux bornes du moteur égale à $\\langle u_s \\rangle = -12\\text{ V}$ ?",
+      "options": [
+        { "id": "A", "text": "$\\alpha = 0{,}25$" },
+        { "id": "B", "text": "$\\alpha = 0{,}375$" },
+        { "id": "C", "text": "$\\alpha = -0{,}25$" },
+        { "id": "D", "text": "$\\alpha = 0{,}625$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. Pour un hacheur 4 quadrants en commande bipolaire, la valeur moyenne de la tension de sortie est reliée au rapport cyclique $\\alpha \\in [0, 1]$ par la loi $\\langle u_s \\rangle = (2\\alpha - 1)\\,U_e$.",
+          "2. On résout $(2\\alpha - 1) \\times 48 = -12 \\iff 2\\alpha - 1 = -\\frac{12}{48} = -0{,}25$.",
+          "3. On isole $\\alpha$ : $2\\alpha = 1 - 0{,}25 = 0{,}75 \\implies \\alpha = 0{,}375$."
+        ],
+        "keyFormula": "$$\\langle u_s \\rangle = (2\\alpha - 1)\\,U_e \\iff \\alpha = \\frac{1}{2}\\left(1 + \\frac{\\langle u_s \\rangle}{U_e}\\right)$$",
+        "commonTrap": "La réponse C ($\\alpha = -0{,}25$) est physiquement absurde car un rapport cyclique est une proportion temporelle toujours comprise entre $0$ et $1$. La réponse D ($0{,}625$) donne $+12\\text{ V}$ au lieu de $-12\\text{ V}$."
+      }
+    },
+    {
+      "id": "qcm-sii-04-02",
+      "difficulty": "Calculatoire",
+      "questionText": "Une Machine à Courant Continu (MCC) à aimants permanents de résistance d'induit $R = 0{,}50\\,\\Omega$ et de constante électromécanique $K_\\Phi = 0{,}20\\text{ V}\\cdot\\text{s}\\cdot\\text{rad}^{-1}$ (ou $\\text{N}\\cdot\\text{m}\\cdot\\text{A}^{-1}$) fonctionne en régime permanent sous une tension d'induit $U = 24\\text{ V}$ et absorbe un courant $I = 8{,}0\\text{ A}$. En négligeant les pertes mécaniques et magnétiques ($C_u = C_{\\text{em}}$), que valent sa vitesse angulaire $\\Omega$, son couple électromécanique $C_{\\text{em}}$ et son rendement $\\eta$ ?",
+      "options": [
+        { "id": "A", "text": "$\\Omega = 100\\text{ rad}\\cdot\\text{s}^{-1}$, $C_{\\text{em}} = 1{,}6\\text{ N}\\cdot\\text{m}$ et $\\eta \\approx 83{,}3\\%$" },
+        { "id": "B", "text": "$\\Omega = 120\\text{ rad}\\cdot\\text{s}^{-1}$, $C_{\\text{em}} = 1{,}6\\text{ N}\\cdot\\text{m}$ et $\\eta = 100\\%$" },
+        { "id": "C", "text": "$\\Omega = 100\\text{ rad}\\cdot\\text{s}^{-1}$, $C_{\\text{em}} = 40\\text{ N}\\cdot\\text{m}$ et $\\eta \\approx 83{,}3\\%$" },
+        { "id": "D", "text": "$\\Omega = 140\\text{ rad}\\cdot\\text{s}^{-1}$, $C_{\\text{em}} = 1{,}6\\text{ N}\\cdot\\text{m}$ et $\\eta \\approx 85{,}7\\%$" }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. En régime permanent continu ($\\mathrm{d}i/\\mathrm{d}t = 0$), la loi des mailles sur l'induit donne $E = U - R\\,I = 24 - 0{,}50 \\times 8{,}0 = 24 - 4{,}0 = 20\\text{ V}$.",
+          "2. De $E = K_\\Phi\\,\\Omega$, on déduit la vitesse de rotation : $\\Omega = \\frac{E}{K_\\Phi} = \\frac{20}{0{,}20} = 100\\text{ rad}\\cdot\\text{s}^{-1}$.",
+          "3. Le couple électromécanique vaut $C_{\\text{em}} = K_\\Phi\\,I = 0{,}20 \\times 8{,}0 = 1{,}6\\text{ N}\\cdot\\text{m}$.",
+          "4. En l'absence de pertes mécaniques, $P_u = P_{\\text{em}} = E\\,I = 20 \\times 8{,}0 = 160\\text{ W}$ et $P_{\\text{abs}} = U\\,I = 24 \\times 8{,}0 = 192\\text{ W}$, d'où le rendement $\\eta = \\frac{P_u}{P_{\\text{abs}}} = \\frac{E}{U} = \\frac{20}{24} = \\frac{5}{6} \\approx 83{,}3\\%$."
+        ],
+        "keyFormula": "$$E = U - R\\,I = K_\\Phi\\,\\Omega \\quad ; \\quad C_{\\text{em}} = K_\\Phi\\,I \\quad ; \\quad \\eta = \\frac{C_u\\,\\Omega}{U\\,I}$$",
+        "commonTrap": "La réponse B oublie la chute de tension ohmique $R\\,I = 4\\text{ V}$ dans la résistance d'induit (en prenant $E = U = 24\\text{ V}$), et la réponse D additionne $R\\,I$ au lieu de le soustraire."
+      }
+    },
+    {
+      "id": "qcm-sii-04-03",
+      "difficulty": "Application directe",
+      "questionText": "Une machine asynchrone triphasée à cage comportant $p = 2$ paires de pôles ($4$ pôles) est alimentée par le réseau triphasé équilibré de fréquence $f = 50\\text{ Hz}$. En fonctionnement nominal moteur, son rotor tourne à la fréquence de rotation $N = 1\\,440\\text{ tr}\\cdot\\text{min}^{-1}$. Que valent la vitesse de synchronisme $N_s$ et le glissement $g$ de cette machine ?",
+      "options": [
+        { "id": "A", "text": "$N_s = 3\\,000\\text{ tr}\\cdot\\text{min}^{-1}$ et $g = 52\\%$" },
+        { "id": "B", "text": "$N_s = 1\\,500\\text{ tr}\\cdot\\text{min}^{-1}$ et $g = 4{,}0\\%$" },
+        { "id": "C", "text": "$N_s = 1\\,500\\text{ tr}\\cdot\\text{min}^{-1}$ et $g = 60\\%$" },
+        { "id": "D", "text": "$N_s = 750\\text{ tr}\\cdot\\text{min}^{-1}$ et $g = -92\\%$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. Pour une fréquence statorique $f = 50\\text{ Hz}$ et $p = 2$ paires de pôles, la fréquence de rotation du champ tournant (vitesse de synchronisme) vaut $N_s = \\frac{60\\,f}{p} = \\frac{60 \\times 50}{2} = 1\\,500\\text{ tr}\\cdot\\text{min}^{-1}$.",
+          "2. Le glissement est défini par l'écart relatif de vitesse : $g = \\frac{N_s - N}{N_s} = \\frac{1\\,500 - 1\\,440}{1\\,500} = \\frac{60}{1\\,500} = 0{,}040 = 4{,}0\\%$."
+        ],
+        "keyFormula": "$$N_s = \\frac{60\\,f}{p} \\quad \\text{et} \\quad g = \\frac{N_s - N}{N_s} = \\frac{\\Omega_s - \\Omega}{\\Omega_s}$$",
+        "commonTrap": "La réponse A confond le nombre de paires de pôles ($p = 2$) et le nombre de pôles ($2p = 4$). La réponse C confond la vitesse de glissement absolue ($N_s - N = 60\\text{ tr}\\cdot\\text{min}^{-1}$) avec le glissement relatif $g$."
+      }
+    },
+    {
+      "id": "qcm-sii-04-04",
+      "difficulty": "Type Concours",
+      "questionText": "Un moteur électrique d'axe robotisé effectue un cycle périodique de durée totale $T = 10\\text{ s}$ décomposé en trois phases :\n- Phase 1 (accélération pendant $\\Delta t_1 = 2\\text{ s}$) : couple $C_1 = 12\\text{ N}\\cdot\\text{m}$ ;\n- Phase 2 (vitesse constante pendant $\\Delta t_2 = 5\\text{ s}$) : couple $C_2 = 4{,}0\\text{ N}\\cdot\\text{m}$ ;\n- Phase 3 (repos pendant $\\Delta t_3 = 3\\text{ s}$) : couple $C_3 = 0\\text{ N}\\cdot\\text{m}$.\nQue vaut le **couple thermique quadratique équivalent** $C_{\\text{th, eq}}$ sur ce cycle pour dimensionner le moteur ?",
+      "options": [
+        { "id": "A", "text": "$C_{\\text{th, eq}} = 4{,}4\\text{ N}\\cdot\\text{m}$" },
+        { "id": "B", "text": "$C_{\\text{th, eq}} \\approx 6{,}07\\text{ N}\\cdot\\text{m}$" },
+        { "id": "C", "text": "$C_{\\text{th, eq}} = 12{,}0\\text{ N}\\cdot\\text{m}$" },
+        { "id": "D", "text": "$C_{\\text{th, eq}} = 36{,}8\\text{ N}\\cdot\\text{m}$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. On calcule la moyenne des carrés des couples pondérés par leurs durées sur la période totale $T = 10\\text{ s}$ : $\\langle C^2 \\rangle = \\frac{C_1^2\\,\\Delta t_1 + C_2^2\\,\\Delta t_2 + C_3^2\\,\\Delta t_3}{T}$.",
+          "2. Application numérique : $\\langle C^2 \\rangle = \\frac{12^2 \\times 2 + 4{,}0^2 \\times 5 + 0^2 \\times 3}{10} = \\frac{144 \\times 2 + 16 \\times 5 + 0}{10} = \\frac{288 + 80}{10} = \\frac{368}{10} = 36{,}8\\text{ N}^2\\cdot\\text{m}^2$.",
+          "3. En prenant la racine carrée, le couple thermique équivalent vaut $C_{\\text{th, eq}} = \\sqrt{36{,}8} \\approx 6{,}07\\text{ N}\\cdot\\text{m}$ (un moteur de couple nominal permanent $C_{\\text{nom}} = 7\\text{ N}\\cdot\\text{m}$ et de couple maximal $C_{\\max} \\ge 12\\text{ N}\\cdot\\text{m}$ convient donc parfaitement)."
+        ],
+        "keyFormula": "$$C_{\\text{th, eq}} = \\sqrt{\\frac{\\sum_k C_k^2\\,\\Delta t_k}{T}} \\le C_{\\text{nom}}$$",
+        "commonTrap": "La réponse A ($4{,}4\\text{ N}\\cdot\\text{m}$) calcule la moyenne arithmétique simple $\\frac{12 \\times 2 + 4 \\times 5}{10}$ au lieu de la moyenne quadratique (or l'effet Joule est proportionnel à $I^2$, donc à $C^2$). La réponse D oublie de prendre la racine carrée finale."
+      }
+    },
+    {
+      "id": "qcm-sii-04-05",
+      "difficulty": "Application directe",
+      "questionText": "Dans la chaîne d'acquisition d'un capteur de pression délivrant une tension comprise entre $0\\text{ V}$ et $10\\text{ V}$ ($\\Delta U = 10\\text{ V}$), on souhaite que la résolution analogique (quantum $q$) du Convertisseur Analogique-Numérique (CAN) soit inférieure ou égale à $3{,}0\\text{ mV}$. Quel est le nombre minimal de bits $n$ que doit posséder ce CAN ?",
+      "options": [
+        { "id": "A", "text": "$n = 8\\text{ bits}$ ($q \\approx 39\\text{ mV}$)" },
+        { "id": "B", "text": "$n = 10\\text{ bits}$ ($q \\approx 9{,}8\\text{ mV}$)" },
+        { "id": "C", "text": "$n = 12\\text{ bits}$ ($q \\approx 2{,}44\\text{ mV}$)" },
+        { "id": "D", "text": "$n = 4\\text{ bits}$ ($q = 625\\text{ mV}$)" }
+      ],
+      "correctOptionId": "C",
+      "explanation": {
+        "steps": [
+          "1. La résolution (quantum) d'un CAN de $n$ bits sur une plage pleine échelle $\\Delta U = 10\\text{ V}$ vaut $q = \\frac{\\Delta U}{2^n}$.",
+          "2. On cherche le plus petit entier $n$ tel que $\\frac{10}{2^n} \\le 3{,}0 \\times 10^{-3}\\text{ V} \\iff 2^n \\ge \\frac{10}{0{,}003} \\approx 3\\,333{,}3$.",
+          "3. Or $2^{10} = 1\\,024$, $2^{11} = 2\\,048 < 3\\,333$ et $2^{12} = 4\\,096 \\ge 3\\,333$. Il faut donc un CAN d'au moins $n = 12\\text{ bits}$ (qui offre un quantum $q = \\frac{10}{4\\,096} \\approx 2{,}44\\text{ mV} \\le 3{,}0\\text{ mV}$)."
+        ],
+        "keyFormula": "$$q = \\frac{\\Delta U}{2^n} \\le q_{\\max} \\iff 2^n \\ge \\frac{\\Delta U}{q_{\\max}}$$",
+        "commonTrap": "Ne pas confondre le nombre de bits $n$ avec le nombre de niveaux de quantification $2^n$."
+      }
+    }
+  ]
+}

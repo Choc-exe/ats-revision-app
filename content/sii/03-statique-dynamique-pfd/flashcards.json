@@ -1,0 +1,62 @@
+{
+  "chapterId": "03-statique-dynamique-pfd",
+  "subject": "sii",
+  "title": "Statique, Dynamique (PFD/TEC) et Résistance des Matériaux",
+  "cards": [
+    {
+      "id": "fc-sii-03-01",
+      "category": "Méthode",
+      "difficulty": 2,
+      "front": "Dans un mécanisme comportant un bras $S_1$ en liaison pivot parfaite d'axe $(A, \\vec{z}_0)$ avec le bâti $S_0$ et actionné par un vérin, quel isolement et quelle équation scalaire du PFS (ou du PFD) permettent de déterminer l'effort du vérin sans faire apparaître les 5 inconnues de la liaison pivot ?",
+      "back": {
+        "mainAnswer": "Dans une liaison pivot parfaite d'axe $(A, \\vec{z}_0)$, le moment transmissible suivant l'axe de rotation est nul ($\\vec{M}_A(S_0 \\to S_1)\\cdot\\vec{z}_0 = 0$). Il suffit donc d'écrire le théorème du moment statique (ou dynamique) au centre $A$ projeté sur $\\vec{z}_0$.",
+        "criticalFormula": "$$\\text{Isoler } S_1 \\text{ et projeter le théorème du moment en } A \\text{ sur } \\vec{z}_0 : \\sum \\vec{M}_A(\\text{ext} \\to S_1) \\cdot \\vec{z}_0 = J_{Az}\\,\\ddot{\\theta}$$",
+        "mnemonicOrTip": "En SII, écrire les 6 équations scalaires d'un torseur est une perte de temps considérable aux concours : choisissez toujours l'unique équation scalaire correspondant à la mobilité de la liaison !"
+      }
+    },
+    {
+      "id": "fc-sii-03-02",
+      "category": "Formule Critique",
+      "difficulty": 2,
+      "front": "Comment calcule-t-on le **moment d'inertie équivalent $J_{\\text{eq}}$** ramené sur l'arbre moteur (vitesse $\\omega_m$) d'un ensemble $\\Sigma$ comprenant un rotor moteur $J_m$, un réducteur de rapport $r = \\frac{\\omega_s}{\\omega_m}$ entraînant une poulie $J_s$, et une masse $m$ en translation à la vitesse $v = R\\,\\omega_s$ ?",
+      "back": {
+        "mainAnswer": "On écrit que l'énergie cinétique totale de $\\Sigma$ est égale à $\\frac{1}{2}J_{\\text{eq}}\\omega_m^2$ en exprimant toutes les vitesses en fonction de $\\omega_m$ : $\\omega_s = r\\,\\omega_m$ et $v = R\\,r\\,\\omega_m$.",
+        "criticalFormula": "$$E_c(\\Sigma/\\mathcal{R}_0) = \\frac{1}{2}J_m\\omega_m^2 + \\frac{1}{2}J_s\\omega_s^2 + \\frac{1}{2}mv^2 = \\frac{1}{2}J_{\\text{eq}}\\omega_m^2 \\implies J_{\\text{eq}} = J_m + r^2\\,J_s + m\\,R^2\\,r^2$$",
+        "mnemonicOrTip": "Attention : comme les énergies cinétiques sont quadratiques, le rapport de réduction $r$ et le rayon $R$ interviennent au **carré** ($r^2$ et $R^2$) dans $J_{\\text{eq}}$ !"
+      }
+    },
+    {
+      "id": "fc-sii-03-03",
+      "category": "Théorème",
+      "difficulty": 2,
+      "front": "Énoncer le **Théorème de l'Énergie Cinétique (TEC)** pour un ensemble de solides $\\Sigma$ d'inertie équivalente $J_{\\text{eq}}$ constante ramenée sur l'arbre moteur $\\omega_m$, et préciser comment simplifier par $\\omega_m$.",
+      "back": {
+        "mainAnswer": "La dérivée temporelle de l'énergie cinétique galiléenne est égale à la somme des puissances des actions extérieures et des puissances des inter-efforts intérieurs.",
+        "criticalFormula": "$$\\frac{\\mathrm{d}}{\\mathrm{d}t}\\left(\\frac{1}{2}J_{\\text{eq}}\\,\\omega_m^2\\right) = J_{\\text{eq}}\\,\\omega_m\\,\\frac{\\mathrm{d}\\omega_m}{\\mathrm{d}t} = \\mathcal{P}_{\\text{ext}} + \\mathcal{P}_{\\text{int}}$$",
+        "mnemonicOrTip": "Comme chaque terme de puissance est proportionnel à $\\omega_m$ (ex: $C_m \\omega_m$, $-F v = -F R r \\omega_m$), on divise toute l'équation par $\\omega_m \\neq 0$ pour obtenir directement l'équation différentielle du mouvement $J_{\\text{eq}}\\frac{\\mathrm{d}\\omega_m}{\\mathrm{d}t} = C_m - \\dots$"
+      }
+    },
+    {
+      "id": "fc-sii-03-04",
+      "category": "Formule Critique",
+      "difficulty": 1,
+      "front": "En Résistance des Matériaux (RDM), comment définit-on le **torseur de cohésion** $\\mathcal{T}_{\\text{coh}}(x)$ lors d'une coupure d'abscisse $x$ séparant la poutre en un tronçon gauche $E_1 = [0, x]$ et un tronçon droit $E_2 = [x, L]$ ?",
+      "back": {
+        "mainAnswer": "Le torseur de cohésion est le torseur des actions internes exercées par le tronçon de droite $E_2$ sur le tronçon de gauche $E_1$ au centre de surface $G(x)$ de la section coupée.",
+        "criticalFormula": "$$\\mathcal{T}_{\\text{coh}}(x) = \\mathcal{T}(E_2 \\to E_1) = -\\mathcal{T}(\\text{ext} \\to E_1) = +\\mathcal{T}(\\text{ext} \\to E_2)$$",
+        "mnemonicOrTip": "Règle d'or pour aller vite : choisissez d'isoler le tronçon ($E_1$ avec un signe MOINS, ou $E_2$ avec un signe PLUS) qui comporte le moins d'actions extérieures (par exemple l'extrémité libre d'une poutre encastrée) !"
+      }
+    },
+    {
+      "id": "fc-sii-03-05",
+      "category": "Formule Critique",
+      "difficulty": 2,
+      "front": "Quelles sont les formules de la contrainte normale maximale $\\sigma_{\\max}$ et de la déformée en **traction simple** et en **flexion plane simple**, ainsi que le critère de sécurité en RDM ?",
+      "back": {
+        "mainAnswer": "En traction, la contrainte est uniforme sur la section $S$. En flexion, la contrainte varie linéairement avec la distance $y$ à la fibre neutre et dépend du moment quadratique $I_{Gz}$.",
+        "criticalFormula": "• Traction : $\\sigma = \\frac{|N|}{S}$ et $\\Delta L = \\frac{N\\,L}{E\\,S}$\n• Flexion : $\\sigma_{\\max} = \\frac{|M_{fz}|_{\\max}}{I_{Gz}}\\,y_{\\max}$ et $E\\,I_{Gz}\\,y''(x) = M_{fz}(x)$\n• Critère : $\\sigma_{\\max} \\le \\frac{R_e}{s}$",
+        "mnemonicOrTip": "Astuce d'unités : en travaillant avec les forces en $\\text{N}$ et les longueurs en $\\text{mm}$ ($S$ en $\\text{mm}^2$, $M_{fz}$ en $\\text{N}\\cdot\\text{mm}$, $I_{Gz}$ en $\\text{mm}^4$), les contraintes $\\sigma$ et le module d'Young $E$ s'expriment directement en $\\text{MPa}$ ($1\\text{ MPa} = 1\\text{ N}\\cdot\\text{mm}^{-2}$) !"
+      }
+    }
+  ]
+}

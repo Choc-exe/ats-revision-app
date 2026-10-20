@@ -1,0 +1,115 @@
+{
+  "chapterId": "03-statique-dynamique-pfd",
+  "subject": "sii",
+  "title": "QCM d'entraînement : Statique, Dynamique (PFD/TEC) et RDM",
+  "questions": [
+    {
+      "id": "qcm-sii-03-01",
+      "difficulty": "Application directe",
+      "questionText": "Une caisse de poids $P = m\\,g = 500\\text{ N}$ repose en équilibre sur un sol horizontal rugueux. Le coefficient de frottement statique de Coulomb au contact caisse/sol vaut $f = 0{,}40$. Un opérateur pousse horizontalement la caisse avec une force $\\vec{F}$ de norme $F = 150\\text{ N}$. Que vaut la norme $T$ de la composante tangentielle de frottement exercée par le sol sur la caisse, et la caisse se met-elle à glisser ?",
+      "options": [
+        { "id": "A", "text": "$T = 200\\text{ N}$ et la caisse reste en équilibre." },
+        { "id": "B", "text": "$T = 150\\text{ N}$ et la caisse reste en équilibre (adhérence)." },
+        { "id": "C", "text": "$T = 150\\text{ N}$ et la caisse glisse." },
+        { "id": "D", "text": "$T = 200\\text{ N}$ et la caisse recule dans le sens opposé à $\\vec{F}$." }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. Le bilan vertical du PFS donne la composante normale de la réaction du sol : $N = P = 500\\text{ N}$.",
+          "2. D'après la loi de Coulomb en adhérence, la force de frottement tangentielle maximale que le sol peut opposer avant glissement vaut $T_{\\max} = f\\,N = 0{,}40 \\times 500 = 200\\text{ N}$.",
+          "3. Comme l'effort de poussée horizontal $F = 150\\text{ N}$ est strictement inférieur au seuil $T_{\\max} = 200\\text{ N}$, la caisse **ne glisse pas** (adhérence). Le PFS horizontal à l'équilibre impose alors $T = F = 150\\text{ N}$."
+        ],
+        "keyFormula": "$$\\text{Adhérence } (\\vec{V}_g = \\vec{0}) : T = F \\le f\\,N \\qquad ; \\qquad \\text{Glissement } (\\vec{V}_g \\neq \\vec{0}) : T = f\\,N$$",
+        "commonTrap": "La réponse A ($T = 200\\text{ N}$) est le piège classique sur les lois de Coulomb : écrire $T = f\\,N$ alors qu'il n'y a pas glissement ! En adhérence, on a une inégalité $T \\le f\\,N$ et c'est le PFS qui donne $T = 150\\text{ N}$."
+      }
+    },
+    {
+      "id": "qcm-sii-03-02",
+      "difficulty": "Calculatoire",
+      "questionText": "Un treuil de levage est constitué d'un moteur électrique dont le rotor a un moment d'inertie $J_m = 0{,}010\\text{ kg}\\cdot\\text{m}^2$ tournant à la vitesse $\\omega_m$, accouplé à un réducteur de rapport $r = \\frac{\\omega_t}{\\omega_m} = \\frac{1}{10}$. Le tambour de sortie (rayon $R = 0{,}20\\text{ m}$, moment d'inertie négligé) enroule sans glisser un câble soulevant verticalement une charge de masse $m = 250\\text{ kg}$ à la vitesse $v = R\\,\\omega_t$. Que vaut le moment d'inertie équivalent $J_{\\text{eq}}$ de l'ensemble ramené sur l'arbre moteur ?",
+      "options": [
+        { "id": "A", "text": "$J_{\\text{eq}} = 0{,}11\\text{ kg}\\cdot\\text{m}^2$" },
+        { "id": "B", "text": "$J_{\\text{eq}} = 1{,}01\\text{ kg}\\cdot\\text{m}^2$" },
+        { "id": "C", "text": "$J_{\\text{eq}} = 10{,}01\\text{ kg}\\cdot\\text{m}^2$" },
+        { "id": "D", "text": "$J_{\\text{eq}} = 0{,}51\\text{ kg}\\cdot\\text{m}^2$" }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. On exprime la vitesse de translation de la charge en fonction de $\\omega_m$ : $v = R\\,\\omega_t = R\\,r\\,\\omega_m$ avec $R\\,r = 0{,}20 \\times \\frac{1}{10} = 0{,}020\\text{ m}$.",
+          "2. On écrit l'énergie cinétique totale de l'ensemble mobile : $E_c = \\frac{1}{2}J_m\\,\\omega_m^2 + \\frac{1}{2}m\\,v^2 = \\frac{1}{2}\\big(J_m + m\\,R^2\\,r^2\\big)\\,\\omega_m^2 = \\frac{1}{2}J_{\\text{eq}}\\,\\omega_m^2$.",
+          "3. On calcule la contribution de la masse ramenée sur l'arbre moteur : $m\\,R^2\\,r^2 = 250 \\times (0{,}020)^2 = 250 \\times 4 \\times 10^{-4} = 0{,}10\\text{ kg}\\cdot\\text{m}^2$.",
+          "4. L'inertie équivalente totale vaut donc $J_{\\text{eq}} = J_m + m\\,R^2\\,r^2 = 0{,}010 + 0{,}10 = 0{,}11\\text{ kg}\\cdot\\text{m}^2$."
+        ],
+        "keyFormula": "$$J_{\\text{eq}} = J_m + m\\,(R\\,r)^2$$",
+        "commonTrap": "La réponse B oublie d'élever le rapport de réduction $r = 1/10$ au carré ($r^2 = 1/100$), et la réponse C oublie totalement le réducteur ($m R^2 = 10\\text{ kg}\\cdot\\text{m}^2$)."
+      }
+    },
+    {
+      "id": "qcm-sii-03-03",
+      "difficulty": "Type Concours",
+      "questionText": "Dans le treuil de la question précédente ($J_{\\text{eq}} = 0{,}11\\text{ kg}\\cdot\\text{m}^2$, $m = 250\\text{ kg}$, $g = 10\\text{ m}\\cdot\\text{s}^{-2}$, $R = 0{,}20\\text{ m}$, $r = 0{,}10$), le réducteur a un rendement $\\eta = 1$ (liaisons parfaites). En appliquant le **Théorème de l'Énergie Cinétique (TEC)** lors de la montée de la charge ($v = R\\,r\\,\\omega_m > 0$), quel couple moteur $C_m$ le moteur doit-il fournir pour imposer une accélération angulaire moteur $\\dot{\\omega}_m = 20\\text{ rad}\\cdot\\text{s}^{-2}$ ?",
+      "options": [
+        { "id": "A", "text": "$C_m = 52{,}2\\text{ N}\\cdot\\text{m}$" },
+        { "id": "B", "text": "$C_m = 50{,}0\\text{ N}\\cdot\\text{m}$" },
+        { "id": "C", "text": "$C_m = 2{,}2\\text{ N}\\cdot\\text{m}$" },
+        { "id": "D", "text": "$C_m = 47{,}8\\text{ N}\\cdot\\text{m}$" }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. Les liaisons étant parfaites ($\\mathcal{P}_{\\text{int}} = 0$), le TEC appliqué à l'ensemble mobile s'écrit $\\frac{\\mathrm{d}E_c}{\\mathrm{d}t} = J_{\\text{eq}}\\,\\omega_m\\,\\dot{\\omega}_m = \\mathcal{P}_{\\text{moteur}} + \\mathcal{P}_{\\text{pesanteur}}$.",
+          "2. La puissance du moteur est motrice ($\\mathcal{P}_{\\text{moteur}} = C_m\\,\\omega_m$) et la puissance du poids en montée est résistante ($\\mathcal{P}_{\\text{pesanteur}} = -m\\,g\\,v = -m\\,g\\,R\\,r\\,\\omega_m$).",
+          "3. En simplifiant par $\\omega_m \\neq 0$, on obtient $J_{\\text{eq}}\\,\\dot{\\omega}_m = C_m - m\\,g\\,R\\,r \\implies C_m = m\\,g\\,R\\,r + J_{\\text{eq}}\\,\\dot{\\omega}_m$.",
+          "4. Application numérique : le couple statique dû au poids vaut $m\\,g\\,R\\,r = 250 \\times 10 \\times 0{,}20 \\times 0{,}10 = 50{,}0\\text{ N}\\cdot\\text{m}$, et le couple dynamique d'accélération vaut $J_{\\text{eq}}\\,\\dot{\\omega}_m = 0{,}11 \\times 20 = 2{,}2\\text{ N}\\cdot\\text{m}$, soit $C_m = 50{,}0 + 2{,}2 = 52{,}2\\text{ N}\\cdot\\text{m}$."
+        ],
+        "keyFormula": "$$J_{\\text{eq}}\\,\\dot{\\omega}_m = C_m - m\\,g\\,R\\,r \\implies C_m = m\\,g\\,R\\,r + J_{\\text{eq}}\\,\\dot{\\omega}_m$$",
+        "commonTrap": "La réponse B correspond au régime permanent ($\\dot{\\omega}_m = 0$), la réponse C oublie le poids de la charge, et la réponse D se trompe sur le signe de la puissance de la pesanteur en montée."
+      }
+    },
+    {
+      "id": "qcm-sii-03-04",
+      "difficulty": "Application directe",
+      "questionText": "Un tirant cylindrique plein en acier (module d'Young $E = 200\\text{ GPa} = 200\\,000\\text{ MPa}$, limite d'élasticité $R_e = 300\\text{ MPa}$) de longueur $L = 1\\,000\\text{ mm}$ et de section droite $S = 100\\text{ mm}^2$ est soumis à une **traction simple** d'effort normal $N = 15\\,000\\text{ N}$. Que valent la contrainte normale $\\sigma$, le coefficient de sécurité $s = \\frac{R_e}{\\sigma}$ et l'allongement $\\Delta L$ du tirant ?",
+      "options": [
+        { "id": "A", "text": "$\\sigma = 150\\text{ MPa}$, $s = 2{,}0$ et $\\Delta L = 0{,}75\\text{ mm}$" },
+        { "id": "B", "text": "$\\sigma = 150\\text{ MPa}$, $s = 2{,}0$ et $\\Delta L = 1{,}50\\text{ mm}$" },
+        { "id": "C", "text": "$\\sigma = 15\\text{ MPa}$, $s = 20$ et $\\Delta L = 0{,}075\\text{ mm}$" },
+        { "id": "D", "text": "$\\sigma = 150\\text{ Pa}$, $s = 2{,}0$ et $\\Delta L = 0{,}75\\text{ mm}$" }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. La contrainte normale en traction simple vaut $\\sigma = \\frac{N}{S} = \\frac{15\\,000\\text{ N}}{100\\text{ mm}^2} = 150\\text{ N}\\cdot\\text{mm}^{-2} = 150\\text{ MPa}$.",
+          "2. Le coefficient de sécurité vis-à-vis de la limite d'élasticité vaut $s = \\frac{R_e}{\\sigma} = \\frac{300\\text{ MPa}}{150\\text{ MPa}} = 2{,}0$.",
+          "3. D'après la loi de Hooke, l'allongement vaut $\\Delta L = \\frac{\\sigma\\,L}{E} = \\frac{150\\text{ MPa} \\times 1\\,000\\text{ mm}}{200\\,000\\text{ MPa}} = \\frac{150}{200} = 0{,}75\\text{ mm}$."
+        ],
+        "keyFormula": "$$\\sigma = \\frac{N}{S} \\quad ; \\quad s = \\frac{R_e}{\\sigma} \\quad ; \\quad \\Delta L = \\frac{N\\,L}{E\\,S} = \\frac{\\sigma\\,L}{E}$$",
+        "commonTrap": "La réponse D confond les Pascals ($\\text{N}\\cdot\\text{m}^{-2}$) et les Mégapascals ($1\\text{ MPa} = 10^6\\text{ Pa} = 1\\text{ N}\\cdot\\text{mm}^{-2}$)."
+      }
+    },
+    {
+      "id": "qcm-sii-03-05",
+      "difficulty": "Calculatoire",
+      "questionText": "Une poutre console de longueur $L$ selon $(Ox)$ est encastrée à son origine $O(x=0)$ et libre à son extrémité $A(x=L)$, où elle supporte uniquement une force ponctuelle verticale descendante $\\vec{F} = -F\\,\\vec{y}$ ($F > 0$). En isolant le tronçon de droite $E_2 = [x, L]$ lors d'une coupure d'abscisse $x \\in [0, L]$, quelles sont les expressions de l'effort tranchant $T_y(x)$ et du moment fléchissant $M_{fz}(x)$, et en quelle abscisse le moment fléchissant est-il maximal en valeur absolue ?",
+      "options": [
+        { "id": "A", "text": "$T_y(x) = -F$, $M_{fz}(x) = -F\\,(L - x)$, maximal en $x = 0$ (à l'encastrement) avec $|M_{fz}|_{\\max} = F\\,L$" },
+        { "id": "B", "text": "$T_y(x) = -F$, $M_{fz}(x) = -F\\,x$, maximal en $x = L$ (à l'extrémité libre) avec $|M_{fz}|_{\\max} = F\\,L$" },
+        { "id": "C", "text": "$T_y(x) = +F$, $M_{fz}(x) = +F\\,(L - x)$, maximal en $x = \\frac{L}{2}$" },
+        { "id": "D", "text": "$T_y(x) = 0$ et $M_{fz}(x) = -F\\,L$ constant sur toute la poutre" }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. On isole le tronçon de droite $E_2 = [x, L]$ qui ne subit qu'une seule action extérieure : la force $\\vec{F} = -F\\,\\vec{y}$ appliquée en $A(L, 0, 0)$.",
+          "2. D'après la définition du torseur de cohésion en $G(x, 0, 0)$, on a $\\mathcal{T}_{\\text{coh}}(x) = +\\mathcal{T}(\\text{ext} \\to E_2)$.",
+          "3. La résultante donne directement $T_y(x) = -F$. Pour le moment en $G(x)$, la formule de Varignon donne $\\vec{M}_{G(x)}(\\vec{F}) = \\vec{GA} \\wedge \\vec{F} = (L - x)\\vec{x} \\wedge (-F\\vec{y}) = -F(L - x)\\,\\vec{z}$, d'où $M_{fz}(x) = -F(L - x)$.",
+          "4. Le moment fléchissant est nul à l'extrémité libre ($x = L$) et maximal en valeur absolue à l'encastrement ($x = 0$), où $|M_{fz}(0)| = F\\,L$ (c'est toujours à l'encastrement qu'une poutre console risque de rompre)."
+        ],
+        "keyFormula": "$$\\mathcal{T}_{\\text{coh}}(x) = +\\mathcal{T}(\\text{ext} \\to E_2) \\implies T_y(x) = -F \\quad \\text{et} \\quad M_{fz}(x) = -F\\,(L - x)$$",
+        "commonTrap": "La réponse B confond le bras de levier $GA = L - x$ entre la coupure $G(x)$ et le point d'application $A(L)$ de la force avec l'abscisse $x$."
+      }
+    }
+  ]
+}
