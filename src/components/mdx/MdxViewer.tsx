@@ -12,6 +12,7 @@ interface MdxViewerProps {
 }
 
 // Personnalisation des balises HTML et injection des composants MDX
+// Personnalisation des balises HTML et injection des composants MDX
 const mdxComponents = {
   CriticalFormula,
   WarningBox,
@@ -46,7 +47,6 @@ const mdxComponents = {
   ol: (props: React.HTMLAttributes<HTMLOListElement>) => (
     <ol className="list-decimal list-outside pl-6 space-y-2 mb-5 text-slate-700 leading-7" {...props} />
   ),
-  // Accentuation automatique du texte en gras pour guider la lecture rapide
   strong: (props: React.HTMLAttributes<HTMLElement>) => (
     <strong
       className="font-bold text-slate-900 bg-red-50/80 text-red-700 px-1 py-0.5 rounded"
@@ -54,9 +54,33 @@ const mdxComponents = {
     />
   ),
   hr: () => <hr className="my-8 border-slate-200" />,
+
+  // BLOC DE SCRIPT COMPLET (ex: ```python ... ```) -> Fenêtre style IDE
+  pre: (props: React.HTMLAttributes<HTMLPreElement>) => (
+    <div className="my-6 rounded-xl overflow-hidden border border-slate-800 bg-[#0d1117] shadow-md">
+      {/* Barre supérieure type terminal / VS Code */}
+      <div className="flex items-center justify-between px-4 py-2 bg-[#161b22] border-b border-slate-800">
+        <div className="flex items-center gap-1.5">
+          <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+          <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
+          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
+        </div>
+        <span className="text-[11px] font-mono font-semibold text-slate-400 uppercase tracking-wider">
+          Script Python 3 — Norme ATS
+        </span>
+      </div>
+      {/* Contenu du script avec défilement horizontal et indentation préservée */}
+      <pre
+        className="p-4 overflow-x-auto font-mono text-xs md:text-sm leading-relaxed text-emerald-300 selection:bg-red-500/30"
+        {...props}
+      />
+    </div>
+  ),
+
+  // CODE INLINE (ex: `len(tab)`) vs CODE DANS UN BLOC <pre>
   code: (props: React.HTMLAttributes<HTMLElement>) => (
     <code
-      className="font-mono text-xs bg-slate-100 text-slate-800 px-1.5 py-0.5 rounded border border-slate-200"
+      className="font-mono text-[13px] [[pre_&]]:bg-transparent [[pre_&]]:text-emerald-300 [[pre_&]]:p-0 [[pre_&]]:border-0 bg-slate-100 text-red-700 px-1.5 py-0.5 rounded border border-slate-200"
       {...props}
     />
   ),
