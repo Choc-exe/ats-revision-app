@@ -56,22 +56,106 @@ const BUILTIN_SCHEMAS: Record<string, React.ReactNode> = {
     </svg>
   ),
 
-  // 2. Physique Chap 1 : Puits d'énergie potentielle
+  // 2. Physique Chap 1 : Puits d'énergie potentielle (Courbe à tangentes horizontales exactes)
   "/images/physique-chimie/puits-energie-potentielle.png": (
-    <svg viewBox="0 0 600 250" className="w-full max-w-xl h-auto overflow-visible">
-      <line x1="60" y1="205" x2="530" y2="205" stroke="#334155" strokeWidth="1.5" />
-      <line x1="70" y1="220" x2="70" y2="20" stroke="#334155" strokeWidth="1.5" />
-      <text x="540" y="210" style={labelStyle} className="text-xs fill-slate-700 font-bold">x</text>
-      <text x="80" y="30" style={labelStyle} className="text-xs fill-slate-700 font-bold">E_p(x)</text>
+    <svg viewBox="0 0 650 285" className="w-full max-w-2xl h-auto overflow-visible">
+      <defs>
+        <marker id="arr-axis" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M 0 1 L 10 5 L 0 9 z" fill="#334155" />
+        </marker>
+        <marker id="arr-osc" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M 0 1 L 10 5 L 0 9 z" fill="#16a34a" />
+        </marker>
+      </defs>
 
-      <path d="M 95 45 Q 195 255 300 110 T 500 165" fill="none" stroke="#1e293b" strokeWidth="2.5" />
-      <line x1="70" y1="125" x2="510" y2="125" stroke="#dc2626" strokeWidth="2" strokeDasharray="6 4" />
-      <text x="410" y="112" style={labelStyle} className="text-xs fill-red-600 font-bold">E_m = E_c + E_p (cte)</text>
+      {/* 1. Zones interdites (Ep > Em => Ec < 0 impossible) */}
+      <rect x="60" y="25" width="56" height="190" fill="#fee2e2" fillOpacity="0.45" />
+      <rect x="290" y="25" width="176" height="190" fill="#fee2e2" fillOpacity="0.45" />
+      <text x="88" y="38" textAnchor="middle" className="text-[10px] fill-red-700 font-bold uppercase tracking-tighter">
+        Interdit
+      </text>
+      <text x="378" y="198" textAnchor="middle" className="text-[10px] fill-red-700 font-bold uppercase tracking-tighter">
+        Barrière (E_p &gt; E_m : interdit)
+      </text>
 
-      <circle cx="198" cy="172" r="5" fill="#16a34a" />
-      <text x="135" y="195" style={labelStyle} className="text-xs fill-emerald-700 font-bold">Équilibre stable (min)</text>
-      <circle cx="352" cy="82" r="5" fill="#dc2626" />
-      <text x="295" y="65" style={labelStyle} className="text-xs fill-red-600 font-bold">Équilibre instable (max)</text>
+      {/* 2. Axes de coordonnées */}
+      <line x1="60" y1="215" x2="605" y2="215" stroke="#334155" strokeWidth="1.5" markerEnd="url(#arr-axis)" />
+      <line x1="60" y1="225" x2="60" y2="18" stroke="#334155" strokeWidth="1.5" markerEnd="url(#arr-axis)" />
+      <text x="615" y="219" style={labelStyle} className="text-xs fill-slate-800 font-bold">x</text>
+      <text x="70" y="26" style={labelStyle} className="text-xs fill-slate-800 font-bold">E_p(x)</text>
+
+      {/* 3. Projections verticales sur l'axe des abscisses (x1, x_eq1, x2, x_eq2) */}
+      {/* Point de rebroussement x1 (116, 115) */}
+      <line x1="116" y1="115" x2="116" y2="215" stroke="#64748b" strokeWidth="1.2" strokeDasharray="3 3" />
+      <text x="116" y="232" textAnchor="middle" style={labelStyle} className="text-xs fill-slate-700 font-bold">x₁</text>
+
+      {/* Position d'équilibre stable x_eq,1 (200, 175) */}
+      <line x1="200" y1="175" x2="200" y2="215" stroke="#16a34a" strokeWidth="1.5" strokeDasharray="3 3" />
+      <text x="200" y="232" textAnchor="middle" style={labelStyle} className="text-xs fill-emerald-700 font-bold">x_éq,1</text>
+
+      {/* Point de rebroussement x2 (290, 115) */}
+      <line x1="290" y1="115" x2="290" y2="215" stroke="#64748b" strokeWidth="1.2" strokeDasharray="3 3" />
+      <text x="290" y="232" textAnchor="middle" style={labelStyle} className="text-xs fill-slate-700 font-bold">x₂</text>
+
+      {/* Position d'équilibre instable x_eq,2 (380, 55) */}
+      <line x1="380" y1="55" x2="380" y2="215" stroke="#dc2626" strokeWidth="1.5" strokeDasharray="3 3" />
+      <text x="380" y="232" textAnchor="middle" style={labelStyle} className="text-xs fill-red-600 font-bold">x_éq,2</text>
+
+      {/* 4. Droite horizontale d'énergie mécanique Em = 115 */}
+      <line x1="60" y1="115" x2="590" y2="115" stroke="#dc2626" strokeWidth="1.8" strokeDasharray="6 4" />
+      <text x="588" y="104" textAnchor="end" style={labelStyle} className="text-xs fill-red-600 font-bold">
+        E_m = E_c + E_p = cte
+      </text>
+
+      {/* 5. Courbe Ep(x) avec tangentes horizontales exactes en (200, 175) et (380, 55) */}
+      <path
+        d="M 80 35 C 110 115, 145 175, 200 175 C 260 175, 320 55, 380 55 C 440 55, 500 185, 580 198"
+        fill="none"
+        stroke="#0f172a"
+        strokeWidth="2.5"
+      />
+
+      {/* 6. Tangentes horizontales dEp/dx = 0 aux deux extremums */}
+      <line x1="165" y1="175" x2="235" y2="175" stroke="#16a34a" strokeWidth="1.5" />
+      <line x1="345" y1="55" x2="415" y2="55" stroke="#dc2626" strokeWidth="1.5" />
+
+      {/* 7. Points de rebroussement (Ec = 0) sur la courbe en y = 115 */}
+      <circle cx="116" cy="115" r="4" fill="#fff" stroke="#0f172a" strokeWidth="2" />
+      <circle cx="290" cy="115" r="4" fill="#fff" stroke="#0f172a" strokeWidth="2" />
+      <circle cx="466" cy="115" r="4" fill="#fff" stroke="#0f172a" strokeWidth="2" />
+
+      {/*Indication de la cuvette d'état lié (oscillations entre x1 et x2) */}
+      <line
+        x1="126"
+        y1="142"
+        x2="280"
+        y2="142"
+        stroke="#16a34a"
+        strokeWidth="2"
+        markerStart="url(#arr-osc)"
+        markerEnd="url(#arr-osc)"
+      />
+      <text x="203" y="134" textAnchor="middle" style={labelStyle} className="text-[11px] fill-emerald-800 font-bold">
+        État lié (oscillations)
+      </text>
+
+      {/* Indication de l'état de diffusion à droite (x >= x3) */}
+      <text x="535" y="168" textAnchor="middle" style={labelStyle} className="text-[11px] fill-slate-700 font-bold">
+        État non lié (x → +∞)
+      </text>
+
+      {/* 8. Points d'équilibre exacts sur la courbe et étiquettes dégagées */}
+      {/* Fond du puits : exactement en (200, 175) */}
+      <circle cx="200" cy="175" r="5.5" fill="#16a34a" stroke="#fff" strokeWidth="1.5" />
+      <text x="200" y="196" textAnchor="middle" style={labelStyle} className="text-xs fill-emerald-700 font-bold">
+        Équilibre stable (min)
+      </text>
+
+      {/* Sommet de la bosse : exactement en (380, 55) */}
+      <circle cx="380" cy="55" r="5.5" fill="#dc2626" stroke="#fff" strokeWidth="1.5" />
+      <text x="380" y="38" textAnchor="middle" style={labelStyle} className="text-xs fill-red-600 font-bold">
+        Équilibre instable (max)
+      </text>
     </svg>
   ),
 
@@ -153,21 +237,159 @@ const BUILTIN_SCHEMAS: Record<string, React.ReactNode> = {
     </svg>
   ),
 
-  // 6. Informatique Chap 2 : Intégration par rectangles et trapèzes
+  // 6. Informatique Chap 2 : Intégration par rectangles et trapèzes (2 sous-figures côte à côte sur la même courbe concave)
   "/images/informatique/integration-rectangles-trapezes.png": (
-    <svg viewBox="0 0 600 240" className="w-full max-w-xl h-auto overflow-visible">
-      <line x1="50" y1="190" x2="540" y2="190" stroke="#334155" strokeWidth="1.5" />
-      <line x1="70" y1="205" x2="70" y2="20" stroke="#334155" strokeWidth="1.5" />
+    <svg viewBox="0 0 680 265" className="w-full max-w-2xl h-auto overflow-visible">
+      <defs>
+        <marker id="arr-int" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto">
+          <path d="M 0 1 L 10 5 L 0 9 z" fill="#334155" />
+        </marker>
+        <marker id="arr-pas" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+        </marker>
+      </defs>
 
-      <rect x="105" y="135" width="90" height="55" fill="#e2e8f0" stroke="#475569" strokeWidth="1.5" />
-      <rect x="195" y="88" width="90" height="102" fill="#e2e8f0" stroke="#475569" strokeWidth="1.5" />
+      {/* =====================================================================
+          SOUS-FIGURE GAUCHE : MÉTHODE DES RECTANGLES À GAUCHE SUR [a, b]
+          Points exacts de la parabole concave y(x) :
+          x0 = 55  -> y0 = 148
+          x1 = 125 -> y1 = 84
+          x2 = 195 -> y2 = 52
+          x3 = 265 -> y3 = 52
+         ===================================================================== */}
+      <text x="160" y="18" textAnchor="middle" className="text-xs fill-slate-800 font-bold">
+        1. Méthode des rectangles à gauche
+      </text>
 
-      <polygon points="285,190 285,62 375,78 375,190" fill="#fef2f2" stroke="#dc2626" strokeWidth="2" />
-      <polygon points="375,190 375,78 465,125 465,190" fill="#fef2f2" stroke="#dc2626" strokeWidth="2" />
+      {/* 3 Rectangles à gauche : hauteur fixée par le bord gauche (x_i, f(x_i)) */}
+      <rect x="55" y="148" width="70" height="52" fill="#e2e8f0" fillOpacity="0.85" stroke="#475569" strokeWidth="1.5" />
+      <rect x="125" y="84" width="70" height="116" fill="#e2e8f0" fillOpacity="0.85" stroke="#475569" strokeWidth="1.5" />
+      <rect x="195" y="52" width="70" height="148" fill="#e2e8f0" fillOpacity="0.85" stroke="#475569" strokeWidth="1.5" />
 
-      <path d="M 85 152 Q 260 22 490 142" fill="none" stroke="#0f172a" strokeWidth="2.5" />
-      <text x="120" y="215" style={labelStyle} className="text-xs fill-slate-700 font-bold">Rectangles à gauche</text>
-      <text x="315" y="215" style={labelStyle} className="text-xs fill-red-600 font-bold">Trapèzes (plus précis)</text>
+      {/* Pointillés de rappel vers l'axe des ordonnées pour f(x0) et f(x1) */}
+      <line x1="35" y1="148" x2="55" y2="148" stroke="#64748b" strokeWidth="1.2" strokeDasharray="3 3" />
+      <text x="30" y="152" textAnchor="end" className="text-[10px] fill-slate-600 font-bold">f(x₀)</text>
+      <line x1="35" y1="84" x2="125" y2="84" stroke="#64748b" strokeWidth="1.2" strokeDasharray="3 3" />
+      <text x="30" y="88" textAnchor="end" className="text-[10px] fill-slate-600 font-bold">f(x₁)</text>
+
+      {/* Courbe concave exacte f(x) passant par (55,148), (125,84), (195,52), (265,52) */}
+      <path
+        d="M 45 160 Q 142.5 -20 278 60"
+        fill="none"
+        stroke="#0f172a"
+        strokeWidth="2.5"
+      />
+
+      {/* Sommets d'évaluation à gauche sur la courbe */}
+      <circle cx="55" cy="148" r="4" fill="#334155" stroke="#fff" strokeWidth="1.2" />
+      <circle cx="125" cy="84" r="4" fill="#334155" stroke="#fff" strokeWidth="1.2" />
+      <circle cx="195" cy="52" r="4" fill="#334155" stroke="#fff" strokeWidth="1.2" />
+      <circle cx="265" cy="52" r="3.5" fill="#fff" stroke="#0f172a" strokeWidth="1.5" />
+
+      {/* Axes de la sous-figure gauche */}
+      <line x1="35" y1="200" x2="295" y2="200" stroke="#334155" strokeWidth="1.5" markerEnd="url(#arr-int)" />
+      <line x1="35" y1="210" x2="35" y2="25" stroke="#334155" strokeWidth="1.5" markerEnd="url(#arr-int)" />
+      <text x="302" y="204" className="text-xs fill-slate-700 font-bold">x</text>
+
+      {/* Repères des abscisses x0=a, x1, x2, x3=b */}
+      <text x="55" y="216" textAnchor="middle" className="text-[11px] fill-slate-800 font-bold">a = x₀</text>
+      <text x="125" y="216" textAnchor="middle" className="text-[11px] fill-slate-800 font-bold">x₁</text>
+      <text x="195" y="216" textAnchor="middle" className="text-[11px] fill-slate-800 font-bold">x₂</text>
+      <text x="265" y="216" textAnchor="middle" className="text-[11px] fill-slate-800 font-bold">x₃ = b</text>
+
+      {/* Cotation du pas h */}
+      <line
+        x1="58"
+        y1="234"
+        x2="122"
+        y2="234"
+        stroke="#dc2626"
+        strokeWidth="1.5"
+        markerStart="url(#arr-pas)"
+        markerEnd="url(#arr-pas)"
+      />
+      <text x="90" y="248" textAnchor="middle" className="text-[11px] fill-red-600 font-bold">pas h</text>
+
+      {/* Séparateur central vertical */}
+      <line x1="340" y1="15" x2="340" y2="245" stroke="#cbd5e1" strokeWidth="1.5" strokeDasharray="4 4" />
+
+      {/* =====================================================================
+          SOUS-FIGURE DROITE : MÉTHODE DES TRAPÈZES SUR LA MÊME COURBE [a, b]
+          Points exacts de la même parabole concave (décalée de +340 px) :
+          x0 = 395 -> y0 = 148
+          x1 = 465 -> y1 = 84
+          x2 = 535 -> y2 = 52
+          x3 = 605 -> y3 = 52
+         ===================================================================== */}
+      <text x="500" y="18" textAnchor="middle" className="text-xs fill-red-600 font-bold">
+        2. Méthode des trapèzes (cordes sous l&apos;arc)
+      </text>
+
+      {/* 3 Trapèzes dont les sommets sont EXACTEMENT sur la courbe (et les cordes SOUS l'arc concave) */}
+      <polygon
+        points="395,200 395,148 465,84 465,200"
+        fill="#fef2f2"
+        fillOpacity="0.85"
+        stroke="#dc2626"
+        strokeWidth="1.8"
+      />
+      <polygon
+        points="465,200 465,84 535,52 535,200"
+        fill="#fef2f2"
+        fillOpacity="0.85"
+        stroke="#dc2626"
+        strokeWidth="1.8"
+      />
+      <polygon
+        points="535,200 535,52 605,52 605,200"
+        fill="#fef2f2"
+        fillOpacity="0.85"
+        stroke="#dc2626"
+        strokeWidth="1.8"
+      />
+
+      {/* Même courbe concave exacte f(x) passant par (395,148), (465,84), (535,52), (605,52) */}
+      <path
+        d="M 385 160 Q 482.5 -20 618 60"
+        fill="none"
+        stroke="#0f172a"
+        strokeWidth="2.5"
+      />
+
+      {/* Les 4 sommets des trapèzes exactement sur la courbe */}
+      <circle cx="395" cy="148" r="4" fill="#dc2626" stroke="#fff" strokeWidth="1.2" />
+      <circle cx="465" cy="84" r="4" fill="#dc2626" stroke="#fff" strokeWidth="1.2" />
+      <circle cx="535" cy="52" r="4" fill="#dc2626" stroke="#fff" strokeWidth="1.2" />
+      <circle cx="605" cy="52" r="4" fill="#dc2626" stroke="#fff" strokeWidth="1.2" />
+
+      {/* Étiquette d'un sommet (x_i, f(x_i)) */}
+      <text x="458" y="72" textAnchor="end" style={labelStyle} className="text-[10px] fill-red-700 font-bold">
+        (x₁, f(x₁))
+      </text>
+
+      {/* Axes de la sous-figure droite */}
+      <line x1="375" y1="200" x2="635" y2="200" stroke="#334155" strokeWidth="1.5" markerEnd="url(#arr-int)" />
+      <line x1="375" y1="210" x2="375" y2="25" stroke="#334155" strokeWidth="1.5" markerEnd="url(#arr-int)" />
+      <text x="642" y="204" className="text-xs fill-slate-700 font-bold">x</text>
+
+      {/* Repères des abscisses x0=a, x1, x2, x3=b */}
+      <text x="395" y="216" textAnchor="middle" className="text-[11px] fill-slate-800 font-bold">a = x₀</text>
+      <text x="465" y="216" textAnchor="middle" className="text-[11px] fill-slate-800 font-bold">x₁</text>
+      <text x="535" y="216" textAnchor="middle" className="text-[11px] fill-slate-800 font-bold">x₂</text>
+      <text x="605" y="216" textAnchor="middle" className="text-[11px] fill-slate-800 font-bold">x₃ = b</text>
+
+      {/* Cotation du pas h */}
+      <line
+        x1="398"
+        y1="234"
+        x2="462"
+        y2="234"
+        stroke="#dc2626"
+        strokeWidth="1.5"
+        markerStart="url(#arr-pas)"
+        markerEnd="url(#arr-pas)"
+      />
+      <text x="430" y="248" textAnchor="middle" className="text-[11px] fill-red-600 font-bold">pas h = (b − a) / n</text>
     </svg>
   ),
 
