@@ -1,1 +1,108 @@
 ﻿@import "tailwindcss";
+/* =========================================================
+   THÈME SOMBRE AUTOMATIQUE (Activé par html.dark)
+   ========================================================= */
+
+html.dark body {
+  background-color: #0b0f19 !important; /* Fond principal très sombre */
+  color: #e2e8f0 !important;
+}
+
+/* Conteneurs principaux : Cartes, Sidebar, Header */
+html.dark .bg-white,
+html.dark .bg-white\/95 {
+  background-color: #111827 !important; /* Gris-bleu nuit (slate-900) */
+  color: #f1f5f9 !important;
+}
+
+/* Fonds secondaires (blocs de code, étapes QCM, fonds de schémas) */
+html.dark .bg-slate-50,
+html.dark .bg-slate-50\/60,
+html.dark .bg-slate-50\/80,
+html.dark .bg-slate-100,
+html.dark .bg-slate-100\/80 {
+  background-color: #1e293b !important; /* Slate-800 */
+  color: #e2e8f0 !important;
+}
+
+/* Bordures et séparateurs */
+html.dark .border-slate-200,
+html.dark .border-slate-200\/80,
+html.dark .border-slate-100,
+html.dark hr {
+  border-color: #334155 !important; /* Slate-700 */
+}
+
+/* Typographie : Titres et textes courants */
+html.dark .text-slate-900,
+html.dark .text-slate-800 {
+  color: #f8fafc !important;
+}
+
+html.dark .text-slate-700,
+html.dark .text-slate-600 {
+  color: #cbd5e1 !important;
+}
+
+html.dark .text-slate-500,
+html.dark .text-slate-400 {
+  color: #94a3b8 !important;
+}
+
+/* Accents pédagogiques ROUGES (Formules critiques & onglets actifs) */
+html.dark .bg-red-50,
+html.dark .bg-red-50\/50,
+html.dark .bg-red-50\/70,
+html.dark .bg-red-50\/80,
+html.dark .bg-red-100 {
+  background-color: rgba(127, 29, 29, 0.35) !important; /* Fond rouge bordeaux translucide */
+  color: #fca5a5 !important;
+}
+
+html.dark .text-red-600,
+html.dark .text-red-700 {
+  color: #f87171 !important; /* Rouge clair très lisible sur fond sombre */
+}
+
+html.dark .border-red-200 {
+  border-color: rgba(220, 38, 38, 0.4) !important;
+}
+
+/* Accents Verts (Bonne réponse QCM / Maîtrisé) et Ambre (Astuces) */
+html.dark .bg-emerald-50,
+html.dark .bg-emerald-50\/90 {
+  background-color: rgba(6, 78, 59, 0.4) !important;
+  color: #6ee7b7 !important;
+}
+
+html.dark .bg-amber-50,
+html.dark .bg-amber-50\/80 {
+  background-color: rgba(120, 53, 15, 0.4) !important;
+  color: #fde68a !important;
+}
+
+/* Formules mathématiques KaTeX et Schémas SVG en mode sombre */
+html.dark .katex {
+  color: #f8fafc !important;
+}
+
+html.dark svg text.fill-slate-900,
+html.dark svg text.fill-slate-800,
+html.dark svg text.fill-slate-700 {
+  fill: #e2e8f0 !important;
+}
+
+html.dark svg rect[fill="#fff"],
+html.dark svg rect[fill="#f8fafc"],
+html.dark svg rect[fill="#f1f5f9"],
+html.dark svg circle[fill="#fff"],
+html.dark svg polygon[fill="#f8fafc"],
+html.dark svg polygon[fill="#f1f5f9"] {
+  fill: #0f172a !important;
+}
+
+html.dark svg rect[fill="#fef2f2"],
+html.dark svg circle[fill="#fef2f2"],
+html.dark svg polygon[fill="#fef2f2"] {
+  fill: rgba(127, 29, 29, 0.45) !important;
+}

@@ -1,5 +1,6 @@
 "use client";
 
+import ThemeToggle from "./ThemeToggle";
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -140,15 +141,16 @@ export default function Sidebar() {
         })}
       </nav>
 
-      {/* Pied de barre latérale : Rappel de la règle visuelle */}
-      <div className="p-4 border-t border-slate-200 bg-slate-50/60">
-        <div className="flex items-center gap-2 text-xs text-slate-500">
-          <span className="w-2 h-2 rounded-full bg-red-600 shrink-0" />
-          <span>
-            Accents <strong className="text-red-600">rouges</strong> = Formules & points critiques concours
-          </span>
-        </div>
-      </div>
+      {/* Pied de barre latérale : Bouton Dark Mode + Rappel visuel */}
+   <div className="p-4 border-t border-slate-200 bg-slate-50/60 space-y-3">
+     <ThemeToggle />
+     <div className="flex items-center gap-2 text-xs text-slate-500">
+       <span className="w-2 h-2 rounded-full bg-red-600 shrink-0" />
+       <span>
+         Accents <strong className="text-red-600">rouges</strong> = Formules & points critiques
+       </span>
+     </div>
+   </div>
     </aside>
   );
 }
