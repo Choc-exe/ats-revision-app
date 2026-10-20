@@ -42,21 +42,15 @@ export default function Sidebar() {
   return (
     <aside className="fixed inset-y-0 left-0 z-30 w-72 bg-white border-r border-slate-200 flex flex-col">
       {/* En-tête de l'application */}
-      {/* En-tête de l'application (Logo) */}
-      <div className="h-16 px-5 border-b border-slate-200 flex items-center gap-3 bg-white">
-        <div className="relative w-9 h-9 rounded-lg bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center text-white shadow-sm shrink-0 overflow-hidden">
-          {/* Effet visuel d'engrenage abstrait en fond */}
-          <div className="absolute -right-2 -bottom-2 opacity-20">
-            <Cpu className="w-8 h-8" />
-          </div>
-          <GraduationCap className="w-5 h-5 relative z-10 drop-shadow-sm" />
+      <div className="h-16 px-5 border-b border-slate-200 flex items-center gap-3">
+        <div className="w-9 h-9 rounded-lg bg-red-600 flex items-center justify-center text-white shadow-sm">
+          <GraduationCap className="w-5 h-5" />
         </div>
-        <div className="flex flex-col truncate">
-          <span className="font-extrabold text-slate-900 tracking-tight text-[15px] leading-tight flex items-center gap-1.5">
-            Prépa ATS
-            <span className="w-1.5 h-1.5 rounded-full bg-red-600 animate-pulse" />
+        <div>
+          <span className="font-bold text-slate-900 tracking-tight block leading-none">
+            CPGE ATS
           </span>
-          <span className="text-[11px] text-slate-500 font-semibold uppercase tracking-wider truncate">
+          <span className="text-xs text-slate-500 font-medium">
             Ingénierie Industrielle
           </span>
         </div>
