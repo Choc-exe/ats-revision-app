@@ -1,0 +1,23 @@
+---
+title: "Fiche Synthèse : Déterminants, Réduction et Espaces euclidiens"
+subject: "mathematiques"
+chapterId: "06-reduction-endomorphismes"
+---
+
+## L'Essentiel du Bulletin Officiel ATS
+
+* **Déterminants ($\mathcal{M}_n(\mathbb{K})$)** :
+  * **$A$ inversible $\iff \det(A) \neq 0$** ; $\det(AB) = \det(A)\det(B)$ ; $\det(A^\top) = \det(A)$ ; $\det(A^{-1}) = \frac{1}{\det A}$[cite: 94].
+  * Piège classique : **$\det(\lambda\,A) = \lambda^n\,\det(A)$** (si $A$ est de taille $n \times n$)[cite: 94].
+  * Matrice triangulaire ou diagonale : $\det(A) =$ produit des termes diagonaux[cite: 94].
+* **Éléments propres, Diagonalisation & Trigonalisation** :
+  * $\lambda \in \text{Sp}(A) \iff \exists X \neq 0, A X = \lambda X \iff$ **$\chi_A(\lambda) = \det(A - \lambda I_n) = 0$**[cite: 95].
+  * Sous-espace propre : $E_\lambda(A) = \text{Ker}(A - \lambda I_n)$, vérifiant toujours **$1 \le \dim E_\lambda(A) \le m_\lambda$**[cite: 95].
+  * **$A$ diagonalisable** ($A = P D P^{-1}$) $\iff \chi_A$ scindé **ET** $\forall \lambda \in \text{Sp}(A), \dim E_\lambda(A) = m_\lambda \iff \sum \dim E_\lambda = n$[cite: 95].
+  * Si $\chi_A$ a $n$ racines simples dans $\mathbb{K}$, alors $A$ est diagonalisable[cite: 95].
+  * **Relations valeurs propres ($\chi_A$ scindé)** : **$\text{Tr}(A) = \sum_{k=1}^n \lambda_k$** et **$\det(A) = \prod_{k=1}^n \lambda_k$**[cite: 95].
+  * Calcul de puissances : $A = P D P^{-1} \implies$ **$A^k = P\,D^k\,P^{-1}$**[cite: 95].
+* **Espaces euclidiens $\mathbb{R}^n$ & Matrices orthogonales** :
+  * Produit scalaire canonique : $\langle X, Y \rangle = X^\top Y$ ; coordonnées dans une BON $(e_1, \dots, e_n)$ : $x_i = \langle x, e_i \rangle$[cite: 96].
+  * **Matrice orthogonale ($P \in O_n(\mathbb{R})$)** : **$P^\top P = I_n \iff P^{-1} = P^\top \iff$** colonnes forment une BON de $\mathbb{R}^n$ ($\det P = \pm 1$)[cite: 96].
+  * **Théorème spectral** : Toute matrice **symétrique réelle** ($A^\top = A$) est diagonalisable dans une BON (**$D = P^\top A P$** avec $P \in O_n(\mathbb{R})$)[cite: 96].

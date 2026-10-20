@@ -1,0 +1,62 @@
+{
+  "chapterId": "02-geometrie-plan-espace",
+  "subject": "mathematiques",
+  "title": "Géométrie élémentaire du plan et de l'espace",
+  "cards": [
+    {
+      "id": "fc-math-02-01",
+      "category": "Formule Critique",
+      "difficulty": 1,
+      "front": "Quelle est l'expression analytique du produit vectoriel $\\vec{u}(x, y, z) \\wedge \\vec{v}(x', y', z')$ dans une base orthonormale directe, et que caractérise $\\vec{u}\\wedge\\vec{v} = \\vec{0}$ ?",
+      "back": {
+        "mainAnswer": "On calcule chaque coordonnée en masquant la ligne correspondante et en effectuant le produit en croix des deux autres (avec permutation circulaire). Un produit vectoriel nul caractérise deux vecteurs colinéaires.",
+        "criticalFormula": "$$\\vec{u}\\wedge\\vec{v} = \\begin{pmatrix} y\\,z' - z\\,y' \\\\ z\\,x' - x\\,z' \\\\ x\\,y' - y\\,x' \\end{pmatrix} \\quad ; \\quad \\vec{u}, \\vec{v} \\text{ colinéaires} \\iff \\vec{u}\\wedge\\vec{v} = \\vec{0}$$",
+        "mnemonicOrTip": "Vérifiez toujours votre calcul à la fin en faisant un produit scalaire de contrôle : $(\\vec{u}\\wedge\\vec{v})\\cdot\\vec{u}$ doit impérativement valoir $0$ !"
+      }
+    },
+    {
+      "id": "fc-math-02-02",
+      "category": "Méthode",
+      "difficulty": 2,
+      "front": "Comment déterminer rapidement une équation cartésienne du plan $(ABC)$ défini par trois points non alignés $A, B, C$ de l'espace ?",
+      "back": {
+        "mainAnswer": "On calcule d'abord un vecteur normal $\\vec{n}(a, b, c)$ au plan en effectuant le produit vectoriel $\\vec{AB}\\wedge\\vec{AC}$, puis on écrit que $\\vec{AM}\\cdot\\vec{n} = 0$.",
+        "criticalFormula": "$$\\vec{n} = \\vec{AB}\\wedge\\vec{AC} = \\begin{pmatrix} a \\\\ b \\\\ c \\end{pmatrix} \\implies a(x - x_A) + b(y - y_A) + c(z - z_A) = 0$$",
+        "mnemonicOrTip": "De même, si une droite $\\mathcal{D}$ de l'espace est donnée comme l'intersection de deux plans de vecteurs normaux $\\vec{n}_1$ et $\\vec{n}_2$, son vecteur directeur est $\\vec{u} = \\vec{n}_1 \\wedge \\vec{n}_2$."
+      }
+    },
+    {
+      "id": "fc-math-02-03",
+      "category": "Formule Critique",
+      "difficulty": 2,
+      "front": "Quelles sont les formules donnant la distance d'un point $M_0(x_0, y_0, z_0)$ à un plan $\\mathcal{P} : ax+by+cz+d=0$ et à une droite $\\mathcal{D}(A, \\vec{u})$ dans l'espace ?",
+      "back": {
+        "mainAnswer": "La distance à un plan utilise la valeur absolue du produit scalaire avec le vecteur normal $\\vec{n}$, tandis que la distance à une droite utilise la norme du produit vectoriel avec le vecteur directeur $\\vec{u}$.",
+        "criticalFormula": "$$d(M_0, \\mathcal{P}) = \\frac{|a\\,x_0 + b\\,y_0 + c\\,z_0 + d|}{\\sqrt{a^2 + b^2 + c^2}} \\quad \\text{et} \\quad d(M_0, \\mathcal{D}) = \\frac{\\|\\vec{AM_0}\\wedge\\vec{u}\\|}{\\|\\vec{u}\\|}$$",
+        "mnemonicOrTip": "Attention : dans l'espace 3D, une droite n'a PAS une équation unique du type $ax+by+cz+d=0$ (qui est l'équation d'un plan !)."
+      }
+    },
+    {
+      "id": "fc-math-02-04",
+      "category": "Définition",
+      "difficulty": 1,
+      "front": "Qu'est-ce que le produit mixte $[\\vec{u}, \\vec{v}, \\vec{w}]$ de trois vecteurs de l'espace, quelle est son interprétation géométrique et quand est-il nul ?",
+      "back": {
+        "mainAnswer": "Le produit mixte est le scalaire $(\\vec{u}\\wedge\\vec{v})\\cdot\\vec{w}$. Sa valeur absolue représente le volume du parallélépipède construit sur les trois vecteurs. Il est nul si et seulement si les trois vecteurs sont coplanaires.",
+        "criticalFormula": "$$[\\vec{u}, \\vec{v}, \\vec{w}] = (\\vec{u}\\wedge\\vec{v})\\cdot\\vec{w} = 0 \\iff \\vec{u}, \\vec{v}, \\vec{w} \\text{ sont coplanaires (famille liée)}$$",
+        "mnemonicOrTip": "Quatre points $A, B, C, D$ de l'espace sont coplanaires si et seulement si $[\\vec{AB}, \\vec{AC}, \\vec{AD}] = 0$."
+      }
+    },
+    {
+      "id": "fc-math-02-05",
+      "category": "Méthode",
+      "difficulty": 2,
+      "front": "Comment déterminer la nature et les éléments caractéristiques de l'intersection d'une sphère $\\mathcal{S}(\\Omega, R)$ et d'un plan $\\mathcal{P}$ ?",
+      "back": {
+        "mainAnswer": "On calcule la distance $d = d(\\Omega, \\mathcal{P})$ du centre $\\Omega$ de la sphère au plan $\\mathcal{P}$ et on la compare au rayon $R$ de la sphère.",
+        "criticalFormula": "• Si $d > R$ : intersection vide ($\\emptyset$)\n• Si $d = R$ : plan tangent au point $H$ (projeté orthogonal de $\\Omega$ sur $\\mathcal{P}$)\n• Si $d < R$ : cercle de centre $H$ et de rayon $r = \\sqrt{R^2 - d^2}$",
+        "mnemonicOrTip": "Pour trouver les coordonnées du centre $H$ du cercle d'intersection, il suffit d'injecter la représentation paramétrique de la normale $M(t) = \\Omega + t\\,\\vec{n}$ dans l'équation cartésienne du plan $\\mathcal{P}$."
+      }
+    }
+  ]
+}

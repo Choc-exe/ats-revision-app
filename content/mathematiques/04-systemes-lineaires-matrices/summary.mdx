@@ -1,0 +1,22 @@
+---
+title: "Fiche Synthèse : Systèmes, Polynômes et Matrices"
+subject: "mathematiques"
+chapterId: "04-systemes-lineaires-matrices"
+---
+
+## L'Essentiel du Bulletin Officiel ATS
+
+* **Systèmes linéaires & Pivot de Gauss-Jordan** :
+  * Opérations élémentaires autorisées : $L_i \leftrightarrow L_j$, $L_i \leftarrow \lambda L_i$ ($\lambda \neq 0$), $L_i \leftarrow L_i + \lambda L_j$ ($i \neq j$)[cite: 86].
+  * **Rang $r$** = nombre de pivots après échelonnement ; $r$ inconnues principales et $p - r$ inconnues secondaires (paramètres)[cite: 86, 87].
+  * Pour $p$ vecteurs colonnes de $\mathbb{R}^n$ formant la matrice $A \in \mathcal{M}_{n,p}(\mathbb{R})$ : **Famille libre $\iff r = p$** ; **Famille génératrice de $\mathbb{R}^n \iff r = n$**[cite: 87].
+* **Polynômes $\mathbb{K}[X]$ & Fractions rationnelles** :
+  * **Division euclidienne** : $A = B\,Q + R$ avec $\deg(R) < \deg(B)$[cite: 88].
+  * **Multiplicité d'une racine $a$** : $a$ est racine d'ordre $\alpha \iff (X-a)^\alpha \mid P$ et $(X-a)^{\alpha+1} \nmid P \iff P(a) = \dots = P^{(\alpha-1)}(a) = 0$ et $P^{(\alpha)}(a) \neq 0$[cite: 88].
+  * **Polynômes irréductibles** : degré $1$ dans $\mathbb{C}[X]$ ; degré $1$ et degré $2$ avec $\Delta < 0$ dans $\mathbb{R}[X]$[cite: 88].
+  * **Somme et produit des racines** (degré $2$) : $x_1 + x_2 = -\frac{b}{a}$ et $x_1 x_2 = \frac{c}{a}$[cite: 88].
+  * **Éléments simples (pôle simple $a$)** : coefficient de $\frac{1}{X-a}$ dans $\frac{A(X)}{B(X)}$ égal à $\frac{A(a)}{B'(a)}$[cite: 88].
+* **Calcul matriciel & Inversion** :
+  * $A\,B \neq B\,A$ en général ; formule du binôme $(A+B)^m = \sum_{k=0}^m \binom{m}{k} A^k B^{m-k}$ **uniquement si $A\,B = B\,A$**[cite: 89].
+  * $A \in GL_n(\mathbb{K})$ inversible $\iff \text{rg}(A) = n$ ($n$ pivots) $\iff \text{Ker}(A) = \{0\}$[cite: 89].
+  * Inverse d'un produit : **$(A\,B)^{-1} = B^{-1}\,A^{-1}$**[cite: 89].

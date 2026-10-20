@@ -1,0 +1,88 @@
+---
+title: "Chapitre 06 : Déterminants, Réduction et Espaces euclidiens"
+subject: "mathematiques"
+chapterId: "06-reduction-endomorphismes"
+semester: 2
+description: "Déterminants, éléments propres, polynôme caractéristique, diagonalisation, trigonalisation, espaces euclidiens, matrices orthogonales et théorème spectral."
+---
+
+# Déterminants, Réduction d'endomorphismes et Espaces euclidiens
+
+Ce chapitre développe les outils de réduction matricielle (diagonalisation) permettant de découpler les systèmes différentiels ou récurrents, puis étudie les propriétés géométriques des espaces euclidiens $\mathbb{R}^n$, des matrices orthogonales et des matrices symétriques réelles (comme les matrices d'inertie en mécanique)[cite: 94, 95, 96].
+
+---
+
+## 1. Déterminants des matrices carrées et des endomorphismes
+
+### Définition et Propriétés fondamentales du déterminant
+Le déterminant est l'unique application $\det : \mathcal{M}_n(\mathbb{K}) \to \mathbb{K}$ qui est **linéaire par rapport à chaque colonne** (et chaque ligne), **alternée** (échanger deux colonnes multiplie le déterminant par $-1$ ; si deux colonnes sont égales, $\det(A) = 0$) et telle que **$\det(I_n) = 1$**[cite: 94].
+
+<CriticalFormula title="Règles de calcul des déterminants et Caractérisation de l'inversibilité">
+Pour toutes matrices carrées $A, B \in \mathcal{M}_n(\mathbb{K})$ et tout scalaire $\lambda \in \mathbb{K}$[cite: 94] :
+* **Attention au scalaire en facteur** : **$\det(\lambda\,A) = \lambda^n\,\det(A)$** (chaque colonne étant multipliée par $\lambda$)[cite: 94].
+* **Produit, Inverse et Transposée** :
+$$\det(A\,B) = \det(A)\,\det(B) \quad ; \quad \det(A^\top) = \det(A) \quad ; \quad \det(A^{-1}) = \frac{1}{\det(A)}$$
+* **Caractérisation des matrices inversibles** : **$A \in GL_n(\mathbb{K}) \iff \det(A) \neq 0$**[cite: 94].
+* **Matrice triangulaire ou diagonale (ou triangulaire par blocs)** : Le déterminant d'une matrice triangulaire est égal au **produit de ses coefficients diagonaux** ; et pour une matrice par blocs : $\det\begin{pmatrix} A & B \\ 0 & D \end{pmatrix} = \det(A)\,\det(D)$[cite: 94].
+</CriticalFormula>
+
+* **Méthode pratique de calcul** : On utilise les opérations élémentaires $C_i \leftarrow C_i + \lambda C_j$ ou $L_i \leftarrow L_i + \lambda L_j$ (qui **ne modifient pas** le déterminant) pour faire apparaître un maximum de zéros sur une ligne ou une colonne, puis on développe par rapport à cette ligne ou colonne en appliquant la règle des signes $(-1)^{i+j}$[cite: 94].
+
+---
+
+## 2. Éléments propres et Polynôme caractéristique
+
+Soit $u \in \mathcal{L}(E)$ un endomorphisme d'un espace vectoriel $E$ de dimension finie $n$ (ou une matrice carrée $A \in \mathcal{M}_n(\mathbb{K})$)[cite: 95].
+
+### Valeurs propres, Vecteurs propres et Sous-espaces propres
+* Un scalaire $\lambda \in \mathbb{K}$ est une **valeur propre** de $A$ s'il existe un vecteur **non nul** $X \in \mathcal{M}_{n,1}(\mathbb{K}) \setminus \{0\}$ tel que **$A\,X = \lambda\,X$**[cite: 95]. Le vecteur $X \neq 0$ est alors appelé un **vecteur propre** associé à $\lambda$, et l'ensemble des valeurs propres est le **spectre** $\text{Sp}(A)$[cite: 95].
+* Le **sous-espace propre** associé à la valeur propre $\lambda$ est le sous-espace vectoriel (de dimension $\ge 1$) défini par[cite: 95] :
+$$E_\lambda(A) = \text{Ker}(A - \lambda\,I_n) = \{X \in \mathcal{M}_{n,1}(\mathbb{K}) \mid A\,X = \lambda\,X\}$$
+* **Propriété fondamentale** : Une somme finie de sous-espaces propres associés à des valeurs propres deux à deux distinctes est toujours une **somme directe** ($\bigoplus_{\lambda \in \text{Sp}(A)} E_\lambda(A)$) ; en particulier, une famille de vecteurs propres associés à des valeurs propres distinctes est toujours **libre**[cite: 95].
+
+<CriticalFormula title="Polynôme caractéristique et Encadrement de la dimension de E_λ">
+Le **polynôme caractéristique** de $A \in \mathcal{M}_n(\mathbb{K})$ est le polynôme de degré $n$ défini par $\chi_A(X) = \det(X\,I_n - A)$ (ou $\det(A - X\,I_n)$)[cite: 95] :
+* **Les valeurs propres de $A$ sont exactement les racines de son polynôme caractéristique** : $\lambda \in \text{Sp}(A) \iff \chi_A(\lambda) = 0$[cite: 95].
+* Si $\lambda$ est une valeur propre d'**ordre de multiplicité $m_\lambda$** (comme racine de $\chi_A$), la dimension du sous-espace propre associé vérifie toujours l'encadrement[cite: 95] :
+$$1 \le \dim\big(E_\lambda(A)\big) \le m_\lambda$$
+*(En particulier, si $\lambda$ est une **racine simple** de $\chi_A$, soit $m_\lambda = 1$, alors on a automatiquement $\dim(E_\lambda(A)) = 1$ !)*[cite: 95].
+</CriticalFormula>
+
+---
+
+## 3. Diagonalisation, Trigonalisation et Applications
+
+### Critères de diagonalisabilité et de trigonalisabilité
+Une matrice $A \in \mathcal{M}_n(\mathbb{K})$ est dite **diagonalisable** sur $\mathbb{K}$ si elle est semblable à une matrice diagonale $D = \text{diag}(\lambda_1, \dots, \lambda_n)$, c'est-à-dire s'il existe une matrice inversible $P \in GL_n(\mathbb{K})$ (dont les colonnes forment une **base de vecteurs propres** de $A$) telle que **$A = P\,D\,P^{-1} \iff D = P^{-1}\,A\,P$**[cite: 95].
+
+<CriticalFormula title="Conditions nécessaires et suffisantes de Diagonalisabilité">
+Soit $A \in \mathcal{M}_n(\mathbb{K})$ (ou $u \in \mathcal{L}(E)$ avec $\dim E = n$). Les trois propriétés suivantes sont équivalentes[cite: 95] :
+1. $A$ est **diagonalisable** dans $\mathcal{M}_n(\mathbb{K})$ (il existe une base de $\mathbb{K}^n$ formée de vecteurs propres de $A$)[cite: 95].
+2. La somme des dimensions des sous-espaces propres est égale à la taille de la matrice : $\sum_{\lambda \in \text{Sp}(A)} \dim(E_\lambda(A)) = n$[cite: 95].
+3. Le polynôme caractéristique $\chi_A$ est **scindé** sur $\mathbb{K}$ **ET** pour chaque valeur propre $\lambda$, **$\dim(E_\lambda(A)) = m_\lambda$**[cite: 95].
+
+**Condition suffisante rapide** : Si $\chi_A$ est **scindé à racines toutes simples** ($n$ valeurs propres distinctes dans $\mathbb{K}$), alors $A$ est **automatiquement diagonalisable**[cite: 95].
+</CriticalFormula>
+
+* **Trigonalisabilité, Trace et Déterminant** : Une matrice $A$ est **trigonalisable** sur $\mathbb{K}$ (semblable à une matrice triangulaire supérieure) si et seulement si son polynôme caractéristique est **scindé** sur $\mathbb{K}$ (ce qui est **toujours vrai dans $\mathbb{C}$** d'après d'Alembert-Gauss)[cite: 88, 95]. Si $\chi_A$ est scindé de racines $\lambda_1, \dots, \lambda_n$ (comptées avec leur multiplicité)[cite: 95] :
+$$\text{Tr}(A) = \sum_{k=1}^n \lambda_k \quad \text{et} \quad \det(A) = \prod_{k=1}^n \lambda_k$$
+* **Applications de la diagonalisation** : Si $A = P\,D\,P^{-1}$ avec $D = \text{diag}(\lambda_1, \dots, \lambda_n)$, alors pour tout $k \in \mathbb{N}$, **$A^k = P\,D^k\,P^{-1}$** où $D^k = \text{diag}(\lambda_1^k, \dots, \lambda_n^k)$, ce qui permet de résoudre explicitement tout système récurrent linéaire homogène $X_{k+1} = A\,X_k \implies X_k = A^k\,X_0$[cite: 95, 96].
+
+---
+
+## 4. Espaces euclidiens $\mathbb{R}^n$, Matrices orthogonales et Théorème spectral
+
+### Produit scalaire canonique, Norme et Bases orthonormales de $\mathbb{R}^n$
+Dans l'espace euclidien $\mathbb{R}^n$, le produit scalaire canonique de deux vecteurs colonnes $X = (x_1, \dots, x_n)^\top$ et $Y = (y_1, \dots, y_n)^\top$ s'écrit[cite: 96] :
+$$\langle X, Y \rangle = (X \mid Y) = X^\top\,Y = \sum_{k=1}^n x_k\,y_k \quad \text{et} \quad \|X\| = \sqrt{X^\top\,X} = \sqrt{\sum_{k=1}^n x_k^2}$$
+Une famille $(e_1, \dots, e_n)$ de $\mathbb{R}^n$ est une **base orthonormale (BON)** si ses vecteurs sont unitaires ($\|e_i\| = 1$) et deux à deux orthogonaux ($\langle e_i, e_j \rangle = 0$ pour $i \neq j$)[cite: 96]. Dans toute BON $\mathcal{B}$, les coordonnées d'un vecteur $x \in \mathbb{R}^n$ s'obtiennent directement par produit scalaire : **$x = \sum_{i=1}^n \langle x, e_i \rangle\,e_i$**[cite: 96].
+
+### Matrices orthogonales, Isométries et Théorème spectral
+* **Matrice orthogonale et Groupe orthogonal $O_n(\mathbb{R})$** : Une matrice $P \in \mathcal{M}_n(\mathbb{R})$ est dite **orthogonale** si elle vérifie **$P^\top\,P = I_n$** (c'est-à-dire si elle est inversible et **$P^{-1} = P^\top$**), ce qui équivaut à dire que ses colonnes (ainsi que ses lignes) forment une **base orthonormale de $\mathbb{R}^n$**[cite: 96].
+* **Isométries vectorielles** : Un endomorphisme $u \in \mathcal{L}(\mathbb{R}^n)$ conserve la norme ($\forall x, \|u(x)\| = \|x\|$) si et seulement si sa matrice dans une base orthonormale est orthogonale[cite: 96]. Le déterminant d'une matrice orthogonale vaut toujours **$\det(P) = +1$** (isométrie directe / rotation en 2D de matrice $\begin{pmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{pmatrix}$) ou **$\det(P) = -1$** (isométrie indirecte / réflexion)[cite: 96].
+
+<CriticalFormula title="Théorème Spectral (Matrices symétriques réelles)">
+Pour toute **matrice symétrique à coefficients réels** $A \in \mathcal{M}_n(\mathbb{R})$ (c'est-à-dire vérifiant **$A^\top = A$**), $A$ est **diagonalisable dans $\mathbb{R}$ dans une base orthonormale de vecteurs propres** : il existe une matrice **orthogonale** $P \in O_n(\mathbb{R})$ ($P^{-1} = P^\top$) et une matrice diagonale réelle $D$ telles que[cite: 96] :
+$$D = P^{-1}\,A\,P = P^\top\,A\,P$$
+*(Application directe en Physique et SII : la **matrice d'inertie** d'un solide étant symétrique réelle, il existe toujours un repère orthonormé principal d'inertie dans lequel elle est diagonale)*[cite: 41, 96, 135].
+</CriticalFormula>

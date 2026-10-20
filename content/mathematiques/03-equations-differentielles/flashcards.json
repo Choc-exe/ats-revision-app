@@ -1,0 +1,62 @@
+{
+  "chapterId": "03-equations-differentielles",
+  "subject": "mathematiques",
+  "title": "Équations différentielles linéaires et Systèmes différentiels",
+  "cards": [
+    {
+      "id": "fc-math-03-01",
+      "category": "Formule Critique",
+      "difficulty": 1,
+      "front": "Quelle est la forme des solutions de l'équation homogène $y' + a(x)y = 0$, et comment met-on en œuvre la méthode de variation de la constante pour $y' + a(x)y = b(x)$ ?",
+      "back": {
+        "mainAnswer": "Si $A(x)$ est une primitive de $a(x)$, les solutions homogènes sont $\\lambda e^{-A(x)}$. Pour la variation de la constante, on remplace $\\lambda$ par une fonction dérivable $\\lambda(x)$ dans l'équation avec second membre.",
+        "criticalFormula": "$$y_H(x) = \\lambda\\,e^{-A(x)} \\quad ; \\quad y_P(x) = \\lambda(x)\\,e^{-A(x)} \\implies \\lambda'(x) = b(x)\\,e^{A(x)}$$",
+        "mnemonicOrTip": "Moyen de contrôle infaillible : quand vous injectez $y_P(x) = \\lambda(x)e^{-A(x)}$ dans $y' + a(x)y$, les termes contenant $\\lambda(x)$ sans dérivée doivent TOUJOURS s'annuler !"
+      }
+    },
+    {
+      "id": "fc-math-03-02",
+      "category": "Formule Critique",
+      "difficulty": 1,
+      "front": "Quelles sont les trois formes de la solution générale réelle de $y'' + ay' + by = 0$ ($a, b \\in \\mathbb{R}$) selon le signe du discriminant $\\Delta = a^2 - 4b$ de $r^2 + ar + b = 0$ ?",
+      "back": {
+        "mainAnswer": "L'espace des solutions est un plan vectoriel (combinaison linéaire de 2 solutions indépendantes avec deux constantes $\\lambda, \\mu \\in \\mathbb{R}$).",
+        "criticalFormula": "• $\\Delta > 0$ ($r_1 \\neq r_2$) : $y_H(x) = \\lambda e^{r_1 x} + \\mu e^{r_2 x}$\n• $\\Delta = 0$ ($r_0$ double) : $y_H(x) = (\\lambda + \\mu x)e^{r_0 x}$\n• $\\Delta < 0$ ($\\alpha \\pm i\\omega$) : $y_H(x) = e^{\\alpha x}(\\lambda\\cos(\\omega x) + \\mu\\sin(\\omega x))$",
+        "mnemonicOrTip": "Attention : on détermine les constantes $\\lambda$ et $\\mu$ à l'aide des conditions initiales UNIQUEMENT à la toute fin, sur la solution complète $y(x) = y_H(x) + y_P(x)$, et jamais sur $y_H(x)$ seule !"
+      }
+    },
+    {
+      "id": "fc-math-03-03",
+      "category": "Méthode",
+      "difficulty": 2,
+      "front": "Sous quelle forme cherche-t-on une solution particulière de $y'' + ay' + by = P(x)e^{\\omega x}$ ($\\deg P = n$) selon que $\\omega$ est ou n'est pas racine de $r^2 + ar + b = 0$ ?",
+      "back": {
+        "mainAnswer": "On cherche $y_P(x)$ avec un polynôme $Q(x)$ de même degré $n$ que $P(x)$, multiplié par $x^m$ où $m$ est l'ordre de multiplicité de $\\omega$ comme racine du polynôme caractéristique.",
+        "criticalFormula": "• $\\omega$ non racine ($m=0$) : $y_P(x) = Q(x)\\,e^{\\omega x}$\n• $\\omega$ racine simple ($m=1$) : $y_P(x) = x\\,Q(x)\\,e^{\\omega x}$\n• $\\omega$ racine double ($m=2$) : $y_P(x) = x^2\\,Q(x)\\,e^{\\omega x}$",
+        "mnemonicOrTip": "Cas particulier très fréquent : si le second membre est un simple polynôme $P(x)$, cela correspond à $\\omega = 0$ ($e^{0x} = 1$). On teste alors si $0$ est racine de $r^2 + ar + b = 0$ (c'est-à-dire si $b = 0$)."
+      }
+    },
+    {
+      "id": "fc-math-03-04",
+      "category": "Méthode",
+      "difficulty": 3,
+      "front": "Pour une équation d'ordre 2 à coefficients variables $y'' + a(t)y' + b(t)y = c(t)$, comment procède-t-on si l'énoncé fait découvrir une solution $y_1(t)$ de l'équation homogène ne s'annulant pas ?",
+      "back": {
+        "mainAnswer": "On effectue le changement de fonction inconnue $y(t) = z(t)\\,y_1(t)$. Comme $y_1$ vérifie l'équation homogène, le terme en $z(t)$ disparaît et on obtient une équation différentielle linéaire du 1er ordre en $u(t) = z'(t)$.",
+        "criticalFormula": "$$\\text{Poser } y(t) = z(t)\\,y_1(t) \\quad \\text{puis} \\quad u(t) = z'(t)$$",
+        "mnemonicOrTip": "Une fois $u(t) = z'(t)$ trouvée, n'oubliez pas d'intégrer une seconde fois pour obtenir $z(t)$, puis de remultiplier par $y_1(t)$ !"
+      }
+    },
+    {
+      "id": "fc-math-03-05",
+      "category": "Formule Critique",
+      "difficulty": 2,
+      "front": "Comment résout-on le système différentiel linéaire $X'(t) = A\\,X(t)$ lorsque la matrice $A$ est diagonalisable ($A = P\\,D\\,P^{-1}$ avec $D = \\text{diag}(\\lambda_1, \\dots, \\lambda_n)$) ?",
+      "back": {
+        "mainAnswer": "On pose le changement de vecteur inconnu $X(t) = P\\,Y(t)$ (soit $Y(t) = P^{-1}X(t)$). Le système devient $P Y'(t) = A P Y(t) \\iff Y'(t) = D Y(t)$, composé de $n$ équations scalaires découplées $y_k' = \\lambda_k y_k$.",
+        "criticalFormula": "$$X(t) = P\\,Y(t) = \\sum_{k=1}^n c_k\\,e^{\\lambda_k t}\\,V_k \\quad (\\text{où } V_k \\text{ est le } k\\text{-ième vecteur propre})$$",
+        "mnemonicOrTip": "Les solutions sont bornées sur $[0, +\\infty[$ (critère de stabilité) si et seulement si toutes les valeurs propres $\\lambda_k$ sont à partie réelle négative."
+      }
+    }
+  ]
+}

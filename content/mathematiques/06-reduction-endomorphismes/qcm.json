@@ -1,0 +1,113 @@
+{
+  "chapterId": "06-reduction-endomorphismes",
+  "subject": "mathematiques",
+  "title": "QCM d'entraînement : Déterminants, Réduction et Espaces euclidiens",
+  "questions": [
+    {
+      "id": "qcm-math-06-01",
+      "difficulty": "Application directe",
+      "questionText": "Soit $A \\in \\mathcal{M}_3(\\mathbb{R})$ une matrice carrée de taille $3 \\times 3$ telle que $\\det(A) = 2$. Que valent respectivement $\\det(3A)$ et $\\det(A^{-1})$ ?",
+      "options": [
+        { "id": "A", "text": "$\\det(3A) = 6$ et $\\det(A^{-1}) = \\frac{1}{2}$" },
+        { "id": "B", "text": "$\\det(3A) = 54$ et $\\det(A^{-1}) = \\frac{1}{2}$" },
+        { "id": "C", "text": "$\\det(3A) = 18$ et $\\det(A^{-1}) = -2$" },
+        { "id": "D", "text": "$\\det(3A) = 54$ et $\\det(A^{-1}) = -2$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. Pour une matrice $A$ de taille $n = 3$, la formule de multilinéarité donne $\\det(\\lambda\\,A) = \\lambda^3\\,\\det(A)$.",
+          "2. Avec $\\lambda = 3$ et $\\det(A) = 2$, on obtient $\\det(3A) = 3^3 \\times 2 = 27 \\times 2 = 54$.",
+          "3. Comme $\\det(A) = 2 \\neq 0$, $A$ est inversible et $\\det(A^{-1}) = \\frac{1}{\\det(A)} = \\frac{1}{2}$."
+        ],
+        "keyFormula": "$$\\det(\\lambda\\,A) = \\lambda^n\\,\\det(A) \\quad \\text{et} \\quad \\det(A^{-1}) = \\frac{1}{\\det(A)}$$",
+        "commonTrap": "La réponse A ($\\det(3A) = 6$) est l'erreur la plus fréquente aux concours : oublier d'élever le scalaire $3$ à la puissance $n = 3$ (taille de la matrice)."
+      }
+    },
+    {
+      "id": "qcm-math-06-02",
+      "difficulty": "Calculatoire",
+      "questionText": "Soit la matrice $A = \\begin{pmatrix} 1 & 2 & -1 \\\\ 0 & 3 & 4 \\\\ 0 & 0 & -2 \\end{pmatrix} \\in \\mathcal{M}_3(\\mathbb{R})$. Quel est son spectre $\\text{Sp}(A)$ et la matrice $A$ est-elle diagonalisable dans $\\mathcal{M}_3(\\mathbb{R})$ ?",
+      "options": [
+        { "id": "A", "text": "$\\text{Sp}(A) = \\{1, 3, -2\\}$ et $A$ est diagonalisable." },
+        { "id": "B", "text": "$\\text{Sp}(A) = \\{1, 3, -2\\}$ et $A$ n'est pas diagonalisable car elle n'est pas symétrique." },
+        { "id": "C", "text": "$\\text{Sp}(A) = \\{-1, -3, 2\\}$ et $A$ est diagonalisable." },
+        { "id": "D", "text": "$\\text{Sp}(A) = \\{1, 2, 4\\}$ et $A$ n'est pas diagonalisable." }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. La matrice $A$ est triangulaire supérieure : son polynôme caractéristique est le produit de ses termes diagonaux $\\chi_A(X) = \\det(X I_3 - A) = (X - 1)(X - 3)(X + 2)$.",
+          "2. Les valeurs propres d'une matrice triangulaire se lisent directement sur sa diagonale : $\\text{Sp}(A) = \\{1, 3, -2\\}$.",
+          "3. Comme $A$ est de taille $3$ et possède $3$ valeurs propres réelles **deux à deux distinctes** ($\\chi_A$ est scindé à racines simples sur $\\mathbb{R}$), $A$ est automatiquement diagonalisable sur $\\mathbb{R}$."
+        ],
+        "keyFormula": "$$A \\text{ triangulaire} \\implies \\text{Sp}(A) = \\{a_{1,1}, \\dots, a_{n,n}\\} \\quad ; \\quad n \\text{ valeurs propres distinctes} \\implies A \\text{ diagonalisable}$$",
+        "commonTrap": "La réponse B confond une condition suffisante (le théorème spectral : $A$ symétrique réelle $\\implies A$ diagonalisable) avec une condition nécessaire : une matrice non symétrique ayant $n$ valeurs propres distinctes est parfaitement diagonalisable !"
+      }
+    },
+    {
+      "id": "qcm-math-06-03",
+      "difficulty": "Calculatoire",
+      "questionText": "On considère une matrice $A \\in \\mathcal{M}_3(\\mathbb{R})$ dont la trace vaut $\\text{Tr}(A) = 7$ et le déterminant vaut $\\det(A) = 0$. On sait que $\\lambda_1 = 2$ et $\\lambda_2 = 5$ sont valeurs propres de $A$. Quelle est la troisième valeur propre $\\lambda_3$, et que peut-on en déduire sur $A$ ?",
+      "options": [
+        { "id": "A", "text": "$\\lambda_3 = 0$, $A$ n'est pas inversible mais $A$ est diagonalisable sur $\\mathbb{R}$." },
+        { "id": "B", "text": "$\\lambda_3 = 0$, et $A$ n'est ni inversible ni diagonalisable car $0$ est valeur propre." },
+        { "id": "C", "text": "$\\lambda_3 = 1$, et $A$ est inversible." },
+        { "id": "D", "text": "$\\lambda_3 = -7$, et $A$ est diagonalisable." }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. La somme des $3$ valeurs propres est égale à la trace : $\\lambda_1 + \\lambda_2 + \\lambda_3 = \\text{Tr}(A) \\iff 2 + 5 + \\lambda_3 = 7 \\implies \\lambda_3 = 0$ (ce qui est cohérent avec $\\det(A) = \\lambda_1 \\lambda_2 \\lambda_3 = 0$).",
+          "2. Comme $\\det(A) = 0$ (ou $0 \\in \\text{Sp}(A)$), la matrice $A$ n'est pas inversible.",
+          "3. En revanche, $A$ possède $3$ valeurs propres réelles distinctes ($\\text{Sp}(A) = \\{0, 2, 5\\}$) en dimension $3$, donc $A$ est diagonalisable sur $\\mathbb{R}$."
+        ],
+        "keyFormula": "$$\\text{Tr}(A) = \\lambda_1 + \\lambda_2 + \\lambda_3 \\quad \\text{et} \\quad \\det(A) = \\lambda_1\\,\\lambda_2\\,\\lambda_3$$",
+        "commonTrap": "La réponse B est une confusion très fréquente : confondre « inversible » ($0 \\notin \\text{Sp}(A)$) et « diagonalisable ». La valeur propre $0$ est une valeur propre comme une autre et n'empêche absolument pas une matrice d'être diagonalisable !"
+      }
+    },
+    {
+      "id": "qcm-math-06-04",
+      "difficulty": "Type Concours",
+      "questionText": "Soit la matrice $A = \\begin{pmatrix} 1 & 1 & 1 \\\\ 1 & 1 & 1 \\\\ 1 & 1 & 1 \\end{pmatrix} \\in \\mathcal{M}_3(\\mathbb{R})$. Sans calcul lourd de déterminant, quels sont le rang de $A$, la dimension de $E_0(A) = \\text{Ker}(A)$, les valeurs propres de $A$ et son caractère diagonalisable ?",
+      "options": [
+        { "id": "A", "text": "$\\text{rg}(A) = 1$, $\\dim E_0(A) = 2$, $\\text{Sp}(A) = \\{0, 3\\}$ et $A$ est diagonalisable." },
+        { "id": "B", "text": "$\\text{rg}(A) = 1$, $\\dim E_0(A) = 2$, $\\text{Sp}(A) = \\{0, 1\\}$ et $A$ est diagonalisable." },
+        { "id": "C", "text": "$\\text{rg}(A) = 1$, $\\dim E_0(A) = 2$, $\\text{Sp}(A) = \\{0, 3\\}$ et $A$ n'est pas diagonalisable car $0$ est valeur propre double." },
+        { "id": "D", "text": "$\\text{rg}(A) = 3$, $\\dim E_0(A) = 0$, $\\text{Sp}(A) = \\{1\\}$ et $A$ est diagonalisable." }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. Les trois colonnes de $A$ sont identiques et non nulles : l'image est de dimension $1$, donc $\\text{rg}(A) = 1$.",
+          "2. D'après le théorème du rang, $\\dim E_0(A) = \\dim(\\text{Ker}(A)) = 3 - \\text{rg}(A) = 3 - 1 = 2$. Ainsi, $\\lambda = 0$ est valeur propre d'ordre de multiplicité au moins $2$ ($\\lambda_1 = 0, \\lambda_2 = 0$).",
+          "3. La troisième valeur propre s'obtient immédiatement avec la trace : $\\lambda_1 + \\lambda_2 + \\lambda_3 = \\text{Tr}(A) = 1 + 1 + 1 = 3 \\implies \\lambda_3 = 3$ (de sous-espace propre de dimension $1$ dirigé par $(1, 1, 1)^\\top$).",
+          "4. Comme $\\dim E_0(A) + \\dim E_3(A) = 2 + 1 = 3$ (ou directement parce que $A$ est symétrique réelle, théorème spectral), $A$ est diagonalisable."
+        ],
+        "keyFormula": "$$\\dim E_0(A) = n - \\text{rg}(A) = 2 \\quad \\text{et} \\quad \\lambda_3 = \\text{Tr}(A) - (0 + 0) = 3$$",
+        "commonTrap": "Cet exercice est un grand classique des écrits et oraux ATS : utiliser le rang et la trace permet d'éviter tout calcul du déterminant $\\det(X I_3 - A)$."
+      }
+    },
+    {
+      "id": "qcm-math-06-05",
+      "difficulty": "Application directe",
+      "questionText": "Dans l'espace euclidien $\\mathbb{R}^2$ muni de sa base orthonormale canonique, on considère la matrice $P = \\frac{1}{\\sqrt{2}}\\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix}$. Quelle est la nature de la matrice $P$ et de l'endomorphisme qu'elle représente ?",
+      "options": [
+        { "id": "A", "text": "$P$ est une matrice orthogonale de déterminant $+1$ (rotation plane)." },
+        { "id": "B", "text": "$P$ est une matrice orthogonale de déterminant $-1$ (symétrie orthogonale / réflexion plane) vérifiant $P^{-1} = P^\\top = P$." },
+        { "id": "C", "text": "$P$ est un projecteur orthogonal non inversible." },
+        { "id": "D", "text": "$P$ n'est pas une matrice orthogonale car son déterminant vaut $-2$." }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. Les deux vecteurs colonnes $C_1 = \\frac{1}{\\sqrt{2}}(1, 1)^\\top$ et $C_2 = \\frac{1}{\\sqrt{2}}(1, -1)^\\top$ sont unitaires ($\\|C_1\\|^2 = \\|C_2\\|^2 = \\frac{1+1}{2} = 1$) et orthogonaux ($\\langle C_1, C_2 \\rangle = \\frac{1 - 1}{2} = 0$) : $P$ est donc une **matrice orthogonale** ($P \\in O_2(\\mathbb{R})$).",
+          "2. Son déterminant vaut $\\det(P) = \\left(\\frac{1}{\\sqrt{2}}\\right)^2 \\times (-1 - 1) = \\frac{1}{2} \\times (-2) = -1$ : elle représente donc une isométrie indirecte (symétrie orthogonale par rapport à une droite).",
+          "3. De plus, comme $P$ est à la fois orthogonale ($P^{-1} = P^\\top$) et symétrique ($P^\\top = P$), elle vérifie $P^{-1} = P$ ($P^2 = I_2$)."
+        ],
+        "keyFormula": "$$P^\\top\\,P = I_2 \\text{ et } \\det(P) = -1 \\implies P \\in O_2(\\mathbb{R}) \\text{ (symétrie orthogonale)}$$",
+        "commonTrap": "La réponse D oublie que le facteur $\\frac{1}{\\sqrt{2}}$ devant la matrice $2 \\times 2$ sort du déterminant au carré : $\\left(\\frac{1}{\\sqrt{2}}\\right)^2 = \\frac{1}{2}$."
+      }
+    }
+  ]
+}

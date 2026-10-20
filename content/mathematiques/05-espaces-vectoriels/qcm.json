@@ -1,0 +1,112 @@
+{
+  "chapterId": "05-espaces-vectoriels",
+  "subject": "mathematiques",
+  "title": "QCM d'entraînement : Espaces vectoriels et Applications linéaires",
+  "questions": [
+    {
+      "id": "qcm-math-05-01",
+      "difficulty": "Application directe",
+      "questionText": "Parmi les sous-ensembles suivants de $\\mathbb{R}^3$, lequel est un **sous-espace vectoriel** de $\\mathbb{R}^3$ ?",
+      "options": [
+        { "id": "A", "text": "$F_1 = \\{(x, y, z) \\in \\mathbb{R}^3 \\mid 2x - y + 3z = 1\\}$" },
+        { "id": "B", "text": "$F_2 = \\{(x, y, z) \\in \\mathbb{R}^3 \\mid x^2 + y^2 - z = 0\\}$" },
+        { "id": "C", "text": "$F_3 = \\{(a + 2b,\\, -a,\\, 3b) \\mid (a, b) \\in \\mathbb{R}^2\\}$" },
+        { "id": "D", "text": "$F_4 = \\{(x, y, z) \\in \\mathbb{R}^3 \\mid x \\ge 0\\}$" }
+      ],
+      "correctOptionId": "C",
+      "explanation": {
+        "steps": [
+          "1. $F_1$ ne contient pas le vecteur nul $(0, 0, 0)$ car $0 \neq 1$ : ce n'est pas un sous-espace vectoriel.",
+          "2. $F_2$ et $F_4$ ne sont pas stables par multiplication par un scalaire négatif (dans $F_2$, $(1, 0, 1) \\in F_2$ mais $(-1) \\cdot (1, 0, 1) = (-1, 0, -1) \\notin F_2$ car $(-1)^2 - (-1) = 2 \\neq 0$).",
+          "3. Tout élément de $F_3$ s'écrit $a(1, -1, 0) + b(2, 0, 3)$ : $F_3 = \\text{Vect}\\big((1, -1, 0),\\, (2, 0, 3)\\big)$ est le sous-espace vectoriel engendré par deux vecteurs (plan vectoriel de dimension $2$)."
+        ],
+        "keyFormula": "$$\\text{Vect}(u_1, u_2) = \\{a\\,u_1 + b\\,u_2 \\mid (a, b) \\in \\mathbb{R}^2\\} \\text{ est toujours un sous-espace vectoriel}$$",
+        "commonTrap": "La réponse A est un plan affine ne passant pas par l'origine : une équation cartésienne de sous-espace vectoriel doit être **linéaire et homogène** (second membre nul)."
+      }
+    },
+    {
+      "id": "qcm-math-05-02",
+      "difficulty": "Application directe",
+      "questionText": "Dans l'espace vectoriel $E = \\mathbb{R}_3[X]$ des polynômes réels de degré au plus $3$, on considère la famille de polynômes $\\mathcal{F} = \\big(2,\\; X - 1,\\; (X - 1)^2,\\; X^3 + 4X\\big)$. Que peut-on affirmer sur la famille $\\mathcal{F}$ ?",
+      "options": [
+        { "id": "A", "text": "$\\mathcal{F}$ est une famille liée car elle contient $4$ vecteurs dans un espace de dimension $3$." },
+        { "id": "B", "text": "$\\mathcal{F}$ est une base de $\\mathbb{R}_3[X]$ car c'est une famille de $4$ polynômes de degrés échelonnés ($0, 1, 2, 3$) et $\\dim(\\mathbb{R}_3[X]) = 4$." },
+        { "id": "C", "text": "$\\mathcal{F}$ est libre mais n'est pas génératrice de $\\mathbb{R}_3[X]$." },
+        { "id": "D", "text": "$\\mathcal{F}$ est génératrice mais liée." }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. Les quatre polynômes de $\\mathcal{F}$ sont non nuls et ont pour degrés respectifs $0, 1, 2$ et $3$.",
+          "2. D'après le théorème du cours, toute famille de polynômes non nuls de **degrés échelonnés** est une **famille libre**.",
+          "3. Or, la dimension de $E = \\mathbb{R}_3[X]$ vaut $\\dim(\\mathbb{R}_3[X]) = 3 + 1 = 4$. Comme $\\mathcal{F}$ est libre et comporte exactement $4 = \\dim(E)$ vecteurs, $\\mathcal{F}$ est une **base** de $\\mathbb{R}_3[X]$."
+        ],
+        "keyFormula": "$$\\text{Degrés échelonnés} \\implies \\text{Famille libre} \\quad ; \\quad \\text{Libre de cardinal } \\dim(\\mathbb{R}_3[X]) = 4 \\implies \\text{Base}$$",
+        "commonTrap": "La réponse A tombe dans le piège classique qui consiste à croire que $\\dim(\\mathbb{R}_3[X]) = 3$ au lieu de $3 + 1 = 4$."
+      }
+    },
+    {
+      "id": "qcm-math-05-03",
+      "difficulty": "Calculatoire",
+      "questionText": "Dans un espace vectoriel $E$ de dimension $5$, soient $F$ et $G$ deux sous-espaces vectoriels de dimensions respectives $\\dim(F) = 3$ et $\\dim(G) = 3$. Quelle est la valeur **minimale** possible pour la dimension de leur intersection $\\dim(F \\cap G)$ ?",
+      "options": [
+        { "id": "A", "text": "$\\dim(F \\cap G) \\ge 0$ ($F$ et $G$ peuvent être en somme directe)" },
+        { "id": "B", "text": "$\\dim(F \\cap G) \\ge 1$" },
+        { "id": "C", "text": "$\\dim(F \\cap G) \\ge 2$" },
+        { "id": "D", "text": "$\\dim(F \\cap G) = 3$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. D'après la formule de Grassmann : $\\dim(F + G) = \\dim(F) + \\dim(G) - \\dim(F \\cap G) = 3 + 3 - \\dim(F \\cap G) = 6 - \\dim(F \\cap G)$.",
+          "2. Comme $F + G$ est un sous-espace vectoriel de $E$, sa dimension ne peut pas dépasser celle de $E$ : $\\dim(F + G) \\le \\dim(E) = 5$.",
+          "3. On a donc $6 - \\dim(F \\cap G) \\le 5 \\iff \\dim(F \\cap G) \\ge 6 - 5 = 1$ (en particulier, $F$ et $G$ ne peuvent jamais être en somme directe dans $E$)."
+        ],
+        "keyFormula": "$$\\dim(F \\cap G) = \\dim(F) + \\dim(G) - \\dim(F + G) \\ge \\dim(F) + \\dim(G) - \\dim(E)$$",
+        "commonTrap": "La réponse A est impossible car si $F \\cap G = \\{0_E\\}$, alors $\\dim(F \\oplus G) = 3 + 3 = 6 > \\dim(E) = 5$."
+      }
+    },
+    {
+      "id": "qcm-math-05-04",
+      "difficulty": "Calculatoire",
+      "questionText": "Soit l'application linéaire $u : \\mathbb{R}^3 \\to \\mathbb{R}^3$ définie par $u(x, y, z) = (x - y + z,\\, 2x - 2y + 2z,\\, -x + y - z)$. Quelles sont la dimension du noyau $\\dim(\\text{Ker}(u))$ et le rang $\\text{rg}(u)$ de cet endomorphisme ?",
+      "options": [
+        { "id": "A", "text": "$\\dim(\\text{Ker}(u)) = 1$ et $\\text{rg}(u) = 2$" },
+        { "id": "B", "text": "$\\dim(\\text{Ker}(u)) = 2$ et $\\text{rg}(u) = 1$" },
+        { "id": "C", "text": "$\\dim(\\text{Ker}(u)) = 0$ et $\\text{rg}(u) = 3$" },
+        { "id": "D", "text": "$\\dim(\\text{Ker}(u)) = 3$ et $\\text{rg}(u) = 0$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. On détermine le noyau : $(x, y, z) \\in \\text{Ker}(u) \\iff u(x, y, z) = (0, 0, 0)$. Les trois lignes étant proportionnelles, le système se réduit à l'unique équation de plan $x - y + z = 0$.",
+          "2. Un plan vectoriel de $\\mathbb{R}^3$ (deux paramètres libres $y$ et $z$ tels que $x = y - z$) est de dimension $2$, donc $\\dim(\\text{Ker}(u)) = 2$.",
+          "3. Par le théorème du rang : $\\text{rg}(u) = \\dim(\\mathbb{R}^3) - \\dim(\\text{Ker}(u)) = 3 - 2 = 1$ (ce qui se voit aussi directement car $\\text{Im}(u) = \\text{Vect}((1, 2, -1)^\\top)$ est une droite vectorielle)."
+        ],
+        "keyFormula": "$$\\text{Ker}(u) : x - y + z = 0 \\implies \\dim(\\text{Ker}(u)) = 2 \\quad \\text{et} \\quad \\text{rg}(u) = 3 - 2 = 1$$",
+        "commonTrap": "La réponse A confond le nombre d'équations cartésiennes indépendantes du noyau ($1$ équation) avec la dimension du noyau ($3 - 1 = 2$ paramètres libres)."
+      }
+    },
+    {
+      "id": "qcm-math-05-05",
+      "difficulty": "Type Concours",
+      "questionText": "Dans $\\mathcal{M}_3(\\mathbb{R})$, on considère une matrice $A$ semblable à la matrice $B = \\begin{pmatrix} 1 & 4 & -2 \\\\ 0 & -3 & 5 \\\\ 0 & 0 & 6 \\end{pmatrix}$ (c'est-à-dire qu'il existe $P \\in GL_3(\\mathbb{R})$ telle que $A = P^{-1}\\,B\\,P$). Que valent la trace $\\text{Tr}(A)$ et le rang $\\text{rg}(A)$ ?",
+      "options": [
+        { "id": "A", "text": "$\\text{Tr}(A) = 4$ et $\\text{rg}(A) = 3$" },
+        { "id": "B", "text": "$\\text{Tr}(A) = -18$ et $\\text{rg}(A) = 3$" },
+        { "id": "C", "text": "$\\text{Tr}(A) = 4$ et $\\text{rg}(A) = 2$" },
+        { "id": "D", "text": "On ne peut pas les déterminer sans connaître la matrice de passage $P$." }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. Deux matrices semblables représentent le même endomorphisme dans deux bases différentes : elles ont donc la **même trace** et le **même rang**.",
+          "2. On calcule la trace de $B$ (somme des coefficients diagonaux) : $\\text{Tr}(A) = \\text{Tr}(B) = 1 + (-3) + 6 = 4$.",
+          "3. La matrice $B$ est triangulaire supérieure (échelonnée) et possède $3$ pivots non nuls sur sa diagonale ($1, -3, 6$) : son rang vaut donc $\\text{rg}(A) = \\text{rg}(B) = 3$."
+        ],
+        "keyFormula": "$$A = P^{-1}\\,B\\,P \\implies \\text{Tr}(A) = \\text{Tr}(B) \\quad \\text{et} \\quad \\text{rg}(A) = \\text{rg}(B)$$",
+        "commonTrap": "La réponse B calcule le produit des coefficients diagonaux ($1 \\times (-3) \\times 6 = -18$, qui est le déterminant) au lieu de leur somme (la trace)."
+      }
+    }
+  ]
+}

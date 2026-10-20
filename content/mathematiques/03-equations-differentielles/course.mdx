@@ -1,0 +1,87 @@
+---
+title: "Chapitre 03 : Équations différentielles linéaires"
+subject: "mathematiques"
+chapterId: "03-equations-differentielles"
+semester: 1
+description: "Équations linéaires d'ordre 1, variation de la constante, ordre 2 à coefficients constants, problème de Cauchy et systèmes différentiels X' = AX."
+---
+
+# Équations différentielles linéaires
+
+Les équations différentielles sont au cœur de la modélisation en physique-chimie (circuits RC, RL, RLC, mécanique, thermique) et en sciences industrielles de l'ingénieur (systèmes asservis, dynamique)[cite: 74, 85, 109].
+
+---
+
+## 1. Équations différentielles linéaires du premier ordre
+
+Soient $I$ un intervalle de $\mathbb{R}$ et $a, b : I \to \mathbb{K}$ ($\mathbb{K} = \mathbb{R}$ ou $\mathbb{C}$) deux fonctions continues sur $I$[cite: 85]. On considère l'équation différentielle linéaire du premier ordre $(E)$ et son **équation homogène associée** $(E_0)$[cite: 85] :
+$$(E) : y' + a(x)\,y = b(x) \qquad ; \qquad (E_0) : y' + a(x)\,y = 0$$
+
+<WarningBox title="Attention à la forme normalisée sur l'intervalle I">
+Si l'équation est donnée sous la forme $\alpha(x)y' + \beta(x)y = \gamma(x)$, il faut **impérativement commencer par diviser par $\alpha(x)$** sur tout sous-intervalle $I$ où $\alpha(x)$ ne s'annule pas, afin de se ramener à $y' + a(x)y = b(x)$ avant d'appliquer les formules du cours[cite: 85].
+</WarningBox>
+
+### Résolution de l'équation homogène et Structure des solutions
+<CriticalFormula title="Solutions de l'équation homogène (E0) et Structure générale">
+* **Résolution de $(E_0)$** : Soit $A$ une primitive de la fonction continue $a$ sur l'intervalle $I$ ($A'(x) = a(x)$). Les solutions de $y' + a(x)y = 0$ sur $I$ forment une droite vectorielle (sous-espace vectoriel de dimension $1$) et sont les fonctions[cite: 85, 90] :
+$$y_H(x) = \lambda\,e^{-A(x)} \quad \text{où } \lambda \in \mathbb{K}$$
+* **Solution générale de $(E)$** : Si $y_P$ est une **solution particulière** de $(E)$ sur $I$, alors la solution générale de $(E)$ sur $I$ est la somme de la solution générale de $(E_0)$ et de $y_P$[cite: 85] :
+$$y(x) = y_H(x) + y_P(x) = \lambda\,e^{-A(x)} + y_P(x) \quad (\lambda \in \mathbb{K})$$
+</CriticalFormula>
+
+### Recherche d'une solution particulière : Superposition et Variation de la constante
+1. **Principe de superposition** : Si $b(x) = \mu_1 b_1(x) + \mu_2 b_2(x)$ et si $y_1, y_2$ sont des solutions particulières associées respectivement aux seconds membres $b_1$ et $b_2$, alors $\mu_1 y_1 + \mu_2 y_2$ est solution particulière pour $b(x)$[cite: 85].
+2. **Méthode de variation de la constante (Universelle)** : Comme la fonction $x \mapsto e^{-A(x)}$ ne s'annule jamais sur $I$, on cherche une solution particulière sous la forme $y_P(x) = \lambda(x)\,e^{-A(x)}$ où $\lambda$ est une fonction dérivable sur $I$[cite: 85]. En dérivant :
+$$y_P'(x) + a(x)\,y_P(x) = \lambda'(x)\,e^{-A(x)} - \lambda(x)\,a(x)\,e^{-A(x)} + a(x)\,\lambda(x)\,e^{-A(x)} = \lambda'(x)\,e^{-A(x)}$$
+L'équation $(E)$ équivaut donc simplement à[cite: 85] :
+$$\lambda'(x)\,e^{-A(x)} = b(x) \iff \lambda'(x) = b(x)\,e^{A(x)}$$
+Il suffit alors de calculer une primitive de $x \mapsto b(x)e^{A(x)}$ pour obtenir $\lambda(x)$, puis $y_P(x) = \lambda(x)e^{-A(x)}$[cite: 85].
+
+### Théorème de Cauchy linéaire (Ordre 1)
+Pour tout $x_0 \in I$ et tout $y_0 \in \mathbb{K}$, le **problème de Cauchy** constitué de $(E) : y' + a(x)y = b(x)$ et de la condition initiale **$y(x_0) = y_0$** admet une **unique solution** sur l'intervalle $I$[cite: 85].
+
+---
+
+## 2. Équations différentielles linéaires du second ordre à coefficients constants
+
+Soient $a, b \in \mathbb{R}$ deux constantes réelles et $f : I \to \mathbb{K}$ une fonction continue. On étudie[cite: 85] :
+$$(E) : y'' + a\,y' + b\,y = f(x) \qquad ; \qquad (E_0) : y'' + a\,y' + b\,y = 0$$
+
+### Résolution de l'équation homogène $(E_0)$
+En cherchant des solutions exponentielles $y(x) = e^{rx}$, on obtient l'**équation caractéristique** associée à $(E_0)$ : **$r^2 + a\,r + b = 0$**, de discriminant $\Delta = a^2 - 4b$[cite: 28, 85]. L'ensemble des solutions de $(E_0)$ est un sous-espace vectoriel de dimension $2$[cite: 90, 109] :
+
+<CriticalFormula title="Solutions homogènes réelles de y'' + ay' + by = 0 selon le signe de Δ">
+* **Cas 1 : $\Delta > 0$** — Deux racines réelles distinctes $r_1, r_2 = \frac{-a \pm \sqrt{\Delta}}{2}$[cite: 85] :
+$$y_H(x) = \lambda\,e^{r_1 x} + \mu\,e^{r_2 x} \quad (\lambda, \mu \in \mathbb{R})$$
+* **Cas 2 : $\Delta = 0$** — Une racine réelle double $r_0 = -\frac{a}{2}$[cite: 85] :
+$$y_H(x) = (\lambda + \mu\,x)\,e^{r_0 x} \quad (\lambda, \mu \in \mathbb{R})$$
+* **Cas 3 : $\Delta < 0$** — Deux racines complexes conjuguées $\alpha \pm i\omega$ (avec $\alpha = -\frac{a}{2}$ et $\omega = \frac{\sqrt{|\Delta|}}{2} > 0$)[cite: 85] :
+$$y_H(x) = e^{\alpha x}\big(\lambda\cos(\omega x) + \mu\sin(\omega x)\big) \quad (\lambda, \mu \in \mathbb{R})$$
+*(Cas particuliers fondamentaux pour $\omega > 0$ : $y'' + \omega^2 y = 0 \iff y(x) = \lambda\cos(\omega x) + \mu\sin(\omega x)$ ; et $y'' - \omega^2 y = 0 \iff y(x) = \lambda e^{\omega x} + \mu e^{-\omega x} = A\cosh(\omega x) + B\sinh(\omega x)$)*[cite: 84, 85].
+</CriticalFormula>
+
+### Recherche d'une solution particulière pour un second membre $f(x) = P(x)\,e^{\omega x}$
+<CriticalFormula title="Règle de recherche d'une solution particulière pour f(x) = P(x) e^(ωx)">
+Lorsque le second membre est de la forme $f(x) = P(x)\,e^{\omega x}$ où $\omega \in \mathbb{C}$ et $P$ est un polynôme de degré $n$, on cherche une solution particulière sous la forme **$y_P(x) = x^m\,Q(x)\,e^{\omega x}$** où $\deg(Q) = \deg(P) = n$ et où l'entier $m \in \{0, 1, 2\}$ est la multiplicité de $\omega$ comme racine de l'équation caractéristique $r^2 + ar + b = 0$[cite: 85] :
+* Si **$\omega$ n'est pas racine** ($r^2 + ar + b \neq 0$ en $r = \omega$, soit $m = 0$) : on pose **$y_P(x) = Q(x)\,e^{\omega x}$**[cite: 85].
+* Si **$\omega$ est racine simple** ($m = 1$) : on pose **$y_P(x) = x\,Q(x)\,e^{\omega x}$**[cite: 85].
+* Si **$\omega$ est racine double** ($m = 2$) : on pose **$y_P(x) = x^2\,Q(x)\,e^{\omega x}$**[cite: 85].
+*(Si le second membre est trigonométrique de la forme $P(x)\cos(\beta x)$ ou $P(x)\sin(\beta x)$, on passe en complexe en résolvant avec $P(x)e^{i\beta x}$ puis on prend la partie réelle ou imaginaire de la solution particulière obtenue)*[cite: 28, 85].
+</CriticalFormula>
+
+### Problème de Cauchy d'ordre 2
+Pour tout $x_0 \in I$ et tout couple $(y_0, y_0') \in \mathbb{K}^2$, il existe une **unique solution** de $(E)$ sur $I$ vérifiant simultanément les **deux conditions initiales** $y(x_0) = y_0$ et $y'(x_0) = y_0'$[cite: 85, 109].
+
+---
+
+## 3. Compléments d'ordre 2 et Systèmes différentiels linéaires
+
+### Équations scalaires d'ordre 2 à coefficients variables
+Pour une équation $y'' + a(t)y' + b(t)y = c(t)$ où $a, b, c$ sont continues sur $I$, l'ensemble des solutions de l'équation homogène associée est un espace vectoriel de dimension $2$[cite: 109]. Si l'énoncé fournit une solution particulière $y_1(t)$ de l'équation homogène ne s'annulant pas sur $I$, on résout l'équation complète en posant le changement de fonction inconnue **$y(t) = z(t)\,y_1(t)$**, ce qui ramène l'équation à une équation linéaire du premier ordre en $u(t) = z'(t)$ (méthode d'abaissement de l'ordre)[cite: 109].
+
+### Systèmes différentiels linéaires à coefficients constants $X' = A\,X$
+Tout système différentiel linéaire homogène d'ordre 1 à coefficients constants s'écrit sous forme matricielle $X'(t) = A\,X(t)$ où $A \in \mathcal{M}_n(\mathbb{K})$ et $X(t) = (x_1(t), \dots, x_n(t))^\top$[cite: 109]. Inversement, une équation scalaire d'ordre 2 telle que $y'' + ay' + by = 0$ équivaut au système d'ordre 1 en posant $X(t) = \begin{pmatrix} y(t) \\ y'(t) \end{pmatrix}$[cite: 109, 110] :
+$$\begin{pmatrix} y(t) \\ y'(t) \end{pmatrix}' = \begin{pmatrix} 0 & 1 \\ -b & -a \end{pmatrix} \begin{pmatrix} y(t) \\ y'(t) \end{pmatrix}$$
+
+* **Méthode de résolution lorsque $A$ est diagonalisable** : Si $A = P\,D\,P^{-1}$ avec $D = \text{diag}(\lambda_1, \dots, \lambda_n)$ et si $(V_1, \dots, V_n)$ est une base de vecteurs propres de $A$, on pose $X(t) = P\,Y(t)$, ce qui découple le système en $Y'(t) = D\,Y(t)$ (soit $y_k'(t) = \lambda_k y_k(t) \implies y_k(t) = c_k e^{\lambda_k t}$)[cite: 95, 109]. La solution générale s'écrit alors directement[cite: 109] :
+$$X(t) = P\,Y(t) = c_1\,e^{\lambda_1 t}\,V_1 + c_2\,e^{\lambda_2 t}\,V_2 + \dots + c_n\,e^{\lambda_n t}\,V_n \quad (c_1, \dots, c_n \in \mathbb{K})$$

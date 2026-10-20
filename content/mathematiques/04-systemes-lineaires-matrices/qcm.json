@@ -1,0 +1,115 @@
+{
+  "chapterId": "04-systemes-lineaires-matrices",
+  "subject": "mathematiques",
+  "title": "QCM d'entraînement : Systèmes, Polynômes et Matrices",
+  "questions": [
+    {
+      "id": "qcm-math-04-01",
+      "difficulty": "Calculatoire",
+      "questionText": "On considère le système linéaire aux inconnues $(x, y, z) \\in \\mathbb{R}^3$ dépendant du paramètre réel $m$ :\n$$\\begin{cases} x + y + z = 1 \\\\ 2x + 3y + 4z = 3 \\\\ x + 2y + m\\,z = 2 \\end{cases}$$\nPour quelle valeur de $m$ ce système possède-t-il un rang strictement inférieur à $3$ (et une infinité de solutions) ?",
+      "options": [
+        { "id": "A", "text": "$m = 2$" },
+        { "id": "B", "text": "$m = 3$" },
+        { "id": "C", "text": "$m = 4$" },
+        { "id": "D", "text": "$m = 1$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. On échelonne le système par la méthode du pivot de Gauss en gardant $L_1$ comme premier pivot : $L_2 \\leftarrow L_2 - 2L_1$ et $L_3 \\leftarrow L_3 - L_1$.",
+          "2. Le système équivalent devient : $L_1 : x + y + z = 1$ ; $L_2 : y + 2z = 1$ ; $L_3 : y + (m - 1)z = 1$.",
+          "3. On élimine $y$ dans $L_3$ à l'aide du deuxième pivot $L_2$ ($L_3 \\leftarrow L_3 - L_2$) : la 3e ligne devient $(m - 3)z = 0$.",
+          "4. Le système possède seulement $2$ pivots (rang $2 < 3$, avec $z$ comme inconnue secondaire libre) si et seulement si $m - 3 = 0 \\iff m = 3$."
+        ],
+        "keyFormula": "$$L_3 \\leftarrow L_3 - L_2 \\implies (m - 3)\\,z = 0 \\implies \\text{rang} = 2 \\text{ si } m = 3$$",
+        "commonTrap": "Oublier d'effectuer l'opération sur la première colonne avant de comparer les coefficients de $y$ et $z$ entre $L_2$ et $L_3$."
+      }
+    },
+    {
+      "id": "qcm-math-04-02",
+      "difficulty": "Application directe",
+      "questionText": "Soit le polynôme $P(X) = X^3 - 3X + 2 \\in \\mathbb{R}[X]$. Quel est l'ordre de multiplicité de la racine $a = 1$ et quelle est la factorisation en facteurs irréductibles de $P(X)$ ?",
+      "options": [
+        { "id": "A", "text": "$1$ est racine simple et $P(X) = (X - 1)(X^2 + X - 2)$" },
+        { "id": "B", "text": "$1$ est racine double et $P(X) = (X - 1)^2(X + 2)$" },
+        { "id": "C", "text": "$1$ est racine double et $P(X) = (X - 1)^2(X - 2)$" },
+        { "id": "D", "text": "$1$ est racine triple et $P(X) = (X - 1)^3$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. On calcule $P(1)$ et les dérivées successives en $a = 1$ : $P(1) = 1 - 3 + 2 = 0$.",
+          "2. $P'(X) = 3X^2 - 3 \\implies P'(1) = 3 - 3 = 0$ ; puis $P''(X) = 6X \\implies P''(1) = 6 \\neq 0$.",
+          "3. Donc $a = 1$ est une racine d'ordre de multiplicité $2$ (racine double), et $(X - 1)^2 = X^2 - 2X + 1$ divise $P(X)$.",
+          "4. Comme le produit des $3$ racines vaut $(-1)^3 \\frac{a_0}{a_3} = -2$, la troisième racine $r$ vérifie $1 \\times 1 \\times r = -2 \\implies r = -2$, d'où $P(X) = (X - 1)^2(X + 2)$."
+        ],
+        "keyFormula": "$$P(1) = P'(1) = 0 \\text{ et } P''(1) \\neq 0 \\iff 1 \\text{ est racine double}$$",
+        "commonTrap": "Dans la réponse A, le facteur $X^2 + X - 2 = (X - 1)(X + 2)$ n'est pas irréductible dans $\\mathbb{R}[X]$ car son discriminant est strictement positif. La réponse C se trompe sur le signe de la racine $-2$."
+      }
+    },
+    {
+      "id": "qcm-math-04-03",
+      "difficulty": "Calculatoire",
+      "questionText": "Quelle est la décomposition en éléments simples sur $\\mathbb{R}$ de la fraction rationnelle $R(X) = \\frac{X^2 + 2}{X(X - 1)}$ ?",
+      "options": [
+        { "id": "A", "text": "$R(X) = -\\frac{2}{X} + \\frac{3}{X - 1}$" },
+        { "id": "B", "text": "$R(X) = 1 - \\frac{2}{X} + \\frac{3}{X - 1}$" },
+        { "id": "C", "text": "$R(X) = 1 + \\frac{2}{X} - \\frac{3}{X - 1}$" },
+        { "id": "D", "text": "$R(X) = X - \\frac{2}{X} + \\frac{3}{X - 1}$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. Le numérateur $A(X) = X^2 + 2$ et le dénominateur $B(X) = X^2 - X$ ont le **même degré** ($2 \\ge 2$) : la partie entière $E(X)$ n'est donc pas nulle et vaut le quotient des termes dominants $E(X) = 1$.",
+          "2. La décomposition s'écrit sous la forme $R(X) = 1 + \\frac{\\alpha}{X} + \\frac{\\beta}{X - 1}$.",
+          "3. Pôle simple $0$ : on multiplie par $X$ et on évalue en $X = 0 \\implies \\alpha = \\left[\\frac{X^2 + 2}{X - 1}\\right]_{X=0} = \\frac{2}{-1} = -2$.",
+          "4. Pôle simple $1$ : on multiplie par $(X - 1)$ et on évalue en $X = 1 \\implies \\beta = \\left[\\frac{X^2 + 2}{X}\\right]_{X=1} = \\frac{3}{1} = 3$. On obtient $R(X) = 1 - \\frac{2}{X} + \\frac{3}{X - 1}$."
+        ],
+        "keyFormula": "$$\\deg(A) = \\deg(B) \\implies E(X) = 1 \\quad ; \\quad \\alpha = \\lim_{X \\to 0} X\\,R(X) = -2 \\quad ; \\quad \\beta = \\lim_{X \\to 1} (X-1)\\,R(X) = 3$$",
+        "commonTrap": "La réponse A est le piège classique : oublier d'extraire la partie entière $E(X) = 1$ lorsque le degré du numérateur est supérieur ou égal au degré du dénominateur."
+      }
+    },
+    {
+      "id": "qcm-math-04-04",
+      "difficulty": "Calculatoire",
+      "questionText": "Soit la matrice $A = \\begin{pmatrix} 2 & 1 \\\\ 0 & 2 \\end{pmatrix} = 2\\,I_2 + N$ avec $N = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix}$. En utilisant la formule du binôme de Newton, quelle est l'expression de $A^n$ pour tout entier $n \\in \\mathbb{N}^*$ ?",
+      "options": [
+        { "id": "A", "text": "$A^n = \\begin{pmatrix} 2^n & 1^n \\\\ 0 & 2^n \\end{pmatrix}$" },
+        { "id": "B", "text": "$A^n = \\begin{pmatrix} 2^n & n\\,2^n \\\\ 0 & 2^n \\end{pmatrix}$" },
+        { "id": "C", "text": "$A^n = \\begin{pmatrix} 2^n & n\\,2^{n-1} \\\\ 0 & 2^n \\end{pmatrix}$" },
+        { "id": "D", "text": "$A^n = \\begin{pmatrix} 2^n & 2^{n-1} \\\\ 0 & 2^n \\end{pmatrix}$" }
+      ],
+      "correctOptionId": "C",
+      "explanation": {
+        "steps": [
+          "1. On calcule $N^2 = \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix} \\begin{pmatrix} 0 & 1 \\\\ 0 & 0 \\end{pmatrix} = \\begin{pmatrix} 0 & 0 \\\\ 0 & 0 \\end{pmatrix} = 0_2$, donc $N^k = 0_2$ pour tout $k \\ge 2$.",
+          "2. Comme la matrice scalaire $2I_2$ commute avec $N$, on applique la formule du binôme de Newton : $(2I_2 + N)^n = \\sum_{k=0}^n \\binom{n}{k} (2I_2)^{n-k}\\,N^k$.",
+          "3. La somme se réduit aux deux premiers termes ($k=0$ et $k=1$) : $A^n = 2^n\\,I_2 + n\\,2^{n-1}\\,N = \\begin{pmatrix} 2^n & n\\,2^{n-1} \\\\ 0 & 2^n \\end{pmatrix}$."
+        ],
+        "keyFormula": "$$N^2 = 0 \\implies (2I_2 + N)^n = 2^n\\,I_2 + n\\,2^{n-1}\\,N$$",
+        "commonTrap": "La réponse A élève naïvement chaque coefficient à la puissance $n$ (ce qui n'est vrai que pour une matrice diagonale). La réponse B écrit $2^n$ au lieu de $2^{n-1}$ pour le terme $k = 1$."
+      }
+    },
+    {
+      "id": "qcm-math-04-05",
+      "difficulty": "Application directe",
+      "questionText": "Quelle est l'inverse $A^{-1}$ de la matrice $A = \\begin{pmatrix} 3 & 5 \\\\ 1 & 2 \\end{pmatrix} \\in GL_2(\\mathbb{R})$ ?",
+      "options": [
+        { "id": "A", "text": "$A^{-1} = \\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix}$" },
+        { "id": "B", "text": "$A^{-1} = \\begin{pmatrix} 2 & 5 \\\\ 1 & 3 \\end{pmatrix}$" },
+        { "id": "C", "text": "$A^{-1} = \\begin{pmatrix} -2 & 5 \\\\ 1 & -3 \\end{pmatrix}$" },
+        { "id": "D", "text": "$A^{-1} = \\begin{pmatrix} \\frac{1}{3} & \\frac{1}{5} \\\\ 1 & \\frac{1}{2} \\end{pmatrix}$" }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. On résout le système $A\\,X = Y \\iff \\begin{cases} 3x_1 + 5x_2 = y_1 \\\\ x_1 + 2x_2 = y_2 \\end{cases}$ (ou on utilise la formule d'inversion d'une matrice $2 \\times 2$ de déterminant $3 \\times 2 - 5 \\times 1 = 1$).",
+          "2. Par combinaison linéaire : $x_2 = -y_1 + 3y_2$ et $x_1 = 2y_1 - 5y_2$.",
+          "3. En lisant la relation $X = A^{-1}Y$, on obtient $A^{-1} = \\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix}$, et on vérifie immédiatement que $\\begin{pmatrix} 3 & 5 \\\\ 1 & 2 \\end{pmatrix}\\begin{pmatrix} 2 & -5 \\\\ -1 & 3 \\end{pmatrix} = \\begin{pmatrix} 1 & 0 \\\\ 0 & 1 \\end{pmatrix}$."
+        ],
+        "keyFormula": "$$\\text{Pour } A = \\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix} \\text{ avec } ad - bc \\neq 0, \\quad A^{-1} = \\frac{1}{ad - bc}\\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}$$",
+        "commonTrap": "Toujours vérifier son résultat en effectuant le produit $A \\times A^{-1}$ : on doit retrouver la matrice identité $I_2$."
+      }
+    }
+  ]
+}

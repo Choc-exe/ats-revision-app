@@ -1,0 +1,62 @@
+{
+  "chapterId": "04-systemes-lineaires-matrices",
+  "subject": "mathematiques",
+  "title": "Systèmes linéaires, Polynômes et Calcul matriciel",
+  "cards": [
+    {
+      "id": "fc-math-04-01",
+      "category": "Théorème",
+      "difficulty": 1,
+      "front": "Soit $A \\in \\mathcal{M}_{n,p}(\\mathbb{R})$ la matrice dont les colonnes sont les coordonnées de $p$ vecteurs $(u_1, \\dots, u_p)$ de $\\mathbb{R}^n$. Comment caractérise-t-on le fait que cette famille est **libre** ou **génératrice** à l'aide du nombre de pivots ?",
+      "back": {
+        "mainAnswer": "Après échelonnement de la matrice $A$ par l'algorithme du pivot de Gauss, on compte le nombre de pivots (qui est le rang de la famille).",
+        "criticalFormula": "• $(u_1, \\dots, u_p)$ est libre $\\iff A\\,X = 0$ a pour seule solution $X = 0 \\iff \\text{nombre de pivots} = p$\n• $(u_1, \\dots, u_p)$ est génératrice de $\\mathbb{R}^n \\iff \\text{nombre de pivots} = n$",
+        "mnemonicOrTip": "En particulier, si $p = n$ (matrice carrée), la famille forme une base de $\\mathbb{R}^n$ si et seulement si la matrice $A$ possède $n$ pivots (matrice inversible)."
+      }
+    },
+    {
+      "id": "fc-math-04-02",
+      "category": "Théorème",
+      "difficulty": 1,
+      "front": "Comment caractérise-t-on le fait qu'un scalaire $a \\in \\mathbb{K}$ est une racine d'ordre de multiplicité $\\alpha \\in \\mathbb{N}^*$ d'un polynôme $P \\in \\mathbb{K}[X]$ (par divisibilité et par les dérivées) ?",
+      "back": {
+        "mainAnswer": "L'ordre de multiplicité $\\alpha$ correspond à la plus grande puissance de $(X - a)$ qui divise $P(X)$, ou au nombre de dérivées successives de $P$ qui s'annulent en $a$ (en comptant $P(a) = P^{(0)}(a)$).",
+        "criticalFormula": "$$(X - a)^\\alpha \\text{ divise } P \\text{ et } (X - a)^{\\alpha+1} \\text{ ne divise pas } P \\iff P(a) = P'(a) = \\dots = P^{(\\alpha-1)}(a) = 0 \\text{ et } P^{(\\alpha)}(a) \\neq 0$$",
+        "mnemonicOrTip": "Par exemple, $a$ est une racine double ($\\alpha = 2$) si et seulement si $P(a) = 0$, $P'(a) = 0$ et $P''(a) \\neq 0$."
+      }
+    },
+    {
+      "id": "fc-math-04-03",
+      "category": "Méthode",
+      "difficulty": 2,
+      "front": "Dans la décomposition en éléments simples d'une fraction rationnelle $R(X) = \\frac{A(X)}{(X - a)\\,Q(X)}$ où $a$ est un pôle simple ($Q(a) \\neq 0$), comment calcule-t-on rapidement le coefficient $\\lambda$ de $\\frac{\\lambda}{X - a}$ ?",
+      "back": {
+        "mainAnswer": "On multiplie la fraction rationnelle $R(X)$ par $(X - a)$ pour simplifier le facteur au dénominateur, puis on évalue l'expression restante en $X = a$ (méthode dite du cache).",
+        "criticalFormula": "$$\\lambda = \\lim_{X \\to a} (X - a)\\,R(X) = \\frac{A(a)}{Q(a)} = \\frac{A(a)}{B'(a)}$$",
+        "mnemonicOrTip": "N'oubliez jamais la première étape avant toute décomposition : si $\\deg(A) \\ge \\deg(B)$, il faut d'abord effectuer la division euclidienne de $A$ par $B$ pour extraire la partie entière $E(X)$ !"
+      }
+    },
+    {
+      "id": "fc-math-04-04",
+      "category": "Piège Classique",
+      "difficulty": 2,
+      "front": "Sous quelle condition stricte peut-on utiliser la formule du binôme de Newton pour calculer la puissance $m$-ième $(A + B)^m$ de la somme de deux matrices carrées ?",
+      "back": {
+        "mainAnswer": "Le produit matriciel n'étant pas commutatif, $(A+B)^2 = A^2 + AB + BA + B^2$. La formule du binôme de Newton exige impérativement que les matrices $A$ et $B$ commutent.",
+        "criticalFormula": "$$\\text{Si } A\\,B = B\\,A, \\quad (A + B)^m = \\sum_{k=0}^m \\binom{m}{k} A^k\\,B^{m-k}$$",
+        "mnemonicOrTip": "Application classique aux concours : on décompose une matrice sous la forme $M = \\lambda I_n + N$ où $N$ est nilpotente ($N^2 = 0$ ou $N^3 = 0$). Comme la matrice identité $I_n$ commute avec toute matrice, le binôme s'applique toujours !"
+      }
+    },
+    {
+      "id": "fc-math-04-05",
+      "category": "Formule Critique",
+      "difficulty": 1,
+      "front": "Si $A$ et $B$ sont deux matrices carrées inversibles de taille $n$ ($A, B \\in GL_n(\\mathbb{K})$), quelle est l'expression de l'inverse de leur produit $(A\\,B)^{-1}$ ?",
+      "back": {
+        "mainAnswer": "Le produit de deux matrices inversibles est inversible, et son inverse s'obtient en inversant chacune des matrices tout en inversant l'ordre du produit.",
+        "criticalFormula": "$$(A\\,B)^{-1} = B^{-1}\\,A^{-1}$$",
+        "mnemonicOrTip": "On vérifie immédiatement que $(A B)(B^{-1} A^{-1}) = A (B B^{-1}) A^{-1} = A I_n A^{-1} = A A^{-1} = I_n$."
+      }
+    }
+  ]
+}

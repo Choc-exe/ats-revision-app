@@ -1,0 +1,109 @@
+---
+title: "Chapitre 02 : Géométrie élémentaire du plan et de l'espace"
+subject: "mathematiques"
+chapterId: "02-geometrie-plan-espace"
+semester: 1
+description: "Produit scalaire, déterminant 2D, produit vectoriel, produit mixte, droites, plans, cercles, sphères et calculs de distances."
+---
+
+# Géométrie élémentaire du plan et de l'espace
+
+La géométrie joue un rôle central en mathématiques ainsi qu'en physique et en sciences industrielles (mécanique, cinématique, électromagnétisme), au cœur des compétences de modélisation et de représentation spatiale[cite: 80, 82].
+
+---
+
+## 1. Repérage, Produit scalaire et Déterminant dans le plan
+
+### Coordonnées cartésiennes et polaires dans le plan
+Le plan géométrique euclidien muni d'un repère orthonormal direct $(O, \vec{i}, \vec{j})$ est identifié à $\mathbb{R}^2$ (ou à $\mathbb{C}$)[cite: 80]. Tout point $M$ est repéré par ses coordonnées cartésiennes $(x, y)$ telles que $\vec{OM} = x\,\vec{i} + y\,\vec{j}$, ou par ses coordonnées polaires $(r, \theta)$ reliées par[cite: 79, 80] :
+$$x = r\cos(\theta) \quad \text{et} \quad y = r\sin(\theta) \quad \text{avec } r = \sqrt{x^2 + y^2}$$
+Deux vecteurs du plan sont **linéairement indépendants** (ils forment une **famille libre**, donc une base du plan) si et seulement s'ils sont **non colinéaires**[cite: 80].
+
+### Produit scalaire et Déterminant en dimension 2
+Soient $\vec{u}(x, y)$ et $\vec{v}(x', y')$ deux vecteurs du plan exprimés dans une base orthonormale directe $(\vec{i}, \vec{j})$[cite: 80, 81] :
+
+<CriticalFormula title="Produit scalaire et Déterminant de deux vecteurs du plan">
+* **Produit scalaire** (bilinéaire, symétrique) : Si $\vec{u}, \vec{v} \neq \vec{0}$, $\vec{u}\cdot\vec{v} = \|\vec{u}\|\,\|\vec{v}\|\cos(\vec{u}, \vec{v})$ (et $0$ sinon)[cite: 80]. En base orthonormale[cite: 28, 80] :
+$$\vec{u}\cdot\vec{v} = x\,x' + y\,y' \quad \text{et} \quad \vec{u} \perp \vec{v} \iff \vec{u}\cdot\vec{v} = 0$$
+* **Déterminant dans une base orthonormée directe** (bilinéaire, antisymétrique) : Si $\vec{u}, \vec{v} \neq \vec{0}$, $[\vec{u}, \vec{v}] = \|\vec{u}\|\,\|\vec{v}\|\sin(\vec{u}, \vec{v})$[cite: 81]. En coordonnées[cite: 81] :
+$$\det(\vec{u}, \vec{v}) = [\vec{u}, \vec{v}] = \begin{vmatrix} x & x' \\ y & y' \end{vmatrix} = x\,y' - y\,x'$$
+* **Caractérisation de la colinéarité** : $\vec{u}$ et $\vec{v}$ sont colinéaires si et seulement si **$[\vec{u}, \vec{v}] = x\,y' - y\,x' = 0$**[cite: 81]. Géométriquement, $|[\vec{u}, \vec{v}]|$ représente l'**aire du parallélogramme** construit sur $\vec{u}$ et $\vec{v}$[cite: 81].
+</CriticalFormula>
+
+---
+
+## 2. Droites et Cercles du plan
+
+### Droites du plan et Distance d'un point à une droite
+Une droite $\mathcal{D}$ du plan peut être définie[cite: 81] :
+1. **Par un point $A(x_A, y_A)$ et un vecteur directeur $\vec{u}(\alpha, \beta) \neq \vec{0}$** : $M(x, y) \in \mathcal{D} \iff \det(\vec{AM}, \vec{u}) = 0$, ce qui conduit au **système d'équations paramétriques**[cite: 81] :
+$$\begin{cases} x(t) = x_A + \alpha\,t \\ y(t) = y_A + \beta\,t \end{cases} \quad (t \in \mathbb{R})$$
+2. **Par un point $A(x_A, y_A)$ et un vecteur normal $\vec{n}(a, b) \neq \vec{0}$** : $M(x, y) \in \mathcal{D} \iff \vec{AM}\cdot\vec{n} = 0$, ce qui donne l'**équation cartésienne**[cite: 81] :
+$$a\,x + b\,y + c = 0 \quad \text{(de vecteur normal } \vec{n}(a, b) \text{ et de vecteur directeur } \vec{u}(-b, a)\text{)}$$
+
+<CriticalFormula title="Projeté orthogonal et Distance d'un point à une droite du plan">
+Soit $\mathcal{D}$ la droite d'équation cartésienne $ax + by + c = 0$ (de vecteur normal $\vec{n}(a, b)$) et $M_0(x_0, y_0)$ un point du plan[cite: 81]. La distance de $M_0$ à la droite $\mathcal{D}$ (égale à $M_0 H$ où $H$ est le projeté orthogonal de $M_0$ sur $\mathcal{D}$) vaut[cite: 81] :
+$$d(M_0, \mathcal{D}) = \frac{|\vec{AM_0}\cdot\vec{n}|}{\|\vec{n}\|} = \frac{|a\,x_0 + b\,y_0 + c|}{\sqrt{a^2 + b^2}}$$
+</CriticalFormula>
+
+### Cercles du plan
+Un cercle $\mathcal{C}$ de centre $\Omega(x_0, y_0)$ et de rayon $R > 0$ est caractérisé par[cite: 81] :
+* **Équation cartésienne** : $(x - x_0)^2 + (y - y_0)^2 = R^2 \iff x^2 + y^2 - 2x_0 x - 2y_0 y + (x_0^2 + y_0^2 - R^2) = 0$ (pour retrouver le centre et le rayon à partir d'une équation développée $x^2 + y^2 + ax + by + c = 0$, on procède par **mise sous forme canonique** des trinômes en $x$ et en $y$)[cite: 81, 134].
+* **Représentation paramétrique** : $x(t) = x_0 + R\cos(t)$ et $y(t) = y_0 + R\sin(t)$ pour $t \in [0, 2\pi[$[cite: 81].
+* **Cercle défini par un diamètre $[AB]$** : $M(x, y) \in \mathcal{C} \iff \vec{MA}\cdot\vec{MB} = 0 \iff (x - x_A)(x - x_B) + (y - y_A)(y - y_B) = 0$[cite: 81].
+
+---
+
+## 3. Produit scalaire, Produit vectoriel et Produit mixte dans l'espace
+
+Dans l'espace muni d'un repère orthonormal direct $(O, \vec{i}, \vec{j}, \vec{k})$, soient $\vec{u}(x, y, z)$, $\vec{v}(x', y', z')$ et $\vec{w}(x'', y'', z'')$ trois vecteurs[cite: 82].
+* **Produit scalaire 3D** : $\vec{u}\cdot\vec{v} = xx' + yy' + zz'$ et $\|\vec{u}\| = \sqrt{x^2 + y^2 + z^2}$[cite: 28, 82].
+
+### Produit vectoriel dans l'espace orienté
+Si $\vec{u}$ et $\vec{v}$ sont non colinéaires, le **produit vectoriel** $\vec{u}\wedge\vec{v}$ est l'unique vecteur tel que[cite: 29, 82] :
+1. **Direction** : $\vec{u}\wedge\vec{v}$ est orthogonal à $\vec{u}$ et à $\vec{v}$ (donc normal au plan engendré par $\vec{u}$ et $\vec{v}$)[cite: 82].
+2. **Sens** : Le trièdre $(\vec{u}, \vec{v}, \vec{u}\wedge\vec{v})$ est **direct** (règle des trois doigts de la main droite ou du tire-bouchon)[cite: 29, 82].
+3. **Norme** : $\|\vec{u}\wedge\vec{v}\| = \|\vec{u}\|\,\|\vec{v}\|\,|\sin(\vec{u}, \vec{v})|$ (ce qui représente l'**aire du parallélogramme** construit sur $\vec{u}$ et $\vec{v}$)[cite: 82].
+
+<CriticalFormula title="Expression analytique et Propriétés du Produit Vectoriel">
+Le produit vectoriel est **bilinéaire** et **antisymétrique** ($\vec{v}\wedge\vec{u} = -\vec{u}\wedge\vec{v}$)[cite: 29, 82]. Dans une base orthonormale directe[cite: 82, 134] :
+$$\vec{u}\wedge\vec{v} = \begin{pmatrix} x \\ y \\ z \end{pmatrix} \wedge \begin{pmatrix} x' \\ y' \\ z' \end{pmatrix} = \begin{pmatrix} y\,z' - z\,y' \\ z\,x' - x\,z' \\ x\,y' - y\,x' \end{pmatrix}$$
+**Caractérisation de la colinéarité dans l'espace** : $\vec{u}$ et $\vec{v}$ sont colinéaires si et seulement si **$\vec{u}\wedge\vec{v} = \vec{0}$**[cite: 82].
+</CriticalFormula>
+
+### Produit mixte de trois vecteurs
+Le **produit mixte** de trois vecteurs $\vec{u}, \vec{v}, \vec{w}$ est le scalaire défini par[cite: 82] :
+$$[\vec{u}, \vec{v}, \vec{w}] = (\vec{u}\wedge\vec{v})\cdot\vec{w} = \det(\vec{u}, \vec{v}, \vec{w})$$
+* Il est **trilinéaire** et **antisymétrique** (il change de signe si l'on échange deux vecteurs, et reste invariant par permutation circulaire : $[\vec{u}, \vec{v}, \vec{w}] = [\vec{v}, \vec{w}, \vec{u}] = [\vec{w}, \vec{u}, \vec{v}]$)[cite: 82].
+* **Interprétation géométrique et Coplanarité** : La valeur absolue $|[\vec{u}, \vec{v}, \vec{w}]|$ est égale au **volume du parallélépipède** construit sur $\vec{u}, \vec{v}, \vec{w}$[cite: 82]. Trois vecteurs $\vec{u}, \vec{v}, \vec{w}$ sont **coplanaires** (famille liée dans $\mathbb{R}^3$) si et seulement si **$[\vec{u}, \vec{v}, \vec{w}] = 0$**[cite: 82].
+
+---
+
+## 4. Plans, Droites et Sphères de l'espace
+
+### Plans et Droites de l'espace
+* **Modes de définition d'un plan $\mathcal{P}$**[cite: 82] :
+  1. Par un point $A$ et **deux vecteurs directeurs non colinéaires** $\vec{u}, \vec{v}$ : donne une représentation paramétrique $M = A + t\vec{u} + s\vec{v}$ ($(t, s) \in \mathbb{R}^2$), ou l'équation cartésienne via $[\vec{AM}, \vec{u}, \vec{v}] = 0$[cite: 82].
+  2. Par **trois points non alignés** $A, B, C$ : on se ramène au cas précédent avec $\vec{u} = \vec{AB}$ et $\vec{v} = \vec{AC}$, et un vecteur normal au plan est donné directement par **$\vec{n} = \vec{AB}\wedge\vec{AC}$**[cite: 82].
+  3. Par un point $A(x_A, y_A, z_A)$ et un **vecteur normal** $\vec{n}(a, b, c) \neq \vec{0}$ : $M(x, y, z) \in \mathcal{P} \iff \vec{AM}\cdot\vec{n} = 0$, soit l'équation cartésienne[cite: 82] :
+$$a\,x + b\,y + c\,z + d = 0$$
+* **Modes de définition d'une droite $\mathcal{D}$ dans l'espace**[cite: 83] :
+  1. Par un point $A(x_A, y_A, z_A)$ et un vecteur directeur $\vec{u}(\alpha, \beta, \gamma) \neq \vec{0}$ : **représentation paramétrique** $x = x_A + \alpha t$, $y = y_A + \beta t$, $z = z_A + \gamma t$ ($t \in \mathbb{R}$)[cite: 83].
+  2. Comme **intersection de deux plans non parallèles** $\mathcal{P}_1$ (de vecteur normal $\vec{n}_1$) et $\mathcal{P}_2$ (de vecteur normal $\vec{n}_2$) : définie par un **système de deux équations cartésiennes**[cite: 83]. Un vecteur directeur de la droite $\mathcal{D} = \mathcal{P}_1 \cap \mathcal{P}_2$ est alors orthogonal à $\vec{n}_1$ et à $\vec{n}_2$, donc donné par **$\vec{u} = \vec{n}_1 \wedge \vec{n}_2$**[cite: 83].
+
+<SchemaPlaceholder alt="Schéma 3D montrant un plan de vecteur normal n, une droite dirigée par u, et les constructions du projeté orthogonal H d'un point M0 sur le plan et sur la droite" caption="Figure 2.1 : Géométrie dans l'espace : vecteur normal à un plan, vecteur directeur d'une droite et distances orthogonales." src="/images/mathematiques/geometrie-espace-plan-droite.png"/>
+
+<CriticalFormula title="Distances dans l'espace : Point-Plan et Point-Droite">
+* **Distance d'un point $M_0(x_0, y_0, z_0)$ à un plan $\mathcal{P} : ax + by + cz + d = 0$** (passant par $A$, de vecteur normal $\vec{n}(a, b, c)$)[cite: 83] :
+$$d(M_0, \mathcal{P}) = \frac{|\vec{AM_0}\cdot\vec{n}|}{\|\vec{n}\|} = \frac{|a\,x_0 + b\,y_0 + c\,z_0 + d|}{\sqrt{a^2 + b^2 + c^2}}$$
+* **Distance d'un point $M_0$ à une droite $\mathcal{D}$** passant par $A$ et dirigée par $\vec{u} \neq \vec{0}$[cite: 83] :
+$$d(M_0, \mathcal{D}) = \frac{\|\vec{AM_0}\wedge\vec{u}\|}{\|\vec{u}\|}$$
+</CriticalFormula>
+
+### Sphères et intersection Sphère-Plan
+La sphère $\mathcal{S}$ de centre $\Omega(x_0, y_0, z_0)$ et de rayon $R > 0$ a pour équation cartésienne en repère orthonormé[cite: 83] :
+$$(x - x_0)^2 + (y - y_0)^2 + (z - z_0)^2 = R^2$$
+Pour étudier l'**intersection d'une sphère $\mathcal{S}(\Omega, R)$ et d'un plan $\mathcal{P}$**, on calcule la distance $d = d(\Omega, \mathcal{P})$ du centre de la sphère au plan[cite: 83] :
+* Si $d > R$ : l'intersection est vide ($\mathcal{S} \cap \mathcal{P} = \emptyset$)[cite: 83].
+* Si $d = R$ : le plan $\mathcal{P}$ est tangent à la sphère au projeté orthogonal $H$ de $\Omega$ sur $\mathcal{P}$[cite: 83].
+* Si $d < R$ : l'intersection est le **cercle** du plan $\mathcal{P}$ de centre $H$ (projeté orthogonal de $\Omega$ sur $\mathcal{P}$) et de rayon **$r = \sqrt{R^2 - d^2}$** (théorème de Pythagore)[cite: 83].

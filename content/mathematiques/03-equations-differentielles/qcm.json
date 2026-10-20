@@ -1,0 +1,114 @@
+{
+  "chapterId": "03-equations-differentielles",
+  "subject": "mathematiques",
+  "title": "QCM d'entraînement : Équations différentielles linéaires",
+  "questions": [
+    {
+      "id": "qcm-math-03-01",
+      "difficulty": "Application directe",
+      "questionText": "Sur l'intervalle $I = \\left]0, +\\infty\\right[$, quelle est la solution générale de l'équation différentielle homogène $(E_0) : x\\,y' + 2y = 0$ ?",
+      "options": [
+        { "id": "A", "text": "$y(x) = \\lambda\\,e^{-2x}$ avec $\\lambda \\in \\mathbb{R}$" },
+        { "id": "B", "text": "$y(x) = \\frac{\\lambda}{x^2}$ avec $\\lambda \\in \\mathbb{R}$" },
+        { "id": "C", "text": "$y(x) = \\lambda\\,x^2$ avec $\\lambda \\in \\mathbb{R}$" },
+        { "id": "D", "text": "$y(x) = \\lambda\\,e^{-x^2}$ avec $\\lambda \\in \\mathbb{R}$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. Sur $I = \\left]0, +\\infty\\right[$, $x$ ne s'annule pas. On commence par diviser par $x$ pour mettre l'équation sous forme normalisée : $y' + \\frac{2}{x}\\,y = 0$, soit $a(x) = \\frac{2}{x}$.",
+          "2. Une primitive de $a(x) = \\frac{2}{x}$ sur $\\left]0, +\\infty\\right[$ est $A(x) = 2\\ln(x) = \\ln(x^2)$.",
+          "3. La solution générale est donc $y(x) = \\lambda\\,e^{-A(x)} = \\lambda\\,e^{-\\ln(x^2)} = \\frac{\\lambda}{x^2}$ avec $\\lambda \\in \\mathbb{R}$."
+        ],
+        "keyFormula": "$$x\\,y' + 2y = 0 \\iff y' + \\frac{2}{x}\\,y = 0 \\implies y(x) = \\lambda\\,e^{-2\\ln(x)} = \\frac{\\lambda}{x^2}$$",
+        "commonTrap": "La réponse A oublie de diviser par le coefficient $x$ devant $y'$ et traite l'équation comme si c'était $y' + 2y = 0$. La réponse C oublie le signe moins dans $e^{-A(x)}$."
+      }
+    },
+    {
+      "id": "qcm-math-03-02",
+      "difficulty": "Calculatoire",
+      "questionText": "Quelle est l'unique solution sur $\\mathbb{R}$ du problème de Cauchy constitué de l'équation différentielle $y' - y = e^x$ et de la condition initiale $y(0) = 2$ ?",
+      "options": [
+        { "id": "A", "text": "$y(x) = 2\\,e^x$" },
+        { "id": "B", "text": "$y(x) = (x + 2)\\,e^x$" },
+        { "id": "C", "text": "$y(x) = \\frac{3}{2}e^x + \\frac{1}{2}e^{-x}$" },
+        { "id": "D", "text": "$y(x) = (2x + 2)\\,e^x$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. L'équation homogène $y' - y = 0$ a pour solution générale $y_H(x) = \\lambda\\,e^x$ ($\\lambda \\in \\mathbb{R}$).",
+          "2. Par la méthode de variation de la constante, on pose $y_P(x) = \\lambda(x)\\,e^x$, ce qui donne $\\lambda'(x)\\,e^x = e^x \\iff \\lambda'(x) = 1 \\implies \\lambda(x) = x$, d'où la solution particulière $y_P(x) = x\\,e^x$.",
+          "3. La solution générale de l'équation complète est $y(x) = (\\lambda + x)\\,e^x$.",
+          "4. En appliquant la condition initiale $y(0) = 2$ : $(\\lambda + 0)\\,e^0 = 2 \\implies \\lambda = 2$, d'où $y(x) = (x + 2)\\,e^x$."
+        ],
+        "keyFormula": "$$\\lambda'(x)\\,e^x = e^x \\implies \\lambda(x) = x \\implies y(x) = (x + \\lambda)\\,e^x$$",
+        "commonTrap": "Chercher une solution particulière sous la forme $C\\,e^x$ échoue car $e^x$ est déjà solution de l'équation homogène ($1$ est racine de l'équation caractéristique $r - 1 = 0$)."
+      }
+    },
+    {
+      "id": "qcm-math-03-03",
+      "difficulty": "Application directe",
+      "questionText": "Quelle est la solution générale réelle sur $\\mathbb{R}$ de l'équation différentielle homogène du second ordre $y'' - 4y' + 13y = 0$ ?",
+      "options": [
+        { "id": "A", "text": "$y(x) = e^{2x}\\big(\\lambda\\cos(3x) + \\mu\\sin(3x)\\big)$ avec $\\lambda, \\mu \\in \\mathbb{R}$" },
+        { "id": "B", "text": "$y(x) = e^{-2x}\\big(\\lambda\\cos(3x) + \\mu\\sin(3x)\\big)$ avec $\\lambda, \\mu \\in \\mathbb{R}$" },
+        { "id": "C", "text": "$y(x) = \\lambda\\,e^{2x} + \\mu\\,e^{3x}$ avec $\\lambda, \\mu \\in \\mathbb{R}$" },
+        { "id": "D", "text": "$y(x) = e^{2x}\\big(\\lambda\\cos(6x) + \\mu\\sin(6x)\\big)$ avec $\\lambda, \\mu \\in \\mathbb{R}$" }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. On écrit l'équation caractéristique associée : $r^2 - 4r + 13 = 0$.",
+          "2. On calcule le discriminant : $\\Delta = (-4)^2 - 4(1)(13) = 16 - 52 = -36 = (6i)^2 < 0$.",
+          "3. Les deux racines complexes conjuguées sont $r_{1,2} = \\frac{4 \\pm 6i}{2} = 2 \\pm 3i$ (donc $\\alpha = 2$ et $\\omega = 3$).",
+          "4. La solution générale réelle s'écrit $y(x) = e^{2x}\\big(\\lambda\\cos(3x) + \\mu\\sin(3x)\\big)$ avec $\\lambda, \\mu \\in \\mathbb{R}$."
+        ],
+        "keyFormula": "$$r = \\alpha \\pm i\\omega \\implies y_H(x) = e^{\\alpha x}\\big(\\lambda\\cos(\\omega x) + \\mu\\sin(\\omega x)\\big)$$",
+        "commonTrap": "La réponse B se trompe sur le signe de $\\alpha = -\\frac{a}{2} = -\\frac{-4}{2} = +2$, et la réponse D oublie de diviser $\\sqrt{|\\Delta|} = 6$ par $2$ pour obtenir $\\omega = 3$."
+      }
+    },
+    {
+      "id": "qcm-math-03-04",
+      "difficulty": "Type Concours",
+      "questionText": "On considère l'équation différentielle $(E) : y'' - 4y' + 4y = (2x + 1)\\,e^{2x}$. Sous quelle forme doit-on chercher une solution particulière $y_P(x)$ de $(E)$ ?",
+      "options": [
+        { "id": "A", "text": "$y_P(x) = (ax + b)\\,e^{2x}$" },
+        { "id": "B", "text": "$y_P(x) = x\\,(ax + b)\\,e^{2x}$" },
+        { "id": "C", "text": "$y_P(x) = x^2\\,(ax + b)\\,e^{2x}$" },
+        { "id": "D", "text": "$y_P(x) = a\\,x^2\\,e^{2x}$" }
+      ],
+      "correctOptionId": "C",
+      "explanation": {
+        "steps": [
+          "1. On résout d'abord l'équation caractéristique du membre de gauche : $r^2 - 4r + 4 = (r - 2)^2 = 0$, qui admet $r_0 = 2$ comme **racine double** ($m = 2$).",
+          "2. Le second membre est de la forme $P(x)\\,e^{\\omega x}$ avec $\\omega = 2$ et $P(x) = 2x + 1$ polynôme de degré $1$.",
+          "3. Comme $\\omega = 2$ est racine double ($m = 2$) de l'équation caractéristique, on doit chercher une solution particulière sous la forme $y_P(x) = x^2\\,Q(x)\\,e^{2x}$ où $Q(x) = ax + b$ est un polynôme général de degré $1$."
+        ],
+        "keyFormula": "$$\\omega \\text{ racine de multiplicité } m \\implies y_P(x) = x^m\\,Q(x)\\,e^{\\omega x} \\quad (\\deg Q = \\deg P)$$",
+        "commonTrap": "La réponse A ignore que $2$ est racine de l'équation caractéristique, la réponse B traite $2$ comme une racine simple au lieu d'une racine double, et la réponse D prend un polynôme $Q$ de degré $0$ au lieu d'un polynôme complet de degré $1$."
+      }
+    },
+    {
+      "id": "qcm-math-03-05",
+      "difficulty": "Calculatoire",
+      "questionText": "Soit le système différentiel $X'(t) = A\\,X(t)$ où $A = \\begin{pmatrix} 1 & 2 \\\\ 2 & 1 \\end{pmatrix}$. Sachant que $A$ admet pour valeurs propres $\\lambda_1 = 3$ (associée au vecteur propre $V_1 = (1, 1)^\\top$) et $\\lambda_2 = -1$ (associée au vecteur propre $V_2 = (1, -1)^\\top$), quelle est l'unique solution vérifiant la condition initiale $X(0) = \\begin{pmatrix} 4 \\\\ 2 \\end{pmatrix}$ ?",
+      "options": [
+        { "id": "A", "text": "$X(t) = \\begin{pmatrix} 3\\,e^{3t} + e^{-t} \\\\ 3\\,e^{3t} - e^{-t} \\end{pmatrix}$" },
+        { "id": "B", "text": "$X(t) = \\begin{pmatrix} 4\\,e^{3t} \\\\ 2\\,e^{-t} \\end{pmatrix}$" },
+        { "id": "C", "text": "$X(t) = \\begin{pmatrix} e^{3t} + 3\\,e^{-t} \\\\ e^{3t} - 3\\,e^{-t} \\end{pmatrix}$" },
+        { "id": "D", "text": "$X(t) = \\begin{pmatrix} 2\\,e^{3t} + 2\\,e^{-t} \\\\ 2\\,e^{3t} - 2\\,e^{-t} \\end{pmatrix}$" }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. Comme $A$ est diagonalisable de couples propres $(3, V_1)$ et $(-1, V_2)$, la solution générale du système s'écrit $X(t) = c_1\\,e^{3t}\\begin{pmatrix} 1 \\\\ 1 \\end{pmatrix} + c_2\\,e^{-t}\\begin{pmatrix} 1 \\\\ -1 \\end{pmatrix} = \\begin{pmatrix} c_1\\,e^{3t} + c_2\\,e^{-t} \\\\ c_1\\,e^{3t} - c_2\\,e^{-t} \\end{pmatrix}$.",
+          "2. En $t = 0$, la condition initiale $X(0) = (4, 2)^\\top$ donne le système linéaire $\\begin{cases} c_1 + c_2 = 4 \\\\ c_1 - c_2 = 2 \\end{cases}$.",
+          "3. En additionnant et soustrayant les deux lignes, on trouve $2c_1 = 6 \\implies c_1 = 3$ et $c_2 = 1$, d'où $X(t) = \\begin{pmatrix} 3\\,e^{3t} + e^{-t} \\\\ 3\\,e^{3t} - e^{-t} \\end{pmatrix}$."
+        ],
+        "keyFormula": "$$X(t) = c_1\\,e^{\\lambda_1 t}\\,V_1 + c_2\\,e^{\\lambda_2 t}\\,V_2$$",
+        "commonTrap": "La réponse B traite le système comme si la matrice $A$ était déjà diagonale sans utiliser les vecteurs propres $V_1$ et $V_2$."
+      }
+    }
+  ]
+}

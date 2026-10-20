@@ -1,0 +1,62 @@
+{
+  "chapterId": "06-reduction-endomorphismes",
+  "subject": "mathematiques",
+  "title": "Déterminants, Réduction et Espaces euclidiens",
+  "cards": [
+    {
+      "id": "fc-math-06-01",
+      "category": "Piège Classique",
+      "difficulty": 1,
+      "front": "Soit $A \\in \\mathcal{M}_n(\\mathbb{K})$ une matrice carrée de taille $n$ et $\\lambda \\in \\mathbb{K}$ un scalaire. Que vaut $\\det(\\lambda\\,A)$ en fonction de $\\det(A)$ ?",
+      "back": {
+        "mainAnswer": "Multiplier la matrice $A$ par $\\lambda$ revient à multiplier chacune de ses $n$ colonnes par $\\lambda$. Par multilinéarité du déterminant par rapport à chacune des $n$ colonnes, le scalaire $\\lambda$ sort à la puissance $n$.",
+        "criticalFormula": "$$\\det(\\lambda\\,A) = \\lambda^n\\,\\det(A) \\quad \\text{(et en particulier } \\det(-A) = (-1)^n\\,\\det(A)\\text{)}$$",
+        "mnemonicOrTip": "Attention : $\\text{Tr}(\\lambda A) = \\lambda\\,\\text{Tr}(A)$ (linéaire), mais $\\det(\\lambda A) = \\lambda^n\\,\\det(A)$ ($n$-linéaire) !"
+      }
+    },
+    {
+      "id": "fc-math-06-02",
+      "category": "Théorème",
+      "difficulty": 2,
+      "front": "Quelles sont les conditions nécessaires et suffisantes pour qu'une matrice $A \\in \\mathcal{M}_n(\\mathbb{K})$ soit **diagonalisable** sur $\\mathbb{K}$, et quelle est la condition suffisante rapide ?",
+      "back": {
+        "mainAnswer": "Une matrice est diagonalisable si et seulement si son polynôme caractéristique est scindé sur $\\mathbb{K}$ et que pour chaque valeur propre $\\lambda$, la dimension du sous-espace propre $E_\\lambda(A) = \\text{Ker}(A - \\lambda I_n)$ est égale à sa multiplicité $m_\\lambda$.",
+        "criticalFormula": "$$A \\text{ diagonalisable} \\iff \\begin{cases} \\chi_A \\text{ est scindé sur } \\mathbb{K} \\\\ \\forall \\lambda \\in \\text{Sp}(A),\\; \\dim(E_\\lambda(A)) = m_\\lambda \\end{cases}$$",
+        "mnemonicOrTip": "Condition suffisante immédiate : si $\\chi_A$ possède $n$ racines simples dans $\\mathbb{K}$, alors comme $1 \\le \\dim(E_\\lambda) \\le m_\\lambda = 1$, on a forcément $\\dim(E_\\lambda) = 1$ partout et $A$ est diagonalisable sans aucun calcul de sous-espace propre !"
+      }
+    },
+    {
+      "id": "fc-math-06-03",
+      "category": "Formule Critique",
+      "difficulty": 1,
+      "front": "Quelles relations relient les valeurs propres $\\lambda_1, \\dots, \\lambda_n$ (comptées avec leur multiplicité) d'une matrice trigonalisable $A$ à sa **trace** et à son **déterminant** ?",
+      "back": {
+        "mainAnswer": "Deux matrices semblables ont même trace et même déterminant. En trigonalisant $A$, les valeurs propres apparaissent sur la diagonale.",
+        "criticalFormula": "$$\\text{Tr}(A) = \\sum_{k=1}^n \\lambda_k \\quad \\text{et} \\quad \\det(A) = \\prod_{k=1}^n \\lambda_k$$",
+        "mnemonicOrTip": "Astuce de concours ultra-rapide : si vous connaissez déjà $n - 1$ valeurs propres d'une matrice $n \\times n$, inutile de factoriser $\\chi_A$ pour trouver la dernière : utilisez simplement $\\lambda_n = \\text{Tr}(A) - (\\lambda_1 + \\dots + \\lambda_{n-1})$ !"
+      }
+    },
+    {
+      "id": "fc-math-06-04",
+      "category": "Définition",
+      "difficulty": 1,
+      "front": "Comment définit-on une **matrice orthogonale** $P \\in O_n(\\mathbb{R})$, comment la caractérise-t-on à l'aide de ses colonnes, et que peut valoir son déterminant ?",
+      "back": {
+        "mainAnswer": "Une matrice réelle est orthogonale si sa transposée est égale à son inverse ($P^\\top P = I_n$). Cela équivaut à dire que ses vecteurs colonnes forment une base orthonormale (BON) de $\\mathbb{R}^n$.",
+        "criticalFormula": "$$P \\in O_n(\\mathbb{R}) \\iff P^\\top\\,P = I_n \\iff P^{-1} = P^\\top \\implies \\det(P) \\in \\{-1, +1\\}$$",
+        "mnemonicOrTip": "Comme $\\det(P^\\top P) = \\det(P^\\top)\\det(P) = (\\det P)^2 = \\det(I_n) = 1$, le déterminant d'une matrice orthogonale ne peut valoir que $+1$ (rotation / isométrie directe) ou $-1$ (isométrie indirecte)."
+      }
+    },
+    {
+      "id": "fc-math-06-05",
+      "category": "Théorème",
+      "difficulty": 2,
+      "front": "Énoncer le **théorème spectral** pour les matrices symétriques réelles.",
+      "back": {
+        "mainAnswer": "Toute matrice carrée symétrique à coefficients réels ($A^\\top = A$) est diagonalisable dans $\\mathbb{R}$, et il existe une base orthonormale de vecteurs propres (la matrice de passage $P$ peut être choisie orthogonale).",
+        "criticalFormula": "$$\\forall A \\in \\mathcal{M}_n(\\mathbb{R}), \\quad A^\\top = A \\implies \\exists P \\in O_n(\\mathbb{R}),\\; \\exists D \\text{ diagonale réelle},\\; D = P^{-1}\\,A\\,P = P^\\top\\,A\\,P$$",
+        "mnemonicOrTip": "Dès que vous voyez dans un sujet une matrice carrée réelle symétrique par rapport à sa diagonale principale, vous pouvez affirmer sans calcul qu'elle est diagonalisable dans $\\mathbb{R}$ par le théorème spectral !"
+      }
+    }
+  ]
+}
