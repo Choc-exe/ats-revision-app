@@ -1,0 +1,62 @@
+{
+  "chapterId": "07-ondes",
+  "subject": "physique-chimie",
+  "title": "Ondes : Câble coaxial, Équations de Maxwell et OPPM",
+  "cards": [
+    {
+      "id": "fc-phys-07-01",
+      "category": "Formule Critique",
+      "difficulty": 2,
+      "front": "Quelles sont les deux équations télégraphistes couplées reliant $u(x,t)$ et $i(x,t)$ dans un câble coaxial sans pertes ($\\Lambda, \\Gamma$), et quelle est la célérité $c$ des ondes qui s'y propagent ?",
+      "back": {
+        "mainAnswer": "En appliquant la loi des mailles et la loi des nœuds sur une tranche élémentaire $[x, x+\\mathrm{d}x]$, on obtient deux équations aux dérivées partielles du 1er ordre dont le découplage donne l'équation de d'Alembert.",
+        "criticalFormula": "$$\\frac{\\partial u}{\\partial x} = -\\Lambda\\,\\frac{\\partial i}{\\partial t} \\quad ; \\quad \\frac{\\partial i}{\\partial x} = -\\Gamma\\,\\frac{\\partial u}{\\partial t} \\quad \\implies \\quad c = \\frac{1}{\\sqrt{\\Lambda\\,\\Gamma}}$$",
+        "mnemonicOrTip": "C'est la seule démonstration de l'équation de d'Alembert exigible au programme ATS. Remarquez l'analogie directe avec $c = \\frac{1}{\\sqrt{\\mu_0 \\varepsilon_0}}$ dans le vide !"
+      }
+    },
+    {
+      "id": "fc-phys-07-02",
+      "category": "Théorème",
+      "difficulty": 1,
+      "front": "Comment obtient-on une onde stationnaire, et quelle est la distance séparant deux nœuds consécutifs (ou deux ventres consécutifs) en fonction de la longueur d'onde $\\lambda$ ?",
+      "back": {
+        "mainAnswer": "Une onde stationnaire résulte de la superposition de deux ondes progressives sinusoïdales de même fréquence et de même amplitude se propageant en sens opposés : $s(x,t) = 2A\\cos(kx)\\cos(\\omega t)$.",
+        "criticalFormula": "$$d_{\\text{nœud-nœud}} = d_{\\text{ventre-ventre}} = \\frac{\\lambda}{2} \\quad \\text{et} \\quad d_{\\text{nœud-ventre}} = \\frac{\\lambda}{4}$$",
+        "mnemonicOrTip": "En TP (ondes ultrasonores ou micro-ondes), relever la distance $D$ correspondant à $N$ internœuds ($N \\times \\frac{\\lambda}{2}$) est la méthode la plus précise pour mesurer $\\lambda$."
+      }
+    },
+    {
+      "id": "fc-phys-07-03",
+      "category": "Formule Critique",
+      "difficulty": 1,
+      "front": "Quelle est la **relation de structure** reliant le champ magnétique $\\vec{B}$, le champ électrique $\\vec{E}$ et le vecteur d'onde $\\vec{k} = k\\,\\vec{u}$ d'une OPPM dans le vide ?",
+      "back": {
+        "mainAnswer": "Pour une onde plane progressive monochromatique dans le vide, les champs $\\vec{E}$ et $\\vec{B}$ sont transverses, en phase, et forment avec $\\vec{k}$ un trièdre orthogonal direct.",
+        "criticalFormula": "$$\\vec{B} = \\frac{\\vec{u} \\wedge \\vec{E}}{c} = \\frac{\\vec{k} \\wedge \\vec{E}}{\\omega} \\quad \\text{et en norme :} \\quad B = \\frac{E}{c}$$",
+        "mnemonicOrTip": "Attention : la relation de structure $\\vec{B} = \\frac{\\vec{u}\\wedge\\vec{E}}{c}$ n'est valable que pour une onde plane **progressive** se propageant dans un seul sens $\\vec{u}$ (elle ne s'applique pas directement à une onde stationnaire)."
+      }
+    },
+    {
+      "id": "fc-phys-07-04",
+      "category": "Formule Critique",
+      "difficulty": 2,
+      "front": "Définir le vecteur de Poynting $\\vec{\\Pi}$, écrire l'équation locale de Poynting dans le vide sans source, et donner la puissance surfacique moyenne $\\langle \\Pi \\rangle$ d'une OPPM d'amplitude électrique $E_0$.",
+      "back": {
+        "mainAnswer": "Le vecteur de Poynting représente le vecteur densité de flux de puissance électromagnétique (en $\\text{W}\\cdot\\text{m}^{-2}$), dirigé dans le sens de propagation de l'onde.",
+        "criticalFormula": "$$\\vec{\\Pi} = \\frac{\\vec{E} \\wedge \\vec{B}}{\\mu_0} \\quad ; \\quad \\frac{\\partial w_{\\text{em}}}{\\partial t} + \\text{div}(\\vec{\\Pi}) = 0 \\quad ; \\quad \\langle \\Pi \\rangle = \\frac{1}{2}\\,\\varepsilon_0\\,c\\,E_0^2 = \\frac{E_0^2}{2\\,\\mu_0\\,c}$$",
+        "mnemonicOrTip": "Le facteur $1/2$ dans la puissance surfacique moyenne provient de la moyenne temporelle de $\\cos^2(\\omega t - kx)$ sur une période."
+      }
+    },
+    {
+      "id": "fc-phys-07-05",
+      "category": "Définition",
+      "difficulty": 1,
+      "front": "Quelles sont les bornes en longueur d'onde du domaine **visible** du spectre électromagnétique, et comment sont classés les domaines adjacents ?",
+      "back": {
+        "mainAnswer": "Le domaine visible s'étend d'environ $400\\text{ nm}$ (violet) à $750\\text{ nm}$ (ou $800\\text{ nm}$, rouge).",
+        "criticalFormula": "• $\\lambda < 400\\text{ nm}$ (hautes fréquences) : UV $\\to$ Rayons X $\\to$ Rayons $\\gamma$\n• $400\\text{ nm} < \\lambda < 750\\text{ nm}$ : Visible\n• $\\lambda > 750\\text{ nm}$ (basses fréquences) : Infrarouge (IR) $\\to$ Micro-ondes / Radio",
+        "mnemonicOrTip": "Comme $f = \\frac{c}{\\lambda}$, plus la longueur d'onde $\\lambda$ est courte, plus la fréquence $f$ (et l'énergie des photons) est élevée."
+      }
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "chapterId": "07-ondes",
+  "subject": "physique-chimie",
+  "title": "QCM d'entraînement : Ondes mécaniques et électromagnétiques",
+  "questions": [
+    {
+      "id": "qcm-phys-07-01",
+      "difficulty": "Application directe",
+      "questionText": "Un câble coaxial sans pertes utilisé en laboratoire de travaux pratiques possède une inductance linéique $\\Lambda = 0{,}25\\,\\mu\\text{H}\\cdot\\text{m}^{-1}$ et une capacité linéique $\\Gamma = 100\\text{ pF}\\cdot\\text{m}^{-1}$. Quelle est la célérité $c$ des ondes de tension dans ce câble, et quel est le retard temporel $\\tau$ mesuré à l'oscilloscope au bout d'un câble de longueur $L = 10\\text{ m}$ ?",
+      "options": [
+        { "id": "A", "text": "$c = 2{,}0 \\times 10^8\\text{ m}\\cdot\\text{s}^{-1}$ et $\\tau = 50\\text{ ns}$" },
+        { "id": "B", "text": "$c = 3{,}0 \\times 10^8\\text{ m}\\cdot\\text{s}^{-1}$ et $\\tau = 33\\text{ ns}$" },
+        { "id": "C", "text": "$c = 2{,}0 \\times 10^8\\text{ m}\\cdot\\text{s}^{-1}$ et $\\tau = 2{,}0\\,\\mu\\text{s}$" },
+        { "id": "D", "text": "$c = 5{,}0 \\times 10^{-9}\\text{ m}\\cdot\\text{s}^{-1}$ et $\\tau = 50\\text{ ns}$" }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. On convertit les paramètres linéiques en unités SI : $\\Lambda = 0{,}25 \\times 10^{-6}\\text{ H}\\cdot\\text{m}^{-1}$ et $\\Gamma = 100 \\times 10^{-12} = 1{,}0 \\times 10^{-10}\\text{ F}\\cdot\\text{m}^{-1}$.",
+          "2. Le produit vaut $\\Lambda\\,\\Gamma = 0{,}25 \\times 10^{-16} = 25 \\times 10^{-18}\\text{ s}^2\\cdot\\text{m}^{-2}$, d'où la célérité $c = \\frac{1}{\\sqrt{\\Lambda\\,\\Gamma}} = \\frac{1}{5{,}0 \\times 10^{-9}} = 2{,}0 \\times 10^8\\text{ m}\\cdot\\text{s}^{-1}$ (soit environ $\\frac{2}{3}$ de la vitesse de la lumière dans le vide).",
+          "3. Le retard temporel sur une longueur $L = 10\\text{ m}$ vaut $\\tau = \\frac{L}{c} = \\frac{10}{2{,}0 \\times 10^8} = 5{,}0 \\times 10^{-8}\\text{ s} = 50\\text{ ns}$."
+        ],
+        "keyFormula": "$$c = \\frac{1}{\\sqrt{\\Lambda\\,\\Gamma}} \\quad \\text{et} \\quad \\tau = \\frac{L}{c}$$",
+        "commonTrap": "La réponse D oublie de prendre l'inverse de $\\sqrt{\\Lambda\\Gamma}$. La réponse B suppose à tort que l'onde dans le diélectrique du câble se propage à la vitesse de la lumière dans le vide ($3{,}0 \\times 10^8\\text{ m}\\cdot\\text{s}^{-1}$)."
+      }
+    },
+    {
+      "id": "qcm-phys-07-02",
+      "difficulty": "Calculatoire",
+      "questionText": "Lors d'une expérience d'ondes acoustiques stationnaires de fréquence $f = 40{,}0\\text{ kHz}$ dans l'air, un étudiant déplace un récepteur ultrasonore le long de l'axe et relève une distance $D = 42{,}5\\text{ mm}$ entre le $1^{\\text{er}}$ nœud et le $11^{\\text{e}}$ nœud d'amplitude. Quelles sont la longueur d'onde $\\lambda$ et la célérité $c$ des ultrasons mesurées ?",
+      "options": [
+        { "id": "A", "text": "$\\lambda = 4{,}25\\text{ mm}$ et $c = 170\\text{ m}\\cdot\\text{s}^{-1}$" },
+        { "id": "B", "text": "$\\lambda = 8{,}50\\text{ mm}$ et $c = 340\\text{ m}\\cdot\\text{s}^{-1}$" },
+        { "id": "C", "text": "$\\lambda = 7{,}73\\text{ mm}$ et $c = 309\\text{ m}\\cdot\\text{s}^{-1}$" },
+        { "id": "D", "text": "$\\lambda = 8{,}50\\text{ mm}$ et $c = 34{,}0\\text{ m}\\cdot\\text{s}^{-1}$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. Entre le $1^{\\text{er}}$ nœud et le $11^{\\text{e}}$ nœud, il y a exactement $11 - 1 = 10$ intervalles internœuds.",
+          "2. Or, la distance entre deux nœuds consécutifs d'une onde stationnaire vaut $\\frac{\\lambda}{2}$. On a donc $D = 10 \\times \\frac{\\lambda}{2} = 5\\,\\lambda$.",
+          "3. On en déduit $\\lambda = \\frac{D}{5} = \\frac{42{,}5\\text{ mm}}{5} = 8{,}50\\text{ mm} = 8{,}50 \\times 10^{-3}\\text{ m}$.",
+          "4. La célérité vaut $c = \\lambda\\,f = 8{,}50 \\times 10^{-3} \\times 40{,}0 \\times 10^3 = 340\\text{ m}\\cdot\\text{s}^{-1}$."
+        ],
+        "keyFormula": "$$d_{\\text{nœud-nœud}} = \\frac{\\lambda}{2} \\quad \\text{et} \\quad c = \\lambda\\,f$$",
+        "commonTrap": "La réponse A ($170\\text{ m}\\cdot\\text{s}^{-1}$) est le piège classique de TP : confondre la distance entre deux nœuds consécutifs ($\\lambda/2$) avec une longueur d'onde entière $\\lambda$. La réponse C divise par $11$ intervalles au lieu de $11 - 1 = 10$."
+      }
+    },
+    {
+      "id": "qcm-phys-07-03",
+      "difficulty": "Application directe",
+      "questionText": "Dans le vide, le champ électrique d'une onde électromagnétique plane progressive monochromatique (OPPM) a pour expression $\\vec{E}(x, y, z, t) = E_0\\cos(\\omega t + k\\,z)\\,\\vec{u}_x$ (avec $\\omega > 0$ et $k > 0$). Quelles sont la direction et le sens de propagation de cette onde, sa direction de polarisation, et l'expression du champ magnétique $\\vec{B}$ associé ?",
+      "options": [
+        { "id": "A", "text": "Propagation selon $+\\vec{u}_z$, polarisation selon $\\vec{u}_x$, et $\\vec{B} = \\frac{E_0}{c}\\cos(\\omega t + kz)\\,\\vec{u}_y$" },
+        { "id": "B", "text": "Propagation selon $-\\vec{u}_z$, polarisation selon $\\vec{u}_x$, et $\\vec{B} = -\\frac{E_0}{c}\\cos(\\omega t + kz)\\,\\vec{u}_y$" },
+        { "id": "C", "text": "Propagation selon $-\\vec{u}_z$, polarisation selon $\\vec{u}_z$, et $\\vec{B} = \\frac{E_0}{c}\\cos(\\omega t + kz)\\,\\vec{u}_y$" },
+        { "id": "D", "text": "Propagation selon $+\\vec{u}_x$, polarisation selon $\\vec{u}_z$, et $\\vec{B} = -\\frac{E_0}{c}\\cos(\\omega t + kz)\\,\\vec{u}_y$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. La phase de l'onde s'écrit $\\omega t + k\\,z = \\omega t - \\vec{k}\\cdot\\vec{r}$ avec $\\vec{k} = -k\\,\\vec{u}_z$ : l'onde se propage donc selon la direction de l'axe $(Oz)$ dans le sens des $z$ **décroissants** (vecteur unitaire de propagation $\\vec{u} = -\\vec{u}_z$).",
+          "2. Par définition, la direction de polarisation d'une onde électromagnétique est celle de son champ électrique $\\vec{E}$ : l'onde est donc polarisée rectilignement selon $\\vec{u}_x$.",
+          "3. D'après la relation de structure $\\vec{B} = \\frac{\\vec{u}\\wedge\\vec{E}}{c}$, avec $\\vec{u} = -\\vec{u}_z$ et $\\vec{u}_z \\wedge \\vec{u}_x = +\\vec{u}_y$, on obtient $\\vec{B} = \\frac{(-\\vec{u}_z) \\wedge (E_0\\cos(\\omega t + kz)\\vec{u}_x)}{c} = -\\frac{E_0}{c}\\cos(\\omega t + kz)\\,\\vec{u}_y$."
+        ],
+        "keyFormula": "$$\\text{Phase } (\\omega t + kz) \\implies \\vec{u} = -\\vec{u}_z \\quad \\text{et} \\quad \\vec{B} = \\frac{\\vec{u} \\wedge \\vec{E}}{c}$$",
+        "commonTrap": "Le signe $+$ dans $\\cos(\\omega t + kz)$ indique une propagation vers les $z$ négatifs ($z + ct = \\text{cte}$), ce qui inverse le signe de $\\vec{B}$ par rapport à une onde en $\\cos(\\omega t - kz)$ (réponse A)."
+      }
+    },
+    {
+      "id": "qcm-phys-07-04",
+      "difficulty": "Calculatoire",
+      "questionText": "Un pointeur laser émet dans le vide un faisceau assimilé à une OPPM polarisée rectilignement transportant une puissance surfacique moyenne $\\langle \\Pi \\rangle = 1\\,500\\text{ W}\\cdot\\text{m}^{-2}$. On donne $c = 3{,}00 \\times 10^8\\text{ m}\\cdot\\text{s}^{-1}$ et $\\mu_0 = 4\\pi \\times 10^{-7}\\text{ H}\\cdot\\text{m}^{-1}$ (soit $\\mu_0\\,c \\approx 377\\,\\Omega$). Quelles sont les valeurs de l'amplitude $E_0$ du champ électrique et de l'amplitude $B_0$ du champ magnétique de cette onde ?",
+      "options": [
+        { "id": "A", "text": "$E_0 \\approx 1{,}06 \\times 10^3\\text{ V}\\cdot\\text{m}^{-1}$ et $B_0 \\approx 3{,}5\\,\\mu\\text{T}$" },
+        { "id": "B", "text": "$E_0 \\approx 752\\text{ V}\\cdot\\text{m}^{-1}$ et $B_0 \\approx 2{,}5\\,\\mu\\text{T}$" },
+        { "id": "C", "text": "$E_0 \\approx 1{,}06 \\times 10^3\\text{ V}\\cdot\\text{m}^{-1}$ et $B_0 \\approx 3{,}2 \\times 10^{11}\\text{ T}$" },
+        { "id": "D", "text": "$E_0 \\approx 1{,}13 \\times 10^6\\text{ V}\\cdot\\text{m}^{-1}$ et $B_0 \\approx 3{,}8\\text{ mT}$" }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. La puissance surfacique moyenne transportée par une OPPM dans le vide vaut $\\langle \\Pi \\rangle = \\frac{E_0^2}{2\\,\\mu_0\\,c}$.",
+          "2. On isole l'amplitude électrique : $E_0 = \\sqrt{2\\,\\mu_0\\,c\\,\\langle \\Pi \\rangle} = \\sqrt{2 \\times 377 \\times 1\\,500} = \\sqrt{1{,}131 \\times 10^6} \\approx 1{,}06 \\times 10^3\\text{ V}\\cdot\\text{m}^{-1}$.",
+          "3. D'après la relation de structure $B_0 = \\frac{E_0}{c}$, l'amplitude du champ magnétique vaut $B_0 = \\frac{1{,}06 \\times 10^3}{3{,}00 \\times 10^8} \\approx 3{,}54 \\times 10^{-6}\\text{ T} \\approx 3{,}5\\,\\mu\\text{T}$."
+        ],
+        "keyFormula": "$$\\langle \\Pi \\rangle = \\frac{E_0^2}{2\\,\\mu_0\\,c} \\implies E_0 = \\sqrt{2\\,\\mu_0\\,c\\,\\langle \\Pi \\rangle} \\quad \\text{et} \\quad B_0 = \\frac{E_0}{c}$$",
+        "commonTrap": "La réponse B oublie le facteur $2$ issu de la valeur moyenne de $\\cos^2$. La réponse C multiplie $E_0$ par $c$ au lieu de diviser par $c$."
+      }
+    },
+    {
+      "id": "qcm-phys-07-05",
+      "difficulty": "Type Concours",
+      "questionText": "Une cellule photovoltaïque de surface utile $S = 100\\text{ cm}^2 = 1{,}00 \\times 10^{-2}\\text{ m}^2$ est éclairée sous incidence normale par un flux solaire de puissance surfacique $\\varphi_{\\text{inc}} = 800\\text{ W}\\cdot\\text{m}^{-2}$. L'étude de sa caractéristique courant-tension montre que la puissance électrique fournie est maximale pour une tension $U_m = 0{,}50\\text{ V}$ et une intensité $I_m = 3{,}2\\text{ A}$. Que valent la puissance électrique maximale $P_{\\max}$ et le rendement maximal $\\eta_{\\max}$ de cette cellule ?",
+      "options": [
+        { "id": "A", "text": "$P_{\\max} = 1{,}6\\text{ W}$ et $\\eta_{\\max} = 20\\%$" },
+        { "id": "B", "text": "$P_{\\max} = 1{,}6\\text{ W}$ et $\\eta_{\\max} = 0{,}20\\%$" },
+        { "id": "C", "text": "$P_{\\max} = 6{,}4\\text{ W}$ et $\\eta_{\\max} = 80\\%$" },
+        { "id": "D", "text": "$P_{\\max} = 1{,}6\\text{ W}$ et $\\eta_{\\max} = 50\\%$" }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. Au point de fonctionnement optimal $(U_m, I_m)$, la puissance électrique maximale fournie par la cellule vaut $P_{\\max} = U_m\\,I_m = 0{,}50\\text{ V} \\times 3{,}2\\text{ A} = 1{,}6\\text{ W}$.",
+          "2. La puissance lumineuse incidente reçue par la surface $S = 1{,}00 \\times 10^{-2}\\text{ m}^2$ vaut $\\mathcal{P}_{\\text{reçue}} = \\varphi_{\\text{inc}}\\,S = 800 \\times 1{,}00 \\times 10^{-2} = 8{,}0\\text{ W}$.",
+          "3. Le rendement maximal vaut donc $\\eta_{\\max} = \\frac{P_{\\max}}{\\mathcal{P}_{\\text{reçue}}} = \\frac{1{,}6\\text{ W}}{8{,}0\\text{ W}} = 0{,}20 = 20\\%$."
+        ],
+        "keyFormula": "$$P_{\\max} = U_m\\,I_m \\quad \\text{et} \\quad \\eta_{\\max} = \\frac{U_m\\,I_m}{\\varphi_{\\text{inc}}\\,S}$$",
+        "commonTrap": "La réponse B oublie de multiplier la puissance surfacique $\\varphi_{\\text{inc}} = 800\\text{ W}\\cdot\\text{m}^{-2}$ par la surface $S = 0{,}01\\text{ m}^2$ de la cellule."
+      }
+    }
+  ]
+}

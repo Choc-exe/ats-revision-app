@@ -1,0 +1,108 @@
+---
+title: "Thème F : Électromagnétisme : champs statiques et quasi statiques"
+subject: "physique-chimie"
+chapterId: "06-electromagnetisme"
+semester: 2
+description: "Électrostatique (Gauss, potentiel, condensateur), conduction électrique, magnétostatique (Ampère, dipôle), lois de l'induction (Faraday, Lenz) et rails de Laplace."
+---
+
+# Électromagnétisme : champs statiques et quasi statiques
+
+Cette partie aborde l'électrostatique, la magnétostatique et les phénomènes d'induction dans l'approximation quasi stationnaire (ARQS)[cite: 20]. Les théorèmes de Gauss et d'Ampère ainsi que la loi de Faraday sont utilisés uniquement sous leur forme intégrale (les théorèmes de Stokes et de Green-Ostrogradski ainsi que les courants surfaciques sont hors programme)[cite: 20].
+
+---
+
+## 1. Électrostatique du vide
+
+### Loi de Coulomb, distributions de charges et symétries
+Une charge ponctuelle $q$ placée en $O$ crée en tout point $M$ (avec $\vec{r} = \vec{OM}$ et $r = \|\vec{r}\|$) un **champ électrostatique**[cite: 20] :
+$$\vec{E}(M) = \frac{q}{4\pi\varepsilon_0\,r^2}\,\vec{u}_r \quad \text{avec} \quad \varepsilon_0 \approx 8{,}85 \times 10^{-12}\text{ F}\cdot\text{m}^{-1}$$
+Par principe de superposition, cette loi s'étend aux distributions continues de charges : volumique ($\mathrm{d}q = \rho\,\mathrm{d}\tau$), surfacique ($\mathrm{d}q = \sigma\,\mathrm{d}S$) et linéique ($\mathrm{d}q = \lambda\,\mathrm{d}\ell$)[cite: 20].
+
+<CriticalFormula title="Règles de symétrie et d'invariance du champ électrostatique (Vrai vecteur)">
+* **Invariances** : Les composantes de $\vec{E}(M)$ dans la base locale ne dépendent pas des coordonnées selon lesquelles la distribution de charges est invariante (par translation ou rotation)[cite: 21].
+* **Plan de symétrie ($\Pi^+$)** : Si en tout point $M \in \Pi^+$, la distribution est symétrique, alors **$\vec{E}(M)$ est contenu dans le plan $\Pi^+$**[cite: 21].
+* **Plan d'antisymétrie ($\Pi^-$)** : Si la distribution change de signe par symétrie par rapport à $\Pi^-$, alors en tout point $M \in \Pi^-$, **$\vec{E}(M)$ est orthogonal au plan $\Pi^-$**[cite: 21].
+</CriticalFormula>
+
+### Potentiel électrostatique et Théorème de Gauss
+* **Circulation et potentiel** : La différence de potentiel s'exprime comme l'opposé de la circulation du champ électrostatique : $\mathrm{d}V = -\vec{E}\cdot\mathrm{d}\vec{\ell}$, soit localement **$\vec{E} = -\overrightarrow{\text{grad}}\,V$**[cite: 21]. Les lignes de champ sont orthogonales aux surfaces équipotentielles et orientées vers les potentiels décroissants[cite: 21, 69]. Pour une charge ponctuelle $q$ en $O$ : $V(r) = \frac{q}{4\pi\varepsilon_0\,r}$ (en prenant $V(\infty) = 0$)[cite: 21].
+
+<CriticalFormula title="Théorème de Gauss et Applications exigibles">
+Le flux du champ électrostatique à travers toute surface fermée $\Sigma$ (orientée vers l'extérieur) est égal à la charge totale $Q_{\text{int}}$ contenue à l'intérieur de $\Sigma$ divisée par $\varepsilon_0$[cite: 21] :
+$$\Phi_E = \oiint_{\Sigma} \vec{E}\cdot\mathrm{d}\vec{S} = \frac{Q_{\text{int}}}{\varepsilon_0}$$
+* **Plan infini uniformément chargé ($\sigma > 0$ en $z=0$)** : En choisissant une surface de Gauss cylindrique symétrique de base $S$, $2\,E\,S = \frac{\sigma S}{\varepsilon_0} \implies$ **$\vec{E} = \frac{\sigma}{2\varepsilon_0}\text{sgn}(z)\,\vec{u}_z$**[cite: 21].
+* **Distribution à symétrie sphérique** : Surface de Gauss sphérique de rayon $r$ centrée en $O \implies 4\pi r^2 E(r) = \frac{Q_{\text{int}}(r)}{\varepsilon_0}$[cite: 21].
+* Dans une région vide de charge ($Q_{\text{int}} = 0$), le flux de $\vec{E}$ se conserve le long d'un tube de champ : un resserrement des lignes de champ traduit une augmentation de la norme $E$[cite: 21].
+</CriticalFormula>
+
+### Condensateur plan et Énergie électrostatique
+Dans un condensateur plan (deux armatures de surface $S$ séparées d'une épaisseur $e \ll \sqrt{S}$ portant $+q$ et $-q$, en négligeant les effets de bords), le champ entre les armatures est uniforme et vaut $E = \frac{\sigma}{\varepsilon_0} = \frac{q}{\varepsilon_0 S}$[cite: 21]. La tension vaut $u = E\,e = \frac{q\,e}{\varepsilon_0 S}$, d'où la capacité $C = \frac{q}{u}$[cite: 21] :
+$$C = \frac{\varepsilon_0\,S}{e} \quad (\text{ou } C = \frac{\varepsilon_0\,\varepsilon_r\,S}{e} \text{ en présence d'un diélectrique de permittivité relative } \varepsilon_r)$$
+La **densité volumique d'énergie électrostatique** stockée dans le champ électrique vaut **$w_e = \frac{1}{2}\varepsilon_0\,E^2$**[cite: 21].
+
+---
+
+## 2. Conduction électrique
+
+### Vecteur densité de courant et Conservation de la charge
+Pour un déplacement d'ensemble homocinétique de porteurs de charge à la vitesse $\vec{v}$ (de densité volumique de charge mobile $\rho_m = n\,q$), le **vecteur densité de courant volumique** s'écrit **$\vec{j} = \rho_m\,\vec{v}$** (en $\text{A}\cdot\text{m}^{-2}$)[cite: 22]. L'intensité $I$ traversant une surface orientée $S$ est le flux de $\vec{j}$ : $I = \iint_S \vec{j}\cdot\mathrm{d}\vec{S}$ (débit de charges $I = \frac{\mathrm{d}q}{\mathrm{d}t}$)[cite: 21, 22].
+
+<CriticalFormula title="Équation locale de conservation de la charge et Loi d'Ohm locale">
+Un bilan de charge sur une tranche $[x, x+\mathrm{d}x]$ donne $\frac{\partial \rho}{\partial t} + \frac{\partial j_x}{\partial x} = 0$, soit en 3D[cite: 22] :
+$$\frac{\partial \rho}{\partial t} + \text{div}(\vec{j}) = 0$$
+En **régime stationnaire** ($\frac{\partial \rho}{\partial t} = 0$), on a **$\text{div}(\vec{j}) = 0$** : le vecteur $\vec{j}$ est à **flux conservatif**, d'où découle la **loi des nœuds** $\sum \varepsilon_k I_k = 0$[cite: 22].
+* **Loi d'Ohm locale** : Dans un conducteur ohmique de conductivité $\sigma$ (ou $\gamma$, en $\text{S}\cdot\text{m}^{-1}$), **$\vec{j} = \sigma\,\vec{E}$**[cite: 22]. Pour un conducteur cylindrique homogène de longueur $\ell$ et de section $S$ en conduction unidirectionnelle, $U = E\,\ell$ et $I = j\,S = \sigma\,E\,S$, d'où la loi d'Ohm macroscopique $U = R\,I$ avec **$R = \frac{\ell}{\sigma\,S}$**[cite: 22]. La puissance volumique dissipée par effet Joule vaut $\vec{j}\cdot\vec{E} = \sigma E^2$ (soit $P_J = R\,I^2$ globalement)[cite: 22].
+</CriticalFormula>
+
+---
+
+## 3. Magnétostatique du vide
+
+### Force magnétique, Force de Laplace et Dipôle magnétique
+* **Force magnétique sur une charge ponctuelle** : $\vec{F}_m = q\,\vec{v}\wedge\vec{B}$[cite: 22]. Sa puissance instantanée est toujours nulle ($\mathcal{P} = \vec{F}_m\cdot\vec{v} = 0$) : **un champ magnétique stationnaire peut courber la trajectoire d'une particule mais ne peut pas modifier son énergie cinétique** (contrairement au champ électrique)[cite: 22].
+* **Force de Laplace** : Un conducteur filiforme rectiligne $AB$ parcouru par un courant $I$ placé dans un champ magnétique uniforme $\vec{B}_{\text{ext}}$ subit la force **$\vec{F}_L = I\,\vec{AB}\wedge\vec{B}_{\text{ext}}$**[cite: 22].
+* **Dipôle magnétique** : Une boucle plane d'aire $S$ parcourue par un courant $I$ (orientée par la règle de la main droite selon la normale $\vec{n}$) possède un **moment magnétique** **$\vec{m} = I\,S\,\vec{n}$** (en $\text{A}\cdot\text{m}^2$, dirigé du pôle Sud vers le pôle Nord de l'aimant équivalent)[cite: 22]. Placé dans un champ uniforme $\vec{B}$, il subit un couple **$\vec{\Gamma} = \vec{m}\wedge\vec{B}$** qui tend à aligner $\vec{m}$ sur $\vec{B}$ (principe de la boussole)[cite: 23].
+
+### Propriétés du champ magnétostatique et Théorème d'Ampère
+* **Conservation du flux magnétique** : Le flux de $\vec{B}$ à travers toute surface fermée est nul ($\oiint \vec{B}\cdot\mathrm{d}\vec{S} = 0$) ; par conséquent, **le flux magnétique se conserve le long de tout tube de champ**[cite: 23].
+* **Symétries de $\vec{B}$ (Pseudo-vecteur)** : Contrairement à $\vec{E}$, en tout point d'un plan de symétrie $\Pi^+$ des courants, **$\vec{B}$ est orthogonal à $\Pi^+$** ; en tout point d'un plan d'antisymétrie $\Pi^-$ des courants, **$\vec{B}$ est contenu dans $\Pi^-$**[cite: 23].
+
+<CriticalFormula title="Théorème d'Ampère et Champs classiques exigibles">
+La circulation du champ magnétostatique le long d'un contour fermé orienté $\mathcal{C}$ est égale à $\mu_0$ ($\mu_0 = 4\pi \times 10^{-7}\text{ H}\cdot\text{m}^{-1}$) fois la somme algébrique des intensités $I_{\text{enlacé}}$ traversant une surface s'appuyant sur $\mathcal{C}$ (orientée par la règle du tire-bouchon)[cite: 23] :
+$$\oint_{\mathcal{C}} \vec{B}\cdot\mathrm{d}\vec{\ell} = \mu_0\,I_{\text{enlacé}}$$
+* **Fil rectiligne infini d'axe $(Oz)$ parcouru par $I$** (contour circulaire de rayon $r$) : $2\pi r B(r) = \mu_0 I \implies$ **$\vec{B}(r) = \frac{\mu_0\,I}{2\pi\,r}\,\vec{u}_\theta$** (à l'extérieur du fil)[cite: 23].
+* **Solénoïde infini d'axe $(Oz)$ comportant $n = N/\ell$ spires par mètre** : Le champ est nul à l'extérieur et uniforme à l'intérieur : **$\vec{B}_{\text{int}} = \mu_0\,n\,I\,\vec{u}_z$**[cite: 23].
+</CriticalFormula>
+
+---
+
+## 4. Lois de l'induction et Couplage électromécanique
+
+### Loi de Faraday, Loi de Lenz et Auto-induction
+Soit un circuit filiforme fermé orienté $\mathcal{C}$ délimitant une surface $S$ (normale $\vec{n}$ liée au sens du contour par la règle de la main droite). Le flux magnétique à travers le circuit vaut $\Phi = \iint_S \vec{B}\cdot\vec{n}\,\mathrm{d}S$ (soit $\Phi = \vec{B}\cdot\vec{S} = B\,S\cos\theta$ si $\vec{B}$ est uniforme et plan)[cite: 23].
+
+<CriticalFormula title="Loi de Faraday et Loi de modération de Lenz">
+* **Loi de Faraday** : Toute variation temporelle du flux magnétique $\Phi(t)$ à travers un circuit fermé y fait apparaître une **force électromotrice (f.é.m.) induite $e(t)$** (orientée dans le sens choisi pour le contour) donnée par[cite: 23] :
+$$e(t) = -\frac{\mathrm{d}\Phi}{\mathrm{d}t}$$
+* **Loi de Lenz** : Le phénomène d'induction (courant induit $i = \frac{e}{R}$, forces de Laplace induites) s'oppose toujours par ses effets aux causes (variation de flux ou mouvement) qui lui ont donné naissance[cite: 23].
+</CriticalFormula>
+
+* **Auto-induction et énergie magnétique** : Un circuit parcouru par $i(t)$ crée son propre flux $\Phi_{\text{propre}} = L\,i(t)$, où $L > 0$ est son **inductance propre** (en Henrys $\text{H}$)[cite: 23, 24]. Pour un solénoïde long de longueur $\ell$, de section $S$, de volume $\mathcal{V} = S\ell$ et de $N = n\ell$ spires, $\Phi_{\text{propre}} = N\,B\,S = \mu_0 n^2 S \ell i \implies$ **$L = \mu_0\,n^2\,\mathcal{V} = \frac{\mu_0\,N^2\,S}{\ell}$**[cite: 24]. La **densité volumique d'énergie magnétique** vaut **$w_m = \frac{B^2}{2\mu_0}$**[cite: 24].
+* **Induction mutuelle et courants de Foucault** : Pour deux bobines coaxiales longues $1$ et $2$ en influence totale, l'inductance mutuelle vaut $M = \frac{\mu_0 N_1 N_2 S}{\ell}$, et les flux totaux s'écrivent $\Phi_1 = L_1 i_1 + M i_2$ et $\Phi_2 = L_2 i_2 + M i_1$[cite: 24]. Dans un conducteur massif soumis à un champ magnétique variable (ou en mouvement dans $\vec{B}$), il apparaît en volume des boucles de **courants induits dits de Foucault**, utilisés pour le **chauffage par induction** (plaques de cuisson, métallurgie par effet Joule) et le **freinage magnétique sans contact** (camions, trains)[cite: 24].
+
+### Couplage électromécanique : Dispositif des rails de Laplace
+Considérons une barre conductrice mobile $MN$ de masse $m$, de longueur $\ell$ selon $(Oy)$ et de résistance totale du circuit $R$, glissant sans frottement avec la vitesse $\vec{v} = v(t)\,\vec{u}_x$ sur deux rails horizontaux parallèles plongés dans un champ magnétique stationnaire uniforme $\vec{B} = B\,\vec{u}_z$[cite: 24].
+
+<SchemaPlaceholder alt="Schéma des rails de Laplace suivant l'axe Ox avec barre mobile MN selon Oy dans un champ B vertical selon Oz" caption="Figure 6.1 : Dispositif des rails de Laplace et orientation du circuit pour le couplage électromécanique." src="/images/physique-chimie/rails-de-laplace.png"/>
+
+<CriticalFormula title="Équations couplées et Bilan énergétique des rails de Laplace">
+En orientant le contour dans le sens trigonométrique autour de $\vec{u}_z$ (de $M$ vers $N$ selon $+\vec{u}_y$)[cite: 24] :
+1. **Équation électrique** : La variation de la surface balayée pendant $\mathrm{d}t$ est $\mathrm{d}S = \ell\,v(t)\,\mathrm{d}t$, donc $\frac{\mathrm{d}\Phi}{\mathrm{d}t} = B\,\ell\,v(t)$, d'où la f.é.m. induite **$e = -B\,\ell\,v(t)$**[cite: 24]. Si le circuit contient un générateur de tension $E_0$, la loi des mailles donne :
+$$E_0 + e = R\,i(t) \iff E_0 - B\,\ell\,v(t) = R\,i(t)$$
+2. **Équation mécanique** : La barre subit la force de Laplace $\vec{F}_L = i\,\ell\,\vec{u}_y \wedge (B\,\vec{u}_z) = i\,B\,\ell\,\vec{u}_x$[cite: 22, 24]. Le PFD projeté sur $(Ox)$ donne :
+$$m\frac{\mathrm{d}v}{\mathrm{d}t} = i(t)\,B\,\ell$$
+3. **Bilan de puissance du couplage** : La puissance mécanique de la force de Laplace et la puissance électrique de la f.é.m. induite vérifient à tout instant[cite: 24] :
+$$\mathcal{P}_{\text{Laplace}} + \mathcal{P}_{\text{ind}} = \vec{F}_L\cdot\vec{v} + e\,i = (i\,B\,\ell\,v) + (-B\,\ell\,v\,i) = 0$$
+La conversion électromécanique de puissance s'effectue donc **sans pertes propres** (les seules pertes étant l'effet Joule $R\,i^2$ dans la résistance du circuit)[cite: 24].
+</CriticalFormula>

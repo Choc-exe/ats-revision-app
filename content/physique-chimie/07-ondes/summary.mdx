@@ -1,0 +1,21 @@
+---
+title: "Fiche Synthèse : Ondes mécaniques et électromagnétiques"
+subject: "physique-chimie"
+chapterId: "07-ondes"
+---
+
+## L'Essentiel du Bulletin Officiel ATS
+
+* **Propagation 1D & Équation de d'Alembert** :
+  * **Câble coaxial sans pertes ($\Lambda, \Gamma$)** : $\frac{\partial u}{\partial x} = -\Lambda\frac{\partial i}{\partial t}$ et $\frac{\partial i}{\partial x} = -\Gamma\frac{\partial u}{\partial t} \implies$ **$\frac{\partial^2 u}{\partial x^2} - \frac{1}{c^2}\frac{\partial^2 u}{\partial t^2} = 0$** avec **$c = \frac{1}{\sqrt{\Lambda\Gamma}}$**[cite: 24, 25].
+  * **Corde vibrante** : $c = \sqrt{\frac{T_0}{\mu}}$ ; Solutions progressives : $s(x,t) = f(x - ct) + g(x + ct)$[cite: 25].
+  * **Onde progressive sinusoïdale** : **$\lambda = c\,T = \frac{c}{f}$** et $k = \frac{2\pi}{\lambda} = \frac{\omega}{c}$[cite: 25].
+  * **Ondes stationnaires** : $s(x,t) = 2A\cos(kx)\cos(\omega t)$ ; distance entre deux nœuds (ou deux ventres) consécutifs : **$d = \frac{\lambda}{2}$**[cite: 25].
+* **Équations de Maxwell & OPPM dans le vide** :
+  * **Dans le vide sans source ($\rho = 0, \vec{j} = \vec{0}$)** : $\text{div}(\vec{E}) = 0$, $\text{div}(\vec{B}) = 0$, $\overrightarrow{\text{rot}}(\vec{E}) = -\frac{\partial \vec{B}}{\partial t}$, $\overrightarrow{\text{rot}}(\vec{B}) = \mu_0\varepsilon_0\frac{\partial \vec{E}}{\partial t}$[cite: 25].
+  * **Célérité dans le vide** : **$c = \frac{1}{\sqrt{\varepsilon_0\mu_0}} \approx 3{,}00 \times 10^8\text{ m}\cdot\text{s}^{-1}$**[cite: 25].
+  * **Relation de structure d'une OPPM** : Champs transverses ($\vec{E} \perp \vec{k}$, $\vec{B} \perp \vec{k}$), **$\vec{B} = \frac{\vec{u}\wedge\vec{E}}{c} = \frac{\vec{k}\wedge\vec{E}}{\omega}$** et **$E = c\,B$**[cite: 26].
+* **Énergie électromagnétique & Photovoltaïque** :
+  * **Vecteur de Poynting** : **$\vec{\Pi} = \frac{\vec{E}\wedge\vec{B}}{\mu_0}$** et conservation locale **$\frac{\partial w_{\text{em}}}{\partial t} + \text{div}(\vec{\Pi}) = 0$**[cite: 26].
+  * **Puissance surfacique moyenne** : **$\langle \Pi \rangle = \frac{1}{2}\varepsilon_0 c E_0^2 = \frac{E_0^2}{2\mu_0 c}$**[cite: 26].
+  * **Cellule photovoltaïque** : $\eta_{\max} = \frac{U_m I_m}{\varphi_{\text{inc}}\,S}$[cite: 26].

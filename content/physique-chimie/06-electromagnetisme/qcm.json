@@ -1,0 +1,112 @@
+{
+  "chapterId": "06-electromagnetisme",
+  "subject": "physique-chimie",
+  "title": "QCM d'entraînement : Électromagnétisme",
+  "questions": [
+    {
+      "id": "qcm-phys-06-01",
+      "difficulty": "Application directe",
+      "questionText": "Une sphère isolante de centre $O$ et de rayon $R$ porte une charge totale $Q > 0$ répartie uniformément dans son volume. En appliquant le théorème de Gauss, quelle est l'expression de la norme du champ électrostatique $E(r)$ en un point $M$ situé **à l'extérieur** de la sphère ($r > R$) ?",
+      "options": [
+        { "id": "A", "text": "$E(r) = \\frac{Q}{4\\pi\\varepsilon_0\\,R^2}$" },
+        { "id": "B", "text": "$E(r) = \\frac{Q}{4\\pi\\varepsilon_0\\,r^2}$" },
+        { "id": "C", "text": "$E(r) = \\frac{Q\\,r}{4\\pi\\varepsilon_0\\,R^3}$" },
+        { "id": "D", "text": "$E(r) = 0$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. Par symétrie sphérique, le champ électrostatique est radial ($\\vec{E}(M) = E(r)\\,\\vec{u}_r$) et sa norme ne dépend que de la distance $r$.",
+          "2. On choisit comme surface de Gauss une sphère fermée $\\Sigma$ de centre $O$ et de rayon $r > R$. Le flux de $\\vec{E}$ à travers $\\Sigma$ vaut $\\oiint_\\Sigma \\vec{E}\\cdot\\mathrm{d}\\vec{S} = 4\\pi\\,r^2\\,E(r)$.",
+          "3. Comme $r > R$, la surface de Gauss englobe la totalité de la sphère chargée, donc $Q_{\\text{int}} = Q$. Le théorème de Gauss donne $4\\pi\\,r^2\\,E(r) = \\frac{Q}{\\varepsilon_0} \\implies E(r) = \\frac{Q}{4\\pi\\varepsilon_0\\,r^2}$ (identique au champ d'une charge ponctuelle $Q$ placée en $O$)."
+        ],
+        "keyFormula": "$$4\\pi\\,r^2\\,E(r) = \\frac{Q_{\\text{int}}}{\\varepsilon_0} \\implies E(r > R) = \\frac{Q}{4\\pi\\varepsilon_0\\,r^2}$$",
+        "commonTrap": "La réponse C correspond au champ à l'intérieur de la sphère ($r < R$), où $Q_{\\text{int}}(r) = Q\\frac{r^3}{R^3}$."
+      }
+    },
+    {
+      "id": "qcm-phys-06-02",
+      "difficulty": "Calculatoire",
+      "questionText": "Un fil de cuivre cylindrique de longueur $\\ell = 20\\text{ m}$ et de section droite $S = 1{,}0\\text{ mm}^2 = 1{,}0 \\times 10^{-6}\\text{ m}^2$ possède une conductivité électrique $\\sigma = 5{,}0 \\times 10^7\\text{ S}\\cdot\\text{m}^{-1}$. Il est parcouru par un courant stationnaire d'intensité $I = 5{,}0\\text{ A}$. Que valent la résistance électrique $R$ de ce fil et la norme du champ électrique $E$ régnant à l'intérieur du conducteur ?",
+      "options": [
+        { "id": "A", "text": "$R = 0{,}40\\,\\Omega$ et $E = 0{,}10\\text{ V}\\cdot\\text{m}^{-1}$" },
+        { "id": "B", "text": "$R = 0{,}40\\,\\Omega$ et $E = 2{,}0\\text{ V}\\cdot\\text{m}^{-1}$" },
+        { "id": "C", "text": "$R = 400\\,\\Omega$ et $E = 0{,}10\\text{ V}\\cdot\\text{m}^{-1}$" },
+        { "id": "D", "text": "$R = 2{,}5\\,\\Omega$ et $E = 0{,}10\\text{ V}\\cdot\\text{m}^{-1}$" }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. La résistance d'un conducteur cylindrique homogène vaut $R = \\frac{\\ell}{\\sigma\\,S} = \\frac{20}{5{,}0 \\times 10^7 \\times 1{,}0 \\times 10^{-6}} = \\frac{20}{50} = 0{,}40\\,\\Omega$.",
+          "2. La densité de courant uniforme vaut $j = \\frac{I}{S} = \\frac{5{,}0}{1{,}0 \\times 10^{-6}} = 5{,}0 \\times 10^6\\text{ A}\\cdot\\text{m}^{-2}$.",
+          "3. D'après la loi d'Ohm locale ($\\vec{j} = \\sigma\\,\\vec{E}$), le champ électrique interne vaut $E = \\frac{j}{\\sigma} = \\frac{5{,}0 \\times 10^6}{5{,}0 \\times 10^7} = 0{,}10\\text{ V}\\cdot\\text{m}^{-1}$ (ou directement via $E = \\frac{U}{\\ell} = \\frac{R\\,I}{\\ell} = \\frac{0{,}40 \\times 5{,}0}{20} = 0{,}10\\text{ V}\\cdot\\text{m}^{-1}$)."
+        ],
+        "keyFormula": "$$R = \\frac{\\ell}{\\sigma\\,S} \\quad \\text{et} \\quad \\vec{j} = \\sigma\\,\\vec{E} \\implies E = \\frac{I}{\\sigma\\,S} = \\frac{U}{\\ell}$$",
+        "commonTrap": "La réponse B confond la tension totale aux bornes du fil ($U = R\\,I = 2{,}0\\text{ V}$) avec le champ électrique ($E = U / \\ell = 0{,}10\\text{ V}\\cdot\\text{m}^{-1}$)."
+      }
+    },
+    {
+      "id": "qcm-phys-06-03",
+      "difficulty": "Calculatoire",
+      "questionText": "Un solénoïde supposé infini de longueur $\\ell = 50\\text{ cm}$, de section $S = 10\\text{ cm}^2 = 1{,}0 \\times 10^{-3}\\text{ m}^2$, comporte $N = 1\\,000$ spires jointives et est parcouru par un courant $I = 2{,}0\\text{ A}$. On donne $\\mu_0 = 4\\pi \\times 10^{-7}\\text{ H}\\cdot\\text{m}^{-1}$. Que valent la norme du champ magnétique intérieur $B$ et l'inductance propre $L$ de cette bobine ?",
+      "options": [
+        { "id": "A", "text": "$B \\approx 2{,}5\\text{ mT}$ et $L \\approx 1{,}3\\text{ mH}$" },
+        { "id": "B", "text": "$B \\approx 5{,}0\\text{ mT}$ et $L \\approx 2{,}5\\text{ mH}$" },
+        { "id": "C", "text": "$B \\approx 5{,}0\\text{ mT}$ et $L \\approx 1{,}3\\text{ mH}$" },
+        { "id": "D", "text": "$B \\approx 1{,}3\\text{ mT}$ et $L \\approx 5{,}0\\text{ mH}$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. Le nombre de spires par unité de longueur vaut $n = \\frac{N}{\\ell} = \\frac{1\\,000}{0{,}50\\text{ m}} = 2\\,000\\text{ spires}\\cdot\\text{m}^{-1}$.",
+          "2. Le champ magnétique à l'intérieur du solénoïde vaut $B = \\mu_0\\,n\\,I = 4\\pi \\times 10^{-7} \\times 2\\,000 \\times 2{,}0 = 1{,}6\\pi \\times 10^{-3}\\text{ T} \\approx 5{,}03 \\times 10^{-3}\\text{ T} \\approx 5{,}0\\text{ mT}$.",
+          "3. Le flux propre à travers les $N$ spires vaut $\\Phi_p = N\\,B\\,S = L\\,I$, d'où l'inductance propre $L = \\frac{\\mu_0\\,N^2\\,S}{\\ell} = \\frac{4\\pi \\times 10^{-7} \\times 10^6 \\times 10^{-3}}{0{,}50} = 8\\pi \\times 10^{-4}\\text{ H} \\approx 2{,}51 \\times 10^{-3}\\text{ H} \\approx 2{,}5\\text{ mH}$."
+        ],
+        "keyFormula": "$$B = \\mu_0\\,\\frac{N}{\\ell}\\,I \\quad \\text{et} \\quad L = \\frac{\\mu_0\\,N^2\\,S}{\\ell}$$",
+        "commonTrap": "La réponse A oublie de diviser $N$ par la longueur $\\ell = 0{,}50\\text{ m}$ (en prenant $n = 1\\,000\\text{ m}^{-1}$ au lieu de $2\\,000\\text{ m}^{-1}$)."
+      }
+    },
+    {
+      "id": "qcm-phys-06-04",
+      "difficulty": "Application directe",
+      "questionText": "Une spire conductrice plane, circulaire, de surface $S = 50\\text{ cm}^2 = 5{,}0 \\times 10^{-3}\\text{ m}^2$ et de résistance totale $R = 2{,}0\\,\\Omega$, est placée perpendiculairement aux lignes d'un champ magnétique uniforme $\\vec{B}(t) = B(t)\\,\\vec{n}$ dont la norme croît linéairement de $0\\text{ T}$ à $0{,}80\\text{ T}$ en une durée $\\Delta t = 0{,}010\\text{ s}$. Quelle est l'intensité $|i|$ du courant induit dans la spire pendant cette variation ?",
+      "options": [
+        { "id": "A", "text": "$|i| = 0{,}40\\text{ A}$" },
+        { "id": "B", "text": "$|i| = 0{,}20\\text{ A}$" },
+        { "id": "C", "text": "$|i| = 0{,}80\\text{ A}$" },
+        { "id": "D", "text": "$|i| = 2{,}0\\text{ mA}$" }
+      ],
+      "correctOptionId": "B",
+      "explanation": {
+        "steps": [
+          "1. Le flux magnétique à travers la spire vaut $\\Phi(t) = B(t)\\,S$.",
+          "2. D'après la loi de Faraday, la valeur absolue de la f.é.m. induite vaut $|e| = \\left|\\frac{\\mathrm{d}\\Phi}{\\mathrm{d}t}\\right| = S\\,\\frac{\\Delta B}{\\Delta t} = 5{,}0 \\times 10^{-3} \\times \\frac{0{,}80}{0{,}010} = 5{,}0 \\times 10^{-3} \\times 80 = 0{,}40\\text{ V}$.",
+          "3. L'intensité du courant induit dans la spire de résistance $R = 2{,}0\\,\\Omega$ vaut $|i| = \\frac{|e|}{R} = \\frac{0{,}40\\text{ V}}{2{,}0\\,\\Omega} = 0{,}20\\text{ A}$."
+        ],
+        "keyFormula": "$$e = -\\frac{\\mathrm{d}\\Phi}{\\mathrm{d}t} = -S\\,\\frac{\\mathrm{d}B}{\\mathrm{d}t} \\quad \\text{et} \\quad i = \\frac{e}{R}$$",
+        "commonTrap": "La réponse A ($0{,}40$) donne la valeur de la force électromotrice induite $|e|$ en Volts en oubliant de diviser par la résistance $R = 2{,}0\\,\\Omega$."
+      }
+    },
+    {
+      "id": "qcm-phys-06-05",
+      "difficulty": "Type Concours",
+      "questionText": "Dans un dispositif de freinage électromagnétique modélisé par des rails de Laplace horizontaux sans générateur ($E_0 = 0$), une barre conductrice de masse $m$ et de longueur $\\ell$ glisse sans frottement mécanique dans un champ magnétique vertical uniforme $B$. La résistance totale du circuit fermé est $R$. En combinant l'équation électrique et l'équation mécanique, quelle est l'équation différentielle vérifiée par la vitesse $v(t)$ de la barre et que vaut le temps caractéristique de freinage $\\tau$ ?",
+      "options": [
+        { "id": "A", "text": "$\\frac{\\mathrm{d}v}{\\mathrm{d}t} + \\frac{B^2\\,\\ell^2}{m\\,R}\\,v = 0$ avec $\\tau = \\frac{m\\,R}{B^2\\,\\ell^2}$" },
+        { "id": "B", "text": "$\\frac{\\mathrm{d}v}{\\mathrm{d}t} - \\frac{B^2\\,\\ell^2}{m\\,R}\\,v = 0$ avec $\\tau = \\frac{m\\,R}{B^2\\,\\ell^2}$" },
+        { "id": "C", "text": "$\\frac{\\mathrm{d}v}{\\mathrm{d}t} + \\frac{B\\,\\ell}{m\\,R}\\,v = 0$ avec $\\tau = \\frac{m\\,R}{B\\,\\ell}$" },
+        { "id": "D", "text": "$\\frac{\\mathrm{d}v}{\\mathrm{d}t} + \\frac{m\\,R}{B^2\\,\\ell^2}\\,v = 0$ avec $\\tau = \\frac{B^2\\,\\ell^2}{m\\,R}$" }
+      ],
+      "correctOptionId": "A",
+      "explanation": {
+        "steps": [
+          "1. Équation électrique (sans générateur) : la f.é.m. induite $e = -B\\,\\ell\\,v$ fait circuler un courant induit $i = \\frac{e}{R} = -\\frac{B\\,\\ell\\,v}{R}$.",
+          "2. Équation mécanique : la force de Laplace projetée sur l'axe du mouvement vaut $F_{Lx} = i\\,B\\,\\ell = -\\frac{B^2\\,\\ell^2}{R}\\,v$ (on retrouve la loi de Lenz : la force induite est une force de freinage visqueux magnétique opposée à la vitesse).",
+          "3. Le PFD donne $m\\frac{\\mathrm{d}v}{\\mathrm{d}t} = -\\frac{B^2\\,\\ell^2}{R}\\,v \\iff \\frac{\\mathrm{d}v}{\\mathrm{d}t} + \\frac{1}{\\tau}\\,v = 0$ avec $\\tau = \\frac{m\\,R}{B^2\\,\\ell^2}$."
+        ],
+        "keyFormula": "$$F_{Lx} = -\\frac{B^2\\,\\ell^2}{R}\\,v \\implies \\frac{\\mathrm{d}v}{\\mathrm{d}t} + \\frac{B^2\\,\\ell^2}{m\\,R}\\,v = 0 \\quad \\left(\\tau = \\frac{m\\,R}{B^2\\,\\ell^2}\\right)$$",
+        "commonTrap": "La réponse B comporte une erreur de signe qui violerait la loi de modération de Lenz (la barre accélérerait spontanément jusqu'à l'infini). La réponse C oublie que le facteur $B\\ell$ intervient deux fois (une fois dans $e = -B\\ell v$ et une fois dans $F_L = i B\\ell$)."
+      }
+    }
+  ]
+}

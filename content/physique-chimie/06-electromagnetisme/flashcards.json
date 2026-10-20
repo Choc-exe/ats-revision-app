@@ -1,0 +1,62 @@
+{
+  "chapterId": "06-electromagnetisme",
+  "subject": "physique-chimie",
+  "title": "Électromagnétisme : Champs statiques et Induction",
+  "cards": [
+    {
+      "id": "fc-phys-06-01",
+      "category": "Méthode",
+      "difficulty": 2,
+      "front": "Quelles sont les règles de symétrie d'un champ électrostatique $\\vec{E}$ et d'un champ magnétostatique $\\vec{B}$ par rapport à un plan de symétrie $\\Pi^+$ et un plan d'antisymétrie $\\Pi^-$ des sources ?",
+      "back": {
+        "mainAnswer": "Le champ électrique est un vrai vecteur (polaire) tandis que le champ magnétique est un pseudo-vecteur (axial), ce qui inverse leurs règles de symétrie.",
+        "criticalFormula": "• Champ $\\vec{E}$ : contenu dans $\\Pi^+$, orthogonal à $\\Pi^-$\n• Champ $\\vec{B}$ : orthogonal à $\\Pi^+$, contenu dans $\\Pi^-$",
+        "mnemonicOrTip": "Moyen mnémotechnique pour $\\vec{B}$ : une spire circulaire est contenue dans un plan de symétrie $\\Pi^+$ des courants, or le champ $\\vec{B}$ sur son axe est bien perpendiculaire au plan de la spire."
+      }
+    },
+    {
+      "id": "fc-phys-06-02",
+      "category": "Théorème",
+      "difficulty": 1,
+      "front": "Énoncer le théorème de Gauss en électrostatique et donner l'expression de la capacité $C$ d'un condensateur plan dans le vide.",
+      "back": {
+        "mainAnswer": "Le flux du champ électrostatique à travers une surface fermée orientée vers l'extérieur vaut la charge intérieure divisée par $\\varepsilon_0$. Entre les armatures d'un condensateur plan, $E = \\frac{\\sigma}{\\varepsilon_0}$.",
+        "criticalFormula": "$$\\oiint_{\\Sigma} \\vec{E}\\cdot\\mathrm{d}\\vec{S} = \\frac{Q_{\\text{int}}}{\\varepsilon_0} \\quad \\text{et} \\quad C = \\frac{\\varepsilon_0\\,S}{e}$$",
+        "mnemonicOrTip": "En présence d'un milieu diélectrique isolant de permittivité relative $\\varepsilon_r$ entre les armatures, il suffit de remplacer $\\varepsilon_0$ par $\\varepsilon_0\\,\\varepsilon_r$, ce qui multiplie la capacité par $\\varepsilon_r$."
+      }
+    },
+    {
+      "id": "fc-phys-06-03",
+      "category": "Théorème",
+      "difficulty": 1,
+      "front": "Énoncer le théorème d'Ampère et donner les expressions du champ magnétostatique créé par un fil rectiligne infini et par un solénoïde infini.",
+      "back": {
+        "mainAnswer": "La circulation de $\\vec{B}$ sur un contour fermé orienté vaut $\\mu_0$ fois le courant algébrique enlacé.",
+        "criticalFormula": "$$\\oint_{\\mathcal{C}} \\vec{B}\\cdot\\mathrm{d}\\vec{\\ell} = \\mu_0\\,I_{\\text{enlacé}} \\implies B_{\\text{fil}}(r) = \\frac{\\mu_0\\,I}{2\\pi\\,r} \\quad ; \\quad B_{\\text{solénoïde}} = \\mu_0\\,n\\,I$$",
+        "mnemonicOrTip": "Dans $B = \\mu_0 n I$, attention à la définition de $n = \\frac{N}{\\ell}$ : c'est le nombre de spires par unité de longueur (en $\\text{m}^{-1}$) et non le nombre total $N$ de spires."
+      }
+    },
+    {
+      "id": "fc-phys-06-04",
+      "category": "Formule Critique",
+      "difficulty": 2,
+      "front": "Énoncer la loi de Faraday et la loi de modération de Lenz, et donner l'expression de l'inductance propre $L$ d'une bobine longue.",
+      "back": {
+        "mainAnswer": "La f.é.m. induite dans un circuit fermé est égale à l'opposé de la dérivée temporelle du flux magnétique qui le traverse. Le signe moins traduit la loi de Lenz : les effets induits s'opposent à la variation du flux.",
+        "criticalFormula": "$$e = -\\frac{\\mathrm{d}\\Phi}{\\mathrm{d}t} \\quad \\text{et} \\quad L = \\mu_0\\,n^2\\,\\mathcal{V} = \\frac{\\mu_0\\,N^2\\,S}{\\ell}$$",
+        "mnemonicOrTip": "Pour appliquer la loi de Faraday sans erreur de signe : 1. Choisir arbitrairement un sens positif sur le contour, 2. Orienter la normale $\\vec{n}$ par la règle de la main droite, 3. Calculer $\\Phi = \\iint \\vec{B}\\cdot\\vec{n}\\,\\mathrm{d}S$, 4. Dériver avec le signe moins."
+      }
+    },
+    {
+      "id": "fc-phys-06-05",
+      "category": "Formule Critique",
+      "difficulty": 2,
+      "front": "Dans le dispositif des rails de Laplace (barre de longueur $\\ell$ à la vitesse $v$ dans un champ orthogonal $B$), quelles sont les expressions de la f.é.m. induite, de la force de Laplace et du bilan de puissance électromécanique ?",
+      "back": {
+        "mainAnswer": "Le mouvement de la barre fait varier le flux coupé, créant une f.é.m. induite $e = -B\\ell v$, tandis que le courant $i$ crée une force de Laplace $F_L = i B \\ell$.",
+        "criticalFormula": "$$e = -B\\,\\ell\\,v \\quad ; \\quad \\vec{F}_L = i\\,B\\,\\ell\\,\\vec{u}_x \\quad ; \\quad \\mathcal{P}_{\\text{Laplace}} + e\\,i = 0$$",
+        "mnemonicOrTip": "La relation $\\mathcal{P}_{\\text{Laplace}} = -e\\,i$ montre que toute la puissance mécanique prélevée (en générateur/freinage) ou fournie (en moteur) par la force de Laplace est intégralement convertie par la f.é.m. induite."
+      }
+    }
+  ]
+}
