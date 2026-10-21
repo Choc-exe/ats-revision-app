@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from "react";
 import { Sliders, Activity, TrendingUp, RotateCcw } from "lucide-react";
 
-// Halo blanc de lisibilité pour les étiquettes internes aux SVG
+// Halo blanc de lisibilité pour les étiquettes internes aux canevas SVG
 const svgLabelStyle: React.CSSProperties = {
   paintOrder: "stroke",
   stroke: "#f8fafc",
@@ -12,10 +12,6 @@ const svgLabelStyle: React.CSSProperties = {
   strokeLinejoin: "round",
 };
 
-/**
- * Sous-composant de contrôle professionnel :
- * Combine un champ de saisie numérique exact, une jauge de curseur stylisée et des boutons de préréglages.
- */
 interface ParameterControlProps {
   label: string;
   symbol: string;
@@ -30,6 +26,10 @@ interface ParameterControlProps {
   presets?: Array<{ label: string; value: number }>;
 }
 
+/**
+ * Carte de paramètre normalisée utilisant les variables CSS de thème (--sim-*)
+ * Disposition empilée : Titre sur sa propre ligne + Champ de saisie large et unifié.
+ */
 function ParameterControl({
   label,
   symbol,
@@ -43,7 +43,6 @@ function ParameterControl({
   helperRight,
   presets,
 }: ParameterControlProps) {
-  // Calcul du pourcentage de remplissage de la jauge
   const pct = Math.min(100, Math.max(0, ((value - min) / (max - min)) * 100));
 
   const handleNumberInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -54,58 +53,99 @@ function ParameterControl({
   };
 
   return (
-    <div className="bg-slate-50/90 rounded-xl border border-slate-200/90 p-4 flex flex-col justify-between space-y-3 shadow-2xs">
-      {/* En-tête : Nom du paramètre + Champ de saisie directe */}
-      <div className="flex items-center justify-between gap-2">
-        <div>
-          <span className="text-xs font-bold text-slate-800 block">{label}</span>
-          <span className="text-[11px] font-mono text-slate-500">{symbol}</span>
+    <div
+      style={{
+        backgroundColor: "var(--sim-card)",
+        borderColor: "var(--sim-border)",
+      }}
+      className="rounded-xl border p-4 flex flex-col justify-between space-y-3.5 shadow-2xs"
+    >
+      {/* Ligne 1 : Titre et sous-titre mathématique dégagés */}
+      <div className="flex items-baseline justify-between gap-3">
+        <span
+          style={{ color: "var(--sim-text)" }}
+          className="text-sm font-bold tracking-tight"
+        >
+          {label}
+        </span>
+        <span
+          style={{ color: "var(--sim-text-muted)" }}
+          className="text-xs font-mono font-medium shrink-0"
+        >
+          {symbol}
+        </span>
+      </div>
+
+      {/* Ligne 2 : Champ de saisie numérique + Curseur sur-mesure */}
+      <div className="space-y-2.5">
+        <div
+          style={{
+            backgroundColor: "var(--sim-input)",
+            borderColor: "var(--sim-border-strong)",
+          }}
+          className="flex items-center justify-between border rounded-lg px-3 py-1.5 focus-within:ring-2 focus-within:ring-sky-500/30 transition-all"
+        >
+          <span
+            style={{ color: "var(--sim-text-muted)" }}
+            className="text-[11px] font-medium select-none"
+          >
+            Valeur exacte :
+          </span>
+          <div className="flex items-center gap-1.5">
+            <input
+              type="number"
+              value={Number(value.toFixed(4))}
+              min={min}
+              max={max * 10}
+              step={step}
+              onChange={handleNumberInput}
+              style={{ color: "var(--sim-accent)" }}
+              className="w-20 text-right font-mono text-sm font-extrabold bg-transparent focus:outline-none"
+            />
+            {unit && (
+              <span
+                style={{ color: "var(--sim-text-muted)" }}
+                className="text-xs font-mono font-semibold select-none"
+              >
+                {unit}
+              </span>
+            )}
+          </div>
         </div>
 
-        <div className="flex items-center bg-white border border-slate-300 rounded-lg px-2.5 py-1 focus-within:border-red-600 focus-within:ring-2 focus-within:ring-red-500/20 transition-all">
+        {/* Piste du curseur utilisant --sim-accent et --sim-track */}
+        <div className="space-y-1.5 pt-0.5">
           <input
-            type="number"
-            value={Number(value.toFixed(4))}
+            type="range"
             min={min}
-            max={max * 10}
+            max={max}
             step={step}
-            onChange={handleNumberInput}
-            className="w-16 text-right font-mono text-xs font-extrabold text-red-600 bg-transparent focus:outline-none"
+            value={Math.min(max, Math.max(min, value))}
+            onChange={(e) => onChange(parseFloat(e.target.value))}
+            style={{
+              background: `linear-gradient(to right, var(--sim-accent) 0%, var(--sim-accent) ${pct}%, var(--sim-track) ${pct}%, var(--sim-track) 100%)`,
+            }}
+            className="ats-range-slider w-full h-2 rounded-lg appearance-none cursor-pointer"
           />
-          {unit && (
-            <span className="ml-1.5 text-[11px] font-mono font-semibold text-slate-400 select-none">
-              {unit}
-            </span>
+
+          {(helperLeft || helperRight) && (
+            <div
+              style={{ color: "var(--sim-text-muted)" }}
+              className="flex justify-between text-xs font-mono"
+            >
+              <span>{helperLeft}</span>
+              <span>{helperRight}</span>
+            </div>
           )}
         </div>
       </div>
 
-      {/* Curseur sur-mesure avec piste remplie */}
-      <div className="space-y-1.5">
-        <input
-          type="range"
-          min={min}
-          max={max}
-          step={step}
-          value={Math.min(max, Math.max(min, value))}
-          onChange={(e) => onChange(parseFloat(e.target.value))}
-          style={{
-            background: `linear-gradient(to right, #dc2626 0%, #dc2626 ${pct}%, #cbd5e1 ${pct}%, #cbd5e1 100%)`,
-          }}
-          className="ats-range-slider w-full h-2 rounded-lg appearance-none cursor-pointer"
-        />
-
-        {(helperLeft || helperRight) && (
-          <div className="flex justify-between text-[11px] font-medium text-slate-500">
-            <span>{helperLeft}</span>
-            <span>{helperRight}</span>
-          </div>
-        )}
-      </div>
-
-      {/* Boutons de valeurs remarquables optionnels */}
+      {/* Ligne 3 : Boutons de préréglages rapides */}
       {presets && presets.length > 0 && (
-        <div className="flex flex-wrap gap-1.5 pt-1 border-t border-slate-200/70">
+        <div
+          style={{ borderColor: "var(--sim-border)" }}
+          className="flex flex-wrap gap-1.5 pt-2.5 border-t"
+        >
           {presets.map((p) => {
             const active = Math.abs(value - p.value) < 1e-3;
             return (
@@ -113,11 +153,20 @@ function ParameterControl({
                 key={p.label}
                 type="button"
                 onClick={() => onChange(p.value)}
-                className={`px-2 py-0.5 text-[10px] font-bold rounded-md border transition-colors cursor-pointer ${
+                style={
                   active
-                    ? "bg-red-600 text-white border-red-600"
-                    : "bg-white border-slate-200 text-slate-600 hover:border-red-400 hover:text-red-600"
-                }`}
+                    ? {
+                        backgroundColor: "var(--sim-accent-soft)",
+                        borderColor: "var(--sim-accent)",
+                        color: "var(--sim-accent)",
+                      }
+                    : {
+                        backgroundColor: "var(--sim-input)",
+                        borderColor: "var(--sim-border)",
+                        color: "var(--sim-text-secondary)",
+                      }
+                }
+                className="px-2.5 py-1 text-[11px] font-mono font-bold rounded-md border transition-colors cursor-pointer hover:opacity-90"
               >
                 {p.label}
               </button>
@@ -131,13 +180,14 @@ function ParameterControl({
 
 export default function BodeStepSimulator() {
   const [order, setOrder] = useState<1 | 2>(2);
-  const [K, setK] = useState<number>(1.0); // Gain statique
-  const [tau, setTau] = useState<number>(0.5); // Constante de temps (1er ordre) en s
-  const [omega0, setOmega0] = useState<number>(10); // Pulsation propre (2nd ordre) en rad/s
-  const [xi, setXi] = useState<number>(0.35); // Amortissement (2nd ordre)
-  const [E0, setE0] = useState<number>(1.0); // Amplitude de l'échelon d'entrée
+  const [K, setK] = useState<number>(1.0);
+  const [tau, setTau] = useState<number>(0.5);
+  const [omega0, setOmega0] = useState<number>(10);
+  const [xi, setXi] = useState<number>(0.35);
+  const [E0, setE0] = useState<number>(1.0);
 
   const Q = useMemo(() => 1 / (2 * xi), [xi]);
+  const xiPct = Math.min(100, Math.max(0, ((Math.min(2, xi) - 0.08) / (2 - 0.08)) * 100));
 
   const handleResetDefaults = () => {
     setK(1.0);
@@ -154,7 +204,6 @@ export default function BodeStepSimulator() {
     const rawTMax =
       order === 1 ? Math.max(5.5 * tau, 0.5) : Math.max(18 / omega0, 0.2);
 
-    // Calcul d'un pas de graduation "propre" (1, 2, 5 × 10^n) pour l'axe des temps
     const roughStep = rawTMax / 6;
     const mag = Math.pow(10, Math.floor(Math.log10(roughStep)));
     const residual = roughStep / mag;
@@ -268,7 +317,6 @@ export default function BodeStepSimulator() {
       ? kDb - 20 * Math.log10(2 * xi * Math.sqrt(1 - xi * xi))
       : null;
 
-    // Décades relatives à wc (0.01 wc, 0.1 wc, wc, 10 wc, 100 wc)
     const decadeTicks = [-2, -1, 0, 1, 2].map((d) => ({
       logW: logCenter + d,
       w: wc * Math.pow(10, d),
@@ -334,7 +382,6 @@ export default function BodeStepSimulator() {
         (W - padL - padR);
     const toYG = (g: number) =>
       H - padB - ((g - minG) / (maxG - minG)) * (H - padT - padB);
-    // Plage de phase élargie [-195°, +20°] pour que la ligne 0° ne touche jamais le bord haut
     const toYP = (ph: number) =>
       H - padB - ((ph - -195) / (20 - -195)) * (H - padT - padB);
 
@@ -395,32 +442,65 @@ export default function BodeStepSimulator() {
       {/* =====================================================================
           1. PUPITRE D'INGÉNIERIE : SÉLECTION ET SAISIE EXACTE DES PARAMÈTRES
          ===================================================================== */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-6">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-4">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-red-50 flex items-center justify-center text-red-600">
+      <div
+        style={{
+          backgroundColor: "var(--sim-surface)",
+          borderColor: "var(--sim-border)",
+        }}
+        className="rounded-2xl border p-6 shadow-sm space-y-6"
+      >
+        <div
+          style={{ borderColor: "var(--sim-border)" }}
+          className="flex flex-wrap items-center justify-between gap-4 border-b pb-4"
+        >
+          <div className="flex items-center gap-3">
+            <div
+              style={{
+                backgroundColor: "var(--sim-accent-soft)",
+                color: "var(--sim-accent)",
+              }}
+              className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0"
+            >
               <Sliders className="w-4 h-4" />
             </div>
             <div>
-              <h2 className="text-base font-bold text-slate-900">
+              <h2
+                style={{ color: "var(--sim-text)" }}
+                className="text-base font-bold"
+              >
                 Pupitre de Commande — Paramètres Système H(p)
               </h2>
-              <p className="text-xs text-slate-500">
-                Ajustez les curseurs ou saisissez directement vos valeurs numériques exactes dans les encadrés.
+              <p
+                style={{ color: "var(--sim-text-muted)" }}
+                className="text-xs"
+              >
+                Ajustez les curseurs ou saisissez directement vos valeurs numériques exactes.
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
-            {/* Sélecteur 1er Ordre vs 2nd Ordre */}
-            <div className="inline-flex rounded-xl p-1 bg-slate-100 border border-slate-200">
+            {/* Sélecteur 1er Ordre vs 2nd Ordre (Accent bleu/cyan sobre) */}
+            <div
+              style={{
+                backgroundColor: "var(--sim-card)",
+                borderColor: "var(--sim-border)",
+              }}
+              className="inline-flex rounded-xl p-1 border"
+            >
               <button
                 type="button"
                 onClick={() => setOrder(1)}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
+                style={
                   order === 1
-                    ? "bg-red-600 text-white shadow-2xs"
-                    : "text-slate-600 hover:text-slate-900"
+                    ? {
+                        backgroundColor: "var(--sim-accent)",
+                        color: "#0f172a",
+                      }
+                    : { color: "var(--sim-text-secondary)" }
+                }
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-extrabold transition-colors cursor-pointer ${
+                  order === 1 ? "text-white dark:text-slate-950 shadow-2xs" : ""
                 }`}
               >
                 1er Ordre (τ)
@@ -428,10 +508,16 @@ export default function BodeStepSimulator() {
               <button
                 type="button"
                 onClick={() => setOrder(2)}
-                className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
+                style={
                   order === 2
-                    ? "bg-red-600 text-white shadow-2xs"
-                    : "text-slate-600 hover:text-slate-900"
+                    ? {
+                        backgroundColor: "var(--sim-accent)",
+                        color: "#0f172a",
+                      }
+                    : { color: "var(--sim-text-secondary)" }
+                }
+                className={`px-3.5 py-1.5 rounded-lg text-xs font-extrabold transition-colors cursor-pointer ${
+                  order === 2 ? "text-white dark:text-slate-950 shadow-2xs" : ""
                 }`}
               >
                 2nd Ordre (ξ, ω₀, Q)
@@ -441,7 +527,12 @@ export default function BodeStepSimulator() {
             <button
               type="button"
               onClick={handleResetDefaults}
-              className="p-2 rounded-xl border border-slate-200 text-slate-500 hover:text-slate-900 hover:bg-slate-50 transition-colors cursor-pointer"
+              style={{
+                backgroundColor: "var(--sim-card)",
+                borderColor: "var(--sim-border)",
+                color: "var(--sim-text-secondary)",
+              }}
+              className="p-2 rounded-xl border hover:opacity-80 transition-opacity cursor-pointer"
               title="Réinitialiser les valeurs par défaut"
             >
               <RotateCcw className="w-4 h-4" />
@@ -449,10 +540,10 @@ export default function BodeStepSimulator() {
           </div>
         </div>
 
-        {/* Grille des contrôleurs avec saisie manuelle */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Grille 2 colonnes aérée (zéro débordement, zéro troncature) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <ParameterControl
-            label="Gain statique"
+            label="Gain statique K"
             symbol={`G₀ = ${(20 * Math.log10(Math.max(K, 1e-4))).toFixed(1)} dB`}
             value={K}
             min={0.1}
@@ -460,7 +551,7 @@ export default function BodeStepSimulator() {
             step={0.1}
             onChange={setK}
             helperLeft="0.1"
-            helperRight="10"
+            helperRight="10.0"
             presets={[
               { label: "K = 1 (0 dB)", value: 1 },
               { label: "K = 2 (+6 dB)", value: 2 },
@@ -469,17 +560,17 @@ export default function BodeStepSimulator() {
           />
 
           <ParameterControl
-            label="Échelon d'entrée"
-            symbol="Consigne E₀"
+            label="Échelon d'entrée E₀"
+            symbol={`Valeur finale s(∞) = ${(K * E0).toFixed(2)}`}
             value={E0}
             min={0.5}
             max={10.0}
             step={0.5}
             onChange={setE0}
             helperLeft="0.5"
-            helperRight={`s(∞) = ${(K * E0).toFixed(2)}`}
+            helperRight="10.0"
             presets={[
-              { label: "Unitaire (1)", value: 1 },
+              { label: "Unitaire (E₀ = 1)", value: 1 },
               { label: "E₀ = 5", value: 5 },
               { label: "E₀ = 10", value: 10 },
             ]}
@@ -489,7 +580,7 @@ export default function BodeStepSimulator() {
             <div className="md:col-span-2">
               <ParameterControl
                 label="Constante de temps τ"
-                symbol={`Pulsation de coupure ω_c = 1/τ = ${(1 / tau).toFixed(2)} rad/s`}
+                symbol={`ω_c = 1/τ = ${(1 / tau).toFixed(2)} rad/s`}
                 unit="s"
                 value={tau}
                 min={0.05}
@@ -508,23 +599,45 @@ export default function BodeStepSimulator() {
             </div>
           ) : (
             <>
-              {/* Contrôle couplé Amortissement xi / Facteur de qualité Q */}
-              <div className="bg-slate-50/90 rounded-xl border border-slate-200/90 p-4 flex flex-col justify-between space-y-3 shadow-2xs">
-                <div className="flex items-center justify-between gap-2">
-                  <div>
-                    <span className="text-xs font-bold text-slate-800 block">
-                      Amortissement ξ & Qualité Q
-                    </span>
-                    <span className="text-[11px] font-mono text-slate-500">
-                      Q = 1 / (2ξ)
-                    </span>
-                  </div>
+              {/* Carte Amortissement ξ & Facteur de qualité Q : Titre en haut, 2 champs unifiés en dessous */}
+              <div
+                style={{
+                  backgroundColor: "var(--sim-card)",
+                  borderColor: "var(--sim-border)",
+                }}
+                className="rounded-xl border p-4 flex flex-col justify-between space-y-3.5 shadow-2xs"
+              >
+                {/* Ligne 1 : Titre sur sa propre ligne */}
+                <div className="flex items-baseline justify-between gap-3">
+                  <span
+                    style={{ color: "var(--sim-text)" }}
+                    className="text-sm font-bold tracking-tight"
+                  >
+                    Amortissement ξ & Qualité Q
+                  </span>
+                  <span
+                    style={{ color: "var(--sim-text-muted)" }}
+                    className="text-xs font-mono font-medium shrink-0"
+                  >
+                    Q = 1 / (2ξ)
+                  </span>
+                </div>
 
-                  {/* Double champ de saisie directe : xi ET Q */}
-                  <div className="flex items-center gap-1.5">
-                    <div className="flex items-center bg-white border border-slate-300 rounded-lg px-2 py-1 focus-within:border-red-600">
-                      <span className="text-[10px] font-mono font-bold text-slate-400 mr-1">
-                        ξ:
+                {/* Ligne 2 : Les deux champs ξ et Q côte à côte avec le MÊME style unifié */}
+                <div className="space-y-2.5">
+                  <div className="grid grid-cols-2 gap-2.5">
+                    <div
+                      style={{
+                        backgroundColor: "var(--sim-input)",
+                        borderColor: "var(--sim-border-strong)",
+                      }}
+                      className="flex items-center justify-between border rounded-lg px-3 py-1.5 focus-within:ring-2 focus-within:ring-sky-500/30"
+                    >
+                      <span
+                        style={{ color: "var(--sim-text-muted)" }}
+                        className="text-xs font-mono font-bold select-none"
+                      >
+                        ξ (SII)
                       </span>
                       <input
                         type="number"
@@ -536,12 +649,23 @@ export default function BodeStepSimulator() {
                           const v = parseFloat(e.target.value);
                           if (!Number.isNaN(v) && v >= 0.05) setXi(v);
                         }}
-                        className="w-12 text-right font-mono text-xs font-extrabold text-red-600 bg-transparent focus:outline-none"
+                        style={{ color: "var(--sim-accent)" }}
+                        className="w-16 text-right font-mono text-sm font-extrabold bg-transparent focus:outline-none"
                       />
                     </div>
-                    <div className="flex items-center bg-white border border-slate-300 rounded-lg px-2 py-1 focus-within:border-red-600">
-                      <span className="text-[10px] font-mono font-bold text-slate-400 mr-1">
-                        Q:
+
+                    <div
+                      style={{
+                        backgroundColor: "var(--sim-input)",
+                        borderColor: "var(--sim-border-strong)",
+                      }}
+                      className="flex items-center justify-between border rounded-lg px-3 py-1.5 focus-within:ring-2 focus-within:ring-sky-500/30"
+                    >
+                      <span
+                        style={{ color: "var(--sim-text-muted)" }}
+                        className="text-xs font-mono font-bold select-none"
+                      >
+                        Q (Phys.)
                       </span>
                       <input
                         type="number"
@@ -555,57 +679,78 @@ export default function BodeStepSimulator() {
                             setXi(1 / (2 * qVal));
                           }
                         }}
-                        className="w-11 text-right font-mono text-xs font-extrabold text-slate-800 bg-transparent focus:outline-none"
+                        style={{ color: "var(--sim-accent)" }}
+                        className="w-16 text-right font-mono text-sm font-extrabold bg-transparent focus:outline-none"
                       />
+                    </div>
+                  </div>
+
+                  {/* Curseur ξ */}
+                  <div className="space-y-1.5 pt-0.5">
+                    <input
+                      type="range"
+                      min={0.08}
+                      max={2.0}
+                      step={0.01}
+                      value={Math.min(2.0, Math.max(0.08, xi))}
+                      onChange={(e) => setXi(parseFloat(e.target.value))}
+                      style={{
+                        background: `linear-gradient(to right, var(--sim-accent) 0%, var(--sim-accent) ${xiPct}%, var(--sim-track) ${xiPct}%, var(--sim-track) 100%)`,
+                      }}
+                      className="ats-range-slider w-full h-2 rounded-lg appearance-none cursor-pointer"
+                    />
+                    <div
+                      style={{ color: "var(--sim-text-muted)" }}
+                      className="flex justify-between text-xs font-mono"
+                    >
+                      <span>ξ = 0.08 (Q = 6.25)</span>
+                      <span>ξ = 2.0 (Q = 0.25)</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="space-y-1.5">
-                  <input
-                    type="range"
-                    min={0.08}
-                    max={2.0}
-                    step={0.01}
-                    value={Math.min(2.0, Math.max(0.08, xi))}
-                    onChange={(e) => setXi(parseFloat(e.target.value))}
-                    style={{
-                      background: `linear-gradient(to right, #dc2626 0%, #dc2626 ${
-                        ((Math.min(2, xi) - 0.08) / (2 - 0.08)) * 100
-                      }%, #cbd5e1 ${
-                        ((Math.min(2, xi) - 0.08) / (2 - 0.08)) * 100
-                      }%, #cbd5e1 100%)`,
-                    }}
-                    className="ats-range-slider w-full h-2 rounded-lg appearance-none cursor-pointer"
-                  />
-                </div>
-
-                <div className="flex flex-wrap gap-1 pt-1 border-t border-slate-200/70">
+                {/* Ligne 3 : Préréglages */}
+                <div
+                  style={{ borderColor: "var(--sim-border)" }}
+                  className="flex flex-wrap gap-1.5 pt-2.5 border-t"
+                >
                   {[
-                    { label: "ξ=0.25 (Q=2)", val: 0.25 },
-                    { label: "ξ=0.707", val: 0.707 },
-                    { label: "ξ=1 (Crit.)", val: 1.0 },
-                    { label: "ξ=1.5", val: 1.5 },
-                  ].map((p) => (
-                    <button
-                      key={p.label}
-                      type="button"
-                      onClick={() => setXi(p.val)}
-                      className={`px-2 py-0.5 text-[10px] font-bold rounded-md border transition-colors cursor-pointer ${
-                        Math.abs(xi - p.val) < 1e-2
-                          ? "bg-red-600 text-white border-red-600"
-                          : "bg-white border-slate-200 text-slate-600 hover:border-red-400"
-                      }`}
-                    >
-                      {p.label}
-                    </button>
-                  ))}
+                    { label: "ξ = 0.25 (Q = 2)", val: 0.25 },
+                    { label: "ξ = 0.707 (Opt.)", val: 0.707 },
+                    { label: "ξ = 1.0 (Critique)", val: 1.0 },
+                    { label: "ξ = 1.5 (Apér.)", val: 1.5 },
+                  ].map((p) => {
+                    const active = Math.abs(xi - p.val) < 1e-2;
+                    return (
+                      <button
+                        key={p.label}
+                        type="button"
+                        onClick={() => setXi(p.val)}
+                        style={
+                          active
+                            ? {
+                                backgroundColor: "var(--sim-accent-soft)",
+                                borderColor: "var(--sim-accent)",
+                                color: "var(--sim-accent)",
+                              }
+                            : {
+                                backgroundColor: "var(--sim-input)",
+                                borderColor: "var(--sim-border)",
+                                color: "var(--sim-text-secondary)",
+                              }
+                        }
+                        className="px-2.5 py-1 text-[11px] font-mono font-bold rounded-md border transition-colors cursor-pointer hover:opacity-90"
+                      >
+                        {p.label}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
 
               <ParameterControl
                 label="Pulsation propre ω₀"
-                symbol={`Fréquence f₀ = ${(omega0 / (2 * Math.PI)).toFixed(2)} Hz`}
+                symbol={`f₀ = ${(omega0 / (2 * Math.PI)).toFixed(2)} Hz`}
                 unit="rad/s"
                 value={omega0}
                 min={1}
@@ -625,50 +770,112 @@ export default function BodeStepSimulator() {
           )}
         </div>
 
-        {/* Bandeau de synthèse des performances calculées */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-2">
-          <div className="p-3.5 rounded-xl bg-red-50/70 border border-red-200">
-            <span className="text-[10px] font-bold uppercase text-red-600 block">
-              Régime Temporel
-            </span>
-            <span className="text-xs font-extrabold text-slate-900">
+        {/* =================================================================
+            CARTES DU BAS (RÉSULTATS) : Surfaces unifiées, contraste WCAG AA
+            et protection du symbole grec minuscule ξ (pas de uppercase sur ξ)
+           ================================================================= */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2">
+          <div
+            style={{
+              backgroundColor: "var(--sim-card)",
+              borderColor: "var(--sim-border)",
+            }}
+            className="p-3.5 rounded-xl border space-y-1"
+          >
+            <div className="flex items-center gap-2">
+              <span
+                style={{ backgroundColor: "var(--sim-accent)" }}
+                className="w-2 h-2 rounded-full shrink-0"
+              />
+              <span
+                style={{ color: "var(--sim-text-muted)" }}
+                className="text-[11px] font-bold uppercase tracking-wider"
+              >
+                Régime Temporel
+              </span>
+            </div>
+            <span
+              style={{ color: "var(--sim-text)" }}
+              className="text-xs font-extrabold block"
+            >
               {order === 1
-                ? "Exponentiel sans dépassement"
+                ? "Exponentiel (sans D₁)"
                 : xi < 1
                 ? "Pseudopériodique (oscillant)"
                 : Math.abs(xi - 1) < 1e-3
-                ? "Critique (le plus rapide sans D₁)"
-                : "Apériodique (amorti sans D₁)"}
+                ? "Critique (le plus rapide)"
+                : "Apériodique (amorti)"}
             </span>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
-            <span className="text-[10px] font-bold uppercase text-slate-400 block">
-              1er Dépassement D₁ (%)
+          <div
+            style={{
+              backgroundColor: "var(--sim-card)",
+              borderColor: "var(--sim-border)",
+            }}
+            className="p-3.5 rounded-xl border space-y-1"
+          >
+            <span
+              style={{ color: "var(--sim-text-muted)" }}
+              className="text-[11px] font-bold block"
+            >
+              1ER DÉPASSEMENT D₁ (%)
             </span>
-            <span className="text-xs font-extrabold text-slate-900 font-mono">
+            <span
+              style={{ color: "var(--sim-text)" }}
+              className="text-xs font-extrabold font-mono block"
+            >
               {order === 2 && xi < 1
                 ? `${stepData.overshootPct.toFixed(1)} % (à t₁ = ${stepData.tPeak?.toFixed(2)} s)`
                 : "0 % (Aucun dépassement)"}
             </span>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
-            <span className="text-[10px] font-bold uppercase text-slate-400 block">
-              Résonance en Gain (ξ &lt; 0.707)
+          <div
+            style={{
+              backgroundColor: "var(--sim-card)",
+              borderColor: "var(--sim-border)",
+            }}
+            className="p-3.5 rounded-xl border space-y-1"
+          >
+            {/* Seul le texte français est en majuscules : ξ reste en minuscule ! */}
+            <span
+              style={{ color: "var(--sim-text-muted)" }}
+              className="text-[11px] font-bold block"
+            >
+              <span className="uppercase tracking-wider">Résonance en Gain</span>{" "}
+              <span className="font-mono">(ξ &lt; 0.707)</span>
             </span>
-            <span className="text-xs font-extrabold text-slate-900 font-mono">
+            <span
+              style={{ color: "var(--sim-text)" }}
+              className="text-xs font-extrabold font-mono block"
+            >
               {order === 2 && bodeData.hasResonance
                 ? `ω_r = ${bodeData.wr?.toFixed(2)} rad/s (${bodeData.mrDb?.toFixed(1)} dB)`
                 : "Aucune résonance"}
             </span>
           </div>
 
-          <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200">
-            <span className="text-[10px] font-bold uppercase text-slate-400 block">
-              Gain et Phase en ω = {order === 1 ? "ω_c" : "ω₀"}
+          <div
+            style={{
+              backgroundColor: "var(--sim-card)",
+              borderColor: "var(--sim-border)",
+            }}
+            className="p-3.5 rounded-xl border space-y-1"
+          >
+            <span
+              style={{ color: "var(--sim-text-muted)" }}
+              className="text-[11px] font-bold block"
+            >
+              <span className="uppercase tracking-wider">Gain & Phase en</span>{" "}
+              <span className="font-mono">
+                ω = {order === 1 ? "ω_c" : "ω₀"}
+              </span>
             </span>
-            <span className="text-xs font-extrabold text-slate-900 font-mono">
+            <span
+              style={{ color: "var(--sim-text)" }}
+              className="text-xs font-extrabold font-mono block"
+            >
               {order === 1
                 ? `${(bodeData.kDb - 3.01).toFixed(1)} dB  |  φ = −45°`
                 : `${(bodeData.kDb - 20 * Math.log10(2 * xi)).toFixed(1)} dB  |  φ = −90°`}
@@ -680,17 +887,29 @@ export default function BodeStepSimulator() {
       {/* =====================================================================
           2. GRAPHIQUE TEMPOREL : RÉPONSE INDICIELLE s(t) AVEC GRADUATIONS
          ===================================================================== */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+      <div
+        style={{
+          backgroundColor: "var(--sim-surface)",
+          borderColor: "var(--sim-border)",
+        }}
+        className="rounded-2xl border p-6 shadow-sm space-y-4"
+      >
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-            <Activity className="w-4 h-4 text-red-600" />
+          <h3
+            style={{ color: "var(--sim-text)" }}
+            className="text-sm font-bold flex items-center gap-2"
+          >
+            <Activity className="w-4 h-4 text-red-500" />
             <span>Réponse Indicielle Temporelle s(t)</span>
           </h3>
           <div className="flex items-center gap-4 text-xs">
-            <span className="flex items-center gap-1.5 font-semibold text-slate-600">
-              <span className="w-3 h-0.5 bg-red-600 inline-block" /> Réponse s(t)
+            <span
+              style={{ color: "var(--sim-text-secondary)" }}
+              className="flex items-center gap-1.5 font-semibold"
+            >
+              <span className="w-3 h-0.5 bg-red-600 inline-block" /> Courbe s(t)
             </span>
-            <span className="flex items-center gap-1.5 font-semibold text-emerald-700">
+            <span className="flex items-center gap-1.5 font-semibold text-emerald-600 dark:text-emerald-400">
               <span className="w-3 h-2 bg-emerald-200 border border-emerald-500 inline-block rounded-xs" />{" "}
               Bande à ±5% de s(∞) = {stepData.sFinal.toFixed(2)}
             </span>
@@ -702,7 +921,6 @@ export default function BodeStepSimulator() {
             viewBox={`0 0 ${stepSvg.W} ${stepSvg.H}`}
             className="w-full h-auto overflow-visible"
           >
-            {/* Quadrillage vertical et graduations numériques de temps t */}
             {stepData.timeTicks.map((tVal) => {
               const xPos = stepSvg.toX(tVal);
               return (
@@ -735,7 +953,6 @@ export default function BodeStepSimulator() {
               );
             })}
 
-            {/* Bande verte des ±5% autour de la valeur finale */}
             <rect
               x={stepSvg.padL}
               y={stepSvg.toY(stepData.sFinal * 1.05)}
@@ -748,7 +965,6 @@ export default function BodeStepSimulator() {
               fillOpacity="0.75"
             />
 
-            {/* Asymptote horizontale s_inf */}
             <line
               x1={stepSvg.padL}
               y1={stepSvg.toY(stepData.sFinal)}
@@ -775,10 +991,8 @@ export default function BodeStepSimulator() {
               0
             </text>
 
-            {/* Repères physiques spécifiques au 1er ordre : τ et 3τ */}
             {order === 1 && tau <= stepData.tMax && (
               <>
-                {/* Tangente à l'origine coupant l'asymptote en t = tau */}
                 <line
                   x1={stepSvg.toX(0)}
                   y1={stepSvg.toY(0)}
@@ -842,7 +1056,6 @@ export default function BodeStepSimulator() {
               </>
             )}
 
-            {/* Axes principaux */}
             <line
               x1={stepSvg.padL}
               y1={stepSvg.toY(0)}
@@ -860,7 +1073,6 @@ export default function BodeStepSimulator() {
               strokeWidth="1.8"
             />
 
-            {/* Courbe s(t) */}
             <path
               d={stepSvg.pathD}
               fill="none"
@@ -868,7 +1080,6 @@ export default function BodeStepSimulator() {
               strokeWidth="2.5"
             />
 
-            {/* Marqueur du 1er dépassement si ordre 2 et xi < 1 */}
             {order === 2 && xi < 1 && stepData.tPeak && (
               <>
                 <line
@@ -909,7 +1120,6 @@ export default function BodeStepSimulator() {
               </>
             )}
 
-            {/* Titre de l'axe des abscisses sous les graduations */}
             <text
               x={(stepSvg.padL + stepSvg.W - stepSvg.padR) / 2}
               y={stepSvg.H - 6}
@@ -925,31 +1135,55 @@ export default function BodeStepSimulator() {
       {/* =====================================================================
           3. DIAGRAMMES DE BODE (GAIN & PHASE AVEC EN-TÊTES DÉGAGÉS)
          ===================================================================== */}
-      <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-5">
-        <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3">
-          <h3 className="text-sm font-bold text-slate-900 flex items-center gap-2">
-            <TrendingUp className="w-4 h-4 text-red-600" />
+      <div
+        style={{
+          backgroundColor: "var(--sim-surface)",
+          borderColor: "var(--sim-border)",
+        }}
+        className="rounded-2xl border p-6 shadow-sm space-y-5"
+      >
+        <div
+          style={{ borderColor: "var(--sim-border)" }}
+          className="flex flex-wrap items-center justify-between gap-2 border-b pb-3"
+        >
+          <h3
+            style={{ color: "var(--sim-text)" }}
+            className="text-sm font-bold flex items-center gap-2"
+          >
+            <TrendingUp className="w-4 h-4 text-red-500" />
             <span>Diagrammes de Bode — Analyse Fréquentielle H(jω)</span>
           </h3>
           <div className="flex items-center gap-4 text-xs">
-            <span className="flex items-center gap-1.5 font-semibold text-slate-700">
+            <span
+              style={{ color: "var(--sim-text-secondary)" }}
+              className="flex items-center gap-1.5 font-semibold"
+            >
               <span className="w-3 h-0.5 bg-red-600 inline-block" /> Courbe réelle
             </span>
-            <span className="flex items-center gap-1.5 font-semibold text-slate-500">
-              <span className="w-3 h-0.5 border-b-2 border-dashed border-slate-600 inline-block" />{" "}
+            <span
+              style={{ color: "var(--sim-text-muted)" }}
+              className="flex items-center gap-1.5 font-semibold"
+            >
+              <span className="w-3 h-0.5 border-b-2 border-dashed border-slate-500 inline-block" />{" "}
               Asymptotes ({order === 1 ? "−20 dB/déc" : "−40 dB/déc"})
             </span>
           </div>
         </div>
 
-        {/* SOUS-BLOC 3A : DIAGRAMME DE GAIN (En-tête propre au-dessus du SVG) */}
+        {/* SOUS-BLOC 3A : DIAGRAMME DE GAIN */}
         <div className="space-y-2">
           <div className="flex items-center justify-between px-1">
-            <span className="text-xs font-extrabold text-slate-800 uppercase tracking-wider">
-              1. Diagramme de Gain : G_dB(ω) = 20·log|H(jω)| (en dB)
+            <span
+              style={{ color: "var(--sim-text)" }}
+              className="text-xs font-extrabold tracking-wide"
+            >
+              1. DIAGRAMME DE GAIN : G_dB(ω) = 20·log|H(jω)| (en dB)
             </span>
-            <span className="text-xs font-mono text-slate-500">
-              Gain BF = {bodeData.kDb.toFixed(1)} dB
+            <span
+              style={{ color: "var(--sim-text-muted)" }}
+              className="text-xs font-mono"
+            >
+              Asymptote BF = {bodeData.kDb.toFixed(1)} dB
             </span>
           </div>
 
@@ -958,7 +1192,6 @@ export default function BodeStepSimulator() {
               viewBox={`0 0 ${bodeSvg.W} ${bodeSvg.H}`}
               className="w-full h-auto overflow-visible"
             >
-              {/* Grille horizontale de Gain */}
               {bodeSvg.gainTicks.map((gVal) => (
                 <g key={gVal}>
                   <line
@@ -980,7 +1213,6 @@ export default function BodeStepSimulator() {
                 </g>
               ))}
 
-              {/* Grille verticale des décades */}
               {bodeData.decadeTicks.map((dt, idx) => {
                 const xPos = bodeSvg.toX(dt.logW);
                 const isCenter = idx === 2;
@@ -1011,7 +1243,7 @@ export default function BodeStepSimulator() {
                       x={xPos}
                       y={bodeSvg.H - bodeSvg.padB + 30}
                       textAnchor="middle"
-                      className="text-[10px] fill-slate-400 font-bold"
+                      className="text-[10px] fill-slate-500 font-bold"
                     >
                       ({dt.multiplierLabel})
                     </text>
@@ -1019,7 +1251,6 @@ export default function BodeStepSimulator() {
                 );
               })}
 
-              {/* Axes Gain */}
               <line
                 x1={bodeSvg.padL}
                 y1={bodeSvg.H - bodeSvg.padB}
@@ -1037,7 +1268,6 @@ export default function BodeStepSimulator() {
                 strokeWidth="1.8"
               />
 
-              {/* Asymptotes et Courbe réelle de Gain */}
               <path
                 d={bodeSvg.gainAsympD}
                 fill="none"
@@ -1055,13 +1285,19 @@ export default function BodeStepSimulator() {
           </div>
         </div>
 
-        {/* SOUS-BLOC 3B : DIAGRAMME DE PHASE (En-tête propre au-dessus du SVG, zéro chevauchement !) */}
+        {/* SOUS-BLOC 3B : DIAGRAMME DE PHASE */}
         <div className="space-y-2 pt-2">
           <div className="flex items-center justify-between px-1">
-            <span className="text-xs font-extrabold text-slate-800 uppercase tracking-wider">
-              2. Diagramme de Phase : φ(ω) = arg(H(jω)) (en degrés)
+            <span
+              style={{ color: "var(--sim-text)" }}
+              className="text-xs font-extrabold tracking-wide"
+            >
+              2. DIAGRAMME DE PHASE : φ(ω) = arg(H(jω)) (en degrés)
             </span>
-            <span className="text-xs font-mono text-slate-500">
+            <span
+              style={{ color: "var(--sim-text-muted)" }}
+              className="text-xs font-mono"
+            >
               Déphasage en {order === 1 ? "ω_c : −45°" : "ω₀ : −90°"} (HF →{" "}
               {order === 1 ? "−90°" : "−180°"})
             </span>
@@ -1072,7 +1308,6 @@ export default function BodeStepSimulator() {
               viewBox={`0 0 ${bodeSvg.W} ${bodeSvg.H}`}
               className="w-full h-auto overflow-visible"
             >
-              {/* Grille horizontale des angles remarquables */}
               {[0, -45, -90, -135, -180].map((deg) => (
                 <g key={deg}>
                   <line
@@ -1099,7 +1334,6 @@ export default function BodeStepSimulator() {
                 </g>
               ))}
 
-              {/* Grille verticale des décades */}
               {bodeData.decadeTicks.map((dt, idx) => {
                 const xPos = bodeSvg.toX(dt.logW);
                 const isCenter = idx === 2;
@@ -1130,7 +1364,7 @@ export default function BodeStepSimulator() {
                       x={xPos}
                       y={bodeSvg.H - bodeSvg.padB + 30}
                       textAnchor="middle"
-                      className="text-[10px] fill-slate-400 font-bold"
+                      className="text-[10px] fill-slate-500 font-bold"
                     >
                       ({dt.multiplierLabel})
                     </text>
@@ -1138,7 +1372,6 @@ export default function BodeStepSimulator() {
                 );
               })}
 
-              {/* Axes Phase */}
               <line
                 x1={bodeSvg.padL}
                 y1={bodeSvg.H - bodeSvg.padB}
@@ -1156,7 +1389,6 @@ export default function BodeStepSimulator() {
                 strokeWidth="1.8"
               />
 
-              {/* Asymptotes et Courbe réelle de Phase */}
               <path
                 d={bodeSvg.phaseAsympD}
                 fill="none"
@@ -1171,7 +1403,6 @@ export default function BodeStepSimulator() {
                 strokeWidth="2.5"
               />
 
-              {/* Point remarquable de symétrie de phase en wc */}
               <circle
                 cx={bodeSvg.toX(Math.log10(bodeData.wc))}
                 cy={bodeSvg.toYP(order === 1 ? -45 : -90)}

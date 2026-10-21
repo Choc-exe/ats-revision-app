@@ -220,3 +220,71 @@ input[type="range"].ats-range-slider::-moz-range-thumb {
   cursor: pointer;
   transition: transform 0.12s ease, background-color 0.12s ease;
 }
+
+/* =========================================================
+   VARIABLES DE SURFACE & INSTRUMENTATION (CLAIR / SOMBRE)
+   ========================================================= */
+:root {
+  --sim-surface: #ffffff;
+  --sim-card: #f8fafc;
+  --sim-input: #ffffff;
+  --sim-border: #e2e8f0;
+  --sim-border-strong: #cbd5e1;
+  --sim-text: #0f172a;
+  --sim-text-secondary: #334155;
+  --sim-text-muted: #475569; /* Contraste > 7:1 sur #f8fafc */
+  --sim-accent: #2563eb; /* Bleu instrumentation (actif / contrôles) */
+  --sim-accent-soft: rgba(37, 99, 235, 0.1);
+  --sim-track: #cbd5e1; /* Piste de curseur bien distincte */
+}
+
+html.dark {
+  --sim-surface: #111827;
+  --sim-card: #1b2336; /* Bleu-noir un cran au-dessus du fond */
+  --sim-input: #0f172a; /* Fond de champ homogène et profond */
+  --sim-border: #2a3550;
+  --sim-border-strong: #3b496b;
+  --sim-text: #e8ecf4; /* Blanc cassé doux (contraste > 12:1) */
+  --sim-text-secondary: #cbd5e1;
+  --sim-text-muted: #9aa6bd; /* Gris-bleu clair garantissant WCAG AA (> 5.2:1 sur #1b2336) */
+  --sim-accent: #38bdf8; /* Cyan lumineux pour valeurs et états actifs */
+  --sim-accent-soft: rgba(56, 189, 248, 0.14);
+  --sim-track: #2a3550; /* Piste sombre nettement distincte de la carte */
+}
+
+/* Sécurité : inclure bg-slate-50/90 dans la surcharge globale sombre */
+html.dark .bg-slate-50\/90 {
+  background-color: #1b2336 !important;
+  color: #e8ecf4 !important;
+}
+
+/* =========================================================
+   CURSEURS D'INSTRUMENTATION (ATS RANGE SLIDER)
+   ========================================================= */
+input[type="range"].ats-range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: var(--sim-accent);
+  border: 2.5px solid #ffffff;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.4);
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+
+input[type="range"].ats-range-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.12);
+}
+
+input[type="range"].ats-range-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: var(--sim-accent);
+  border: 2.5px solid #ffffff;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.4);
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
