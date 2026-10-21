@@ -189,3 +189,34 @@ html.dark .schema-canvas {
     color: #0f172a !important;
   }
 }
+/* =========================================================
+   CURSEURS PROFESSIONNELS (ATS RANGE SLIDER)
+   ========================================================= */
+input[type="range"].ats-range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: #dc2626;
+  border: 2.5px solid #ffffff;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.35);
+  cursor: pointer;
+  transition: transform 0.12s ease, background-color 0.12s ease;
+}
+
+input[type="range"].ats-range-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.12);
+  background: #b91c1c;
+}
+
+input[type="range"].ats-range-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 9999px;
+  background: #dc2626;
+  border: 2.5px solid #ffffff;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.35);
+  cursor: pointer;
+  transition: transform 0.12s ease, background-color 0.12s ease;
+}
