@@ -77,10 +77,10 @@ const mdxComponents = {
     </div>
   ),
 
-  // CODE INLINE (ex: `len(tab)`) vs CODE DANS UN BLOC <pre>
+  // CODE INLINE (ex: `int`, `+`, `-`) vs CODE DANS UN BLOC <pre>
   code: (props: React.HTMLAttributes<HTMLElement>) => (
     <code
-      className="font-mono text-[13px] [[pre_&]]:bg-transparent [[pre_&]]:text-emerald-300 [[pre_&]]:p-0 [[pre_&]]:border-0 bg-slate-100 text-red-700 px-1.5 py-0.5 rounded border border-slate-200"
+      className="inline-code font-mono text-[13px] [[pre_&]]:bg-transparent [[pre_&]]:text-emerald-300 [[pre_&]]:p-0 [[pre_&]]:border-0 bg-slate-100 text-slate-800 px-1.5 py-0.5 rounded-md border border-slate-200 font-semibold"
       {...props}
     />
   ),
