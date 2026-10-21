@@ -899,7 +899,10 @@ export default function BodeStepSimulator() {
             style={{ color: "var(--sim-text)" }}
             className="text-sm font-bold flex items-center gap-2"
           >
-            <Activity className="w-4 h-4 text-red-500" />
+            <Activity
+  style={{ color: "var(--sim-accent)" }}
+  className="w-4 h-4"
+/>
             <span>Réponse Indicielle Temporelle s(t)</span>
           </h3>
           <div className="flex items-center gap-4 text-xs">
@@ -1150,7 +1153,10 @@ export default function BodeStepSimulator() {
             style={{ color: "var(--sim-text)" }}
             className="text-sm font-bold flex items-center gap-2"
           >
-            <TrendingUp className="w-4 h-4 text-red-500" />
+            <TrendingUp
+  style={{ color: "var(--sim-accent)" }}
+  className="w-4 h-4"
+/>
             <span>Diagrammes de Bode — Analyse Fréquentielle H(jω)</span>
           </h3>
           <div className="flex items-center gap-4 text-xs">

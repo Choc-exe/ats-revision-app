@@ -97,15 +97,27 @@ export default function Sidebar() {
           href="/simulateur-bode"
           className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
             pathname.startsWith("/simulateur-bode")
-              ? "bg-red-50 text-red-600 font-semibold"
-              : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+              ? "bg-blue-50 text-blue-600 dark:bg-sky-950/50 dark:text-sky-400 font-semibold border border-blue-200/70 dark:border-sky-800/60"
+              : "text-slate-600 hover:bg-slate-100 hover:text-slate-900 dark:text-slate-400 dark:hover:bg-slate-800/60 dark:hover:text-slate-200"
           }`}
         >
           <span className="flex items-center gap-2.5">
-            <Activity className="w-4 h-4 text-red-600" />
+            <Activity
+              className={`w-4 h-4 ${
+                pathname.startsWith("/simulateur-bode")
+                  ? "text-blue-600 dark:text-sky-400"
+                  : "text-slate-500 dark:text-slate-400"
+              }`}
+            />
             <span>Traceur Bode & Indicielle</span>
           </span>
-          <span className="px-1.5 py-0.5 text-[10px] font-bold rounded bg-slate-100 text-slate-600">
+          <span
+            className={`px-1.5 py-0.5 text-[10px] font-bold rounded ${
+              pathname.startsWith("/simulateur-bode")
+                ? "bg-blue-100 text-blue-700 dark:bg-sky-900/60 dark:text-sky-300"
+                : "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400"
+            }`}
+          >
             Labo
           </span>
         </Link>
