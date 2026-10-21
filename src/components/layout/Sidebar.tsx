@@ -17,6 +17,7 @@ import {
   GraduationCap,
   LayoutDashboard,
   Trophy,
+  Activity,
 } from "lucide-react";
 
 // Association d'une icône Lucide par matière
@@ -90,6 +91,22 @@ export default function Sidebar() {
           </span>
           <span className="px-1.5 py-0.5 text-[10px] font-bold rounded bg-red-100 text-red-700">
             Chrono
+          </span>
+        </Link>
+        <Link
+          href="/simulateur-bode"
+          className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
+            pathname.startsWith("/simulateur-bode")
+              ? "bg-red-50 text-red-600 font-semibold"
+              : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+          }`}
+        >
+          <span className="flex items-center gap-2.5">
+            <Activity className="w-4 h-4 text-red-600" />
+            <span>Traceur Bode & Indicielle</span>
+          </span>
+          <span className="px-1.5 py-0.5 text-[10px] font-bold rounded bg-slate-100 text-slate-600">
+            Labo
           </span>
         </Link>
       </div>

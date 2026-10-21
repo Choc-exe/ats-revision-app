@@ -127,3 +127,65 @@ html.dark .schema-canvas {
   background-color: #f8fafc !important;
   border-color: #475569 !important;
 }
+/* =========================================================
+   MODE IMPRESSION / EXPORT PDF A4 (@media print)
+   ========================================================= */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 12mm 14mm;
+  }
+
+  /* Masquer la Sidebar, les onglets de navigation, les boutons et la recherche */
+  aside,
+  nav,
+  header,
+  .no-print {
+    display: none !important;
+  }
+
+  /* Forcer un fond blanc pur et un texte noir contrasté même si le mode sombre était actif */
+  html,
+  body,
+  html.dark body,
+  main,
+  .print-article {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Conserver les couleurs des encadrés de formules critiques et de schémas sur le PDF */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Éviter qu'une formule encadrée, un tableau ou un schéma soit coupé en deux entre 2 pages */
+  figure,
+  table,
+  pre,
+  blockquote,
+  .rounded-r-xl,
+  .rounded-xl {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  h1,
+  h2,
+  h3 {
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+    color: #0f172a !important;
+  }
+
+  html.dark .katex {
+    color: #0f172a !important;
+  }
+}

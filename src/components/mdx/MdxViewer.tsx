@@ -6,6 +6,7 @@ import CriticalFormula from "./CriticalFormula";
 import WarningBox from "./WarningBox";
 import SchemaPlaceholder from "./SchemaPlaceholder";
 import PythonSandbox from "./PythonSandbox";
+import PrintPdfButton from "./PrintPdfButton";
 
 interface MdxViewerProps {
   source: string;
@@ -96,10 +97,26 @@ export default function MdxViewer({
 }: MdxViewerProps) {
   return (
     <article
-      className={`bg-white rounded-2xl border border-slate-200 shadow-sm p-8 md:p-10 ${
+      className={`print-article bg-white rounded-2xl border border-slate-200 shadow-sm p-8 md:p-10 ${
         variant === "synthetic" ? "border-t-4 border-t-red-600" : ""
       }`}
     >
+      {/* Barre d'action supérieure (masquée sur le PDF final grâce à .no-print) */}
+      <div className="no-print flex items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+        <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+          {variant === "synthetic"
+            ? "Fiche Synthèse Officielle — Format Révision Rapide"
+            : "Cours Complet & Démonstrations Exigibles"}
+        </span>
+        <PrintPdfButton
+          label={
+            variant === "synthetic"
+              ? "Exporter la Fiche Synthèse en PDF"
+              : "Exporter le Cours en PDF"
+          }
+        />
+      </div>
+
       <MDXRemote
         source={source}
         components={mdxComponents}
