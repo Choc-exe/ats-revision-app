@@ -1,5 +1,6 @@
 "use client";
 
+import SearchModal from "./SearchModal";
 import ThemeToggle from "./ThemeToggle";
 import React, { useState } from "react";
 import Link from "next/link";
@@ -15,6 +16,7 @@ import {
   ChevronRight,
   GraduationCap,
   LayoutDashboard,
+  Trophy,
 } from "lucide-react";
 
 // Association d'une icône Lucide par matière
@@ -58,11 +60,13 @@ export default function Sidebar() {
         </div>
       </div>
 
-      {/* Lien vers le Tableau de bord */}
-      <div className="p-3 border-b border-slate-100">
+      {/* Recherche instantanée + Navigation globale (Dashboard & Examen Blanc) */}
+      <div className="p-3 border-b border-slate-100 space-y-1.5">
+        <SearchModal />
+
         <Link
           href="/"
-          className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+          className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
             pathname === "/"
               ? "bg-red-50 text-red-600 font-semibold"
               : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
@@ -70,6 +74,23 @@ export default function Sidebar() {
         >
           <LayoutDashboard className="w-4 h-4" />
           Tableau de bord
+        </Link>
+
+        <Link
+          href="/examen"
+          className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
+            pathname.startsWith("/examen")
+              ? "bg-red-50 text-red-600 font-semibold"
+              : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
+          }`}
+        >
+          <span className="flex items-center gap-2.5">
+            <Trophy className="w-4 h-4 text-red-600" />
+            <span>Mode Examen Blanc / Colle</span>
+          </span>
+          <span className="px-1.5 py-0.5 text-[10px] font-bold rounded bg-red-100 text-red-700">
+            Chrono
+          </span>
         </Link>
       </div>
 

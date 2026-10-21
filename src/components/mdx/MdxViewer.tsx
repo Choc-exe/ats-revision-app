@@ -5,14 +5,28 @@ import rehypeKatex from "rehype-katex";
 import CriticalFormula from "./CriticalFormula";
 import WarningBox from "./WarningBox";
 import SchemaPlaceholder from "./SchemaPlaceholder";
+import PythonSandbox from "./PythonSandbox";
 
 interface MdxViewerProps {
   source: string;
   variant?: "detailed" | "synthetic";
 }
 
-// Personnalisation des balises HTML et injection des composants MDX
-// Personnalisation des balises HTML et injection des composants MDX
+// 1. FONCTION UTILITAIRE (placée EN DEHORS de mdxComponents)
+// Elle extrait le texte brut du script Python contenu dans <pre><code>...</code></pre>
+function extractTextFromChildren(node: React.ReactNode): string {
+  if (typeof node === "string") return node;
+  if (typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(extractTextFromChildren).join("");
+  if (React.isValidElement(node)) {
+    return extractTextFromChildren(
+      (node.props as { children?: React.ReactNode }).children
+    );
+  }
+  return "";
+}
+
+// 2. DICTIONNAIRE DES COMPOSANTS MDX
 const mdxComponents = {
   CriticalFormula,
   WarningBox,
@@ -42,10 +56,16 @@ const mdxComponents = {
     <p className="text-slate-700 leading-7 mb-4" {...props} />
   ),
   ul: (props: React.HTMLAttributes<HTMLUListElement>) => (
-    <ul className="list-disc list-outside pl-6 space-y-2 mb-5 text-slate-700 leading-7" {...props} />
+    <ul
+      className="list-disc list-outside pl-6 space-y-2 mb-5 text-slate-700 leading-7"
+      {...props}
+    />
   ),
   ol: (props: React.HTMLAttributes<HTMLOListElement>) => (
-    <ol className="list-decimal list-outside pl-6 space-y-2 mb-5 text-slate-700 leading-7" {...props} />
+    <ol
+      className="list-decimal list-outside pl-6 space-y-2 mb-5 text-slate-700 leading-7"
+      {...props}
+    />
   ),
   strong: (props: React.HTMLAttributes<HTMLElement>) => (
     <strong
@@ -55,29 +75,13 @@ const mdxComponents = {
   ),
   hr: () => <hr className="my-8 border-slate-200" />,
 
-  // BLOC DE SCRIPT COMPLET (ex: ```python ... ```) -> Fenêtre style IDE
-  pre: (props: React.HTMLAttributes<HTMLPreElement>) => (
-    <div className="my-6 rounded-xl overflow-hidden border border-slate-800 bg-[#0d1117] shadow-md">
-      {/* Barre supérieure type terminal / VS Code */}
-      <div className="flex items-center justify-between px-4 py-2 bg-[#161b22] border-b border-slate-800">
-        <div className="flex items-center gap-1.5">
-          <span className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-          <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80" />
-          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80" />
-        </div>
-        <span className="text-[11px] font-mono font-semibold text-slate-400 uppercase tracking-wider">
-          Script Python 3 — Norme ATS
-        </span>
-      </div>
-      {/* Contenu du script avec défilement horizontal et indentation préservée */}
-      <pre
-        className="p-4 overflow-x-auto font-mono text-xs md:text-sm leading-relaxed text-emerald-300 selection:bg-red-500/30"
-        {...props}
-      />
-    </div>
-  ),
+  // C'EST ICI QUE L'ANCIEN BLOC `pre:` EST REMPLACÉ PAR PYTHON SANDBOX :
+  pre: (props: React.HTMLAttributes<HTMLPreElement>) => {
+    const rawCode = extractTextFromChildren(props.children);
+    return <PythonSandbox initialCode={rawCode} />;
+  },
 
-  // CODE INLINE (ex: `int`, `+`, `-`) vs CODE DANS UN BLOC <pre>
+  // CODE INLINE (ex: `int`, `+`, `-`)
   code: (props: React.HTMLAttributes<HTMLElement>) => (
     <code
       className="inline-code font-mono text-[13px] [[pre_&]]:bg-transparent [[pre_&]]:text-emerald-300 [[pre_&]]:p-0 [[pre_&]]:border-0 bg-slate-100 text-slate-800 px-1.5 py-0.5 rounded-md border border-slate-200 font-semibold"
