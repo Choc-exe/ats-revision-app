@@ -50,7 +50,7 @@ const mdxComponents = {
   // 3. Termes définis (**gras**) en ardoise/bleu sobre : le rouge reste 100% réservé aux formules critiques
   strong: (props: React.HTMLAttributes<HTMLElement>) => (
     <strong
-      className="font-bold text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded border-b-2 border-blue-500/40 dark:border-sky-400/40"
+      className="font-bold text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded dark:border-sky-400/40"
       {...props}
     />
   ),
