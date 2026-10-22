@@ -102,13 +102,12 @@ export default function MdxViewer({
 }: MdxViewerProps) {
   return (
     <article
-      className={`print-article bg-white rounded-2xl border border-slate-200 shadow-sm p-8 md:p-10 ${
-        variant === "synthetic" ? "border-t-4 border-t-red-600" : ""
+      className={`print-article bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-8 md:p-10 ${
+        variant === "synthetic" ? "border-t-4 border-t-blue-600" : ""
       }`}
     >
-      {/* Barre d'action supérieure (masquée sur le PDF final grâce à .no-print) */}
-      <div className="no-print flex items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
-        <span className="text-xs font-bold uppercase tracking-wider text-slate-400">
+      <div className="no-print flex items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-200 dark:border-slate-800">
+        <span className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
           {variant === "synthetic"
             ? "Fiche Synthèse Officielle — Format Révision Rapide"
             : "Cours Complet & Démonstrations Exigibles"}
@@ -116,7 +115,7 @@ export default function MdxViewer({
         <PrintPdfButton
           label={
             variant === "synthetic"
-              ? "Exporter la Fiche Synthèse en PDF"
+              ? "Exporter la Fiche en PDF"
               : "Exporter le Cours en PDF"
           }
         />
