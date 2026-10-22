@@ -37,7 +37,7 @@ const mdxComponents = {
   h1: () => null,
 
   // 2. Titres de sections avec barre bleue d'instrumentation (et non plus rouge)
-  h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
+ h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h2
       className="text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 flex items-center gap-2.5"
       {...props}
@@ -45,6 +45,13 @@ const mdxComponents = {
       <span className="w-1.5 h-5 rounded-full bg-blue-600 dark:bg-sky-400 inline-block shrink-0" />
       <span>{props.children}</span>
     </h2>
+  ),
+
+  h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
+    <h3
+      className="text-base font-bold text-slate-800 dark:text-slate-200 mt-6 mb-2"
+      {...props}
+    />
   ),
 
   // 3. Termes définis (**gras**) en ardoise/bleu sobre : le rouge reste 100% réservé aux formules critiques
@@ -56,13 +63,6 @@ const mdxComponents = {
   ),
 
   // 3. Termes définis (**gras**) en ardoise/bleu sobre : le rouge reste 100% réservé aux formules critiques
-
-  h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h3
-      className="text-base font-bold text-slate-800 mt-6 mb-2"
-      {...props}
-    />
-  ),
   p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
     <p className="text-slate-700 leading-7 mb-4" {...props} />
   ),
