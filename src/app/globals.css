@@ -1,4 +1,25 @@
 ﻿@import "tailwindcss";
+
+/* 1. CRUCIAL : Force Tailwind à baser 'dark:' sur la classe html.dark (et non sur l'OS) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* 2. Supprime le contour noir au clic souris, mais garde un anneau bleu propre au clavier (Tab) */
+*:focus:not(:focus-visible) {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+*:focus-visible {
+  outline: 2px solid #2563eb !important;
+  outline-offset: 2px !important;
+}
+
+/* 3. Évite les coupures sèches sur les éléments inline qui passent à la ligne */
+strong,
+code.inline-code {
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
 /* =========================================================
    THÈME SOMBRE AUTOMATIQUE CORRIGÉ (Activé par html.dark)
    ========================================================= */
