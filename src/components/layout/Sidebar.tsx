@@ -157,33 +157,31 @@ export default function Sidebar() {
               {isOpen && (
                 <ul className="space-y-0.5 pl-3 border-l border-slate-200 ml-4 mt-1">
                   {subject.chapters.map((chapter) => {
-                    const chapterBasePath = `/${subject.id}/${chapter.id}`;
-                    const isChapterActive = pathname.startsWith(chapterBasePath);
-
-                    return (
-                      <li key={chapter.id}>
-                        <Link
-                          href={`${chapterBasePath}/cours`}
-                          className={`group flex items-start gap-2.5 px-3 py-2 rounded-md text-xs transition-all ${
-                            isChapterActive
-                              ? "bg-blue-50 text-blue-600 dark:bg-sky-950/50 dark:text-sky-400 font-semibold font-semibold border-l-2 border-red-600 -ml-[13px] pl-[23px]"
-                              : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
-                          }`}
-                        >
-                          <span
-                            className={`font-mono text-[11px] px-1.5 py-0.5 rounded ${
-                              isChapterActive
-                                ? "bg-red-100 text-red-700 font-bold"
-                                : "bg-slate-100 text-slate-500 group-hover:bg-slate-200"
-                            }`}
-                          >
-                            {chapter.number}
-                          </span>
-                          <span className="leading-snug">{chapter.title}</span>
-                        </Link>
-                      </li>
-                    );
-                  })}
+  const isChapterActive = pathname.startsWith(`/${subject.id}/${chapter.id}`);
+  return (
+    <Link
+      key={chapter.id}
+      href={`/${subject.id}/${chapter.id}/cours`}
+      className={`group flex items-center gap-2.5 px-2.5 py-2 rounded-lg text-xs transition-colors ${
+        isChapterActive
+          ? "bg-blue-50 text-blue-700 dark:bg-sky-950/60 dark:text-sky-300 font-bold"
+          : "text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/70 font-medium"
+      }`}
+    >
+      {/* Badge 01..07 : Bleu quand actif, Ardoise contrasté (WCAG AA) quand inactif */}
+      <span
+        className={`font-mono text-[11px] font-bold px-1.5 py-0.5 rounded shrink-0 ${
+          isChapterActive
+            ? "bg-blue-600 text-white dark:bg-sky-400 dark:text-slate-950"
+            : "bg-slate-200/80 text-slate-700 dark:bg-slate-800 dark:text-slate-300 group-hover:bg-slate-300/80"
+        }`}
+      >
+        {chapter.number}
+      </span>
+      <span className="truncate">{chapter.title}</span>
+    </Link>
+  );
+})}
                 </ul>
               )}
             </div>
