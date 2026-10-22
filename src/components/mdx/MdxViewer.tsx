@@ -32,21 +32,31 @@ const mdxComponents = {
   CriticalFormula,
   WarningBox,
   SchemaPlaceholder,
-  h1: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
-    <h1
-      className="text-2xl font-bold text-slate-900 tracking-tight mb-6 pb-3 border-b border-slate-200"
-      {...props}
-    />
-  ),
+  // 1. Masque le <h1> redondant du fichier MDX (déjà affiché dans l'en-tête de page)
+  // 1. Masque le <h1> redondant du fichier MDX (déjà affiché dans l'en-tête de page)
+  h1: () => null,
+
+  // 2. Titres de sections avec barre bleue d'instrumentation (et non plus rouge)
   h2: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h2
-      className="text-xl font-bold text-slate-900 mt-10 mb-4 flex items-center gap-2.5"
+      className="text-xl font-bold text-slate-900 dark:text-slate-100 mt-10 mb-4 flex items-center gap-2.5"
       {...props}
     >
-      <span className="w-1.5 h-5 rounded-full bg-red-600 inline-block shrink-0" />
+      <span className="w-1.5 h-5 rounded-full bg-blue-600 dark:bg-sky-400 inline-block shrink-0" />
       <span>{props.children}</span>
     </h2>
   ),
+
+  // 3. Termes définis (**gras**) en ardoise/bleu sobre : le rouge reste 100% réservé aux formules critiques
+  strong: (props: React.HTMLAttributes<HTMLElement>) => (
+    <strong
+      className="font-bold text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded border-b-2 border-blue-500/40 dark:border-sky-400/40"
+      {...props}
+    />
+  ),
+
+  // 3. Termes définis (**gras**) en ardoise/bleu sobre : le rouge reste 100% réservé aux formules critiques
+
   h3: (props: React.HTMLAttributes<HTMLHeadingElement>) => (
     <h3
       className="text-base font-bold text-slate-800 mt-6 mb-2"
@@ -68,12 +78,7 @@ const mdxComponents = {
       {...props}
     />
   ),
-  strong: (props: React.HTMLAttributes<HTMLElement>) => (
-    <strong
-      className="font-bold text-slate-900 bg-red-50/80 text-red-700 px-1 py-0.5 rounded"
-      {...props}
-    />
-  ),
+
   hr: () => <hr className="my-8 border-slate-200" />,
 
   // C'EST ICI QUE L'ANCIEN BLOC `pre:` EST REMPLACÉ PAR PYTHON SANDBOX :
