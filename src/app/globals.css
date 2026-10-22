@@ -130,49 +130,211 @@ html.dark .schema-canvas {
 /* =========================================================
    MODE IMPRESSION / EXPORT PDF A4 (@media print)
    ========================================================= */
+/* =========================================================
+   MODE IMPRESSION / EXPORT PDF A4 — RENDU POLYCOPIÉ PRO
+   ========================================================= */
 @media print {
   @page {
     size: A4 portrait;
-    margin: 12mm 14mm;
+    margin: 14mm 15mm 14mm 15mm;
   }
 
-  /* Masquer la Sidebar, les onglets de navigation, les boutons et la recherche */
-  aside,
-  nav,
-  header,
-  .no-print {
-    display: none !important;
-  }
-
-  /* Forcer un fond blanc pur et un texte noir contrasté même si le mode sombre était actif */
+  /* 1. Débloquer TOUS les conteneurs flex/scroll qui causaient l'effet "capture d'écran" */
   html,
   body,
   html.dark body,
   main,
+  div,
+  article,
   .print-article {
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+    position: static !important;
+  }
+
+  html,
+  body,
+  html.dark body {
     background-color: #ffffff !important;
-    color: #0f172a !important;
+    color: #000000 !important;
+    font-size: 10.5pt !important;
+    line-height: 1.5 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* 2. Masquer toute l'interface web (Sidebar, Header, Boutons, Console interactive) */
+  aside,
+  nav,
+  header,
+  .no-print,
+  button {
+    display: none !important;
+  }
+
+  /* 3. Supprimer l'aspect "carte web" (ombres, bordures extérieures, marges grises) */
+  main,
+  .print-article,
+  div[class*="max-w-"] {
     margin: 0 !important;
     padding: 0 !important;
     width: 100% !important;
     max-width: 100% !important;
     border: none !important;
     box-shadow: none !important;
+    background: #ffffff !important;
   }
 
-  /* Conserver les couleurs des encadrés de formules critiques et de schémas sur le PDF */
-  * {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
+  /* 4. Typographie nette (Noir pur pour le cours, Rouge bordeaux pour les titres/accents) */
+  h1 {
+    font-size: 18pt !important;
+    font-weight: 800 !important;
+    color: #0f172a !important;
+    border-bottom: 2px solid #dc2626 !important;
+    padding-bottom: 6pt !important;
+    margin-bottom: 12pt !important;
   }
 
-  /* Éviter qu'une formule encadrée, un tableau ou un schéma soit coupé en deux entre 2 pages */
+  h2 {
+    font-size: 13.5pt !important;
+    font-weight: 800 !important;
+    color: #0f172a !important;
+    margin-top: 14pt !important;
+    margin-bottom: 6pt !important;
+  }
+
+  h3 {
+    font-size: 11.5pt !important;
+    font-weight: 700 !important;
+    color: #1e293b !important;
+    margin-top: 10pt !important;
+    margin-bottom: 4pt !important;
+  }
+
+  p,
+  li,
+  td,
+  th {
+    color: #0f172a !important;
+    font-size: 10.5pt !important;
+  }
+
+  /* Mots en gras (strong) et formules mathématiques KaTeX */
+  strong {
+    font-weight: 800 !important;
+    color: #991b1b !important;
+    background-color: #fef2f2 !important;
+    padding: 0 3px !important;
+    border-radius: 3px !important;
+  }
+
+  .katex,
+  html.dark .katex {
+    color: #000000 !important;
+    font-size: 1.05em !important;
+  }
+
+  /* 5. CODE INLINE (`int`, `len(tab)`, `+`, `-`) : Gras, encadré net sur fond clair */
+  code.inline-code:not(pre code),
+  html.dark code.inline-code:not(pre code) {
+    background-color: #f1f5f9 !important;
+    color: #0f172a !important;
+    font-weight: 700 !important;
+    border: 1px solid #94a3b8 !important;
+    padding: 1px 4px !important;
+    border-radius: 4px !important;
+    font-size: 9.5pt !important;
+  }
+
+  /* 6. SCRIPTS PYTHON (<pre>) : Conversion du thème sombre IDE en bloc de code papier pro */
+  div:has(> pre),
+  pre,
+  pre code {
+    background-color: #f8fafc !important;
+    color: #0f172a !important;
+    font-weight: 700 !important; /* Code en gras très lisible à l'impression */
+    border-color: #cbd5e1 !important;
+    box-shadow: none !important;
+  }
+
+  pre {
+    border: 1.5px solid #94a3b8 !important;
+    border-left: 4px solid #0f172a !important;
+    border-radius: 6px !important;
+    padding: 10pt !important;
+    white-space: pre-wrap !important; /* Coupe les lignes longues au lieu de les tronquer */
+    word-break: break-word !important;
+    font-size: 9.5pt !important;
+    line-height: 1.45 !important;
+  }
+
+  /* Masquer la barre de titre noire de la sandbox Python à l'impression */
+  div.bg-\[\#161b22\],
+  div.bg-\[\#090d13\] {
+    display: none !important;
+  }
+
+  /* 7. Encadrés de Formules Critiques & Avertissements */
+  .border-l-4 {
+    background-color: #fff5f5 !important;
+    border: 1px solid #fca5a5 !important;
+    border-left: 4px solid #dc2626 !important;
+    border-radius: 6px !important;
+    padding: 8pt 12pt !important;
+    margin: 10pt 0 !important;
+    box-shadow: none !important;
+  }
+
+  /* 8. Tableaux de cours propres */
+  table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 10pt 0 !important;
+  }
+
+  th,
+  td {
+    border: 1px solid #cbd5e1 !important;
+    padding: 5pt 8pt !important;
+    background-color: #ffffff !important;
+  }
+
+  th {
+    background-color: #f1f5f9 !important;
+    font-weight: 800 !important;
+  }
+
+  /* 9. Schémas SVG compacts et centrés */
+  figure {
+    border: 1px solid #cbd5e1 !important;
+    background-color: #ffffff !important;
+    padding: 8pt !important;
+    margin: 10pt 0 !important;
+    box-shadow: none !important;
+  }
+
+  .schema-canvas {
+    background-color: #ffffff !important;
+    border: none !important;
+    padding: 4pt !important;
+  }
+
+  figure svg {
+    max-height: 170px !important;
+    width: auto !important;
+    margin: 0 auto !important;
+  }
+
+  /* 10. Interdire la coupure d'une formule, d'un script ou d'un schéma entre 2 pages */
   figure,
   table,
   pre,
   blockquote,
-  .rounded-r-xl,
-  .rounded-xl {
+  .border-l-4,
+  h1,
+  h2,
+  h3 {
     break-inside: avoid !important;
     page-break-inside: avoid !important;
   }
@@ -182,11 +344,6 @@ html.dark .schema-canvas {
   h3 {
     break-after: avoid !important;
     page-break-after: avoid !important;
-    color: #0f172a !important;
-  }
-
-  html.dark .katex {
-    color: #0f172a !important;
   }
 }
 /* =========================================================
