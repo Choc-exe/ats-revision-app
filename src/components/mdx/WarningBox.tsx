@@ -26,3 +26,4 @@ export default function WarningBox({
     </div>
   );
 }
+<div className="print-keep-together my-6 rounded-xl border border-red-200 bg-white p-5 shadow-xs"></div>

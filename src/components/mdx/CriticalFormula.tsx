@@ -22,3 +22,4 @@ export default function CriticalFormula({
     </div>
   );
 }
+<div className="print-keep-together my-6 rounded-r-xl border-l-4 border-red-600 bg-red-50/70 p-5 shadow-xs"></div>

@@ -128,88 +128,93 @@ html.dark .schema-canvas {
   border-color: #475569 !important;
 }
 /* =========================================================
-   MODE IMPRESSION / EXPORT PDF A4 (@media print)
-   ========================================================= */
-/* =========================================================
-   MODE IMPRESSION / EXPORT PDF A4 — RENDU POLYCOPIÉ PRO
+   MODE IMPRESSION / EXPORT PDF A4 — PLEINE LARGEUR & ZÉRO URL
    ========================================================= */
 @media print {
+  /* ASTUCE CHROME/EDGE : margin: 0 supprime automatiquement la date, 
+     le titre et l'URL Vercel en haut et en bas de la feuille ! */
   @page {
     size: A4 portrait;
-    margin: 14mm 15mm 14mm 15mm;
+    margin: 0mm !important;
   }
 
-  /* 1. Débloquer TOUS les conteneurs flex/scroll qui causaient l'effet "capture d'écran" */
+  /* 1. Casser le Flexbox du Layout (qui rétrécissait la colonne à 55% et bloquait les sauts de page) */
   html,
   body,
   html.dark body,
+  body > div,
   main,
-  div,
-  article,
+  main > div,
   .print-article {
-    overflow: visible !important;
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 100% !important;
     height: auto !important;
+    min-height: 0 !important;
     max-height: none !important;
+    overflow: visible !important;
     position: static !important;
-  }
-
-  html,
-  body,
-  html.dark body {
+    margin: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
     background-color: #ffffff !important;
     color: #000000 !important;
-    font-size: 10.5pt !important;
-    line-height: 1.5 !important;
+  }
+
+  /* 2. Recréer des marges A4 propres (12mm haut/bas, 14mm gauche/droite) directement sur le body */
+  body,
+  html.dark body {
+    padding: 12mm 14mm !important;
+    font-size: 10pt !important;
+    line-height: 1.45 !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
 
-  /* 2. Masquer toute l'interface web (Sidebar, Header, Boutons, Console interactive) */
+  /* Supprimer tous les paddings/marges des conteneurs intermédiaires (qui créaient le grand vide en haut) */
+  main,
+  main > div,
+  .print-article {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* 3. Masquer toute l'interface de navigation (Sidebar, Onglets, En-tête de chapitre, Boutons) */
   aside,
   nav,
   header,
   .no-print,
-  button {
+  button,
+  main > div > div:first-child:not(.print-article) {
     display: none !important;
   }
 
-  /* 3. Supprimer l'aspect "carte web" (ombres, bordures extérieures, marges grises) */
-  main,
-  .print-article,
-  div[class*="max-w-"] {
-    margin: 0 !important;
-    padding: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    border: none !important;
-    box-shadow: none !important;
-    background: #ffffff !important;
-  }
-
-  /* 4. Typographie nette (Noir pur pour le cours, Rouge bordeaux pour les titres/accents) */
+  /* 4. Typographie compacte pour tenir sur un minimum de pages (3 à 4 pages au lieu de 7) */
   h1 {
-    font-size: 18pt !important;
+    font-size: 16pt !important;
     font-weight: 800 !important;
     color: #0f172a !important;
     border-bottom: 2px solid #dc2626 !important;
-    padding-bottom: 6pt !important;
-    margin-bottom: 12pt !important;
+    padding-bottom: 4pt !important;
+    margin-top: 0 !important;
+    margin-bottom: 10pt !important;
   }
 
   h2 {
-    font-size: 13.5pt !important;
+    font-size: 12.5pt !important;
     font-weight: 800 !important;
     color: #0f172a !important;
-    margin-top: 14pt !important;
-    margin-bottom: 6pt !important;
+    margin-top: 12pt !important;
+    margin-bottom: 5pt !important;
   }
 
   h3 {
-    font-size: 11.5pt !important;
+    font-size: 10.5pt !important;
     font-weight: 700 !important;
     color: #1e293b !important;
-    margin-top: 10pt !important;
-    margin-bottom: 4pt !important;
+    margin-top: 8pt !important;
+    margin-bottom: 3pt !important;
   }
 
   p,
@@ -217,133 +222,145 @@ html.dark .schema-canvas {
   td,
   th {
     color: #0f172a !important;
-    font-size: 10.5pt !important;
+    font-size: 9.8pt !important;
+    line-height: 1.42 !important;
   }
 
-  /* Mots en gras (strong) et formules mathématiques KaTeX */
+  p {
+    margin-bottom: 6pt !important;
+  }
+
+  ul,
+  ol {
+    margin-bottom: 6pt !important;
+    padding-left: 16pt !important;
+  }
+
+  hr {
+    margin: 8pt 0 !important;
+    border-color: #cbd5e1 !important;
+  }
+
   strong {
     font-weight: 800 !important;
     color: #991b1b !important;
     background-color: #fef2f2 !important;
-    padding: 0 3px !important;
-    border-radius: 3px !important;
+    padding: 0 2px !important;
+    border-radius: 2px !important;
   }
 
   .katex,
   html.dark .katex {
     color: #000000 !important;
-    font-size: 1.05em !important;
+    font-size: 1em !important;
   }
 
-  /* 5. CODE INLINE (`int`, `len(tab)`, `+`, `-`) : Gras, encadré net sur fond clair */
+  .katex-display {
+    margin: 6pt 0 !important;
+  }
+
+  /* 5. CODE INLINE & SCRIPTS PYTHON : Gras, compact et fond clair */
   code.inline-code:not(pre code),
   html.dark code.inline-code:not(pre code) {
     background-color: #f1f5f9 !important;
     color: #0f172a !important;
     font-weight: 700 !important;
     border: 1px solid #94a3b8 !important;
-    padding: 1px 4px !important;
-    border-radius: 4px !important;
-    font-size: 9.5pt !important;
+    padding: 0 3px !important;
+    border-radius: 3px !important;
+    font-size: 9pt !important;
   }
 
-  /* 6. SCRIPTS PYTHON (<pre>) : Conversion du thème sombre IDE en bloc de code papier pro */
   div:has(> pre),
   pre,
   pre code {
     background-color: #f8fafc !important;
     color: #0f172a !important;
-    font-weight: 700 !important; /* Code en gras très lisible à l'impression */
-    border-color: #cbd5e1 !important;
+    font-weight: 700 !important;
     box-shadow: none !important;
   }
 
   pre {
-    border: 1.5px solid #94a3b8 !important;
-    border-left: 4px solid #0f172a !important;
-    border-radius: 6px !important;
-    padding: 10pt !important;
-    white-space: pre-wrap !important; /* Coupe les lignes longues au lieu de les tronquer */
+    border: 1px solid #94a3b8 !important;
+    border-left: 3.5px solid #0f172a !important;
+    border-radius: 4px !important;
+    padding: 8pt !important;
+    margin: 6pt 0 !important;
+    white-space: pre-wrap !important;
     word-break: break-word !important;
-    font-size: 9.5pt !important;
-    line-height: 1.45 !important;
+    font-size: 8.8pt !important;
+    line-height: 1.35 !important;
   }
 
-  /* Masquer la barre de titre noire de la sandbox Python à l'impression */
   div.bg-\[\#161b22\],
   div.bg-\[\#090d13\] {
     display: none !important;
   }
 
-  /* 7. Encadrés de Formules Critiques & Avertissements */
+  /* 6. PROTECTION STRICTE CONTRE LES COUPURES DE PAGE (Encadrés rouges, Schémas, Tableaux, Scripts) */
+  .print-keep-together,
+  .border-l-4,
+  figure,
+  table,
+  pre,
+  blockquote,
+  div:has(> pre) {
+    display: block !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
   .border-l-4 {
     background-color: #fff5f5 !important;
     border: 1px solid #fca5a5 !important;
     border-left: 4px solid #dc2626 !important;
     border-radius: 6px !important;
-    padding: 8pt 12pt !important;
-    margin: 10pt 0 !important;
-    box-shadow: none !important;
+    padding: 7pt 10pt !important;
+    margin: 8pt 0 !important;
   }
 
-  /* 8. Tableaux de cours propres */
-  table {
-    width: 100% !important;
-    border-collapse: collapse !important;
-    margin: 10pt 0 !important;
-  }
-
-  th,
-  td {
-    border: 1px solid #cbd5e1 !important;
-    padding: 5pt 8pt !important;
-    background-color: #ffffff !important;
-  }
-
-  th {
-    background-color: #f1f5f9 !important;
-    font-weight: 800 !important;
-  }
-
-  /* 9. Schémas SVG compacts et centrés */
-  figure {
-    border: 1px solid #cbd5e1 !important;
-    background-color: #ffffff !important;
-    padding: 8pt !important;
-    margin: 10pt 0 !important;
-    box-shadow: none !important;
-  }
-
-  .schema-canvas {
-    background-color: #ffffff !important;
-    border: none !important;
-    padding: 4pt !important;
-  }
-
-  figure svg {
-    max-height: 170px !important;
-    width: auto !important;
-    margin: 0 auto !important;
-  }
-
-  /* 10. Interdire la coupure d'une formule, d'un script ou d'un schéma entre 2 pages */
-  figure,
-  table,
-  pre,
-  blockquote,
-  .border-l-4,
-  h1,
-  h2,
-  h3 {
-    break-inside: avoid !important;
-    page-break-inside: avoid !important;
-  }
-
+  /* Interdire un titre tout seul en bas de page */
   h1,
   h2,
   h3 {
     break-after: avoid !important;
     page-break-after: avoid !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* 7. Tableaux et Schémas SVG compacts */
+  table {
+    display: table !important;
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 8pt 0 !important;
+  }
+
+  th,
+  td {
+    border: 1px solid #cbd5e1 !important;
+    padding: 4pt 6pt !important;
+    background-color: #ffffff !important;
+  }
+
+  figure {
+    border: 1px solid #cbd5e1 !important;
+    background-color: #ffffff !important;
+    padding: 6pt !important;
+    margin: 8pt 0 !important;
+  }
+
+  .schema-canvas {
+    background-color: #ffffff !important;
+    border: none !important;
+    padding: 2pt !important;
+  }
+
+  figure svg {
+    max-height: 150px !important;
+    width: auto !important;
+    margin: 0 auto !important;
   }
 }
 /* =========================================================
