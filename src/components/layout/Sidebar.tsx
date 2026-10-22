@@ -69,7 +69,7 @@ export default function Sidebar() {
           href="/"
           className={`flex items-center gap-2.5 px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
             pathname === "/"
-              ? "bg-red-50 text-red-600 font-semibold"
+              ? "bg-blue-50 text-blue-600 dark:bg-sky-950/50 dark:text-sky-400 font-semibold font-semibold"
               : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
           }`}
         >
@@ -81,7 +81,7 @@ export default function Sidebar() {
           href="/examen"
           className={`flex items-center justify-between px-3 py-2 rounded-lg text-xs font-medium transition-colors ${
             pathname.startsWith("/examen")
-              ? "bg-red-50 text-red-600 font-semibold"
+              ? "bg-blue-50 text-blue-600 dark:bg-sky-950/50 dark:text-sky-400 font-semibold font-semibold"
               : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
           }`}
         >
@@ -166,7 +166,7 @@ export default function Sidebar() {
                           href={`${chapterBasePath}/cours`}
                           className={`group flex items-start gap-2.5 px-3 py-2 rounded-md text-xs transition-all ${
                             isChapterActive
-                              ? "bg-red-50 text-red-600 font-semibold border-l-2 border-red-600 -ml-[13px] pl-[23px]"
+                              ? "bg-blue-50 text-blue-600 dark:bg-sky-950/50 dark:text-sky-400 font-semibold font-semibold border-l-2 border-red-600 -ml-[13px] pl-[23px]"
                               : "text-slate-600 hover:bg-slate-100 hover:text-slate-900"
                           }`}
                         >

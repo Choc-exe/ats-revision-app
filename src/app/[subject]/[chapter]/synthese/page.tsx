@@ -2,6 +2,8 @@ import React from "react";
 import { getMdxContent } from "@/lib/content-loader";
 import MdxViewer from "@/components/mdx/MdxViewer";
 import { Zap } from "lucide-react";
+import { Metadata } from "next";
+import { getSubjectById, getChapterById } from "@/lib/curriculum";
 
 interface SummaryPageProps {
   params: Promise<{
@@ -41,4 +43,15 @@ export default async function SummaryPage({ params }: SummaryPageProps) {
       <MdxViewer source={data.content} variant="synthetic" />
     </div>
   );
+}
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ subject: string; chapter: string }>;
+}): Promise<Metadata> {
+  const { subject, chapter } = await params;
+  const chapterData = getChapterById(subject, chapter);
+  return {
+    title: `${chapterData?.title ?? "Chapitre"} — Cours | Prépa ATS`,
+  };
 }

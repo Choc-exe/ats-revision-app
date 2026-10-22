@@ -65,9 +65,9 @@ export default function SearchModal() {
           <Search className="w-3.5 h-3.5 text-red-600" />
           <span>Rechercher un concept...</span>
         </span>
-        <kbd className="px-1.5 py-0.5 text-[10px] font-mono font-semibold bg-white text-slate-500 rounded border border-slate-200">
-          Ctrl K
-        </kbd>
+        <kbd className="hidden sm:inline-block px-1.5 py-0.5 text-[10px] font-mono font-semibold bg-white dark:bg-slate-800 text-slate-500 dark:text-slate-400 rounded border border-slate-200 dark:border-slate-700">
+  Ctrl K
+</kbd>
       </button>
 
       {/* Fenêtre modale de recherche */}

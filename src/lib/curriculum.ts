@@ -6,13 +6,13 @@ export const ATS_CURRICULUM: SubjectMeta[] = [
     title: "Physique-Chimie",
     shortTitle: "Physique",
     chapters: [
-      { id: "01-mouvement-et-interactions", number: "A", title: "Mouvement et interactions", semester: 1 },
-      { id: "02-energie-conversion-transferts", number: "B", title: "Énergie : conversion et transferts", semester: 1 },
-      { id: "03-electrocinetique-regimes-sinusoidaux", number: "C", title: "Électrocinétique et régimes sinusoïdaux", semester: 1 },
-      { id: "04-fluides-repos-ecoulement", number: "D", title: "Fluides au repos ou en écoulement", semester: 2 },
-      { id: "05-transferts-thermiques", number: "E", title: "Transferts thermiques", semester: 2 },
-      { id: "06-electromagnetisme", number: "F", title: "Électromagnétisme", semester: 2 },
-      { id: "07-ondes", number: "G", title: "Ondes mécaniques et électromagnétiques", semester: 2 },
+      { id: "01-mouvement-et-interactions", number: "01", title: "Mouvement et interactions", semester: 1 },
+      { id: "02-energie-conversion-transferts", number: "02", title: "Énergie : conversion et transferts", semester: 1 },
+      { id: "03-electrocinetique-regimes-sinusoidaux", number: "03", title: "Électrocinétique et régimes sinusoïdaux", semester: 1 },
+      { id: "04-fluides-repos-ecoulement", number: "04", title: "Fluides au repos ou en écoulement", semester: 2 },
+      { id: "05-transferts-thermiques", number: "05", title: "Transferts thermiques", semester: 2 },
+      { id: "06-electromagnetisme", number: "06", title: "Électromagnétisme", semester: 2 },
+      { id: "07-ondes", number: "07", title: "Ondes mécaniques et électromagnétiques", semester: 2 },
     ],
   },
   {
@@ -49,3 +49,15 @@ export const ATS_CURRICULUM: SubjectMeta[] = [
     ],
   },
 ];
+// Récupère une matière par son ID
+export function getSubjectById(id: string) {
+  return ATS_CURRICULUM.find((subject) => subject.id === id);
+}
+
+// Récupère un chapitre par l'ID de sa matière et son propre ID
+export function getChapterById(subjectId: string, chapterId: string) {
+  const subject = getSubjectById(subjectId);
+  if (!subject) return undefined;
+  
+  return subject.chapters.find((chapter) => chapter.id === chapterId);
+}

@@ -1,6 +1,13 @@
 import React from "react";
 import BodeStepSimulator from "@/components/interactive/BodeStepSimulator";
 import { Activity } from "lucide-react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Traceur de Diagrammes de Bode & Réponse Indicielle | Prépa ATS",
+  description:
+    "Simulateur interactif des systèmes du 1er et 2nd ordre (SLCI & Électrocinétique) : réponse indicielle temporelle et diagrammes de Bode asymptotiques et réels.",
+};
 
 export default function SimulateurBodePage() {
   return (

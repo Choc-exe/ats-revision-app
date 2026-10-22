@@ -2,6 +2,8 @@ import React from "react";
 import { getQcmData } from "@/lib/content-loader";
 import QcmEngine from "@/components/modules/QcmEngine";
 import { CheckSquare, FileWarning } from "lucide-react";
+import { Metadata } from "next";
+import { getSubjectById, getChapterById } from "@/lib/curriculum";
 
 interface QcmPageProps {
   params: Promise<{
@@ -54,4 +56,15 @@ export default async function QcmPage({ params }: QcmPageProps) {
       <QcmEngine qcm={qcmData} />
     </div>
   );
+}
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ subject: string; chapter: string }>;
+}): Promise<Metadata> {
+  const { subject, chapter } = await params;
+  const chapterData = getChapterById(subject, chapter);
+  return {
+    title: `${chapterData?.title ?? "Chapitre"} — Cours | Prépa ATS`,
+  };
 }

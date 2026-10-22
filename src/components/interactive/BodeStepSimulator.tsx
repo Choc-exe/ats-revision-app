@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Sliders, Activity, TrendingUp, RotateCcw } from "lucide-react";
 
-// Halo blanc de lisibilité pour les étiquettes internes aux canevas SVG
 const svgLabelStyle: React.CSSProperties = {
   paintOrder: "stroke",
   stroke: "#f8fafc",
@@ -11,6 +10,116 @@ const svgLabelStyle: React.CSSProperties = {
   strokeLinecap: "round",
   strokeLinejoin: "round",
 };
+
+/**
+ * Formatage numérique aux normes françaises (virgule décimale)
+ */
+function fmtFr(val: number, decimals = 2): string {
+  return val
+    .toFixed(decimals)
+    .replace(/\.?0+$/, (m) => (decimals === 0 ? "" : m))
+    .replace(".", ",");
+}
+
+function fmtFrFixed(val: number, decimals = 2): string {
+  return val.toFixed(decimals).replace(".", ",");
+}
+
+/**
+ * Champ de saisie numérique contrôlé acceptant la virgule française (ex: "0,707")
+ */
+function FrenchNumberInput({
+  value,
+  min,
+  max,
+  decimals = 2,
+  onChange,
+  unit,
+  prefix,
+}: {
+  value: number;
+  min: number;
+  max: number;
+  decimals?: number;
+  onChange: (v: number) => void;
+  unit?: string;
+  prefix?: string;
+}) {
+  const [raw, setRaw] = useState<string>(() => fmtFr(value, decimals));
+  const [focused, setFocused] = useState(false);
+
+  useEffect(() => {
+    if (!focused) {
+      setRaw(fmtFr(value, decimals));
+    }
+  }, [value, decimals, focused]);
+
+  const commitValue = (str: string) => {
+    const normalized = str.replace(",", ".").trim();
+    const parsed = parseFloat(normalized);
+    if (!Number.isNaN(parsed) && parsed > 0) {
+      const clamped = Math.min(max, Math.max(min, parsed));
+      onChange(clamped);
+      setRaw(fmtFr(clamped, decimals));
+    } else {
+      setRaw(fmtFr(value, decimals));
+    }
+  };
+
+  return (
+    <div
+      style={{
+        backgroundColor: "var(--sim-input)",
+        borderColor: "var(--sim-border-strong)",
+      }}
+      className="flex items-center justify-between gap-2 border rounded-lg px-2.5 py-1.5 min-w-0 focus-within:ring-2 focus-within:ring-sky-500/30 transition-all"
+    >
+      {prefix && (
+        <span
+          style={{ color: "var(--sim-text-muted)" }}
+          className="text-xs font-mono font-bold select-none shrink-0"
+        >
+          {prefix}
+        </span>
+      )}
+      <div className="flex items-center gap-1.5 ml-auto min-w-0">
+        <input
+          type="text"
+          inputMode="decimal"
+          value={raw}
+          onFocus={() => setFocused(true)}
+          onBlur={() => {
+            setFocused(false);
+            commitValue(raw);
+          }}
+          onChange={(e) => {
+            setRaw(e.target.value);
+            const normalized = e.target.value.replace(",", ".");
+            const parsed = parseFloat(normalized);
+            if (!Number.isNaN(parsed) && parsed >= min && parsed <= max) {
+              onChange(parsed);
+            }
+          }}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              e.currentTarget.blur();
+            }
+          }}
+          style={{ color: "var(--sim-accent)" }}
+          className="w-16 text-right font-mono text-sm font-extrabold bg-transparent focus:outline-none"
+        />
+        {unit && (
+          <span
+            style={{ color: "var(--sim-text-muted)" }}
+            className="text-xs font-mono font-semibold select-none shrink-0"
+          >
+            {unit}
+          </span>
+        )}
+      </div>
+    </div>
+  );
+}
 
 interface ParameterControlProps {
   label: string;
@@ -20,16 +129,13 @@ interface ParameterControlProps {
   min: number;
   max: number;
   step: number;
+  decimals?: number;
   onChange: (val: number) => void;
   helperLeft?: string;
   helperRight?: string;
   presets?: Array<{ label: string; value: number }>;
 }
 
-/**
- * Carte de paramètre normalisée utilisant les variables CSS de thème (--sim-*)
- * Disposition empilée : Titre sur sa propre ligne + Champ de saisie large et unifié.
- */
 function ParameterControl({
   label,
   symbol,
@@ -38,6 +144,7 @@ function ParameterControl({
   min,
   max,
   step,
+  decimals = 2,
   onChange,
   helperLeft,
   helperRight,
@@ -45,23 +152,16 @@ function ParameterControl({
 }: ParameterControlProps) {
   const pct = Math.min(100, Math.max(0, ((value - min) / (max - min)) * 100));
 
-  const handleNumberInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const parsed = parseFloat(e.target.value);
-    if (!Number.isNaN(parsed) && parsed > 0) {
-      onChange(parsed);
-    }
-  };
-
   return (
     <div
       style={{
         backgroundColor: "var(--sim-card)",
         borderColor: "var(--sim-border)",
       }}
-      className="rounded-xl border p-4 flex flex-col justify-between space-y-3.5 shadow-2xs"
+      className="rounded-xl border p-4 flex flex-col justify-between space-y-3.5 shadow-2xs min-w-0"
     >
-      {/* Ligne 1 : Titre et sous-titre mathématique dégagés */}
-      <div className="flex items-baseline justify-between gap-3">
+      {/* En-tête avec flex-wrap pour éviter toute collision ou troncature */}
+      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
         <span
           style={{ color: "var(--sim-text)" }}
           className="text-sm font-bold tracking-tight"
@@ -70,50 +170,23 @@ function ParameterControl({
         </span>
         <span
           style={{ color: "var(--sim-text-muted)" }}
-          className="text-xs font-mono font-medium shrink-0"
+          className="text-xs font-mono font-medium"
         >
           {symbol}
         </span>
       </div>
 
-      {/* Ligne 2 : Champ de saisie numérique + Curseur sur-mesure */}
       <div className="space-y-2.5">
-        <div
-          style={{
-            backgroundColor: "var(--sim-input)",
-            borderColor: "var(--sim-border-strong)",
-          }}
-          className="flex items-center justify-between border rounded-lg px-3 py-1.5 focus-within:ring-2 focus-within:ring-sky-500/30 transition-all"
-        >
-          <span
-            style={{ color: "var(--sim-text-muted)" }}
-            className="text-[11px] font-medium select-none"
-          >
-            Valeur exacte :
-          </span>
-          <div className="flex items-center gap-1.5">
-            <input
-              type="number"
-              value={Number(value.toFixed(4))}
-              min={min}
-              max={max * 10}
-              step={step}
-              onChange={handleNumberInput}
-              style={{ color: "var(--sim-accent)" }}
-              className="w-20 text-right font-mono text-sm font-extrabold bg-transparent focus:outline-none"
-            />
-            {unit && (
-              <span
-                style={{ color: "var(--sim-text-muted)" }}
-                className="text-xs font-mono font-semibold select-none"
-              >
-                {unit}
-              </span>
-            )}
-          </div>
-        </div>
+        <FrenchNumberInput
+          prefix="Valeur :"
+          value={value}
+          min={min}
+          max={max * 10}
+          decimals={decimals}
+          unit={unit}
+          onChange={onChange}
+        />
 
-        {/* Piste du curseur utilisant --sim-accent et --sim-track */}
         <div className="space-y-1.5 pt-0.5">
           <input
             type="range"
@@ -131,7 +204,7 @@ function ParameterControl({
           {(helperLeft || helperRight) && (
             <div
               style={{ color: "var(--sim-text-muted)" }}
-              className="flex justify-between text-xs font-mono"
+              className="flex flex-wrap justify-between gap-2 text-xs font-mono"
             >
               <span>{helperLeft}</span>
               <span>{helperRight}</span>
@@ -140,7 +213,6 @@ function ParameterControl({
         </div>
       </div>
 
-      {/* Ligne 3 : Boutons de préréglages rapides */}
       {presets && presets.length > 0 && (
         <div
           style={{ borderColor: "var(--sim-border)" }}
@@ -187,7 +259,10 @@ export default function BodeStepSimulator() {
   const [E0, setE0] = useState<number>(1.0);
 
   const Q = useMemo(() => 1 / (2 * xi), [xi]);
-  const xiPct = Math.min(100, Math.max(0, ((Math.min(2, xi) - 0.08) / (2 - 0.08)) * 100));
+  const xiPct = Math.min(
+    100,
+    Math.max(0, ((Math.min(2, xi) - 0.08) / (2 - 0.08)) * 100)
+  );
 
   const handleResetDefaults = () => {
     setK(1.0);
@@ -341,7 +416,7 @@ export default function BodeStepSimulator() {
     };
   }, [order, K, tau, omega0, xi]);
 
-  // Projection SVG pour la réponse indicielle (680 x 260)
+  // Projection SVG pour la réponse indicielle (680 x 260) — Axe Y adaptatif au dépassement D1
   const stepSvg = useMemo(() => {
     const W = 680;
     const H = 260;
@@ -350,7 +425,9 @@ export default function BodeStepSimulator() {
     const padT = 22;
     const padB = 48;
 
-    const maxY = Math.max(stepData.sFinal * 1.65, 0.5);
+    const peakVal =
+      stepData.sFinal * (1 + (order === 2 ? stepData.overshootPct / 100 : 0));
+    const maxY = Math.max(peakVal * 1.18, stepData.sFinal * 1.35, 0.5);
     const toX = (t: number) => padL + (t / stepData.tMax) * (W - padL - padR);
     const toY = (s: number) => H - padB - (s / maxY) * (H - padT - padB);
 
@@ -362,9 +439,9 @@ export default function BodeStepSimulator() {
       .join(" ");
 
     return { W, H, padL, padR, padT, padB, toX, toY, pathD, maxY };
-  }, [stepData]);
+  }, [stepData, order]);
 
-  // Projection SVG pour le diagramme de Bode (680 x 220 par graphe)
+  // Projection SVG pour le diagramme de Bode — Axe Y de Gain 100 % DYNAMIQUE (supporte K=10 et xi=0,08 sans déborder)
   const bodeSvg = useMemo(() => {
     const W = 680;
     const H = 220;
@@ -373,8 +450,25 @@ export default function BodeStepSimulator() {
     const padT = 20;
     const padB = 42;
 
-    const maxG = bodeData.kDb + 24;
-    const minG = bodeData.kDb - 85;
+    // Calcul du sommet réel (soit le plateau BF kDb, soit le sommet du pic de résonance mrDb)
+    const highestGain = Math.max(
+      bodeData.kDb,
+      bodeData.mrDb ?? bodeData.kDb
+    );
+    const lowestGain =
+      order === 1 ? bodeData.kDb - 45 : bodeData.kDb - 85;
+
+    // Arrondi propre aux multiples de 20 dB au-dessus et en-dessous
+    const topTick = Math.ceil((highestGain + 6) / 20) * 20;
+    const bottomTick = Math.floor((lowestGain - 4) / 20) * 20;
+
+    const maxG = topTick + 4;
+    const minG = bottomTick - 4;
+
+    const gainTicks: number[] = [];
+    for (let g = topTick; g >= bottomTick; g -= 20) {
+      gainTicks.push(g);
+    }
 
     const toX = (logW: number) =>
       padL +
@@ -410,15 +504,6 @@ export default function BodeStepSimulator() {
       )
       .join(" ");
 
-    const gainTicks = [
-      bodeData.kDb + 10,
-      bodeData.kDb,
-      bodeData.kDb - 20,
-      bodeData.kDb - 40,
-      bodeData.kDb - 60,
-      bodeData.kDb - 80,
-    ];
-
     return {
       W,
       H,
@@ -435,7 +520,7 @@ export default function BodeStepSimulator() {
       phaseAsympD,
       gainTicks,
     };
-  }, [bodeData]);
+  }, [bodeData, order]);
 
   return (
     <div className="space-y-6">
@@ -474,13 +559,12 @@ export default function BodeStepSimulator() {
                 style={{ color: "var(--sim-text-muted)" }}
                 className="text-xs"
               >
-                Ajustez les curseurs ou saisissez directement vos valeurs numériques exactes.
+                Ajustez les curseurs ou saisissez directement vos valeurs numériques (avec virgule).
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-2">
-            {/* Sélecteur 1er Ordre vs 2nd Ordre (Accent bleu/cyan sobre) */}
             <div
               style={{
                 backgroundColor: "var(--sim-card)",
@@ -540,18 +624,19 @@ export default function BodeStepSimulator() {
           </div>
         </div>
 
-        {/* Grille 2 colonnes aérée (zéro débordement, zéro troncature) */}
+        {/* Grille 2 colonnes fluide et sans collision */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <ParameterControl
             label="Gain statique K"
-            symbol={`G₀ = ${(20 * Math.log10(Math.max(K, 1e-4))).toFixed(1)} dB`}
+            symbol={`G₀ = ${fmtFrFixed(20 * Math.log10(Math.max(K, 1e-4)), 1)} dB`}
             value={K}
             min={0.1}
             max={10.0}
             step={0.1}
+            decimals={2}
             onChange={setK}
-            helperLeft="0.1"
-            helperRight="10.0"
+            helperLeft="0,1"
+            helperRight="10,0"
             presets={[
               { label: "K = 1 (0 dB)", value: 1 },
               { label: "K = 2 (+6 dB)", value: 2 },
@@ -561,14 +646,15 @@ export default function BodeStepSimulator() {
 
           <ParameterControl
             label="Échelon d'entrée E₀"
-            symbol={`Valeur finale s(∞) = ${(K * E0).toFixed(2)}`}
+            symbol={`Valeur finale s(∞) = ${fmtFrFixed(K * E0, 2)}`}
             value={E0}
             min={0.5}
             max={10.0}
             step={0.5}
+            decimals={2}
             onChange={setE0}
-            helperLeft="0.5"
-            helperRight="10.0"
+            helperLeft="0,5"
+            helperRight="10,0"
             presets={[
               { label: "Unitaire (E₀ = 1)", value: 1 },
               { label: "E₀ = 5", value: 5 },
@@ -580,35 +666,35 @@ export default function BodeStepSimulator() {
             <div className="md:col-span-2">
               <ParameterControl
                 label="Constante de temps τ"
-                symbol={`ω_c = 1/τ = ${(1 / tau).toFixed(2)} rad/s`}
+                symbol={`ω_c = 1/τ = ${fmtFrFixed(1 / tau, 2)} rad/s`}
                 unit="s"
                 value={tau}
                 min={0.05}
                 max={5.0}
                 step={0.05}
+                decimals={2}
                 onChange={setTau}
-                helperLeft="Rapide (0.05 s)"
-                helperRight={`t_r5% ≈ 3τ = ${(3 * tau).toFixed(2)} s`}
+                helperLeft="Rapide (0,05 s)"
+                helperRight={`t_r5% ≈ 3τ = ${fmtFrFixed(3 * tau, 2)} s`}
                 presets={[
-                  { label: "τ = 0.1 s", value: 0.1 },
-                  { label: "τ = 0.5 s", value: 0.5 },
-                  { label: "τ = 1.0 s", value: 1.0 },
-                  { label: "τ = 2.0 s", value: 2.0 },
+                  { label: "τ = 0,1 s", value: 0.1 },
+                  { label: "τ = 0,5 s", value: 0.5 },
+                  { label: "τ = 1,0 s", value: 1.0 },
+                  { label: "τ = 2,0 s", value: 2.0 },
                 ]}
               />
             </div>
           ) : (
             <>
-              {/* Carte Amortissement ξ & Facteur de qualité Q : Titre en haut, 2 champs unifiés en dessous */}
+              {/* Carte Amortissement ξ & Facteur de qualité Q */}
               <div
                 style={{
                   backgroundColor: "var(--sim-card)",
                   borderColor: "var(--sim-border)",
                 }}
-                className="rounded-xl border p-4 flex flex-col justify-between space-y-3.5 shadow-2xs"
+                className="rounded-xl border p-4 flex flex-col justify-between space-y-3.5 shadow-2xs min-w-0"
               >
-                {/* Ligne 1 : Titre sur sa propre ligne */}
-                <div className="flex items-baseline justify-between gap-3">
+                <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
                   <span
                     style={{ color: "var(--sim-text)" }}
                     className="text-sm font-bold tracking-tight"
@@ -617,75 +703,32 @@ export default function BodeStepSimulator() {
                   </span>
                   <span
                     style={{ color: "var(--sim-text-muted)" }}
-                    className="text-xs font-mono font-medium shrink-0"
+                    className="text-xs font-mono font-medium"
                   >
                     Q = 1 / (2ξ)
                   </span>
                 </div>
 
-                {/* Ligne 2 : Les deux champs ξ et Q côte à côte avec le MÊME style unifié */}
                 <div className="space-y-2.5">
-                  <div className="grid grid-cols-2 gap-2.5">
-                    <div
-                      style={{
-                        backgroundColor: "var(--sim-input)",
-                        borderColor: "var(--sim-border-strong)",
-                      }}
-                      className="flex items-center justify-between border rounded-lg px-3 py-1.5 focus-within:ring-2 focus-within:ring-sky-500/30"
-                    >
-                      <span
-                        style={{ color: "var(--sim-text-muted)" }}
-                        className="text-xs font-mono font-bold select-none"
-                      >
-                        ξ (SII)
-                      </span>
-                      <input
-                        type="number"
-                        value={Number(xi.toFixed(3))}
-                        min={0.05}
-                        max={5}
-                        step={0.05}
-                        onChange={(e) => {
-                          const v = parseFloat(e.target.value);
-                          if (!Number.isNaN(v) && v >= 0.05) setXi(v);
-                        }}
-                        style={{ color: "var(--sim-accent)" }}
-                        className="w-16 text-right font-mono text-sm font-extrabold bg-transparent focus:outline-none"
-                      />
-                    </div>
-
-                    <div
-                      style={{
-                        backgroundColor: "var(--sim-input)",
-                        borderColor: "var(--sim-border-strong)",
-                      }}
-                      className="flex items-center justify-between border rounded-lg px-3 py-1.5 focus-within:ring-2 focus-within:ring-sky-500/30"
-                    >
-                      <span
-                        style={{ color: "var(--sim-text-muted)" }}
-                        className="text-xs font-mono font-bold select-none"
-                      >
-                        Q (Phys.)
-                      </span>
-                      <input
-                        type="number"
-                        value={Number(Q.toFixed(2))}
-                        min={0.1}
-                        max={10}
-                        step={0.1}
-                        onChange={(e) => {
-                          const qVal = parseFloat(e.target.value);
-                          if (!Number.isNaN(qVal) && qVal >= 0.1) {
-                            setXi(1 / (2 * qVal));
-                          }
-                        }}
-                        style={{ color: "var(--sim-accent)" }}
-                        className="w-16 text-right font-mono text-sm font-extrabold bg-transparent focus:outline-none"
-                      />
-                    </div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                    <FrenchNumberInput
+                      prefix="ξ (SII) :"
+                      value={xi}
+                      min={0.05}
+                      max={5.0}
+                      decimals={3}
+                      onChange={setXi}
+                    />
+                    <FrenchNumberInput
+                      prefix="Q (Phys.) :"
+                      value={Q}
+                      min={0.1}
+                      max={10.0}
+                      decimals={2}
+                      onChange={(qVal) => setXi(1 / (2 * qVal))}
+                    />
                   </div>
 
-                  {/* Curseur ξ */}
                   <div className="space-y-1.5 pt-0.5">
                     <input
                       type="range"
@@ -701,24 +744,23 @@ export default function BodeStepSimulator() {
                     />
                     <div
                       style={{ color: "var(--sim-text-muted)" }}
-                      className="flex justify-between text-xs font-mono"
+                      className="flex flex-wrap justify-between gap-2 text-xs font-mono"
                     >
-                      <span>ξ = 0.08 (Q = 6.25)</span>
-                      <span>ξ = 2.0 (Q = 0.25)</span>
+                      <span>ξ = 0,08 (Q = 6,25)</span>
+                      <span>ξ = 2,0 (Q = 0,25)</span>
                     </div>
                   </div>
                 </div>
 
-                {/* Ligne 3 : Préréglages */}
                 <div
                   style={{ borderColor: "var(--sim-border)" }}
                   className="flex flex-wrap gap-1.5 pt-2.5 border-t"
                 >
                   {[
-                    { label: "ξ = 0.25 (Q = 2)", val: 0.25 },
-                    { label: "ξ = 0.707 (Opt.)", val: 0.707 },
-                    { label: "ξ = 1.0 (Critique)", val: 1.0 },
-                    { label: "ξ = 1.5 (Apér.)", val: 1.5 },
+                    { label: "ξ = 0,25 (Q = 2)", val: 0.25 },
+                    { label: "ξ = 0,707 (Butterworth)", val: 0.707 },
+                    { label: "ξ = 1,0 (Critique)", val: 1.0 },
+                    { label: "ξ = 1,5 (Apériodique)", val: 1.5 },
                   ].map((p) => {
                     const active = Math.abs(xi - p.val) < 1e-2;
                     return (
@@ -750,12 +792,13 @@ export default function BodeStepSimulator() {
 
               <ParameterControl
                 label="Pulsation propre ω₀"
-                symbol={`f₀ = ${(omega0 / (2 * Math.PI)).toFixed(2)} Hz`}
+                symbol={`f₀ = ${fmtFrFixed(omega0 / (2 * Math.PI), 2)} Hz`}
                 unit="rad/s"
                 value={omega0}
                 min={1}
                 max={100}
                 step={1}
+                decimals={1}
                 onChange={setOmega0}
                 helperLeft="1 rad/s"
                 helperRight="100 rad/s"
@@ -770,10 +813,7 @@ export default function BodeStepSimulator() {
           )}
         </div>
 
-        {/* =================================================================
-            CARTES DU BAS (RÉSULTATS) : Surfaces unifiées, contraste WCAG AA
-            et protection du symbole grec minuscule ξ (pas de uppercase sur ξ)
-           ================================================================= */}
+        {/* Cartes de synthèse avec virgules françaises et protection du symbole ξ */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2">
           <div
             style={{
@@ -803,7 +843,7 @@ export default function BodeStepSimulator() {
                 : xi < 1
                 ? "Pseudopériodique (oscillant)"
                 : Math.abs(xi - 1) < 1e-3
-                ? "Critique (le plus rapide)"
+                ? "Critique (sans dépassement)"
                 : "Apériodique (amorti)"}
             </span>
           </div>
@@ -825,8 +865,8 @@ export default function BodeStepSimulator() {
               style={{ color: "var(--sim-text)" }}
               className="text-xs font-extrabold font-mono block"
             >
-              {order === 2 && xi < 1
-                ? `${stepData.overshootPct.toFixed(1)} % (à t₁ = ${stepData.tPeak?.toFixed(2)} s)`
+              {order === 2 && xi < 1 && stepData.tPeak
+                ? `${fmtFrFixed(stepData.overshootPct, 1)} % (à t₁ = ${fmtFrFixed(stepData.tPeak, 2)} s)`
                 : "0 % (Aucun dépassement)"}
             </span>
           </div>
@@ -838,20 +878,22 @@ export default function BodeStepSimulator() {
             }}
             className="p-3.5 rounded-xl border space-y-1"
           >
-            {/* Seul le texte français est en majuscules : ξ reste en minuscule ! */}
             <span
               style={{ color: "var(--sim-text-muted)" }}
               className="text-[11px] font-bold block"
             >
               <span className="uppercase tracking-wider">Résonance en Gain</span>{" "}
-              <span className="font-mono">(ξ &lt; 0.707)</span>
+              <span className="font-mono">(ξ &lt; 0,707)</span>
             </span>
             <span
               style={{ color: "var(--sim-text)" }}
               className="text-xs font-extrabold font-mono block"
             >
-              {order === 2 && bodeData.hasResonance
-                ? `ω_r = ${bodeData.wr?.toFixed(2)} rad/s (${bodeData.mrDb?.toFixed(1)} dB)`
+              {order === 2 &&
+              bodeData.hasResonance &&
+              bodeData.wr !== null &&
+              bodeData.mrDb !== null
+                ? `ω_r = ${fmtFrFixed(bodeData.wr, 2)} rad/s (${fmtFrFixed(bodeData.mrDb, 1)} dB)`
                 : "Aucune résonance"}
             </span>
           </div>
@@ -877,8 +919,8 @@ export default function BodeStepSimulator() {
               className="text-xs font-extrabold font-mono block"
             >
               {order === 1
-                ? `${(bodeData.kDb - 3.01).toFixed(1)} dB  |  φ = −45°`
-                : `${(bodeData.kDb - 20 * Math.log10(2 * xi)).toFixed(1)} dB  |  φ = −90°`}
+                ? `${fmtFrFixed(bodeData.kDb - 3.01, 1)} dB  |  φ = −45°`
+                : `${fmtFrFixed(bodeData.kDb - 20 * Math.log10(2 * xi), 1)} dB  |  φ = −90°`}
             </span>
           </div>
         </div>
@@ -900,9 +942,9 @@ export default function BodeStepSimulator() {
             className="text-sm font-bold flex items-center gap-2"
           >
             <Activity
-  style={{ color: "var(--sim-accent)" }}
-  className="w-4 h-4"
-/>
+              style={{ color: "var(--sim-accent)" }}
+              className="w-4 h-4"
+            />
             <span>Réponse Indicielle Temporelle s(t)</span>
           </h3>
           <div className="flex items-center gap-4 text-xs">
@@ -914,7 +956,7 @@ export default function BodeStepSimulator() {
             </span>
             <span className="flex items-center gap-1.5 font-semibold text-emerald-600 dark:text-emerald-400">
               <span className="w-3 h-2 bg-emerald-200 border border-emerald-500 inline-block rounded-xs" />{" "}
-              Bande à ±5% de s(∞) = {stepData.sFinal.toFixed(2)}
+              Bande à ±5 % de s(∞) = {fmtFrFixed(stepData.sFinal, 2)}
             </span>
           </div>
         </div>
@@ -950,7 +992,7 @@ export default function BodeStepSimulator() {
                     textAnchor="middle"
                     className="text-[11px] font-mono fill-slate-700 font-bold"
                   >
-                    {tVal}s
+                    {fmtFr(tVal, 2)} s
                   </text>
                 </g>
               );
@@ -983,7 +1025,7 @@ export default function BodeStepSimulator() {
               textAnchor="end"
               className="text-[11px] font-mono fill-emerald-700 font-bold"
             >
-              {stepData.sFinal.toFixed(2)}
+              {fmtFrFixed(stepData.sFinal, 2)}
             </text>
             <text
               x={stepSvg.padL - 8}
@@ -1026,7 +1068,7 @@ export default function BodeStepSimulator() {
                   style={svgLabelStyle}
                   className="text-[11px] fill-red-600 font-bold"
                 >
-                  τ (63%)
+                  τ (63 %)
                 </text>
 
                 {3 * tau <= stepData.tMax && (
@@ -1052,7 +1094,7 @@ export default function BodeStepSimulator() {
                       style={svgLabelStyle}
                       className="text-[11px] fill-emerald-700 font-bold"
                     >
-                      3τ (95%)
+                      3τ (95 %)
                     </text>
                   </>
                 )}
@@ -1117,8 +1159,8 @@ export default function BodeStepSimulator() {
                   style={svgLabelStyle}
                   className="text-[11px] fill-red-600 font-bold"
                 >
-                  D₁ = {stepData.overshootPct.toFixed(1)}% (t₁ ={" "}
-                  {stepData.tPeak.toFixed(2)}s)
+                  D₁ = {fmtFrFixed(stepData.overshootPct, 1)} % (t₁ ={" "}
+                  {fmtFrFixed(stepData.tPeak, 2)} s)
                 </text>
               </>
             )}
@@ -1136,7 +1178,7 @@ export default function BodeStepSimulator() {
       </div>
 
       {/* =====================================================================
-          3. DIAGRAMMES DE BODE (GAIN & PHASE AVEC EN-TÊTES DÉGAGÉS)
+          3. DIAGRAMMES DE BODE (AXE Y DE GAIN ADAPTATIF & VIRGULES FRANÇAISES)
          ===================================================================== */}
       <div
         style={{
@@ -1154,9 +1196,9 @@ export default function BodeStepSimulator() {
             className="text-sm font-bold flex items-center gap-2"
           >
             <TrendingUp
-  style={{ color: "var(--sim-accent)" }}
-  className="w-4 h-4"
-/>
+              style={{ color: "var(--sim-accent)" }}
+              className="w-4 h-4"
+            />
             <span>Diagrammes de Bode — Analyse Fréquentielle H(jω)</span>
           </h3>
           <div className="flex items-center gap-4 text-xs">
@@ -1178,7 +1220,7 @@ export default function BodeStepSimulator() {
 
         {/* SOUS-BLOC 3A : DIAGRAMME DE GAIN */}
         <div className="space-y-2">
-          <div className="flex items-center justify-between px-1">
+          <div className="flex flex-wrap items-center justify-between gap-2 px-1">
             <span
               style={{ color: "var(--sim-text)" }}
               className="text-xs font-extrabold tracking-wide"
@@ -1189,7 +1231,8 @@ export default function BodeStepSimulator() {
               style={{ color: "var(--sim-text-muted)" }}
               className="text-xs font-mono"
             >
-              Asymptote BF = {bodeData.kDb.toFixed(1)} dB
+              Asymptote BF = {fmtFrFixed(bodeData.kDb, 1)} dB | Pente HF ={" "}
+              {order === 1 ? "−20 dB/déc" : "−40 dB/déc"}
             </span>
           </div>
 
@@ -1214,7 +1257,7 @@ export default function BodeStepSimulator() {
                     textAnchor="end"
                     className="text-[11px] font-mono fill-slate-700 font-bold"
                   >
-                    {gVal.toFixed(0)} dB
+                    {gVal > 0 ? `+${gVal}` : gVal} dB
                   </text>
                 </g>
               ))}
@@ -1239,11 +1282,11 @@ export default function BodeStepSimulator() {
                       textAnchor="middle"
                       className={`text-[11px] font-mono ${
                         isCenter
-                          ? "fill-red-600 font-extrabold"
+                          ? "fill-blue-600 font-extrabold"
                           : "fill-slate-600 font-semibold"
                       }`}
                     >
-                      {dt.w < 10 ? dt.w.toFixed(2) : dt.w.toFixed(0)} rad/s
+                      {dt.w < 10 ? fmtFr(dt.w, 2) : fmtFr(dt.w, 0)} rad/s
                     </text>
                     <text
                       x={xPos}
@@ -1293,7 +1336,7 @@ export default function BodeStepSimulator() {
 
         {/* SOUS-BLOC 3B : DIAGRAMME DE PHASE */}
         <div className="space-y-2 pt-2">
-          <div className="flex items-center justify-between px-1">
+          <div className="flex flex-wrap items-center justify-between gap-2 px-1">
             <span
               style={{ color: "var(--sim-text)" }}
               className="text-xs font-extrabold tracking-wide"
@@ -1360,11 +1403,11 @@ export default function BodeStepSimulator() {
                       textAnchor="middle"
                       className={`text-[11px] font-mono ${
                         isCenter
-                          ? "fill-red-600 font-extrabold"
+                          ? "fill-blue-600 font-extrabold"
                           : "fill-slate-600 font-semibold"
                       }`}
                     >
-                      {dt.w < 10 ? dt.w.toFixed(2) : dt.w.toFixed(0)} rad/s
+                      {dt.w < 10 ? fmtFr(dt.w, 2) : fmtFr(dt.w, 0)} rad/s
                     </text>
                     <text
                       x={xPos}

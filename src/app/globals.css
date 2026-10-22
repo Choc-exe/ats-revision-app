@@ -131,41 +131,50 @@ html.dark .schema-canvas {
    MODE IMPRESSION / EXPORT PDF A4 — PLEINE LARGEUR & ZÉRO URL
    ========================================================= */
 @media print {
-  /* ASTUCE CHROME/EDGE : margin: 0 supprime automatiquement la date, 
-     le titre et l'URL Vercel en haut et en bas de la feuille ! */
+  /* 0. Marges A4 natives : permettent d'avoir la pagination propre sans coller au bord */
   @page {
     size: A4 portrait;
-    margin: 0mm !important;
+    margin: 12mm 14mm 12mm 14mm !important;
   }
 
-  /* 1. Casser le Flexbox du Layout (qui rétrécissait la colonne à 55% et bloquait les sauts de page) */
+  /* 1. SUPPRIMER LE DÉCALAGE GAUCHE DE LA SIDEBAR (ml-64, ml-72, pl-64, grid, flex) */
   html,
   body,
   html.dark body,
   body > div,
   main,
   main > div,
-  .print-article {
+  main > div > div,
+  .print-article,
+  [class*="ml-"],
+  [class*="pl-"],
+  [class*="max-w-"],
+  [class*="mx-auto"] {
     display: block !important;
     width: 100% !important;
-    max-width: none !important;
-    min-width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    left: 0 !important;
+    transform: none !important;
     height: auto !important;
-    min-height: 0 !important;
     max-height: none !important;
     overflow: visible !important;
     position: static !important;
-    margin: 0 !important;
     box-shadow: none !important;
     border: none !important;
     background-color: #ffffff !important;
     color: #000000 !important;
   }
 
-  /* 2. Recréer des marges A4 propres (12mm haut/bas, 14mm gauche/droite) directement sur le body */
+  /* 2. Mise à l'échelle du body (les marges de la feuille sont déjà gérées par @page) */
   body,
   html.dark body {
-    padding: 12mm 14mm !important;
+    padding: 0 !important;
+    margin: 0 !important;
     font-size: 10pt !important;
     line-height: 1.45 !important;
     -webkit-print-color-adjust: exact !important;
