@@ -128,6 +128,27 @@ html.dark .schema-canvas {
   border-color: #475569 !important;
 }
 /* =========================================================
+   PROTECTION TYPOGRAPHIQUE KATEX (Espacement & Coupures)
+   ========================================================= */
+.katex,
+.katex * {
+  letter-spacing: normal !important;
+  word-spacing: normal !important;
+}
+
+/* Empêche une formule inline ($PV = nRT$) d'être coupée en deux en fin de ligne */
+span.katex {
+  white-space: nowrap !important;
+}
+
+/* Centrage et aération des formules critiques en mode Display ($$...$$) */
+.katex-display {
+  margin: 0.85em 0 !important;
+  padding: 0.25em 0 !important;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+/* =========================================================
    MODE IMPRESSION / EXPORT PDF A4 — PLEINE LARGEUR & ZÉRO URL
    ========================================================= */
 @media print {
