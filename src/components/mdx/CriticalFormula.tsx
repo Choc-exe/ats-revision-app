@@ -1,25 +1,24 @@
 import React from "react";
-import { Flame } from "lucide-react";
+import { BookmarkCheck } from "lucide-react";
 
 interface CriticalFormulaProps {
-  title: string;
+  title?: string;
   children: React.ReactNode;
 }
 
 export default function CriticalFormula({
-  title,
+  title = "À connaître absolument",
   children,
 }: CriticalFormulaProps) {
   return (
-    <div className="my-6 rounded-r-xl border-l-4 border-red-600 bg-red-50/70 p-5 shadow-sm">
-      <div className="flex items-center gap-2 text-red-600 font-bold text-sm uppercase tracking-wide mb-2">
-        <Flame className="w-4 h-4 shrink-0" />
-        <span>À connaître absolument — {title}</span>
+    <div className="print-keep-together my-6 rounded-xl border border-red-200/90 dark:border-red-900/60 border-l-4 border-l-red-600 dark:border-l-red-500 bg-red-50/40 dark:bg-red-950/25 p-5">
+      <div className="flex items-center gap-2 text-red-800 dark:text-red-300 font-bold text-sm mb-2.5">
+        <BookmarkCheck className="w-4 h-4 text-red-600 dark:text-red-400 shrink-0" />
+        <span>{title}</span>
       </div>
-      <div className="text-slate-900 font-medium leading-relaxed overflow-x-auto">
+      <div className="text-slate-800 dark:text-slate-200 text-sm leading-relaxed space-y-2">
         {children}
       </div>
     </div>
   );
 }
-<div className="print-keep-together my-6 rounded-r-xl border-l-4 border-red-600 bg-red-50/70 p-5 shadow-xs"></div>
