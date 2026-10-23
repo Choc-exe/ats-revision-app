@@ -3,7 +3,8 @@ import { getFlashcardsData } from "@/lib/content-loader";
 import FlashcardDeck from "@/components/modules/FlashcardDeck";
 import { Layers, FileWarning } from "lucide-react";
 import { Metadata } from "next";
-import { getSubjectById, getChapterById } from "@/lib/curriculum";
+import { getChapterById } from "@/lib/curriculum";
+import { SubjectId } from "@/types/pedagogy";
 
 interface FlashcardsPageProps {
   params: Promise<{
@@ -14,47 +15,58 @@ interface FlashcardsPageProps {
 
 export default async function FlashcardsPage({ params }: FlashcardsPageProps) {
   const { subject, chapter } = await params;
-  const deckData = await getFlashcardsData(subject, chapter);
+  const cards = await getFlashcardsData(subject, chapter);
+  const chapterData = getChapterById(subject, chapter);
 
-  if (!deckData || !deckData.cards || deckData.cards.length === 0) {
+  if (!cards || cards.length === 0) {
     return (
-      <div className="bg-white rounded-xl border border-slate-200 p-8 text-center max-w-xl mx-auto">
+      <div className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-8 text-center max-w-xl mx-auto shadow-sm">
         <FileWarning className="w-8 h-8 text-red-600 mx-auto mb-3" />
-        <h2 className="text-base font-bold text-slate-900 mb-1">
+        <h2 className="text-base font-bold text-slate-900 dark:text-white mb-1">
           Aucune flashcard disponible
         </h2>
-        <p className="text-sm text-slate-500">
-          Le fichier <code className="font-mono text-xs bg-slate-100 px-1.5 py-0.5 rounded text-red-600">flashcards.json</code> est introuvable ou vide pour ce chapitre.
+        <p className="text-sm text-slate-500 dark:text-slate-400">
+          Le fichier <code className="font-mono text-xs bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded text-red-600 dark:text-red-400">flashcards.json</code> est introuvable ou vide pour ce chapitre.
         </p>
       </div>
     );
   }
 
+  const deckObject = {
+    subject: subject as SubjectId,
+    chapterId: chapter,
+    title: chapterData?.title ?? "Flashcards du chapitre",
+    cards: cards,
+  };
+
   return (
     <div className="space-y-6">
       {/* En-tête du module */}
-      <div className="flex items-center justify-between bg-white border border-slate-200 rounded-2xl p-6 shadow-sm">
+      <div className="flex items-center justify-between bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-red-50 text-red-600 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-sky-950/60 text-blue-600 dark:text-sky-400 flex items-center justify-center">
             <Layers className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="text-lg font-bold text-slate-900">{deckData.title}</h2>
-            <p className="text-xs text-slate-500">
+            <h2 className="text-lg font-bold text-slate-900 dark:text-white">
+              {deckObject.title}
+            </h2>
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               Entraînement par répétition espacée et mémorisation active
             </p>
           </div>
         </div>
-        <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-slate-100 text-slate-700">
-          {deckData.cards.length} cartes au total
+        <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
+          {cards.length} cartes au total
         </span>
       </div>
 
       {/* Moteur interactif des flashcards */}
-      <FlashcardDeck deck={deckData} />
+      <FlashcardDeck deck={deckObject} />
     </div>
   );
 }
+
 export async function generateMetadata({
   params,
 }: {
@@ -63,6 +75,6 @@ export async function generateMetadata({
   const { subject, chapter } = await params;
   const chapterData = getChapterById(subject, chapter);
   return {
-    title: `${chapterData?.title ?? "Chapitre"} — Cours | Prépa ATS`,
+    title: `${chapterData?.title ?? "Chapitre"} — Flashcards | Prépa ATS`,
   };
 }
