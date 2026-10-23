@@ -240,10 +240,6 @@ export default function Sidebar() {
             <span className="w-2.5 h-2.5 rounded-full bg-red-600 shrink-0" />
             <span>Encadrés rouges = Formules & points critiques</span>
           </div>
-          <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-blue-600 dark:bg-sky-400 shrink-0" />
-            <span>Accents bleus = Navigation & outils</span>
-          </div>
         </div>
       </aside>
     </>
