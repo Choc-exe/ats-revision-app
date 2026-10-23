@@ -70,7 +70,7 @@ export default function Sidebar() {
       {/* 1. BARRE SUPÉRIEURE MOBILE (Visible uniquement sous le breakpoint lg: 1024px) */}
       <header className="no-print lg:hidden fixed top-0 inset-x-0 z-40 h-14 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xs border-b border-slate-200 dark:border-slate-800 px-4 flex items-center justify-between">
         <Link href="/" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-blue-600 flex items-center justify-center text-white shadow-xs">
+          <div className="w-8 h-8 rounded-lg bg-red-600 flex items-center justify-center text-white shadow-xs">
             <GraduationCap className="w-4 h-4" />
           </div>
           <span className="font-extrabold text-sm text-slate-900 dark:text-white tracking-tight">
@@ -296,12 +296,6 @@ export default function Sidebar() {
               <span className="w-2 h-2 rounded-full bg-red-600 shrink-0" />
               <span>
                 Encadrés <strong className="text-red-600 dark:text-red-400 font-bold">rouges</strong> = Formules & points critiques
-              </span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-blue-600 dark:bg-sky-400 shrink-0" />
-              <span>
-                Accents <strong className="text-blue-600 dark:text-sky-400 font-bold">bleus</strong> = Navigation & outils
               </span>
             </div>
           </div>
