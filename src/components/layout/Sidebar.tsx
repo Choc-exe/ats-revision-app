@@ -105,13 +105,13 @@ export default function Sidebar() {
         {/* En-tête de l'application */}
         <div className="h-16 px-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3">
           <Link href="/" className="flex items-center gap-3 min-w-0">
-            <div className="w-9 h-9 rounded-lg bg-blue-600 flex items-center justify-center text-white shadow-sm shrink-0">
+            <div className="w-9 h-9 rounded-lg bg-red-600 flex items-center justify-center text-white shadow-sm shrink-0">
               <GraduationCap className="w-5 h-5" />
             </div>
             <div className="flex flex-col truncate">
               <span className="font-extrabold text-slate-900 dark:text-white tracking-tight text-[15px] leading-tight flex items-center gap-1.5">
                 Prépa ATS
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-600 dark:bg-sky-400 animate-pulse" />
+                <span className="w-1.5 h-1.5 rounded-full bg-red-600 dark:bg-red-400 animate-pulse" />
               </span>
               <span className="text-[11px] text-slate-600 dark:text-slate-400 font-semibold uppercase tracking-wider truncate">
                 Ingénierie Industrielle
