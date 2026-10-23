@@ -23,16 +23,12 @@ export default function RootLayout({
   return (
     <html lang="fr" className={inter.variable}>
       {/* Fond gris très doux (bg-slate-50) et texte contrasté non agressif (text-slate-800) */}
-      <body className="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-red-100 selection:text-red-900">
-        <div className="flex min-h-screen">
-          {/* Barre latérale fixe à gauche */}
-          <Sidebar />
-
-          {/* Zone de contenu principale à droite */}
-          <div className="flex-1 pl-72 flex flex-col min-h-screen ">
-            {children}
-          </div>
-        </div>
+      <body className="bg-slate-50 dark:bg-[#0b0f19] text-slate-900 dark:text-slate-100 antialiased min-h-screen">
+        <Sidebar />
+        {/* 0px de marge à gauche sur mobile/tablette + 56px en haut pour la barre mobile ; 288px à gauche sur Desktop (lg:) */}
+        <main className="lg:pl-72 pt-14 lg:pt-0 min-h-screen">
+          {children}
+        </main>
       </body>
     </html>
   );
