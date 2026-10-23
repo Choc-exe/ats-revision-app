@@ -51,8 +51,17 @@ export async function GET() {
 
       // 2. Indexation des Flashcards
       const deck = await getFlashcardsData(subject.id, chapter.id);
-      if (deck?.cards) {
-        for (const card of deck.cards) {
+      if (deck && Array.isArray(deck)) {
+        for (const card of deck) {
+          const frontText =
+            typeof card.front === "string"
+              ? card.front
+              : (card as any).question || "Flashcard";
+          const backText =
+            typeof card.back === "string"
+              ? card.back
+              : (card as any).answer || "";
+
           searchIndex.push({
             id: card.id,
             type: "Flashcard",
@@ -60,8 +69,8 @@ export async function GET() {
             subjectTitle: subject.shortTitle,
             chapterId: chapter.id,
             chapterTitle: fullChapterTitle,
-            title: card.front,
-            snippet: `${card.back.mainAnswer} ${card.back.criticalFormula || ""}`,
+            title: frontText,
+            snippet: backText,
             href: `${baseHref}/flashcards`,
           });
         }
@@ -69,8 +78,15 @@ export async function GET() {
 
       // 3. Indexation des QCM + Alimentation de la banque d'Examen Blanc
       const qcm = await getQcmData(subject.id, chapter.id);
-      if (qcm?.questions) {
-        for (const q of qcm.questions) {
+      if (qcm && Array.isArray(qcm)) {
+        for (const q of qcm) {
+          const qText =
+            (q as any).question ||
+            (q as any).prompt ||
+            (q as any).questionText ||
+            "Question QCM";
+          const formula = q.explanation?.keyFormula || "";
+
           searchIndex.push({
             id: q.id,
             type: "QCM",
@@ -78,8 +94,8 @@ export async function GET() {
             subjectTitle: subject.shortTitle,
             chapterId: chapter.id,
             chapterTitle: fullChapterTitle,
-            title: q.questionText,
-            snippet: q.explanation.keyFormula,
+            title: qText,
+            snippet: formula,
             href: `${baseHref}/qcm`,
           });
 
