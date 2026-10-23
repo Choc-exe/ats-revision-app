@@ -1,0 +1,38 @@
+[
+  {
+    "id": "math-11-qcm-01",
+    "question": "Soit la fonction $f(x, y) = x^2 - 2xy + 3y^2$ définie sur $\\mathbb{R}^2$. Quelle est la nature de son unique point critique $(0, 0)$ ?",
+    "options": [
+      "Un minimum local (et global) strict",
+      "Un maximum local strict",
+      "Un point col (point selle)",
+      "Un cas douteux ($rt - s^2 = 0$)"
+    ],
+    "correctIndex": 0,
+    "explanation": "On a $\\frac{\\partial f}{\\partial x} = 2x - 2y$ et $\\frac{\\partial f}{\\partial y} = -2x + 6y$, qui s'annulent uniquement en $(0, 0)$. Les dérivées secondes valent $r = 2$, $s = -2$ et $t = 6$. Ainsi $rt - s^2 = 2 \\times 6 - (-2)^2 = 12 - 4 = 8 > 0$ avec $r = 2 > 0$ : $(0, 0)$ est un minimum local strict (d'ailleurs $f(x, y) = (x - y)^2 + 2y^2 \\ge 0$)."
+  },
+  {
+    "id": "math-11-qcm-02",
+    "question": "Soit $f(x, y) = x^3 - 3xy + y^3$. Que valent les dérivées secondes $r, s, t$ au point critique $(1, 1)$ et quelle est la nature de ce point ?",
+    "options": [
+      "$r = 6, s = -3, t = 6$ ($rt - s^2 = 27 > 0, r > 0$) : minimum local",
+      "$r = 0, s = -3, t = 0$ ($rt - s^2 = -9 < 0$) : point col",
+      "$r = 6, s = 3, t = 6$ ($rt - s^2 = 27 > 0$) : maximum local",
+      "$r = 3, s = -3, t = 3$ ($rt - s^2 = 0$) : cas douteux"
+    ],
+    "correctIndex": 0,
+    "explanation": "On a $\\frac{\\partial f}{\\partial x} = 3x^2 - 3y$ et $\\frac{\\partial f}{\\partial y} = -3x + 3y^2$, qui s'annulent en $(0, 0)$ et en $(1, 1)$. En outre, $\\frac{\\partial^2 f}{\\partial x^2} = 6x$, $\\frac{\\partial^2 f}{\\partial x \\partial y} = -3$ et $\\frac{\\partial^2 f}{\\partial y^2} = 6y$. En $(1, 1)$, on trouve $r = 6, s = -3, t = 6$, d'où $rt - s^2 = 36 - 9 = 27 > 0$ et $r = 6 > 0$ : $(1, 1)$ est un minimum local (tandis que $(0, 0)$ est un point col car $rt - s^2 = -9 < 0$)."
+  },
+  {
+    "id": "math-11-qcm-03",
+    "question": "Quelle est l'équation du plan tangent à la surface $z = f(x, y) = x^2 + y^2$ au point $(1, 2, 5)$ ?",
+    "options": [
+      "$z = 2x + 4y - 5$",
+      "$z = 2x + 4y + 5$",
+      "$z = x + 2y + 5$",
+      "$z = 2(x - 1) + 2(y - 2) + 5$"
+    ],
+    "correctIndex": 0,
+    "explanation": "En $(1, 2)$, on a $f(1, 2) = 5$, $\\frac{\\partial f}{\\partial x}(1, 2) = 2x\\big|_{x=1} = 2$ et $\\frac{\\partial f}{\\partial y}(1, 2) = 2y\\big|_{y=2} = 4$. L'équation du plan tangent est $z = 5 + 2(x - 1) + 4(y - 2) = 2x + 4y - 5$."
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "math-09-fc-01",
+    "category": "Intégrales sur un segment",
+    "question": "Énoncer la propriété de stricte positivité de l'intégrale pour une fonction continue sur $[a, b]$ ($a < b$).",
+    "answer": "Si $f$ est **continue** et **positive** ($f(t) \\ge 0$) sur $[a, b]$ et si $\\int_a^b f(t)\\,\\mathrm{d}t = 0$, alors $f$ est la fonction nulle sur tout le segment $[a, b]$."
+  },
+  {
+    "id": "math-09-fc-02",
+    "category": "Sommes de Riemann",
+    "question": "Comment reconnaît-on une somme de Riemann sur $[0, 1]$ et quelle est la limite de $S_n = \\sum_{k=1}^n \\frac{n}{n^2 + k^2}$ ?",
+    "answer": "En mettant $\\frac{1}{n}$ en facteur : $S_n = \\frac{1}{n}\\sum_{k=1}^n \\frac{1}{1 + (k/n)^2}$. Par théorème des sommes de Riemann pour $f(t) = \\frac{1}{1+t^2}$ continue sur $[0, 1]$, on obtient $\\lim_{n\\to+\\infty} S_n = \\int_0^1 \\frac{\\mathrm{d}t}{1+t^2} = \\big[\\arctan t\\big]_0^1 = \\frac{\\pi}{4}$."
+  },
+  {
+    "id": "math-09-fc-03",
+    "category": "Intégrales impropres",
+    "question": "Pour quelles valeurs du réel $\\alpha$ les intégrales de Riemann $\\int_1^{+\\infty} \\frac{\\mathrm{d}t}{t^\\alpha}$ et $\\int_0^1 \\frac{\\mathrm{d}t}{t^\\alpha}$ convergent-elles ?",
+    "answer": "- En $+\\infty$ : $\\int_1^{+\\infty} \\frac{\\mathrm{d}t}{t^\\alpha}$ converge $\\iff \\alpha > 1$.\n- En $0^+$ : $\\int_0^1 \\frac{\\mathrm{d}t}{t^\\alpha}$ converge $\\iff \\alpha < 1$.\n(En particulier, $\\int_0^{+\\infty} \\frac{\\mathrm{d}t}{t^\\alpha}$ diverge pour toute valeur de $\\alpha$)."
+  },
+  {
+    "id": "math-09-fc-04",
+    "category": "Fonction définie par une intégrale",
+    "question": "Si $g(x) = \\int_{u(x)}^{v(x)} f(t)\\,\\mathrm{d}t$ avec $f$ continue et $u, v$ dérivables, quelle est l'expression de la dérivée $g'(x)$ ?",
+    "answer": "En notant $F$ une primitive de $f$, on a $g(x) = F(v(x)) - F(u(x))$. Par dérivation d'une fonction composée :\n$$g'(x) = v'(x)\\,f(v(x)) - u'(x)\\,f(u(x))$$"
+  }
+]

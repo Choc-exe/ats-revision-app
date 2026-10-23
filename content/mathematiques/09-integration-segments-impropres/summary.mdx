@@ -1,0 +1,18 @@
+# Fiche Synthèse — Intégration et Intégrales Impropres
+
+<CriticalFormula title="1. Sommes de Riemann, IPP et Changement de variable">
+$$\lim_{n\to+\infty}\frac{1}{n}\sum_{k=1}^n f\left(\frac{k}{n}\right) = \int_0^1 f(t)\,\mathrm{d}t$$
+
+$$\int_a^b u\,v' = \Big[u\,v\Big]_a^b - \int_a^b u'\,v \quad ; \quad \int_{\varphi(\alpha)}^{\varphi(\beta)} f(x)\,\mathrm{d}x = \int_\alpha^\beta f(\varphi(t))\,\varphi'(t)\,\mathrm{d}t$$
+</CriticalFormula>
+
+<CriticalFormula title="2. Tableau des Intégrales de Riemann (Attention à l'inversion du sens !)">
+$$\int_1^{+\infty} \frac{\mathrm{d}t}{t^\alpha} \text{ converge} \iff \mathbf{\alpha > 1} \quad \text{tandis que} \quad \int_0^1 \frac{\mathrm{d}t}{t^\alpha} \text{ converge} \iff \mathbf{\alpha < 1}$$
+</CriticalFormula>
+
+| Fonction $f(x)$ | Primitive usuelle $F(x)$ | Domaine de validité |
+| :--- | :--- | :--- |
+| $\dfrac{u'(x)}{u(x)}$ | $\ln\|u(x)\|$ | $u(x) \neq 0$ |
+| $\dfrac{1}{a^2 + x^2}\; (a > 0)$ | $\dfrac{1}{a}\arctan\left(\dfrac{x}{a}\right)$ | $\mathbb{R}$ |
+| $\dfrac{1}{\sqrt{1 - x^2}}$ | $\arcsin(x)$ | $]-1, 1[$ |
+| $\ln(x)$ | $x\ln(x) - x$ | $]0, +\infty[$ (par IPP) |

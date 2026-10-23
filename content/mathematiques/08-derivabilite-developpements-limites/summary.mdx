@@ -1,0 +1,21 @@
+# Fiche Synthèse — Dérivabilité et Développements Limités
+
+<CriticalFormula title="1. Accroissements Finis et Formule de Taylor-Young">
+$$\text{TAF sur } [a, b] : \quad \exists c \in ]a, b[,\quad f(b) - f(a) = f'(c)(b-a) \quad ; \quad \text{IAF : } |f(b)-f(a)| \le \sup_{]a,b[}|f'|\cdot |b-a|$$
+
+$$\text{Taylor-Young : } f(x_0+h) = f(x_0) + f'(x_0)h + \frac{f''(x_0)}{2!}h^2 + \dots + \frac{f^{(n)}(x_0)}{n!}h^n + o(h^n)$$
+</CriticalFormula>
+
+<CriticalFormula title="2. DL_3(0) indispensables en calcul de limites">
+$$\mathrm{e}^x = 1 + x + \frac{x^2}{2} + \frac{x^3}{6} + o(x^3) \quad ; \quad \ln(1+x) = x - \frac{x^2}{2} + \frac{x^3}{3} + o(x^3)$$
+
+$$\sqrt{1+x} = 1 + \frac{x}{2} - \frac{x^2}{8} + \frac{x^3}{16} + o(x^3) \quad ; \quad \frac{1}{\sqrt{1+x}} = 1 - \frac{x}{2} + \frac{3}{8}x^2 - \frac{5}{16}x^3 + o(x^3)$$
+
+$$\sin x = x - \frac{x^3}{6} + o(x^4) \quad ; \quad \cos x = 1 - \frac{x^2}{2} + \frac{x^4}{24} + o(x^5) \quad ; \quad \tan x = x + \frac{x^3}{3} + o(x^4)$$
+</CriticalFormula>
+
+| Opération sur un $\text{DL}_n(0)$ | Règle pratique |
+| :--- | :--- |
+| **Parité** | Fonction paire $\implies$ uniquement des puissances paires dans son $\text{DL}(0)$ |
+| **Primitivation** | On intègre terme à terme le polynôme et le reste passe de $o(x^n)$ à $o(x^{n+1})$ |
+| **Dérivation** | Uniquement si l'on sait à l'avance que $f'$ admet un DL (ex. $f$ de classe $\mathcal{C}^{n+1}$) ; l'ordre baisse de 1 |

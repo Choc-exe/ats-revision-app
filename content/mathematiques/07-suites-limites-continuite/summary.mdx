@@ -1,0 +1,21 @@
+# Fiche Synthèse — Suites, Limites et Continuité
+
+<CriticalFormula title="1. Convergence des suites réelles">
+$$\text{Croissante + Majorée} \implies \text{Converge} \quad ; \quad \text{Décroissante + Minorée} \implies \text{Converge}$$
+
+$$\text{Adjacentes : } (u_n)\nearrow,\; (v_n)\searrow,\; \lim(v_n - u_n) = 0 \implies \lim u_n = \lim v_n = \ell$$
+
+$$u_{n+1} = a u_n + b \;(a\neq 1) \implies u_n = \alpha + (u_0 - \alpha)a^n \quad \text{avec} \quad \alpha = \frac{b}{1-a}$$
+</CriticalFormula>
+
+<CriticalFormula title="2. Équivalents usuels lorsque u_n → 0 et Croissances comparées">
+$$\text{Pour } u_n \to 0 : \quad \sin(u_n) \sim u_n \quad ; \quad \ln(1+u_n) \sim u_n \quad ; \quad \mathrm{e}^{u_n} - 1 \sim u_n \quad ; \quad 1 - \cos(u_n) \sim \frac{u_n^2}{2}$$
+
+$$\text{Hiérarchie en } +\infty : \quad (\ln n)^\beta \ll n^\alpha \ll q^n \ll n! \quad (\alpha, \beta > 0,\; q > 1)$$
+</CriticalFormula>
+
+| Théorème fondamental sur la continuité | Hypothèses exigées dans une rédaction de concours | Conclusion obtenue |
+| :--- | :--- | :--- |
+| **Valeurs Intermédiaires (TVI)** | $f$ continue sur $[a, b]$ et $k$ compris entre $f(a)$ et $f(b)$ | Au moins une solution à $f(x) = k$ dans $[a, b]$ |
+| **Bijection monotone** | $f$ continue **et strictement monotone** sur $I$ | Unique solution à $f(x) = k \in f(I)$ |
+| **Bornes atteintes** | $f$ continue sur un **segment fermé borné** $[a, b]$ | $f$ est bornée et atteint son minimum et son maximum |

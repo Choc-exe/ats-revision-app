@@ -1,0 +1,38 @@
+[
+  {
+    "id": "math-10-qcm-01",
+    "question": "Soit la série de terme général $u_n = \\frac{2^n}{n!}$ pour $n \\ge 0$. Que vaut le rapport $\\lim_{n\\to+\\infty} \\frac{u_{n+1}}{u_n}$ et que vaut la somme $\\sum_{n=0}^{+\\infty} u_n$ ?",
+    "options": [
+      "Limite $0$ (converge par d'Alembert) et somme égale à $\\mathrm{e}^2$",
+      "Limite $2$ (diverge par d'Alembert)",
+      "Limite $0$ et somme égale à $2\\mathrm{e}$",
+      "Limite $1/2$ et somme égale à $2$"
+    ],
+    "correctIndex": 0,
+    "explanation": "On a $\\frac{u_{n+1}}{u_n} = \\frac{2^{n+1}}{(n+1)!} \\times \\frac{n!}{2^n} = \\frac{2}{n+1} \\xrightarrow[n\\to+\\infty]{} 0 < 1$. Par la règle de d'Alembert, la série converge. On reconnaît la série exponentielle $\\sum_{n=0}^{+\\infty} \\frac{x^n}{n!} = \\mathrm{e}^x$ évaluée en $x = 2$, d'où la somme $\\mathrm{e}^2$."
+  },
+  {
+    "id": "math-10-qcm-02",
+    "question": "Un signal créneau $2\\pi$-périodique impair vaut $f(t) = -1$ sur $]-\\pi, 0[$ et $f(t) = +1$ sur $]0, \\pi[$. Que valent ses coefficients $a_n$ et vers quelle valeur converge sa série de Fourier en $t = 0$ ?",
+    "options": [
+      "$\\forall n \\ge 0,\\; a_n = 0$ et la série converge vers $0$ en $t = 0$",
+      "$\\forall n \\ge 0,\\; a_n = 0$ et la série converge vers $1$ en $t = 0$",
+      "$\\forall n \\ge 1,\\; b_n = 0$ et la série converge vers $0$ en $t = 0$",
+      "La série diverge en $t = 0$ car $f$ y est discontinue"
+    ],
+    "correctIndex": 0,
+    "explanation": "Comme $f$ est impaire, tous ses coefficients cosinus $a_n$ (y compris la valeur moyenne $a_0$) sont nuls. En $t = 0$, $f$ présente un saut avec $f(0^-) = -1$ et $f(0^+) = +1$. D'après le théorème de Dirichlet, la série converge vers $\\frac{f(0^+) + f(0^-)}{2} = \\frac{1 + (-1)}{2} = 0$."
+  },
+  {
+    "id": "math-10-qcm-03",
+    "question": "Un signal périodique a pour développement en série de Fourier $u(t) = 3 + 4\\cos(\\omega t) + 2\\sqrt{2}\\sin(2\\omega t)$. Quelle est la valeur efficace $U_{\\text{eff}}$ de ce signal ?",
+    "options": [
+      "$U_{\\text{eff}} = \\sqrt{21}$",
+      "$U_{\\text{eff}} = \\sqrt{33}$",
+      "$U_{\\text{eff}} = 3 + 4 + 2\\sqrt{2}$",
+      "$U_{\\text{eff}} = 5$"
+    ],
+    "correctIndex": 0,
+    "explanation": "D'après la formule de Parseval : $U_{\\text{eff}}^2 = a_0^2 + \\frac{1}{2}\\sum_{n\\ge 1}(a_n^2 + b_n^2) = 3^2 + \\frac{4^2}{2} + \\frac{(2\\sqrt{2})^2}{2} = 9 + 8 + 4 = 21$, soit $U_{\\text{eff}} = \\sqrt{21}$."
+  }
+]

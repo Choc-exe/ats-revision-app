@@ -1,0 +1,53 @@
+# Séries numériques et Séries de Fourier
+
+## 1. Séries numériques $\sum u_n$ : Convergence et séries de référence
+
+Soit $(u_n)_{n\in\mathbb{N}}$ une suite réelle ou complexe. On appelle **série de terme général $u_n$** la suite des **sommes partielles** $(S_N)_{N\in\mathbb{N}}$ définie par $S_N = \sum_{n=0}^N u_n$. La série $\sum u_n$ **converge** si la suite $(S_N)$ converge vers une limite finie $S = \sum_{n=0}^{+\infty} u_n$.
+
+<WarningBox title="Condition nécessaire de convergence (Divergence grossière)">
+Si la série $\sum u_n$ converge, alors son terme général tend nécessairement vers zéro : $\lim_{n\to+\infty} u_n = 0$. Par contraposée, **si $(u_n)$ ne tend pas vers $0$, la série $\sum u_n$ diverge grossièrement**. Attention : la réciproque est fausse ($\lim \frac{1}{n} = 0$, mais la série harmonique $\sum_{n\ge 1}\frac{1}{n}$ diverge).
+</WarningBox>
+
+<CriticalFormula title="À connaître absolument — Séries numériques de référence et Règles de convergence">
+* **Série géométrique :** $\sum_{n\ge 0} q^n$ converge $\iff |q| < 1$, et dans ce cas $\sum_{n=0}^{+\infty} q^n = \frac{1}{1 - q}$.
+* **Série exponentielle :** Pour tout $x \in \mathbb{C}$, $\sum_{n\ge 0} \frac{x^n}{n!}$ converge absolument et $\sum_{n=0}^{+\infty} \frac{x^n}{n!} = \mathrm{e}^x$.
+* **Série de Riemann :** $\sum_{n\ge 1} \frac{1}{n^\alpha}$ converge $\iff \mathbf{\alpha > 1}$.
+* **Règle de d'Alembert ($u_n > 0$) :** Si $\lim_{n\to+\infty} \frac{u_{n+1}}{u_n} = L$, alors $\sum u_n$ converge si $L < 1$ et diverge grossièrement si $L > 1$ (si $L = 1$, on ne peut pas conclure directement).
+* **Critère spécial des séries alternées (Leibniz) :** Si $(a_n)$ est positive, **décroissante** et $\lim_{n\to+\infty} a_n = 0$, alors la série alternée $\sum (-1)^n a_n$ converge et le reste $R_N = \sum_{n=N+1}^{+\infty}(-1)^n a_n$ vérifie $|R_N| \le a_{N+1}$.
+</CriticalFormula>
+
+---
+
+## 2. Séries de Fourier d'un signal périodique
+
+Soit $f : \mathbb{R} \to \mathbb{R}$ une fonction **$T$-périodique** (de pulsation fondamentale $\omega = \frac{2\pi}{T}$) et continue par morceaux. On décompose le signal en une valeur moyenne $a_0$ et une somme d'harmoniques de pulsations $n\omega$ :
+
+$$S_f(t) = a_0 + \sum_{n=1}^{+\infty} \Big(a_n \cos(n\omega t) + b_n \sin(n\omega t)\Big) = \sum_{n=-\infty}^{+\infty} c_n\,\mathrm{e}^{\mathrm{i} n \omega t}$$
+
+<CriticalFormula title="À connaître absolument — Coefficients de Fourier trigonométriques et Parité">
+Sur toute période de longueur $T$ (par exemple $[0, T]$ ou $[-T/2, T/2]$) :
+
+$$a_0 = \frac{1}{T}\int_{-T/2}^{T/2} f(t)\,\mathrm{d}t \quad \text{(valeur moyenne du signal sur une période)}$$
+
+$$\forall n \ge 1, \quad a_n = \frac{2}{T}\int_{-T/2}^{T/2} f(t)\cos(n\omega t)\,\mathrm{d}t \quad \text{et} \quad b_n = \frac{2}{T}\int_{-T/2}^{T/2} f(t)\sin(n\omega t)\,\mathrm{d}t$$
+
+* **Si $f$ est PAIRE ($f(-t) = f(t)$) :** $\forall n \ge 1,\; b_n = 0$ et $a_n = \frac{4}{T}\int_0^{T/2} f(t)\cos(n\omega t)\,\mathrm{d}t$.
+* **Si $f$ est IMPAIRE ($f(-t) = -f(t)$) :** $a_0 = 0$, $\forall n \ge 1,\; a_n = 0$ et $b_n = \frac{4}{T}\int_0^{T/2} f(t)\sin(n\omega t)\,\mathrm{d}t$.
+</CriticalFormula>
+
+---
+
+## 3. Théorème de Dirichlet et Formule de Parseval (Énergie / Puissance)
+
+Ces deux théorèmes constituent le pont systématique des sujets de concours ATS pour calculer la somme exacte de séries numériques du type $\sum \frac{1}{n^2}$ ou $\sum \frac{1}{n^4}$.
+
+<CriticalFormula title="À connaître absolument — Théorème de Dirichlet (Convergence ponctuelle) et Parseval">
+* **Théorème de Dirichlet :** Si $f$ est $T$-périodique et de classe $\mathcal{C}^1$ par morceaux sur $\mathbb{R}$, sa série de Fourier converge en tout point $t \in \mathbb{R}$ vers la **demi-somme des limites à droite et à gauche** :
+
+$$a_0 + \sum_{n=1}^{+\infty} \Big(a_n \cos(n\omega t) + b_n \sin(n\omega t)\Big) = \frac{f(t^+) + f(t^-)}{2}$$
+
+*(En particulier, en tout point $t$ où $f$ est **continue**, la série de Fourier est égale à $f(t)$).*
+* **Formule de Parseval (Conservation de la puissance moyenne / Valeur efficace $f_{\text{eff}}^2$) :**
+
+$$\frac{1}{T}\int_{-T/2}^{T/2} |f(t)|^2\,\mathrm{d}t = a_0^2 + \frac{1}{2}\sum_{n=1}^{+\infty}\left(a_n^2 + b_n^2\right) = \sum_{n=-\infty}^{+\infty} |c_n|^2$$
+</CriticalFormula>

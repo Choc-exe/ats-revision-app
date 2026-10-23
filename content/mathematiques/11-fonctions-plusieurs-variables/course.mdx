@@ -1,0 +1,62 @@
+# Fonctions de plusieurs variables (Dérivées partielles, Gradient, Extremums)
+
+## 1. Dérivées partielles premières, Différentielle et Gradient
+
+Soit $f : U \subset \mathbb{R}^2 \to \mathbb{R}$ définie sur un ouvert $U$ du plan. Les **dérivées partielles d'ordre 1** de $f$ au point $(x_0, y_0) \in U$ s'obtiennent en dérivant par rapport à l'une des variables tout en maintenant l'autre constante :
+
+$$\frac{\partial f}{\partial x}(x_0, y_0) = \lim_{h\to 0} \frac{f(x_0 + h, y_0) - f(x_0, y_0)}{h} \quad ; \quad \frac{\partial f}{\partial y}(x_0, y_0) = \lim_{k\to 0} \frac{f(x_0, y_0 + k) - f(x_0, y_0)}{k}$$
+
+<CriticalFormula title="À connaître absolument — Vecteur Gradient, Différentielle totale et Plan tangent">
+Si $f$ est de classe $\mathcal{C}^1$ sur $U$, on définit son **vecteur gradient** et sa **différentielle exacte $\mathrm{d}f$** (utilisée en thermodynamique et en calcul d'incertitudes) par :
+
+$$\overrightarrow{\text{grad}}\,f(x, y) = \nabla f(x, y) = \begin{pmatrix} \dfrac{\partial f}{\partial x}(x, y) \\[8pt] \dfrac{\partial f}{\partial y}(x, y) \end{pmatrix} \quad \text{et} \quad \mathrm{d}f = \frac{\partial f}{\partial x}\,\mathrm{d}x + \frac{\partial f}{\partial y}\,\mathrm{d}y$$
+
+* **Propriété géométrique du gradient :** En tout point où $\nabla f(x_0, y_0) \neq \vec{0}$, le vecteur gradient est **orthogonal à la ligne de niveau** $f(x, y) = c$ passant par $(x_0, y_0)$ et pointe dans le sens des **valeurs croissantes** de $f$.
+* **Équation du plan tangent à la surface $z = f(x, y)$ en $(x_0, y_0)$ :**
+
+$$z = f(x_0, y_0) + \frac{\partial f}{\partial x}(x_0, y_0)\,(x - x_0) + \frac{\partial f}{\partial y}(x_0, y_0)\,(y - y_0)$$
+</CriticalFormula>
+
+### Dérivation d'une fonction composée (Règle de la chaîne / Chain Rule)
+Si $x(t)$ et $y(t)$ sont dérivables par rapport au temps $t$ et si $g(t) = f(x(t), y(t))$, alors :
+
+$$\frac{\mathrm{d}g}{\mathrm{d}t}(t) = \frac{\partial f}{\partial x}(x(t), y(t))\cdot x'(t) + \frac{\partial f}{\partial y}(x(t), y(t))\cdot y'(t) = \overrightarrow{\text{grad}}\,f \cdot \vec{v}(t)$$
+
+---
+
+## 2. Dérivées partielles secondes, Théorème de Schwarz et Matrice Hessienne
+
+Si $f$ est de classe $\mathcal{C}^2$ sur l'ouvert $U$, elle admet quatre dérivées partielles d'ordre 2, regroupées dans la **matrice hessienne** $H_f(x, y)$ :
+
+$$H_f(x, y) = \begin{pmatrix} \dfrac{\partial^2 f}{\partial x^2} & \dfrac{\partial^2 f}{\partial x \partial y} \\[10pt] \dfrac{\partial^2 f}{\partial y \partial x} & \dfrac{\partial^2 f}{\partial y^2} \end{pmatrix} = \begin{pmatrix} r & s \\ s & t \end{pmatrix}$$
+
+<CriticalFormula title="À connaître absolument — Théorème de Schwarz et Condition de différentielle totale exacte">
+* **Théorème de Schwarz :** Pour toute fonction $f$ de classe $\mathcal{C}^2$ sur un ouvert $U$, l'ordre de dérivation partielle croisée n'a pas d'importance :
+
+$$\frac{\partial^2 f}{\partial x \partial y}(x, y) = \frac{\partial^2 f}{\partial y \partial x}(x, y)$$
+
+* **Forme différentielle exacte :** Une forme $\omega = P(x, y)\,\mathrm{d}x + Q(x, y)\,\mathrm{d}y$ sur un ouvert étoilé (ou simplement connexe) est la différentielle totale exacte d'une fonction d'état $f$ ($\omega = \mathrm{d}f$) si et seulement si elle vérifie la **condition de Cauchy-Schwarz** :
+
+$$\frac{\partial P}{\partial y}(x, y) = \frac{\partial Q}{\partial x}(x, y)$$
+</CriticalFormula>
+
+---
+
+## 3. Recherche des Extremums locaux sur un ouvert $U \subset \mathbb{R}^2$
+
+Un point $(x_0, y_0) \in U$ est un **point critique** (ou point stationnaire) de $f$ si son gradient s'y annule :
+
+$$\nabla f(x_0, y_0) = \vec{0} \iff \begin{cases} \dfrac{\partial f}{\partial x}(x_0, y_0) = 0 \\[6pt] \dfrac{\partial f}{\partial y}(x_0, y_0) = 0 \end{cases}$$
+
+Condition nécessaire : sur un **ouvert**, tout extremum local d'une fonction de classe $\mathcal{C}^1$ est nécessairement un point critique. Pour déterminer la nature d'un point critique $(x_0, y_0)$, on utilise les **notations de Monge** en $(x_0, y_0)$ :
+
+$$r = \frac{\partial^2 f}{\partial x^2}(x_0, y_0) \quad ; \quad s = \frac{\partial^2 f}{\partial x \partial y}(x_0, y_0) \quad ; \quad t = \frac{\partial^2 f}{\partial y^2}(x_0, y_0) \quad \text{et} \quad \det H_f = r\,t - s^2$$
+
+<CriticalFormula title="À connaître absolument — Condition suffisante d'ordre 2 (Critère rt - s² de Monge)">
+En un point critique $(x_0, y_0)$ d'une fonction de classe $\mathcal{C}^2$ sur un ouvert $U$ :
+1. **Si $r\,t - s^2 > 0$** : $f$ présente un **extremum local strict** en $(x_0, y_0)$ :
+   * Si **$r > 0$** : c'est un **minimum local**.
+   * Si **$r < 0$** : c'est un **maximum local**.
+2. **Si $r\,t - s^2 < 0$** : $f$ ne présente **pas d'extremum** en $(x_0, y_0)$ ; c'est un **point col** (ou **point selle**).
+3. **Si $r\,t - s^2 = 0$** : cas douteux, on ne peut pas conclure avec les dérivées secondes (il faut étudier directement le signe de $f(x_0 + h, y_0 + k) - f(x_0, y_0)$).
+</CriticalFormula>

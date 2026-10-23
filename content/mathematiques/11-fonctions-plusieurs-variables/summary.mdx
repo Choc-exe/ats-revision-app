@@ -1,0 +1,14 @@
+# Fiche Synthèse — Fonctions de Plusieurs Variables
+
+<CriticalFormula title="1. Gradient, Différentielle et Règle de la chaîne">
+$$\nabla f(x, y) = \begin{pmatrix} \partial f/\partial x \\ \partial f/\partial y \end{pmatrix} \quad ; \quad \mathrm{d}f = \frac{\partial f}{\partial x}\mathrm{d}x + \frac{\partial f}{\partial y}\mathrm{d}y \quad ; \quad \frac{\mathrm{d}}{\mathrm{d}t}\Big(f(x(t), y(t))\Big) = \frac{\partial f}{\partial x}x'(t) + \frac{\partial f}{\partial y}y'(t)$$
+</CriticalFormula>
+
+<CriticalFormula title="2. Méthode en 3 étapes pour les Extremums sur un ouvert">
+1. **Points critiques :** Résoudre le système $\frac{\partial f}{\partial x}(x, y) = 0$ et $\frac{\partial f}{\partial y}(x, y) = 0$.
+2. **Notations de Monge en $(x_0, y_0)$ :** Calculer $r = \frac{\partial^2 f}{\partial x^2}$, $s = \frac{\partial^2 f}{\partial x \partial y}$, $t = \frac{\partial^2 f}{\partial y^2}$.
+3. **Discriminant hessien $\Delta = rt - s^2$ :**
+   * $\Delta = rt - s^2 > 0$ et $r > 0 \implies$ **Minimum local**.
+   * $\Delta = rt - s^2 > 0$ et $r < 0 \implies$ **Maximum local**.
+   * $\Delta = rt - s^2 < 0 \implies$ **Point col (pas d'extremum)**.
+</CriticalFormula>

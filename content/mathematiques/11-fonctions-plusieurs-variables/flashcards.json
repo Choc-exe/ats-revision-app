@@ -1,0 +1,20 @@
+[
+  {
+    "id": "math-11-fc-01",
+    "category": "Gradient & Géométrie",
+    "question": "Quelle est la direction et quel est le sens géométrique du vecteur gradient $\\overrightarrow{\\text{grad}}\\,f(x_0, y_0)$ par rapport aux lignes de niveau de $f$ ?",
+    "answer": "En tout point où il est non nul, le vecteur gradient $\\overrightarrow{\\text{grad}}\\,f(x_0, y_0)$ est **normal (orthogonal) à la ligne de niveau** $f(x, y) = f(x_0, y_0)$ et il est orienté vers les **valeurs croissantes** de $f$ (direction de plus grande pente)."
+  },
+  {
+    "id": "math-11-fc-02",
+    "category": "Théorème de Schwarz",
+    "question": "Énoncer le théorème de Schwarz et son application pour vérifier qu'une forme différentielle $\\omega = P(x, y)\\,\\mathrm{d}x + Q(x, y)\\,\\mathrm{d}y$ est une différentielle totale exacte.",
+    "answer": "Théorème de Schwarz : si $f$ est de classe $\\mathcal{C}^2$, alors $\\frac{\\partial^2 f}{\\partial x \\partial y} = \\frac{\\partial^2 f}{\\partial y \\partial x}$.\nApplication : sur un ouvert simplement connexe, $\\omega = P\\,\\mathrm{d}x + Q\\,\\mathrm{d}y$ est une différentielle exacte ($\\omega = \\mathrm{d}f$) si et seulement si $\\frac{\\partial P}{\\partial y} = \\frac{\\partial Q}{\\partial x}$."
+  },
+  {
+    "id": "math-11-fc-03",
+    "category": "Extremums locaux",
+    "question": "En un point critique $(x_0, y_0)$, que valent les notations de Monge $r, s, t$ et comment conclut-on selon le signe de $rt - s^2$ ?",
+    "answer": "$r = \\frac{\\partial^2 f}{\\partial x^2}(x_0, y_0)$, $s = \\frac{\\partial^2 f}{\\partial x \\partial y}(x_0, y_0)$, $t = \\frac{\\partial^2 f}{\\partial y^2}(x_0, y_0)$.\n- Si $rt - s^2 > 0$ : extremum local (minimum si $r > 0$, maximum si $r < 0$).\n- Si $rt - s^2 < 0$ : point col (ou point selle), ce n'est pas un extremum.\n- Si $rt - s^2 = 0$ : on ne peut pas conclure directement."
+  }
+]

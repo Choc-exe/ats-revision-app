@@ -1,0 +1,26 @@
+[
+  {
+    "id": "math-08-fc-01",
+    "category": "Théorèmes fondamentaux",
+    "question": "Énoncer précisément le théorème de Rolle avec ses trois hypothèses.",
+    "answer": "Soit $f : [a, b] \\to \\mathbb{R}$ telle que :\n1. $f$ est continue sur le segment fermé $[a, b]$,\n2. $f$ est dérivable sur l'intervalle ouvert $]a, b[$,\n3. $f(a) = f(b)$.\nAlors il existe au moins un réel $c \\in ]a, b[$ tel que $f'(c) = 0$."
+  },
+  {
+    "id": "math-08-fc-02",
+    "category": "Développements limités",
+    "question": "Quel est le développement limité à l'ordre 3 en $0$ de $\\sqrt{1+x}$ et de $\\frac{1}{1+x}$ ?",
+    "answer": "$$\\sqrt{1+x} = 1 + \\frac{1}{2}x - \\frac{1}{8}x^2 + \\frac{1}{16}x^3 + o(x^3)$$\n$$\\frac{1}{1+x} = 1 - x + x^2 - x^3 + o(x^3)$$"
+  },
+  {
+    "id": "math-08-fc-03",
+    "category": "Géométrie des courbes",
+    "question": "Une fonction vérifie au voisinage de $0$ : $f(x) = 2 - 3x + 5x^3 + o(x^3)$. Quelle est l'équation de la tangente en $0$ et quelle est la position relative de $\\mathcal{C}_f$ par rapport à cette tangente ?",
+    "answer": "L'équation de la tangente en $0$ est $y = 2 - 3x$.\nL'écart vaut $f(x) - (2 - 3x) = 5x^3 + o(x^3) \\sim 5x^3$, qui change de signe en $0$ (positif pour $x>0$, négatif pour $x<0$) : la courbe traverse sa tangente, le point $(0, 2)$ est un point d'inflexion."
+  },
+  {
+    "id": "math-08-fc-04",
+    "category": "Dérivation",
+    "question": "Retrouver la dérivée de $\\arctan(x)$ sur $\\mathbb{R}$ et de $\\arcsin(x)$ sur $]-1, 1[$ à l'aide de la formule de dérivation d'une bijection réciproque.",
+    "answer": "$$(\\arctan)'(x) = \\frac{1}{1 + x^2} \\quad \\text{et} \\quad (\\arcsin)'(x) = \\frac{1}{\\sqrt{1 - x^2}}$$"
+  }
+]

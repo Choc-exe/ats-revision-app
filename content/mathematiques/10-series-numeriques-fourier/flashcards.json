@@ -1,0 +1,26 @@
+[
+  {
+    "id": "math-10-fc-01",
+    "category": "Séries numériques",
+    "question": "Quelle est la nature de la série harmonique $\\sum_{n\\ge 1}\\frac{1}{n}$ et de la série harmonique alternée $\\sum_{n\\ge 1}\\frac{(-1)^{n-1}}{n}$ ?",
+    "answer": "- $\\sum_{n\\ge 1}\\frac{1}{n}$ diverge (série de Riemann avec $\\alpha = 1 \\le 1$).\n- $\\sum_{n\\ge 1}\\frac{(-1)^{n-1}}{n}$ converge d'après le critère spécial des séries alternées (car $1/n$ décroît vers $0$) et sa somme vaut $\\ln(2)$."
+  },
+  {
+    "id": "math-10-fc-02",
+    "category": "Séries de Fourier",
+    "question": "Que vaut la somme de la série de Fourier d'une fonction $\\mathcal{C}^1$ par morceaux en un point de discontinuité $t_0$ (Théorème de Dirichlet) ?",
+    "answer": "D'après le théorème de Dirichlet, en un point de saut $t_0$, la série de Fourier converge vers la moyenne arithmétique des limites à droite et à gauche :\n$$S_f(t_0) = \\frac{f(t_0^+) + f(t_0^-)}{2}$$"
+  },
+  {
+    "id": "math-10-fc-03",
+    "category": "Séries de Fourier",
+    "question": "Dans un sujet de concours, à quel moment utilise-t-on le théorème de Dirichlet et à quel moment utilise-t-on la formule de Parseval pour calculer la somme d'une série numérique ?",
+    "answer": "- Si les coefficients de Fourier sont en $1/n$ (ou $1/n^2$) et qu'on cherche la somme $\\sum \\frac{1}{n^2}$, on évalue la série en un point particulier $t_0$ via **Dirichlet** (si $a_n \\propto 1/n^2$) ou on élève au carré via **Parseval** (si $b_n \\propto 1/n$, alors $b_n^2 \\propto 1/n^2$)."
+  },
+  {
+    "id": "math-10-fc-04",
+    "category": "Interprétation physique",
+    "question": "Que représentent physiquement $a_0$ et le membre de gauche $\\frac{1}{T}\\int_0^T f(t)^2\\,\\mathrm{d}t$ de l'égalité de Parseval pour une tension électrique périodique $u(t)$ ?",
+    "answer": "$a_0 = \\langle u \\rangle$ est la composante continue (valeur moyenne) du signal, et $\\sqrt{\\frac{1}{T}\\int_0^T u(t)^2\\,\\mathrm{d}t} = U_{\\text{eff}} = \\sqrt{a_0^2 + \\sum_{n=1}^{+\\infty} \\frac{a_n^2 + b_n^2}{2}}$ est la **valeur efficace (RMS)** de la tension."
+  }
+]

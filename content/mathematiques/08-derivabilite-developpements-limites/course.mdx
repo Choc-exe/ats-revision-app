@@ -1,0 +1,61 @@
+# Dérivabilité, Étude de fonctions et Développements limités (Taylor)
+
+## 1. Dérivabilité en un point, Tangente et Fonctions de classe $\mathcal{C}^k$
+
+Soit $f : I \to \mathbb{R}$ et $x_0 \in I$. La fonction $f$ est **dérivable en $x_0$** si le taux d'accroissement admet une limite finie lorsque $x \to x_0$ :
+
+$$f'(x_0) = \lim_{x\to x_0} \frac{f(x) - f(x_0)}{x - x_0} = \lim_{h\to 0} \frac{f(x_0 + h) - f(x_0)}{h}$$
+
+La courbe représentative $\mathcal{C}_f$ admet alors en $(x_0, f(x_0))$ une **tangente** d'équation $y = f(x_0) + f'(x_0)(x - x_0)$. Toute fonction dérivable en $x_0$ est continue en $x_0$ (la réciproque est fausse : $x \mapsto |x|$ ou $x \mapsto \sqrt{x}$ en $0$).
+
+<CriticalFormula title="À connaître absolument — Dérivée d'une fonction composée et d'une réciproque">
+* **Composition :** Si $u$ est dérivable en $x$ et $f$ dérivable en $u(x)$, alors $(f \circ u)'(x) = u'(x) \cdot f'(u(x))$.
+* **Bijection réciproque :** Si $f : I \to J$ est bijective, dérivable en $x_0 \in I$ avec **$f'(x_0) \neq 0$**, alors $f^{-1}$ est dérivable en $y_0 = f(x_0)$ et :
+
+$$\left(f^{-1}\right)'(y_0) = \frac{1}{f'\left(f^{-1}(y_0)\right)} = \frac{1}{f'(x_0)}$$
+
+* **Formule de Leibniz (dérivée $n$-ième d'un produit) :** $(u\cdot v)^{(n)} = \sum_{k=0}^n \binom{n}{k} u^{(k)} v^{(n-k)}$.
+</CriticalFormula>
+
+---
+
+## 2. Théorème de Rolle et Théorème des Accroissements Finis (TAF)
+
+<CriticalFormula title="À connaître absolument — Théorème de Rolle et Accroissements Finis">
+* **Théorème de Rolle :** Si $f$ est **continue sur le segment fermé $[a, b]$**, **dérivable sur l'ouvert $]a, b[$** et vérifie **$f(a) = f(b)$**, alors il existe au moins un réel $c \in ]a, b[$ tel que $f'(c) = 0$.
+* **Égalité des Accroissements Finis (TAF) :** Sous les mêmes hypothèses de régularité (sans supposer $f(a)=f(b)$), il existe $c \in ]a, b[$ tel que :
+
+$$f(b) - f(a) = f'(c)\,(b - a)$$
+
+* **Inégalité des Accroissements Finis (IAF) :** Si $\forall x \in ]a, b[,\; m \le f'(x) \le M$, alors $m(b-a) \le f(b) - f(a) \le M(b-a)$. En particulier, si $|f'(x)| \le k$ sur $I$, alors $\forall x, y \in I,\; |f(x) - f(y)| \le k\,|x - y|$ ($f$ est $k$-lipschitzienne).
+</CriticalFormula>
+
+---
+
+## 3. Formules de Taylor et Développements Limités (DL)
+
+Une fonction $f$ admet un **développement limité d'ordre $n$ au voisinage de $0$** (noté $\text{DL}_n(0)$) s'il existe un polynôme $P_n(x) = c_0 + c_1 x + \dots + c_n x^n$ tel que :
+
+$$f(x) \underset{x\to 0}{=} c_0 + c_1 x + c_2 x^2 + \dots + c_n x^n + o(x^n)$$
+
+**Formule de Taylor-Young :** Si $f$ est de classe $\mathcal{C}^n$ au voisinage de $x_0$, alors $f$ admet un $\text{DL}_n(x_0)$ unique donné par :
+
+$$f(x_0 + h) \underset{h\to 0}{=} \sum_{k=0}^n \frac{f^{(k)}(x_0)}{k!}\,h^k + o(h^n)$$
+
+<CriticalFormula title="À connaître absolument — Formulaire des Développements Limités usuels en 0">
+$$\begin{aligned}
+\mathrm{e}^x &= 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \dots + \frac{x^n}{n!} + o(x^n) \\[6pt]
+\frac{1}{1 - x} &= 1 + x + x^2 + x^3 + \dots + x^n + o(x^n) \quad ; \quad \frac{1}{1 + x} = 1 - x + x^2 - x^3 + \dots + (-1)^n x^n + o(x^n) \\[6pt]
+\ln(1 + x) &= x - \frac{x^2}{2} + \frac{x^3}{3} - \frac{x^4}{4} + \dots + (-1)^{n-1}\frac{x^n}{n} + o(x^n) \\[6pt]
+(1 + x)^\alpha &= 1 + \alpha x + \frac{\alpha(\alpha - 1)}{2!}x^2 + \frac{\alpha(\alpha - 1)(\alpha - 2)}{3!}x^3 + o(x^3) \\[6pt]
+\cos(x) &= 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \dots + (-1)^p\frac{x^{2p}}{(2p)!} + o(x^{2p+1}) \quad ; \quad \cosh(x) = 1 + \frac{x^2}{2!} + \frac{x^4}{4!} + o(x^5) \\[6pt]
+\sin(x) &= x - \frac{x^3}{3!} + \frac{x^5}{5!} - \dots + (-1)^p\frac{x^{2p+1}}{(2p+1)!} + o(x^{2p+2}) \quad ; \quad \sinh(x) = x + \frac{x^3}{3!} + \frac{x^5}{5!} + o(x^6) \\[6pt]
+\tan(x) &= x + \frac{x^3}{3} + \frac{2}{15}x^5 + o(x^6) \quad ; \quad \arctan(x) = x - \frac{x^3}{3} + \frac{x^5}{5} - \dots + (-1)^p\frac{x^{2p+1}}{2p+1} + o(x^{2p+2})
+\end{aligned}$$
+</CriticalFormula>
+
+### Applications géométriques d'un Développement Limité
+* **Position locale d'une courbe par rapport à sa tangente en $x_0$ :** Si $f(x_0 + h) = f(x_0) + f'(x_0)h + a_p h^p + o(h^p)$ avec $a_p \neq 0$ et $p \ge 2$, alors l'équation de la tangente est $y_T = f(x_0) + f'(x_0)h$ et l'écart vertical vaut $f(x) - y_T \sim a_p h^p$.
+  * Si $p$ est **pair** : $\mathcal{C}_f$ reste du même côté de sa tangente (au-dessus si $a_p > 0$, en dessous si $a_p < 0$).
+  * Si $p$ est **impair** ($p \ge 3$) : la courbe traverse sa tangente en $x_0$, c'est un **point d'inflexion**.
+* **Asymptote oblique en $\pm\infty$ :** En posant $h = \frac{1}{x} \to 0$, si l'on obtient un développement asymptotique de la forme $f(x) = a x + b + \frac{c}{x^k} + o\left(\frac{1}{x^k}\right)$ avec $c \neq 0$, alors la droite $\Delta : y = ax + b$ est **asymptote oblique** à $\mathcal{C}_f$ et le signe de $\frac{c}{x^k}$ donne la position de $\mathcal{C}_f$ par rapport à $\Delta$.

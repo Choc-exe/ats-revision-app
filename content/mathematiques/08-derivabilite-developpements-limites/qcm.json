@@ -1,0 +1,38 @@
+[
+  {
+    "id": "math-08-qcm-01",
+    "question": "Quel est le développement limité à l'ordre 2 en $0$ de la fonction $f(x) = \\ln(\\cos x)$ ?",
+    "options": [
+      "$-\\frac{x^2}{2} + o(x^2)$",
+      "$1 - \\frac{x^2}{2} + o(x^2)$",
+      "$\\frac{x^2}{2} + o(x^2)$",
+      "$-x - \\frac{x^2}{2} + o(x^2)$"
+    ],
+    "correctIndex": 0,
+    "explanation": "On sait que $\\cos x = 1 - \\frac{x^2}{2} + o(x^2) = 1 + u$ avec $u = -\\frac{x^2}{2} + o(x^2) \\to 0$. Comme $\\ln(1+u) = u + o(u)$, on obtient $\\ln(\\cos x) = -\\frac{x^2}{2} + o(x^2)$."
+  },
+  {
+    "id": "math-08-qcm-02",
+    "question": "Que vaut la limite $\\lim_{x\\to 0} \\frac{\\mathrm{e}^x - 1 - \\sin x}{x^2}$ ?",
+    "options": [
+      "$0$",
+      "$\\frac{1}{2}$",
+      "$1$",
+      "$\\frac{1}{6}$"
+    ],
+    "correctIndex": 1,
+    "explanation": "Effectuons un $\\text{DL}_2(0)$ du numérateur : $\\mathrm{e}^x - 1 - \\sin x = \\left(1 + x + \\frac{x^2}{2} + o(x^2)\\right) - 1 - \\left(x + o(x^2)\\right) = \\frac{x^2}{2} + o(x^2)$. En divisant par $x^2$, la limite vaut $\\frac{1}{2}$."
+  },
+  {
+    "id": "math-08-qcm-03",
+    "question": "Pour tout $x > 0$, en appliquant le Théorème des Accroissements Finis à la fonction $t \\mapsto \\ln(t)$ sur le segment $[x, x+1]$, quel encadrement obtient-on ?",
+    "options": [
+      "$\\frac{1}{x+1} \\le \\ln(x+1) - \\ln(x) \\le \\frac{1}{x}$",
+      "$\\frac{1}{x} \\le \\ln(x+1) - \\ln(x) \\le \\frac{1}{x+1}$",
+      "$x \\le \\ln(x+1) - \\ln(x) \\le x+1$",
+      "$0 \\le \\ln(x+1) - \\ln(x) \\le \\frac{1}{x^2}$"
+    ],
+    "correctIndex": 0,
+    "explanation": "La fonction $t \\mapsto \\ln(t)$ est continue sur $[x, x+1]$ et dérivable sur $]x, x+1[$ de dérivée $t \\mapsto \\frac{1}{t}$. Pour tout $t \\in [x, x+1]$, on a $\\frac{1}{x+1} \\le \\frac{1}{t} \\le \\frac{1}{x}$. L'Inégalité des Accroissements Finis sur un intervalle de longueur $(x+1)-x = 1$ donne immédiatement $\\frac{1}{x+1} \\le \\ln(x+1) - \\ln(x) \\le \\frac{1}{x}$."
+  }
+]

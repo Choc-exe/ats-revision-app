@@ -1,0 +1,38 @@
+[
+  {
+    "id": "math-09-qcm-01",
+    "question": "Que vaut l'intégrale $I = \\int_1^{\\mathrm{e}} x \\ln(x)\\,\\mathrm{d}x$ ?",
+    "options": [
+      "$\\frac{\\mathrm{e}^2 + 1}{4}$",
+      "$\\frac{\\mathrm{e}^2 - 1}{4}$",
+      "$\\frac{\\mathrm{e}^2 + 1}{2}$",
+      "$1$"
+    ],
+    "correctIndex": 0,
+    "explanation": "Par intégration par parties en posant $u(x) = \\ln(x)$ ($u'(x) = 1/x$) et $v'(x) = x$ ($v(x) = x^2/2$) : $I = \\left[\\frac{x^2}{2}\\ln x\\right]_1^{\\mathrm{e}} - \\int_1^{\\mathrm{e}} \\frac{x}{2}\\,\\mathrm{d}x = \\frac{\\mathrm{e}^2}{2} - \\left[\\frac{x^2}{4}\\right]_1^{\\mathrm{e}} = \\frac{\\mathrm{e}^2}{2} - \\frac{\\mathrm{e}^2 - 1}{4} = \\frac{\\mathrm{e}^2 + 1}{4}$."
+  },
+  {
+    "id": "math-09-qcm-02",
+    "question": "Quelle est la nature de l'intégrale impropre $J = \\int_0^{+\\infty} \\frac{\\ln(1 + t)}{t^{3/2}}\\,\\mathrm{d}t$ ?",
+    "options": [
+      "Elle diverge en $0^+$ et converge en $+\\infty$",
+      "Elle converge en $0^+$ et diverge en $+\\infty$",
+      "Elle converge (en $0^+$ comme en $+\\infty$)",
+      "Elle diverge en $0^+$ et en $+\\infty$"
+    ],
+    "correctIndex": 2,
+    "explanation": "La fonction est continue et positive sur $]0, +\\infty[$. En $0^+$, $\\frac{\\ln(1+t)}{t^{3/2}} \\sim \\frac{t}{t^{3/2}} = \\frac{1}{t^{1/2}}$, intégrable en $0^+$ par Riemann car $\\frac{1}{2} < 1$. En $+\\infty$, par croissance comparée $\\ln(1+t) = o(t^{1/4})$, donc $f(t) = o\\left(\\frac{1}{t^{5/4}}\\right)$, intégrable en $+\\infty$ car $\\frac{5}{4} > 1$. L'intégrale $J$ converge donc."
+  },
+  {
+    "id": "math-09-qcm-03",
+    "question": "En effectuant le changement de variable $t = \\sqrt{x}$ dans l'intégrale $K = \\int_1^4 \\frac{\\mathrm{d}x}{x + \\sqrt{x}}$, quelle expression obtient-on ?",
+    "options": [
+      "$K = 2\\ln\\left(\\frac{3}{2}\\right)$",
+      "$K = \\ln\\left(\\frac{3}{2}\\right)$",
+      "$K = 2\\ln(2)$",
+      "$K = \\ln\\left(\\frac{5}{2}\\right)$"
+    ],
+    "correctIndex": 0,
+    "explanation": "On pose $t = \\sqrt{x} \\iff x = t^2$, d'où $\\mathrm{d}x = 2t\\,\\mathrm{d}t$. Pour $x=1, t=1$ ; pour $x=4, t=2$. Ainsi $K = \\int_1^2 \\frac{2t\\,\\mathrm{d}t}{t^2 + t} = 2\\int_1^2 \\frac{\\mathrm{d}t}{t+1} = 2\\big[\\ln(t+1)\\big]_1^2 = 2(\\ln 3 - \\ln 2) = 2\\ln\\left(\\frac{3}{2}\\right)$."
+  }
+]

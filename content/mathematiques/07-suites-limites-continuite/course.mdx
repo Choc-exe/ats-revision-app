@@ -1,0 +1,54 @@
+# Suites réelles, Limites et Continuité des fonctions
+
+## 1. Suites numériques réelles : Convergence et théorèmes d'existence
+
+Une suite réelle $(u_n)_{n\in\mathbb{N}}$ converge vers une limite finie $\ell \in \mathbb{R}$ si tout intervalle ouvert centré en $\ell$ contient tous les termes de la suite à partir d'un certain rang :
+
+$$\forall \varepsilon > 0, \quad \exists N \in \mathbb{N}, \quad \forall n \ge N, \quad |u_n - \ell| \le \varepsilon$$
+
+Toute suite convergente est **bornée** (la réciproque est fausse, par exemple $u_n = (-1)^n$).
+
+<CriticalFormula title="À connaître absolument — Théorèmes fondamentaux de convergence des suites">
+* **Théorème d'encadrement (des gendarmes) :** Si $v_n \le u_n \le w_n$ à partir d'un certain rang et si $\lim_{n\to+\infty} v_n = \lim_{n\to+\infty} w_n = \ell \in \mathbb{R}$, alors $(u_n)$ converge et $\lim_{n\to+\infty} u_n = \ell$.
+* **Théorème de la limite monotone :** Toute suite réelle **croissante et majorée** converge vers $\sup_{n\in\mathbb{N}} u_n$. Toute suite réelle **décroissante et minorée** converge vers $\inf_{n\in\mathbb{N}} u_n$.
+* **Suites adjacentes :** Deux suites $(u_n)$ et $(v_n)$ sont adjacentes si $(u_n)$ est croissante, $(v_n)$ est décroissante et $\lim_{n\to+\infty} (v_n - u_n) = 0$. Elles convergent alors vers une **même limite** $\ell \in \mathbb{R}$ et vérifient $\forall n \in \mathbb{N},\; u_n \le \ell \le v_n$.
+</CriticalFormula>
+
+### Suites classiques et récurrentes $u_{n+1} = f(u_n)$
+* **Suite arithmético-géométrique ($u_{n+1} = a u_n + b$ avec $a \neq 1$) :** On cherche l'unique point fixe $\alpha = \frac{b}{1-a}$ vérifiant $\alpha = a\alpha + b$. La suite auxiliaire $v_n = u_n - \alpha$ est géométrique de raison $a$, d'où :
+
+$$u_n = \alpha + (u_0 - \alpha)\,a^n$$
+
+* **Suite récurrente $u_{n+1} = f(u_n)$ :** Si $f$ est continue sur un intervalle fermé stable $I$ ($f(I) \subset I$) et si $(u_n)$ converge vers $\ell \in I$, alors $\ell$ est nécessairement un **point fixe** de $f$, solution de l'équation $f(\ell) = \ell$. Si $f$ est croissante sur $I$, la suite $(u_n)$ est monotone (son sens de variation est donné par le signe de $u_1 - u_0$).
+
+---
+
+## 2. Équivalents, Négligeabilité et Croissances comparées
+
+Soient $(u_n)$ et $(v_n)$ deux suites ne s'annulant pas à partir d'un certain rang :
+* **Négligeabilité ($u_n = o(v_n)$) :** $\lim_{n\to+\infty} \frac{u_n}{v_n} = 0$.
+* **Équivalence ($u_n \underset{+\infty}{\sim} v_n$) :** $\lim_{n\to+\infty} \frac{u_n}{v_n} = 1 \iff u_n - v_n = o(v_n)$. Deux suites équivalentes ont le **même signe** à partir d'un certain rang et la **même nature** (même limite).
+
+<WarningBox title="Piège classique — Opérations interdites sur les équivalents">
+On peut multiplier, diviser ou élever à une puissance constante des équivalents, mais **on ne doit jamais additionner ou soustraire des équivalents** sans vérifier qu'il n'y a pas simplification des termes dominants, ni **composer un équivalent par l'exponentielle** ($u_n \sim v_n \not\Rightarrow \mathrm{e}^{u_n} \sim \mathrm{e}^{v_n}$ : il faut que $\lim (u_n - v_n) = 0$).
+</WarningBox>
+
+<CriticalFormula title="À connaître absolument — Croissances comparées et Équivalent de Stirling">
+Pour tous réels $\alpha > 0$, $\beta > 0$ et $q > 1$ :
+
+$$\lim_{n\to+\infty} \frac{(\ln n)^\beta}{n^\alpha} = 0 \quad ; \quad \lim_{n\to+\infty} \frac{n^\alpha}{q^n} = 0 \quad ; \quad \lim_{n\to+\infty} \frac{q^n}{n!} = 0$$
+
+**Formule de Stirling :** $n! \underset{n\to+\infty}{\sim} \sqrt{2\pi n}\left(\frac{n}{\mathrm{e}}\right)^n$.
+</CriticalFormula>
+
+---
+
+## 3. Continuité des fonctions d'une variable réelle sur un intervalle
+
+Une fonction $f : I \to \mathbb{R}$ est continue en $x_0 \in I$ si $\lim_{x\to x_0} f(x) = f(x_0)$. Si $\lim_{x\to x_0, x\neq x_0} f(x) = \ell \in \mathbb{R}$ pour une fonction non définie en $x_0$, on peut **prolonger $f$ par continuité** en posant $\tilde{f}(x_0) = \ell$.
+
+<CriticalFormula title="À connaître absolument — Théorème des Valeurs Intermédiaires (TVI), Bijection et Bornes">
+* **Théorème des Valeurs Intermédiaires (TVI) :** L'image d'un intervalle $I$ par une fonction continue est un intervalle. En particulier, si $f$ est continue sur $[a, b]$ et $f(a)\cdot f(b) \le 0$, l'équation $f(x) = 0$ admet **au moins une solution** dans $[a, b]$.
+* **Théorème de la bijection monotone :** Si $f$ est **continue et strictement monotone** sur un intervalle $I$, elle réalise une bijection de $I$ sur l'intervalle image $J = f(I)$. Sa bijection réciproque $f^{-1} : J \to I$ est continue et strictement monotone de même sens que $f$.
+* **Théorème des bornes atteintes (Weierstrass) :** Toute fonction continue sur un **segment fermé borné $[a, b]$** est bornée et **atteint ses bornes** : il existe $x_{\min}, x_{\max} \in [a, b]$ tels que $\forall x \in [a, b],\; f(x_{\min}) \le f(x) \le f(x_{\max})$.
+</CriticalFormula>

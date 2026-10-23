@@ -1,0 +1,26 @@
+[
+  {
+    "id": "math-07-fc-01",
+    "category": "Suites réelles",
+    "question": "Quelles sont les trois conditions exactes pour que deux suites $(u_n)$ et $(v_n)$ soient dites adjacentes, et que peut-on en conclure ?",
+    "answer": "1. $(u_n)$ est croissante.\n2. $(v_n)$ est décroissante.\n3. $\\lim_{n\\to+\\infty}(v_n - u_n) = 0$.\nConclusion : elles convergent vers la même limite finie $\\ell \\in \\mathbb{R}$ et encadrent cette limite à tout rang ($u_n \\le \\ell \\le v_n$)."
+  },
+  {
+    "id": "math-07-fc-02",
+    "category": "Suites récurrentes",
+    "question": "Si $u_{n+1} = f(u_n)$ avec $f$ continue sur un intervalle fermé stable $I$, comment détermine-t-on le sens de variation de $(u_n)$ et ses limites éventuelles ?",
+    "answer": "- Si $f$ est croissante sur $I$, alors $(u_n)$ est monotone (croissante si $u_1 - u_0 \\ge 0$, décroissante sinon). Ou bien le signe de $f(x) - x$ donne directement le signe de $u_{n+1} - u_n$.\n- Si $(u_n)$ converge vers $\\ell \\in I$, la continuité de $f$ impose $f(\\ell) = \\ell$ (point fixe)."
+  },
+  {
+    "id": "math-07-fc-03",
+    "category": "Équivalents",
+    "question": "Donner les équivalents usuels lorsque $x \\to 0$ de $\\ln(1+x)$, $\\mathrm{e}^x - 1$, $1 - \\cos(x)$ et $(1+x)^\\alpha - 1$.",
+    "answer": "Lorsque $x \\to 0$ :\n$$\\ln(1+x) \\sim x \\quad ; \\quad \\mathrm{e}^x - 1 \\sim x \\quad ; \\quad 1 - \\cos(x) \\sim \\frac{x^2}{2} \\quad ; \\quad (1+x)^\\alpha - 1 \\sim \\alpha x$$"
+  },
+  {
+    "id": "math-07-fc-04",
+    "category": "Continuité",
+    "question": "Énoncer le théorème des bornes atteintes (Weierstrass) et préciser pourquoi l'hypothèse d'un segment fermé borné $[a, b]$ est indispensable.",
+    "answer": "Toute fonction continue sur un segment fermé borné $[a, b]$ est bornée et atteint ses bornes. Sur un intervalle ouvert comme $]0, 1]$, la fonction continue $f(x) = 1/x$ n'est pas majorée ; sur $[0, +\\infty[$, $g(x) = \\arctan(x)$ est bornée mais n'atteint jamais sa borne supérieure $\\pi/2$."
+  }
+]
