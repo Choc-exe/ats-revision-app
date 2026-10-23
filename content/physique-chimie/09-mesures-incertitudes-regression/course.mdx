@@ -1,0 +1,73 @@
+# Mesures, incertitudes-types, régression linéaire et capacités expérimentales
+
+## 1. Erreur de mesure, Incertitude-type et Écriture d'un résultat (Annexe V)
+
+Toute mesure expérimentale d'une grandeur physique $G$ est entachée d'une **incertitude** liée à l'instrument, à l'opérateur et aux fluctuations de l'environnement :
+* **Les erreurs aléatoires (accidentelles)** varient de façon imprévisible d'une mesure à l'autre. Elles gouvernent la **fidélité** (dispersion) et sont réduites en répétant les mesures ($N$ grand).
+* **Les erreurs systématiques (biais)** décalent toutes les mesures dans le même sens (ex. défaut d'étalonnage, zéro mal réglé). Elles gouvernent la **justesse** de la mesure.
+
+L'**incertitude-type $u(G)$** est assimilée à l'écart-type de la distribution statistique des valeurs pouvant être raisonnablement attribuées au mesurande $G$.
+
+<CriticalFormula title="À connaître absolument — Évaluations de Type A et de Type B">
+* **Évaluation de Type A (approche statistique sur $N$ mesures répétées $g_1, \dots, g_N$)** : la meilleure estimation est la moyenne arithmétique $\bar{g}$ et l'incertitude-type sur cette moyenne vaut :
+
+$$\bar{g} = \frac{1}{N}\sum_{i=1}^N g_i \quad ; \quad s_{n-1} = \sqrt{\frac{1}{N-1}\sum_{i=1}^N (g_i - \bar{g})^2} \quad \Longrightarrow \quad u(\bar{g}) = \frac{s_{n-1}}{\sqrt{N}}$$
+
+* **Évaluation de Type B (mesure unique sur un instrument gradué ou notice constructeur)** : lorsque l'erreur maximale possible est bornée par une demi-étendue $\pm a$ (loi de probabilité uniforme sur $[g - a, g + a]$), l'incertitude-type vaut :
+
+$$u(g) = \frac{a}{\sqrt{3}}$$
+
+*(Pour une lecture directe sur une échelle graduée au pas $\Delta_{\text{grad}}$, en prenant $a = \frac{\Delta_{\text{grad}}}{2}$, on obtient $u(g) = \frac{\Delta_{\text{grad}}}{\sqrt{12}}$).*
+</CriticalFormula>
+
+**Règle d'arrondi et d'écriture du résultat final :** On conserve en général **1 ou 2 chiffres significatifs** sur l'incertitude-type $u(G)$ (souvent majorée par sécurité), et le dernier chiffre significatif de la valeur mesurée $g_{\text{mes}}$ doit occuper **exactement la même position décimale** que celui de $u(G)$ :
+
+$$G = (g_{\text{mes}} \pm u(G))\text{ unité} \quad \text{ex. : } R = (47{,}3 \pm 0{,}4)\,\Omega$$
+
+---
+
+## 2. Propagation des incertitudes (Mesures indirectes)
+
+Lorsqu'une grandeur $G = f(X, Y)$ est calculée à partir de deux grandeurs mesurées indépendantes $X$ et $Y$ d'incertitudes-types respectives $u(X)$ et $u(Y)$, la loi de composition quadratique des variances donne :
+
+<CriticalFormula title="À connaître absolument — Formules de propagation des incertitudes">
+* **Somme ou différence ($G = aX \pm bY + c$)** : les incertitudes-types absolues se composent quadratiquement :
+
+$$u(G) = \sqrt{a^2\,u(X)^2 + b^2\,u(Y)^2}$$
+
+* **Produit, quotient ou loi puissance ($G = k \cdot X^\alpha \cdot Y^\beta$)** : ce sont les **incertitudes-types relatives** $\frac{u(X)}{|X|}$ qui se composent quadratiquement :
+
+$$\frac{u(G)}{|G|} = \sqrt{\alpha^2\left(\frac{u(X)}{X}\right)^2 + \beta^2\left(\frac{u(Y)}{Y}\right)^2}$$
+
+* **Cas général ($G = f(X, Y)$)** :
+
+$$u(G) = \sqrt{\left(\frac{\partial f}{\partial X}\right)^2 u(X)^2 + \left(\frac{\partial f}{\partial Y}\right)^2 u(Y)^2}$$
+</CriticalFormula>
+
+---
+
+## 3. Validation d'un résultat expérimental : Écart normalisé (Score $z$)
+
+En travaux pratiques comme dans les sujets écrits de concours ATS, on ne juge jamais la validité d'une mesure avec un simple écart relatif en pourcentage sans tenir compte de l'incertitude. L'outil officiel est l'**écart normalisé $z$** (ou *z-score*).
+
+<CriticalFormula title="À connaître absolument — Critère de compatibilité par l'écart normalisé">
+Pour comparer une valeur expérimentale $g_{\text{exp}}$ (accompagnée de son incertitude-type $u(g_{\text{exp}})$) à une valeur de référence tabulée $g_{\text{réf}}$ :
+
+$$z = \frac{|g_{\text{exp}} - g_{\text{réf}}|}{u(g_{\text{exp}})} \quad \text{(ou } z = \frac{|g_{\text{exp}} - g_{\text{réf}}|}{\sqrt{u(g_{\text{exp}})^2 + u(g_{\text{réf}})^2}} \text{ si } g_{\text{réf}} \text{ a une incertitude)}$$
+
+* **Si $z \le 2$** : la mesure est **compatible** avec la valeur de référence (le modèle ou le protocole est validé au niveau de confiance de $95\,\%$).
+* **Si $z > 2$** : l'écart est **statistiquement significatif** (présence d'un biais systématique ou modèle théorique inadapté).
+</CriticalFormula>
+
+---
+
+## 4. Régression linéaire, Linéarisation et Analyse des résidus
+
+Pour vérifier expérimentalement une loi physique non linéaire, la méthode consiste à **linéariser** l'expression théorique afin de se ramener à une droite $Y = a\,X + b$ :
+* *Exemple 1 (Pendule simple)* : $T_0 = 2\pi\sqrt{\frac{L}{g}} \iff \underbrace{T_0^2}_{Y} = \underbrace{\frac{4\pi^2}{g}}_{a} \cdot \underbrace{L}_{X}$. La pente $a$ permet d'extraire $g = \frac{4\pi^2}{a}$.
+* *Exemple 2 (Loi d'Arrhenius ou décharge d'un condensateur)* : $u_C(t) = E\,\mathrm{e}^{-t/\tau} \iff \underbrace{\ln(u_C)}_{Y} = \underbrace{-\frac{1}{\tau}}_{a}\,t + \underbrace{\ln E}_{b}$.
+
+**Critères rigoureux de validation d'une régression linéaire :**
+1. **Alignement aux incertitudes près :** La droite modèle doit passer par les rectangles (ou barres) d'incertitude de la majorité des points expérimentaux.
+2. **Analyse des résidus $e_i = Y_i - (a X_i + b)$ :** Les écarts verticaux entre les points mesurés et la droite doivent être **répartis aléatoirement de part et d'autre de zéro**. Si les résidus dessinent une courbe en « U » ou en « S », le modèle affine est invalidé.
+3. **Ordonnée à l'origine $b$ :** Si la théorie prévoit une loi de proportionnalité pure ($Y = aX$), il faut vérifier que $|b| \le 2\,u(b)$ (l'ordonnée à l'origine est compatible avec $0$).

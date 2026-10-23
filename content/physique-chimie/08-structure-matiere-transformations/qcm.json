@@ -1,0 +1,38 @@
+[
+  {
+    "id": "pc-08-qcm-01",
+    "question": "Quelle est la composition exacte de l'ion ferrique $^{56}_{26}\\text{Fe}^{3+}$ ?",
+    "options": [
+      "$26$ protons, $30$ neutrons et $23$ électrons",
+      "$26$ protons, $56$ neutrons et $29$ électrons",
+      "$30$ protons, $26$ neutrons et $23$ électrons",
+      "$26$ protons, $30$ neutrons et $26$ électrons"
+    ],
+    "correctIndex": 0,
+    "explanation": "Le numéro atomique $Z = 26$ donne le nombre de protons ($26$). Le nombre de neutrons vaut $N = A - Z = 56 - 26 = 30$. La charge $+3e$ indique que l'atome neutre a perdu $3$ électrons : il en possède donc $26 - 3 = 23$."
+  },
+  {
+    "id": "pc-08-qcm-02",
+    "question": "On réalise la combustion complète de $n_1 = 2{,}0\\text{ mol}$ de méthane $\\text{CH}_4$ en présence de $n_2 = 3{,}0\\text{ mol}$ de dioxygène selon $\\text{CH}_4 + 2\\,\\text{O}_2 \\rightarrow \\text{CO}_2 + 2\\,\\text{H}_2\\text{O}$. Quel est l'avancement maximal $x_{\\max}$ et combien de moles de $\\text{CO}_2$ obtient-on ?",
+    "options": [
+      "$x_{\\max} = 2{,}0\\text{ mol}$ et $n(\\text{CO}_2) = 2{,}0\\text{ mol}$",
+      "$x_{\\max} = 1{,}5\\text{ mol}$ et $n(\\text{CO}_2) = 1{,}5\\text{ mol}$",
+      "$x_{\\max} = 1{,}5\\text{ mol}$ et $n(\\text{CO}_2) = 3{,}0\\text{ mol}$",
+      "$x_{\\max} = 1{,}0\\text{ mol}$ et $n(\\text{CO}_2) = 1{,}0\\text{ mol}$"
+    ],
+    "correctIndex": 1,
+    "explanation": "On compare $\\frac{n_0(\\text{CH}_4)}{1} = 2{,}0\\text{ mol}$ et $\\frac{n_0(\\text{O}_2)}{2} = \\frac{3{,}0}{2} = 1{,}5\\text{ mol}$. Le dioxygène est donc le réactif limitant avec $x_{\\max} = 1{,}5\\text{ mol}$, ce qui forme $n_f(\\text{CO}_2) = 1 \\times x_{\\max} = 1{,}5\\text{ mol}$."
+  },
+  {
+    "id": "pc-08-qcm-03",
+    "question": "Lors de la fission d'un noyau d'uranium $^{235}_{92}\\text{U}$ sous l'impact d'un neutron thermique selon $^{235}_{92}\\text{U} + \\,^1_0\\text{n} \\rightarrow \\,^{94}_{38}\\text{Sr} + \\,^{139}_{Z}\\text{Xe} + k\\,^1_0\\text{n}$, quelles sont les valeurs de $Z$ et de $k$ ?",
+    "options": [
+      "$Z = 54$ et $k = 2$",
+      "$Z = 54$ et $k = 3$",
+      "$Z = 52$ et $k = 3$",
+      "$Z = 54$ et $k = 1$"
+    ],
+    "correctIndex": 1,
+    "explanation": "D'après les lois de conservation de Soddy : sur la charge $Z$, on a $92 + 0 = 38 + Z + 0 \\implies Z = 92 - 38 = 54$. Sur le nombre de nucléons $A$, on a $235 + 1 = 94 + 139 + k \\implies 236 = 233 + k \\implies k = 3$ neutrons émis."
+  }
+]

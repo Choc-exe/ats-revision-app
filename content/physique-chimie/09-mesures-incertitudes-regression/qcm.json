@@ -1,0 +1,38 @@
+[
+  {
+    "id": "pc-09-qcm-01",
+    "question": "Un étudiant mesure l'accélération de la pesanteur et obtient $g_{\\text{exp}} = 9{,}72\\text{ m}\\cdot\\text{s}^{-2}$ avec une incertitude-type $u(g_{\\text{exp}}) = 0{,}06\\text{ m}\\cdot\\text{s}^{-2}$. La valeur de référence du laboratoire est $g_{\\text{réf}} = 9{,}81\\text{ m}\\cdot\\text{s}^{-2}$ (supposée exacte). Que vaut l'écart normalisé $z$ et que conclure ?",
+    "options": [
+      "$z = 0{,}92 \\le 2$ : la mesure est compatible avec la référence",
+      "$z = 1{,}50 \\le 2$ : la mesure est compatible avec la référence",
+      "$z = 2{,}25 > 2$ : la mesure est incompatible avec la référence",
+      "$z = 0{,}09 \\le 2$ : la mesure est compatible avec la référence"
+    ],
+    "correctIndex": 1,
+    "explanation": "L'écart normalisé vaut $z = \\frac{|9{,}72 - 9{,}81|}{0{,}06} = \\frac{0{,}09}{0{,}06} = 1{,}50$. Comme $z = 1{,}50 \\le 2$, l'écart entre la mesure et la référence s'explique par l'incertitude expérimentale : le résultat est validé."
+  },
+  {
+    "id": "pc-09-qcm-02",
+    "question": "Un calcul numérique donne une capacité $C = 4{,}7183 \\times 10^{-6}\\text{ F}$ et une incertitude-type $u(C) = 0{,}184 \\times 10^{-6}\\text{ F}$. Quelle est l'écriture finale normalisée correcte (en conservant 2 chiffres significatifs sur l'incertitude) ?",
+    "options": [
+      "$C = (4{,}72 \\pm 0{,}18)\\,\\mu\\text{F}$",
+      "$C = (4{,}718 \\pm 0{,}18)\\,\\mu\\text{F}$",
+      "$C = (4{,}7 \\pm 0{,}18)\\,\\mu\\text{F}$",
+      "$C = (4{,}7183 \\pm 0{,}2)\\,\\mu\\text{F}$"
+    ],
+    "correctIndex": 0,
+    "explanation": "En gardant deux chiffres significatifs sur l'incertitude-type, on obtient $u(C) = 0{,}18\\,\\mu\\text{F}$ (au centième de $\\mu\\text{F}$). La valeur mesurée doit impérativement être arrondie à la même décimale (au centième), soit $4{,}72\\,\\mu\\text{F}$."
+  },
+  {
+    "id": "pc-09-qcm-03",
+    "question": "Lors d'une régression linéaire $Y = a X + b$, le coefficient de détermination vaut $R^2 = 0{,}985$, mais le graphique des résidus $e_i = Y_i - (a X_i + b)$ en fonction de $X_i$ présente une forme parabolique très nette en « U ». Que doit-on en conclure ?",
+    "options": [
+      "Le modèle affine est parfaitement validé car $R^2 > 0{,}98$",
+      "Le modèle affine est inadapté car les résidus ne sont pas répartis aléatoirement autour de zéro (présence d'un terme non linéaire non pris en compte)",
+      "Les incertitudes de Type A ont été surestimées",
+      "Il suffit d'imposer $b = 0$ pour corriger la courbure des résidus"
+    ],
+    "correctIndex": 1,
+    "explanation": "Un $R^2$ proche de $1$ ne suffit jamais à lui seul pour valider une loi affine. Une structure systématique (en « U » ou en « S ») sur le graphe des résidus prouve que la loi réelle n'est pas affine sur l'intervalle étudié."
+  }
+]

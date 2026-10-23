@@ -102,10 +102,10 @@ export default function MdxViewer({
 }: MdxViewerProps) {
   return (
     <article
-      className={`print-article bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-8 md:p-10 ${
-        variant === "synthetic" ? "border-t-4 border-t-blue-600" : ""
-      }`}
-    >
+  className={`print-article bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm p-4 sm:p-6 md:p-10 ${
+    variant === "synthetic" ? "border-t-4 border-t-blue-600" : ""
+  }`}
+>
       <div className="no-print flex items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-200 dark:border-slate-800">
         <span className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
           {variant === "synthetic"

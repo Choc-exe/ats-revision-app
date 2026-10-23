@@ -1,0 +1,92 @@
+# Structure de la matière, réactions chimiques, combustions et nucléaire
+
+## 1. Constitution de l'atome, Noyau et Isotopes
+
+Un atome est constitué d'un **noyau** central chargé positivement, concentrant la quasi-totalité de sa masse, entouré d'un **cortège électronique** formé d'électrons de charge $q_e = -e = -1{,}602 \times 10^{-19}\text{ C}$.
+
+Un noyau atomique (ou nucléide) est représenté par la notation conventionnelle :
+
+$$^A_Z\text{X}$$
+
+* **$Z$** désigne le **numéro atomique** (ou nombre de charge) : c'est le nombre de **protons** présents dans le noyau (et aussi le nombre d'électrons dans l'atome électriquement neutre). Il caractérise l'**élément chimique** $\text{X}$.
+* **$A$** désigne le **nombre de masse** : c'est le nombre total de **nucléons** (protons + neutrons) du noyau.
+* **$N = A - Z$** désigne le nombre de **neutrons** électriquement neutres.
+
+Deux noyaux sont dits **isotopes** s'ils possèdent le même numéro atomique $Z$ (ils appartiennent au même élément chimique et ont les mêmes propriétés chimiques) mais des nombres de masse $A$ différents (nombre de neutrons $N$ différent). Par exemple, le carbone possède trois isotopes naturels principaux : $^{12}_6\text{C}$ (stable, $98{,}9\,\%$), $^{13}_6\text{C}$ (stable, $1{,}1\,\%$) et $^{14}_6\text{C}$ (radioactif $\beta^-$).
+
+<CriticalFormula title="À connaître absolument — Quantité de matière et Relations fondamentales">
+La **mole** ($\text{mol}$) est l'unité de quantité de matière du Système International. Une mole contient exactement $N_A = 6{,}022 \times 10^{23}\text{ mol}^{-1}$ entités élémentaires (**constante d'Avogadro**). Selon l'état physique de l'espèce étudiée, la quantité de matière $n$ se calcule par :
+
+$$\begin{aligned} n &= \frac{N_{\text{entités}}}{N_A} = \frac{m}{M} \quad &\text{(solide, liquide ou gaz de masse } m \text{ et de masse molaire } M\text{)} \\ n &= \frac{\rho \cdot V}{M} \quad &\text{(fluide ou solide homogène de masse volumique } \rho \text{ et de volume } V\text{)} \\ n &= C \cdot V_{\text{sol}} \quad &\text{(soluté de concentration molaire } C \text{ dans un volume } V_{\text{sol}}\text{)} \\ n &= \frac{V_{\text{gaz}}}{V_m} = \frac{P \cdot V_{\text{gaz}}}{R \cdot T} \quad &\text{(gaz parfait de volume molaire } V_m = \frac{RT}{P}\text{)} \end{aligned}$$
+</CriticalFormula>
+
+---
+
+## 2. Transformations chimiques, Tableau d'avancement et Réactif limitant
+
+Une réaction chimique macroscopique est modélisée par une **équation de réaction** traduisant la conservation des éléments chimiques et de la charge électrique globale :
+
+$$\nu_A\,\text{A} + \nu_B\,\text{B} \longrightarrow \nu_C\,\text{C} + \nu_D\,\text{D}$$
+
+Les entiers ou fractions simples $\nu_i$ sont les **nombres stœchiométriques**. Pour suivre l'évolution du système entre l'état initial ($x = 0$) et un état intermédiaire quelconque, on introduit l'**avancement molaire $x(t)$** (exprimé en $\text{mol}$) :
+
+$$\begin{aligned} n_A(x) &= n_{A,0} - \nu_A\,x \quad &;\quad n_B(x) &= n_{B,0} - \nu_B\,x \\ n_C(x) &= n_{C,0} + \nu_C\,x \quad &;\quad n_D(x) &= n_{D,0} + \nu_D\,x \end{aligned}$$
+
+<CriticalFormula title="À connaître absolument — Avancement maximal et Mélange stœchiométrique">
+Pour une transformation **totale**, la réaction s'arrête dès que l'un des réactifs est entièrement consommé. L'**avancement maximal $x_{\max}$** est la plus petite des valeurs annulant les quantités de matière des réactifs :
+
+$$x_{\max} = \min\left(\frac{n_{A,0}}{\nu_A}\,,\,\frac{n_{B,0}}{\nu_B}\right)$$
+
+Le réactif qui impose cette valeur minimale est appelé **réactif limitant** ; l'autre est dit **en excès**. Le mélange initial est dit **stœchiométrique** si les réactifs sont introduits dans les proportions exactes de l'équation :
+
+$$\frac{n_{A,0}}{\nu_A} = \frac{n_{B,0}}{\nu_B}$$
+</CriticalFormula>
+
+<WarningBox title="Piège classique en concours — Taux d'avancement final et Rendement">
+Si la réaction est limitée par un équilibre chimique, l'avancement final mesuré expérimentalement $x_f$ reste inférieur à $x_{\max}$. Le **taux d'avancement final** (ou rendement de conversion) se définit par $\tau = \frac{x_f}{x_{\max}} \in [0, 1]$. Une transformation est totale si et seulement si $\tau = 1$.
+</WarningBox>
+
+---
+
+## 3. Combustions, Pouvoir Calorifique (PCI) et Émissions de $\text{CO}_2$
+
+La **combustion complète** d'un hydrocarbure $\text{C}_x\text{H}_y$ ou d'un biocarburant oxygéné $\text{C}_x\text{H}_y\text{O}_z$ en présence de dioxygène $\text{O}_2$ (comburant de l'air, l'air sec contenant en volume environ $21\,\%$ de $\text{O}_2$ et $79\,\%$ de $\text{N}_2$) produit exclusivement du **dioxyde de carbone $\text{CO}_2$** et de l'**eau $\text{H}_2\text{O}$** :
+
+$$\text{C}_x\text{H}_y\text{O}_z + \left(x + \frac{y}{4} - \frac{z}{2}\right)\text{O}_2 \longrightarrow x\,\text{CO}_2 + \frac{y}{2}\,\text{H}_2\text{O}$$
+
+Si l'apport en dioxygène est insuffisant ($\text{O}_2$ limitant), la combustion est **incomplète** et forme du **monoxyde de carbone $\text{CO}$** (gaz incolore, inodore et mortel) ainsi que des particules de carbone imbrûlé $\text{C(s)}$ (suies).
+
+<CriticalFormula title="À connaître absolument — Bilan masse de CO₂ et Énergie thermique de combustion">
+En brûlant complètement une masse $m_{\text{carb}}$ d'un combustible $\text{C}_x\text{H}_y\text{O}_z$ de masse molaire $M_{\text{carb}}$, chaque mole de combustible consomme $\left(x + \frac{y}{4} - \frac{z}{2}\right)$ moles de $\text{O}_2$ et rejette **$x$ moles de $\text{CO}_2$** ($M_{\text{CO}_2} = 44{,}0\text{ g}\cdot\text{mol}^{-1}$) :
+
+$$n(\text{CO}_2) = x \cdot n_{\text{carb}} = x \cdot \frac{m_{\text{carb}}}{M_{\text{carb}}} \quad \Longrightarrow \quad m(\text{CO}_2) = x \cdot \frac{M_{\text{CO}_2}}{M_{\text{carb}}} \cdot m_{\text{carb}}$$
+
+L'énergie thermique libérée par la combustion complète d'une masse $m_{\text{carb}}$ de carburant est donnée par son **Pouvoir Calorifique Inférieur ($\text{PCI}$, en $\text{J}\cdot\text{kg}^{-1}$)** lorsque l'eau formée reste à l'état vapeur :
+
+$$Q_{\text{libérée}} = \vert{}\Delta H_{\text{comb}}\vert{} = m_{\text{carb}} \cdot \text{PCI}$$
+</CriticalFormula>
+
+---
+
+## 4. Transformations nucléaires, Lois de Soddy et Relation d'Einstein
+
+Une réaction nucléaire affecte le cœur des noyaux atomiques. Contrairement aux réactions chimiques, les éléments chimiques ne sont pas conservés, mais la transformation obéit aux **lois de conservation de Soddy** :
+
+$$\sum_{\text{réactifs}} A_i = \sum_{\text{produits}} A_j \quad \text{(conservation du nombre de nucléons)} \quad \text{et} \quad \sum_{\text{réactifs}} Z_i = \sum_{\text{produits}} Z_j \quad \text{(conservation de la charge)}$$
+
+On distingue quatre types de désintégrations radioactives spontanées (aléatoires, suivant la loi de décroissance exponentielle $N(t) = N_0\,\mathrm{e}^{-\lambda t}$ avec $t_{1/2} = \frac{\ln 2}{\lambda}$) et deux réactions provoquées :
+* **Radioactivité $\alpha$** (noyaux lourds $A > 200$) : émission d'un noyau d'hélium $^4_2\text{He}$ selon $^A_Z\text{X} \rightarrow \,^{A-4}_{Z-2}\text{Y} + \,^4_2\text{He}$.
+* **Radioactivité $\beta^-$** (excès de neutrons) : un neutron se transforme en proton avec émission d'un électron $^0_{-1}\text{e}$ selon $^A_Z\text{X} \rightarrow \,^A_{Z+1}\text{Y} + \,^0_{-1}\text{e} + \bar{\nu}_e$.
+* **Radioactivité $\beta^+$** (excès de protons) : émission d'un positon $^0_{+1}\text{e}$ selon $^A_Z\text{X} \rightarrow \,^A_{Z-1}\text{Y} + \,^0_{+1}\text{e} + \nu_e$.
+* **Désexcitation $\gamma$** : émission d'un photon de haute énergie par un noyau fils laissé dans un état excité $^A_Z\text{Y}^* \rightarrow \,^A_Z\text{Y} + \gamma$.
+* **Fission nucléaire** : un noyau lourd fissile (ex. $^{235}_{92}\text{U}$) percuté par un neutron thermique se scinde en deux noyaux plus légers en libérant 2 ou 3 neutrons (réaction en chaîne).
+* **Fusion nucléaire** : deux noyaux légers (ex. deutérium $^2_1\text{H}$ et tritium $^3_1\text{H}$) s'assemblent à très haute température pour former un noyau plus lourd ($^4_2\text{He} + \,^1_0\text{n}$).
+
+<CriticalFormula title="À connaître absolument — Défaut de masse et Énergie libérée (Relation d'Einstein)">
+La masse d'un noyau $^A_Z\text{X}$ est toujours strictement inférieure à la somme des masses de ses nucléons séparés : c'est le **défaut de masse** $\Delta m_{\text{noyau}} = Z\,m_p + (A-Z)\,m_n - m(^A_Z\text{X}) > 0$.
+Lors d'une réaction nucléaire exoénergétique ($\text{Réactifs} \rightarrow \text{Produits}$), la perte de masse $\Delta m = \sum m_{\text{réactifs}} - \sum m_{\text{produits}} > 0$ est convertie en énergie libérée $E_{\text{lib}}$ selon l'équivalence masse-énergie d'Einstein :
+
+$$E_{\text{lib}} = \vert{}\Delta E\vert{} = \Delta m \cdot c^2$$
+
+Avec $c = 2{,}998 \times 10^8\text{ m}\cdot\text{s}^{-1}$, $1\text{ eV} = 1{,}602 \times 10^{-19}\text{ J}$, $1\text{ MeV} = 1{,}602 \times 10^{-13}\text{ J}$ et l'équivalent énergétique de l'unité de masse atomique $1\text{ u} = 1{,}6605 \times 10^{-27}\text{ kg} \leftrightarrow 931{,}5\text{ MeV}/c^2$.
+</CriticalFormula>

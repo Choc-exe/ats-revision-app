@@ -1,0 +1,21 @@
+# Fiche Synthèse — Mesures, Incertitudes-types et Régression linéaire
+
+<CriticalFormula title="1. Calcul d'une incertitude-type (Type A vs Type B)">
+$$\text{Type A ($N$ mesures) : } u(\bar{x}) = \frac{s_{n-1}}{\sqrt{N}} \quad ; \quad \text{Type B (demi-étendue } a\text{) : } u(x) = \frac{a}{\sqrt{3}}$$
+
+$$\text{Écriture normalisée : } G = (g_{\text{mes}} \pm u(G))\text{ unité} \quad \text{(même nombre de décimales sur } g_{\text{mes}} \text{ et } u(G)\text{)}$$
+</CriticalFormula>
+
+<CriticalFormula title="2. Propagation des incertitudes et Écart normalisé z">
+$$G = X \pm Y \implies u(G) = \sqrt{u(X)^2 + u(Y)^2}$$
+
+$$G = k\,X^\alpha Y^\beta \implies \frac{u(G)}{|G|} = \sqrt{\alpha^2\left(\frac{u(X)}{X}\right)^2 + \beta^2\left(\frac{u(Y)}{Y}\right)^2}$$
+
+$$\text{Compatibilité avec une référence : } z = \frac{|g_{\text{exp}} - g_{\text{réf}}|}{\sqrt{u(g_{\text{exp}})^2 + u(g_{\text{réf}})^2}} \le 2$$
+</CriticalFormula>
+
+| Loi physique étudiée | Changement de variables $(X, Y)$ pour linéariser en $Y = aX + b$ | Exploitation de la pente $a$ |
+| :--- | :--- | :--- |
+| **Pendule pesant** : $T_0 = 2\pi\sqrt{L/g}$ | $X = L$ et $Y = T_0^2$ (ordonnée à l'origine $b \approx 0$) | $a = \dfrac{4\pi^2}{g} \implies g = \dfrac{4\pi^2}{a}$ |
+| **Décharge RC** : $u(t) = E\,\mathrm{e}^{-t/\tau}$ | $X = t$ et $Y = \ln(u(t))$ | $a = -\dfrac{1}{\tau} \implies \tau = -\dfrac{1}{a}$ |
+| **Loi des gaz parfaits isotherme** : $P V = n R T_0$ | $X = \dfrac{1}{V}$ et $Y = P$ | $a = n R T_0$ |

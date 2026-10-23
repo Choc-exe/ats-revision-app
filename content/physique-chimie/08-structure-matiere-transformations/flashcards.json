@@ -1,0 +1,32 @@
+[
+  {
+    "id": "pc-08-fc-01",
+    "category": "Structure de la matière",
+    "question": "Que représentent les nombres $A$, $Z$ et $N = A - Z$ dans la notation d'un noyau $^A_Z\\text{X}$, et comment définit-on deux isotopes ?",
+    "answer": "$Z$ est le numéro atomique (nombre de protons, qui définit l'élément chimique). $A$ est le nombre de masse (nombre total de nucléons : protons + neutrons). $N = A - Z$ est le nombre de neutrons. Deux isotopes ont le même numéro atomique $Z$ mais un nombre de masse $A$ différent."
+  },
+  {
+    "id": "pc-08-fc-02",
+    "category": "Stœchiométrie",
+    "question": "Comment détermine-t-on l'avancement maximal $x_{\\max}$ et la condition de mélange stœchiométrique pour $\\nu_A\\text{A} + \\nu_B\\text{B} \\rightarrow \\text{Produits}$ ?",
+    "answer": "L'avancement maximal vaut $x_{\\max} = \\min\\left(\\frac{n_{A,0}}{\\nu_A}, \\frac{n_{B,0}}{\\nu_B}\\right)$. Le réactif donnant ce minimum est le réactif limitant. Le mélange initial est stœchiométrique si $\\frac{n_{A,0}}{\\nu_A} = \\frac{n_{B,0}}{\\nu_B}$."
+  },
+  {
+    "id": "pc-08-fc-03",
+    "category": "Combustions & Carbone",
+    "question": "Écrire l'équation générale de combustion complète d'un alcane $\\text{C}_n\\text{H}_{2n+2}$ dans le dioxygène.",
+    "answer": "$$\\text{C}_n\\text{H}_{2n+2} + \\left(\\frac{3n+1}{2}\\right)\\text{O}_2 \\longrightarrow n\\,\\text{CO}_2 + (n+1)\\,\\text{H}_2\\text{O}$$"
+  },
+  {
+    "id": "pc-08-fc-04",
+    "category": "Combustions & Carbone",
+    "question": "Quelle masse de $\\text{CO}_2$ ($M = 44\\text{ g}\\cdot\\text{mol}^{-1}$) est rejetée par la combustion complète de $m_{\\text{carb}} = 1{,}00\\text{ kg}$ d'octane $\\text{C}_8\\text{H}_{18}$ ($M = 114\\text{ g}\\cdot\\text{mol}^{-1}$) ?",
+    "answer": "Chaque mole d'octane $\\text{C}_8\\text{H}_{18}$ libère $8$ moles de $\\text{CO}_2$. On a donc $m(\\text{CO}_2) = 8 \\times \\frac{44}{114} \\times 1{,}00\\text{ kg} \\approx 3{,}09\\text{ kg}$ de $\\text{CO}_2$ par kilogramme d'essence brûlé."
+  },
+  {
+    "id": "pc-08-fc-05",
+    "category": "Physique nucléaire",
+    "question": "Énoncer les lois de conservation de Soddy et la relation d'Einstein donnant l'énergie libérée par une réaction nucléaire.",
+    "answer": "Lois de Soddy : conservation du nombre total de nucléons ($\\sum A_{\\text{réactifs}} = \\sum A_{\\text{produits}}$) et conservation de la charge électrique ($\\sum Z_{\\text{réactifs}} = \\sum Z_{\\text{produits}}$). Énergie libérée : $E_{\\text{lib}} = \\Delta m \\cdot c^2$ avec $\\Delta m = \\sum m_{\\text{réactifs}} - \\sum m_{\\text{produits}} > 0$."
+  }
+]

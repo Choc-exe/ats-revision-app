@@ -1,0 +1,26 @@
+[
+  {
+    "id": "pc-09-fc-01",
+    "category": "Incertitudes-types",
+    "question": "Quelle est la formule de l'incertitude-type $u(\\bar{x})$ de Type A pour une série de $N$ mesures indépendantes d'écart-type expérimental $s_{n-1}$ ?",
+    "answer": "$$u(\\bar{x}) = \\frac{s_{n-1}}{\\sqrt{N}}$$\nRépéter la mesure $N$ fois permet de diviser l'incertitude-type aléatoire sur la moyenne par $\\sqrt{N}$."
+  },
+  {
+    "id": "pc-09-fc-02",
+    "category": "Incertitudes-types",
+    "question": "Comment évalue-t-on une incertitude-type de Type B lorsque la notice indique une tolérance maximale $\\pm a$ (loi uniforme) ?",
+    "answer": "$$u(x) = \\frac{a}{\\sqrt{3}}$$"
+  },
+  {
+    "id": "pc-09-fc-03",
+    "category": "Propagation",
+    "question": "On détermine une résistance par $R = \\frac{U}{I}$ avec $\\frac{u(U)}{U} = 3\\,\\%$ et $\\frac{u(I)}{I} = 4\\,\\%$. Quelle est l'incertitude-type relative $\\frac{u(R)}{R}$ ?",
+    "answer": "Par composition quadratique des incertitudes relatives :\n$$\\frac{u(R)}{R} = \\sqrt{\\left(\\frac{u(U)}{U}\\right)^2 + \\left(\\frac{u(I)}{I}\\right)^2} = \\sqrt{3^2 + 4^2} = 5\\,\\%$$"
+  },
+  {
+    "id": "pc-09-fc-04",
+    "category": "Validation expérimentale",
+    "question": "Comment calcule-t-on l'écart normalisé $z$ entre une mesure $g_{\\text{exp}} \\pm u(g_{\\text{exp}})$ et une valeur tabulée exacte $g_{\\text{réf}}$, et quel est le seuil de validation ?",
+    "answer": "$$z = \\frac{|g_{\\text{exp}} - g_{\\text{réf}}|}{u(g_{\\text{exp}})}$$\nLa mesure est déclarée compatible avec la valeur de référence si $z \\le 2$."
+  }
+]

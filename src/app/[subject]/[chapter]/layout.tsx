@@ -36,7 +36,7 @@ export default async function ChapterLayout({
       />
 
       {/* Conteneur de lecture centré, optimisé pour ne pas dépasser 85ch de large */}
-      <main className="flex-1 w-full max-w-5xl mx-auto px-8 py-8">
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10 space-y-6">
         {children}
       </main>
     </div>
