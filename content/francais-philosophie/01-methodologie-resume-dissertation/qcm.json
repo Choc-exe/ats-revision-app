@@ -15,7 +15,7 @@
         "Décomposons chaque unité : L' (1) + homme (2) + n' (3) + agit (4) + peut (5) + être (6) + qu' (7) + aujourd'hui (8, un seul mot !) + c' (9) + est (10) + à (11) + dire (12) + tardivement (13).",
         "On obtient exactement 13 mots."
       ],
-      "keyFormula": "\\text{« c'est-à-dire »} = 4 \\text{ mots} \\quad ; \\quad \\text{« aujourd'hui »} = 1 \\text{ mot}",
+      "keyFormula": "N_{\\text{mots}} = 100 \\pm 10\\% \\iff 90 \\le N_{\\text{mots}} \\le 110",
       "commonTrap": "Compter « aujourd'hui » pour 2 mots ou « c'est-à-dire » pour 1 seul mot fausse tout le décompte final."
     }
   },

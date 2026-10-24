@@ -107,16 +107,20 @@ function normalizeQcmQuestion(raw: any, index: number): QcmQuestion {
       : 0;
 
   const options = rawOptions.map((opt: any, idx: number) => {
-    const id = opt?.id ?? letters[idx] ?? String(idx);
+    const id = String(opt?.id ?? letters[idx] ?? idx);
     const text =
       typeof opt === "string"
         ? opt
-        : opt?.text ?? opt?.label ?? opt?.latex ?? "";
+        : String(opt?.text ?? opt?.label ?? opt?.latex ?? "");
     return {
       id,
       label: opt?.label ?? id.toUpperCase(),
       text,
-      latex: opt?.latex ?? undefined,
+      // On ne définit latex que s'il existait explicitement dans le JSON d'origine sans '$'
+      latex:
+        typeof opt?.latex === "string" && !opt.latex.includes("$")
+          ? opt.latex
+          : undefined,
       isCorrect:
         typeof opt?.isCorrect === "boolean"
           ? opt.isCorrect
@@ -134,25 +138,30 @@ function normalizeQcmQuestion(raw: any, index: number): QcmQuestion {
     raw?.explanation && typeof raw.explanation === "object"
       ? {
           steps: Array.isArray(raw.explanation.steps)
-            ? raw.explanation.steps
-            : [String(raw.explanation.main ?? "Voir formule clé ci-dessous.")],
-          keyFormula: raw.explanation.keyFormula ?? "",
-          commonTrap: raw.explanation.commonTrap ?? undefined,
+            ? raw.explanation.steps.map(String)
+            : [String(raw.explanation.main ?? "Voir l'explication ci-dessous.")],
+          keyFormula: String(
+            raw.explanation.keyFormula ?? "N_{\\text{mots}} \\in [90\\,;\\,110]"
+          ),
+          commonTrap: raw.explanation.commonTrap
+            ? String(raw.explanation.commonTrap)
+            : undefined,
         }
       : {
           steps:
             typeof raw?.explanation === "string"
               ? [raw.explanation]
-              : ["Appliquer la formule du cours."],
-          keyFormula: raw?.keyFormula ?? "",
-          commonTrap: raw?.commonTrap ?? undefined,
+              : ["Appliquer la méthode du cours."],
+          keyFormula: String(raw?.keyFormula ?? "N_{\\text{mots}} \\in [90\\,;\\,110]"),
+          commonTrap: raw?.commonTrap ? String(raw.commonTrap) : undefined,
         };
 
-  const qText =
-    raw?.questionText ?? raw?.question ?? raw?.prompt ?? `Question ${index + 1}`;
+  const qText = String(
+    raw?.questionText ?? raw?.question ?? raw?.prompt ?? `Question ${index + 1}`
+  );
 
   return {
-    id: raw?.id ?? `qcm-${index + 1}`,
+    id: String(raw?.id ?? `qcm-${index + 1}`),
     difficulty: raw?.difficulty ?? "Concours ATS",
     questionText: qText,
     question: qText,

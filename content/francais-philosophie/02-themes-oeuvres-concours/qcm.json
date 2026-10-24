@@ -15,7 +15,7 @@
         "En français typographique, les titres d'œuvres autonomes s'écrivent en italique à l'ordinateur et se soulignent à la main.",
         "Les guillemets sont réservés aux titres de subdivisions (chapitres, poèmes) et aux citations."
       ],
-      "keyFormula": "\\text{Titre d'œuvre intégrale sur copie} \\implies \\text{Souligné}"
+      "keyFormula": "\\text{Parties } (\\text{I, II, III}) \\times \\text{Sous-parties } (\\text{A, B, C})"
     }
   },
   {
