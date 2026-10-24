@@ -1,0 +1,38 @@
+[
+  {
+    "id": "fr-01-fc-01",
+    "category": "Méthode",
+    "front": "Quelles sont les 4 règles formelles impératives du résumé de texte (contraction) au concours ATS ?",
+    "back": {
+      "mainAnswer": "1. Respecter strictement la fourchette de ± 10 % du nombre de mots (ex. 90 à 110 mots) et indiquer le total exact.\n2. Adopter l'énonciation de l'auteur (ne jamais écrire « L'auteur dit que... »).\n3. Reformuler intégralement avec son propre vocabulaire (zéro citation, suppression des exemples).\n4. Respecter l'ordre et les proportions des mouvements du texte.",
+      "criticalFormula": "90 \\le N_{\\text{mots}} \\le 110 \\quad (\\text{pour une consigne à } 100 \\text{ mots})"
+    }
+  },
+  {
+    "id": "fr-01-fc-02",
+    "category": "Piège Classique",
+    "front": "Combien de mots comptent respectivement les expressions : « c'est-à-dire », « l'être humain », « aujourd'hui » et « peut-être » dans un résumé de concours ?",
+    "back": {
+      "mainAnswer": "- « c'est-à-dire » = 4 mots (ce + est + à + dire)\n- « l'être humain » = 3 mots (l' + être + humain)\n- « aujourd'hui » = 1 seul mot (unité lexicale figée)\n- « peut-être » = 2 mots",
+      "commonTrap": "L'apostrophe sépare toujours deux mots (sauf dans « aujourd'hui »)."
+    }
+  },
+  {
+    "id": "fr-01-fc-03",
+    "category": "Méthode",
+    "front": "Quelles sont les 4 étapes obligatoires d'une introduction de dissertation en un seul paragraphe ?",
+    "back": {
+      "mainAnswer": "1. L'accroche (amorce culturelle ou paradoxe).\n2. L'analyse des termes du sujet et la mise en tension (formulation du paradoxe).\n3. La problématique (question centrale dégageant l'enjeu).\n4. L'annonce fluide du plan en trois parties.",
+      "criticalFormula": "\\text{Accroche} \\longrightarrow \\text{Définition \\& Paradoxe} \\longrightarrow \\text{Problématique} \\longrightarrow \\text{Annonce du plan}"
+    }
+  },
+  {
+    "id": "fr-01-fc-04",
+    "category": "Méthode",
+    "front": "Quelle est la structure interne (« I-A-E-B ») d'une sous-partie de développement en dissertation ?",
+    "back": {
+      "mainAnswer": "- I (Idée directrice) : connecteur logique + affirmation de la thèse du paragraphe.\n- A (Argumentation) : explication conceptuelle et philosophique.\n- E (Exemple analysé) : confrontation précise des œuvres au programme.\n- B (Bilan) : retour aux termes exacts du sujet.",
+      "commonTrap": "Ne jamais terminer un paragraphe par une citation brute non commentée."
+    }
+  }
+]

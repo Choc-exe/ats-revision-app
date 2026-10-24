@@ -1,0 +1,63 @@
+[
+  {
+    "id": "sii-05-qcm-01",
+    "difficulty": "Concours ATS",
+    "questionText": "Un capteur de température délivre une tension variant de $0\\text{ V}$ à $5\\text{ V}$ pour une plage de $0\\,^\\circ\\text{C}$ à $100\\,^\\circ\\text{C}$. Il est relié à un CAN de $10\\text{ bits}$ ($U_{\\text{PE}} = 5\\text{ V}$). Quelle est la résolution en tension $q$ du CAN et la résolution correspondante $\\Delta T$ en température ?",
+    "options": [
+      { "id": "a", "text": "$q \\approx 4{,}88\\text{ mV}$ et $\\Delta T \\approx 0{,}098\\,^\\circ\\text{C}$", "isCorrect": true },
+      { "id": "b", "text": "$q = 5{,}00\\text{ mV}$ et $\\Delta T = 0{,}50\\,^\\circ\\text{C}$", "isCorrect": false },
+      { "id": "c", "text": "$q \\approx 1{,}22\\text{ mV}$ et $\\Delta T \\approx 0{,}024\\,^\\circ\\text{C}$", "isCorrect": false },
+      { "id": "d", "text": "$q = 0{,}50\\text{ V}$ et $\\Delta T = 10\\,^\\circ\\text{C}$", "isCorrect": false }
+    ],
+    "correctOptionId": "a",
+    "explanation": {
+      "steps": [
+        "Sur $N = 10\\text{ bits}$, on dispose de $2^{10} = 1024$ niveaux de quantification.",
+        "Le quantum en tension vaut $q = \\frac{U_{\\text{PE}}}{2^{10}} = \\frac{5}{1024} \\approx 4{,}88\\text{ mV}$.",
+        "La sensibilité du capteur étant de $\\frac{5\\text{ V}}{100\\,^\\circ\\text{C}} = 50\\text{ mV}/^\\circ\\text{C}$, la résolution thermique vaut $\\Delta T = \\frac{100}{1024} \\approx 0{,}098\\,^\\circ\\text{C}$."
+      ],
+      "keyFormula": "q = \\frac{U_{\\text{PE}}}{2^N} \\quad \\text{avec} \\quad 2^{10} = 1024"
+    }
+  },
+  {
+    "id": "sii-05-qcm-02",
+    "difficulty": "Concours ATS",
+    "questionText": "Un codeur optique incrémental de $P = 500$ fentes par tour est monté directement sur l'arbre d'un moteur électrique accouplé à un réducteur de rapport $r = \\frac{\\omega_s}{\\omega_m} = \\frac{1}{25}$. L'électronique exploite les voies A et B en quadrature ($4$ fronts par fente). Quelle est la résolution angulaire $\\Delta \\theta_s$ obtenue sur l'arbre de sortie du réducteur ?",
+    "options": [
+      { "id": "a", "text": "$\\Delta \\theta_s = 0{,}0072^\\circ$", "isCorrect": true },
+      { "id": "b", "text": "$\\Delta \\theta_s = 0{,}18^\\circ$", "isCorrect": false },
+      { "id": "c", "text": "$\\Delta \\theta_s = 0{,}0288^\\circ$", "isCorrect": false },
+      { "id": "d", "text": "$\\Delta \\theta_s = 0{,}72^\\circ$", "isCorrect": false }
+    ],
+    "correctOptionId": "a",
+    "explanation": {
+      "steps": [
+        "Sur l'arbre moteur, le nombre d'impulsions par tour en quadrature vaut $N_m = 4 \\times P = 4 \\times 500 = 2000\\text{ pts/tr}$, soit $\\Delta \\theta_m = \\frac{360^\\circ}{2000} = 0{,}18^\\circ$.",
+        "Pour 1 tour de l'arbre de sortie lent, le moteur effectue $25$ tours : on compte donc $N_s = 25 \\times 2000 = 50\\,000$ impulsions par tour de sortie.",
+        "La résolution angulaire en sortie vaut $\\Delta \\theta_s = \\frac{360^\\circ}{50\\,000} = 0{,}0072^\\circ$."
+      ],
+      "keyFormula": "\\Delta \\theta_s = r \\cdot \\frac{360^\\circ}{4\\,P}",
+      "commonTrap": "Placer le codeur côté moteur (arbre rapide) améliore la résolution de mesure d'un facteur $1/r$ par rapport à un codeur placé en sortie."
+    }
+  },
+  {
+    "id": "sii-05-qcm-03",
+    "difficulty": "Concours ATS",
+    "questionText": "Dans le montage d'une roue de wagonnet folle en rotation autour d'un essieu fixe par rapport au châssis (soumis au poids de direction verticale fixe), quel est le montage correct des deux roulements à billes à contact radial ?",
+    "options": [
+      { "id": "a", "text": "Bagues extérieures (liées au moyeu tournant) montées serrées ; bagues intérieures (liées à l'essieu fixe) montées glissantes", "isCorrect": true },
+      { "id": "b", "text": "Bagues intérieures montées serrées sur l'essieu ; bagues extérieures montées glissantes dans le moyeu", "isCorrect": false },
+      { "id": "c", "text": "Bagues intérieures et extérieures toutes montées avec jeu pour faciliter le démontage", "isCorrect": false },
+      { "id": "d", "text": "Montage serré sur toutes les bagues sans épaulement", "isCorrect": false }
+    ],
+    "correctOptionId": "a",
+    "explanation": {
+      "steps": [
+        "Ici, c'est le moyeu (alésage) qui tourne par rapport à la direction fixe de la charge verticale, tandis que l'arbre (essieu) est fixe.",
+        "La bague tournante par rapport à la charge est donc la bague extérieure : elle doit être montée serrée dans le moyeu (et arrêtée par 4 obstacles).",
+        "La bague intérieure (fixe par rapport à la charge) est montée glissante sur l'essieu."
+      ],
+      "keyFormula": "\\text{Moyeu tournant} \\implies \\text{Bagues extérieures serrées, bagues intérieures glissantes}"
+    }
+  }
+]

@@ -1,0 +1,59 @@
+[
+  {
+    "id": "fr-02-qcm-01",
+    "difficulty": "Concours ATS",
+    "questionText": "Sur une copie manuscrite de concours, comment doit-on présenter correctement le titre d'un roman ou d'un essai philosophique au programme ?",
+    "options": [
+      { "id": "a", "text": "En le soulignant soigneusement à la règle, sans mettre de guillemets", "isCorrect": true },
+      { "id": "b", "text": "En le mettant uniquement entre guillemets sans le souligner", "isCorrect": false },
+      { "id": "c", "text": "En l'écrivant tout en lettres majuscules", "isCorrect": false },
+      { "id": "d", "text": "Sans aucun signe distinctif particulier", "isCorrect": false }
+    ],
+    "correctOptionId": "a",
+    "explanation": {
+      "steps": [
+        "En français typographique, les titres d'œuvres autonomes s'écrivent en italique à l'ordinateur et se soulignent à la main.",
+        "Les guillemets sont réservés aux titres de subdivisions (chapitres, poèmes) et aux citations."
+      ],
+      "keyFormula": "\\text{Titre d'œuvre intégrale sur copie} \\implies \\text{Souligné}"
+    }
+  },
+  {
+    "id": "fr-02-qcm-02",
+    "difficulty": "Concours ATS",
+    "questionText": "Dans une dissertation, quelle organisation des exemples au sein d'une grande partie (comportant trois sous-parties A, B et C) correspond aux attentes des jurys de concours ?",
+    "options": [
+      { "id": "a", "text": "Organiser A, B et C selon trois arguments progressifs, en faisant dialoguer deux œuvres au sein des sous-parties", "isCorrect": true },
+      { "id": "b", "text": "Consacrer A à la première œuvre, B à la deuxième œuvre et C à la troisième œuvre sans les relier", "isCorrect": false },
+      { "id": "c", "text": "Utiliser uniquement des exemples personnels tirés de l'actualité dans A et B, et garder les œuvres pour C", "isCorrect": false },
+      { "id": "d", "text": "N'utiliser qu'une seule des trois œuvres au programme dans toute la copie", "isCorrect": false }
+    ],
+    "correctOptionId": "a",
+    "explanation": {
+      "steps": [
+        "Le sujet de dissertation porte sur l'ensemble du corpus au programme : les trois œuvres doivent être mobilisées de façon équilibrée.",
+        "La confrontation comparée à l'intérieur d'une même sous-partie prouve la maîtrise transversale du thème."
+      ],
+      "keyFormula": "\\text{Progression par concepts} + \\text{Confrontation croisée des œuvres}",
+      "commonTrap": "Le catalogue juxtaposé (1 sous-partie = 1 œuvre isolée) plafonne systématiquement la note sous la moyenne."
+    }
+  },
+  {
+    "id": "fr-02-qcm-03",
+    "difficulty": "Concours ATS",
+    "questionText": "Comment doit-on procéder lorsqu'on souhaite modifier un mot (par exemple remplacer un pronom « il » par le nom du personnage) à l'intérieur d'une citation entre guillemets pour qu'elle s'intègre grammaticalement à notre phrase ?",
+    "options": [
+      { "id": "a", "text": "On place le mot ajouté ou modifié entre crochets droits : « [...] »", "isCorrect": true },
+      { "id": "b", "text": "On modifie librement la citation sans rien signaler", "isCorrect": false },
+      { "id": "c", "text": "On place la modification entre parenthèses avec la mention (sic)", "isCorrect": false },
+      { "id": "d", "text": "On souligne le mot modifié à l'intérieur de la citation", "isCorrect": false }
+    ],
+    "correctOptionId": "a",
+    "explanation": {
+      "steps": [
+        "La citation doit toujours rester exacte. Toute intervention du candidat (ajout d'un antécédent, changement de temps ou coupure d'un passage trop long) se signale obligatoirement entre crochets droits `[...]`."
+      ],
+      "keyFormula": "\\text{Modification ou coupure interne d'une citation} \\implies [\\dots]"
+    }
+  }
+]

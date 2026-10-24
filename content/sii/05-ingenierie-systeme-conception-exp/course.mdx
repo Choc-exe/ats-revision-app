@@ -1,0 +1,102 @@
+# Ingénierie Système (Exigences, SysML), Conception et Chaîne d'acquisition
+
+## 1. Démarche de l'Ingénieur SII, Triptyque et Diagrammes SysML (Annexe VI)
+
+Le programme officiel de Sciences Industrielles de l'Ingénieur (SII) en CPGE ATS s'articule autour de **six compétences fondamentales** : *Analyser, Modéliser, Résoudre, Expérimenter, Concevoir* et *Communiquer*. L'analyse de la performance d'un système pluritechnique repose sur la comparaison entre trois domaines (**le triptyque de l'ingénieur**) :
+1. **Le système souhaité (Attendu)** : défini par le Cahier des Charges Fonctionnel (CdCF) et le diagramme des exigences.
+2. **Le système simulé (Modèle théorique)** : issu de la modélisation multiphysique (équations différentielles, schémas-blocs).
+3. **Le système réel (Mesuré)** : caractérisé par des essais expérimentaux sur le prototype instrumenté.
+
+<CriticalFormula title="À connaître absolument — Calcul des écarts relatifs de performance">
+Pour valider un cahier des charges ou un modèle numérique sur une grandeur $G$, on évalue trois écarts relatifs (généralement exprimés en pourcentage, avec un seuil de validation typique de $5\,\%$) :
+
+$$\varepsilon_{\text{perf}} = \frac{|G_{\text{réel}} - G_{\text{souhaité}}|}{|G_{\text{souhaité}}|} \quad ; \quad \varepsilon_{\text{modèle}} = \frac{|G_{\text{simulé}} - G_{\text{réel}}|}{|G_{\text{réel}}|} \quad ; \quad \varepsilon_{\text{conception}} = \frac{|G_{\text{simulé}} - G_{\text{souhaité}}|}{|G_{\text{souhaité}}|}$$
+</CriticalFormula>
+
+### Les 6 diagrammes SysML exigibles au concours ATS
+Le langage **SysML** (*Systems Modeling Language*) répartit la description du système en trois piliers :
+* **Pilier Exigences :**
+  * **Diagramme des exigences (`req`)** : hiérarchise les exigences fonctionnelles et non fonctionnelles avec leur identifiant (`id`) et leur texte (`text` : critères, niveaux et tolérances). Les liens `<<satisfy>>` relient un constituant matériel à l'exigence qu'il satisfait ; les liens `<<verify>>` relient un protocole d'essai à l'exigence qu'il vérifie.
+* **Pilier Comportemental :**
+  * **Diagramme des cas d'utilisation (`uc`)** : définit la frontière du système, les acteurs externes et les services rendus.
+  * **Diagramme de séquence (`seq`)** : représente par ordre chronologique les échanges de messages et d'événements entre les acteurs et les sous-systèmes le long de lignes de vie verticales.
+  * **Diagramme d'états (`stm`)** : décrit la logique séquentielle d'un système événementiel sous forme d'états stables et de transitions franchies sur la condition `événement [garde] / action`.
+* **Pilier Structurel :**
+  * **Diagramme de définition de blocs (`bdd`)** : dresse l'arborescence matérielle du système (relations de composition représentées par un losange noir plein).
+  * **Diagramme de blocs internes (`ibd`)** : détaille à l'intérieur d'un bloc les **ports de flux** (matière, énergie, information) et les **connecteurs** reliant la chaîne d'énergie et la chaîne d'information.
+
+---
+
+## 2. Architecture fonctionnelle : Chaîne d'énergie et Chaîne d'information
+
+Tout système automatisé est structuré en deux chaînes coopérantes dans le diagramme `ibd` :
+
+### A. La Chaîne d'Énergie (Puissance)
+Elle transforme l'énergie d'entrée pour exercer l'action mécanique ou thermique sur la matière d'œuvre :
+1. **Alimenter** : réseau électrique triphasé/monophasé, batterie d'accumulateurs, centrale hydraulique ou pneumatique.
+2. **Distribuer (Préactionneur)** : module l'énergie sur ordre de la commande (hacheur 4 quadrants, onduleur MLI, contacteur, distributeur pneumatique $5/2$).
+3. **Convertir (Actionneur)** : convertit la nature de l'énergie (machine à courant continu MCC, machine asynchrone MAS, machine synchrone autopilotée MSAP, vérin hydraulique).
+4. **Transmettre / Adapter** : adapte les composantes du flux de puissance mécanique $(\Omega, C) \to (V, F)$ (réducteur à engrenages, système poulie-courroie, vis-écrou à billes) jusqu'à l'**effecteur**.
+
+<CriticalFormula title="À connaître absolument — Puissance, Rendement global et Adaptation par réducteur">
+Pour $n$ constituants en cascade de rendements respectifs $\eta_1, \eta_2, \dots, \eta_n$ en régime permanent :
+
+$$\eta_{\text{global}} = \frac{P_{\text{utile}}}{P_{\text{absorbée}}} = \prod_{k=1}^n \eta_k = \eta_1 \cdot \eta_2 \cdots \eta_n$$
+
+Pour un réducteur mécanique de rapport de transmission $r = \frac{\omega_{\text{sortie}}}{\omega_{\text{entrée}}}$ et de rendement $\eta_{\text{réd}}$ :
+
+$$C_{\text{sortie}} = \frac{\eta_{\text{réd}}}{r}\,C_{\text{entrée}} \quad ; \quad J_{\text{équivalent sur arbre moteur}} = J_{\text{moteur}} + r^2\,J_{\text{charge}} + \left(\frac{V}{\omega_{\text{moteur}}}\right)^2 M_{\text{masse en translation}}$$
+</CriticalFormula>
+
+### B. La Chaîne d'Information (Commande et Supervision)
+1. **Acquérir** : capteurs analogiques ou numériques, codeurs optiques, conditionneurs et filtres anti-repliement.
+2. **Traiter** : Convertisseur Analogique-Numérique (CAN), microcontrôleur, automate programmable (API), correcteur numérique.
+3. **Communiquer** : interface homme-machine (IHM), bus de terrain (CAN, Modbus, Ethernet industriel), ordres de commande MLI.
+
+---
+
+## 3. Chaîne d'acquisition : Capteurs, Échantillonnage, CAN et Codeurs
+
+### A. Échantillonnage et Convertisseur Analogique-Numérique (CAN)
+Pour numériser un signal analogique $u(t)$ dont le spectre fréquentiel est borné par $f_{\max}$, le **théorème de Shannon-Nyquist** impose de choisir une fréquence d'échantillonnage $f_e = \frac{1}{T_e}$ vérifiant strictement :
+
+$$f_e > 2\,f_{\max} \quad \text{(en pratique industrielle : } f_e \ge 10\,f_{\max}\text{)}$$
+
+Afin d'éliminer tout bruit haute fréquence qui provoquerait un **repliement spectral** (*aliasing*), on place obligatoirement un **filtre passe-bas analogique anti-repliement** de fréquence de coupure $f_c \le \frac{f_e}{2}$ en amont de l'échantillonneur-bloqueur.
+
+<CriticalFormula title="À connaître absolument — Quantum (Résolution) d'un CAN et Codeur optique incrémental">
+* **Convertisseur Analogique-Numérique (CAN) sur $N$ bits** de plage de tension pleine échelle $U_{\text{PE}} = U_{\max} - U_{\min}$ : il possède $2^N$ codes numériques distincts (entiers $N_{\text{num}} \in \{0, \dots, 2^N - 1\}$). Son **quantum (ou pas de quantification $q$)** vaut :
+
+$$q = \frac{U_{\text{PE}}}{2^N} \quad \text{(ou } q = \frac{U_{\text{PE}}}{2^N - 1} \text{ selon la convention de l'énoncé)} \quad \text{et} \quad N_{\text{num}} = \left\lfloor \frac{u_e}{q} \right\rfloor$$
+
+* **Codeur optique incrémental** comportant $P$ fentes (traits) par tour :
+  * En comptage simple (1 front par fente) : résolution angulaire $\Delta \theta = \dfrac{2\pi}{P}\text{ rad} = \dfrac{360^\circ}{P}$.
+  * En **quadrature sur les voies A et B** (détection des fronts montants et descendants des deux voies déphasées de $90^\circ$ électriques, permettant aussi de connaître le **sens de rotation**) : on compte **$4\,P$ impulsions par tour**, d'où la résolution angulaire :
+
+$$\Delta \theta_{\text{quad}} = \frac{2\pi}{4\,P}\text{ rad} = \frac{360^\circ}{4\,P}$$
+</CriticalFormula>
+
+<WarningBox title="Différence fondamentale — Codeur incrémental vs Codeur absolu (Code Gray)">
+Un **codeur incrémental** (voies A, B et top tour Z) délivre des impulsions relatives : en cas de coupure d'alimentation, la position absolue est perdue et nécessite une **procédure de prise d'origine (POM)**. À l'inverse, un **codeur absolu** à $N$ pistes parallèles affecte un mot binaire unique à chaque secteur angulaire $\Delta \theta = \frac{360^\circ}{2^N}$ et utilise le **code binaire réfléchi (code Gray)** pour qu'un seul bit change à la fois entre deux positions adjacentes, évitant toute erreur grossière de lecture sur les transitions.
+</WarningBox>
+
+---
+
+## 4. Conception mécanique : Guidages en rotation et Montage des roulements
+
+Pour réaliser une liaison pivot entre un arbre et un alésage (bâti), le concepteur choisit entre trois familles technologiques selon la vitesse et le chargement :
+1. **Contact direct ou bagues autolubrifiantes (coussinets frittés / PTFE)** : économique, compact, adapté aux vitesses modérées. Le dimensionnement vérifie la pression diamétrale $p = \frac{F_r}{d \cdot L} \le p_{\text{adm}}$ et le produit thermique d'usure **$p \cdot V \le (pV)_{\text{adm}}$** avec $V = \omega\,\frac{d}{2}$.
+2. **Guidage par éléments roulants (roulements à billes ou à rouleaux)** : rendement élevé ($\eta \approx 0{,}99$), faible couple de frottement au démarrage, supporte des vitesses et charges élevées.
+
+<CriticalFormula title="À connaître absolument — Les 3 Règles d'Or du montage des roulements à billes">
+1. **Règle d'ajustement des bagues (Serré vs Glissant) :**
+   * La bague **tournante par rapport à la direction de la charge radiale** doit impérativement être **montée SERRÉE** (ex. ajustement `k6` ou `m6` sur un arbre tournant sous charge de direction fixe) pour éviter le phénomène de laminage et d'usure par roulement de la bague sur sa portée.
+   * La bague **fixe par rapport à la direction de la charge** doit être **montée GLISSANTE (avec jeu)** (ex. ajustement `H7` dans l'alésage) pour permettre son libre déplacement axial lors de la dilatation thermique.
+2. **Règle des arrêts axiaux pour les roulements rigides à billes (contact radial, type BC) :**
+   * Les **bagues montées serrées** sont arrêtées axialement des deux côtés (**4 obstacles au total** sur l'ensemble des deux roulements).
+   * Les **bagues montées glissantes** ne sont arrêtées axialement que sur **un seul des deux roulements** (**2 obstacles** sur le roulement dit « fixe » qui assure le positionnement axial, et **0 obstacle** sur le roulement dit « libre » pour autoriser la dilatation thermique sans hyperstatisme).
+3. **Roulements à contact oblique (type BT) ou à rouleaux coniques (type KB) :**
+   * Ils se montent toujours par paire en opposition :
+     * **Montage en « X » (direct)** : généralement utilisé dans le cas **arbre tournant** (bagues intérieures serrées appuyées contre deux épaulements d'arbre ; réglage du jeu axial sur les bagues extérieures glissantes).
+     * **Montage en « O » (indirect)** : utilisé dans le cas **moyeu (alésage) tournant** ou lorsque l'on recherche une très grande **rigidité angulaire** face à un couple de basculement (écartement maximal des centres de poussée).
+</CriticalFormula>

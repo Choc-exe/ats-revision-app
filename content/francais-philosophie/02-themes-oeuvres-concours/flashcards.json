@@ -1,0 +1,36 @@
+[
+  {
+    "id": "fr-02-fc-01",
+    "category": "Méthode",
+    "front": "Quelle est la règle typographique obligatoire sur une copie manuscrite de concours pour distinguer le titre d'une œuvre complète et une citation ?",
+    "back": {
+      "mainAnswer": "Le titre d'une œuvre complète (roman, pièce de théâtre, essai philosophique) doit toujours être SOULIGNÉ (équivalent de l'italique), sans guillemets. Les guillemets « ... » sont réservés aux citations exactes et aux titres de chapitres ou de poèmes.",
+      "commonTrap": "Oublier de souligner le titre d'une œuvre au programme est systématiquement sanctionné par les correcteurs."
+    }
+  },
+  {
+    "id": "fr-02-fc-02",
+    "category": "Méthode",
+    "front": "Comment faire dialoguer l'œuvre philosophique et les œuvres littéraires à l'intérieur d'une même sous-partie de dissertation ?",
+    "back": {
+      "mainAnswer": "On utilise l'œuvre philosophique pour définir rigoureusement le concept et poser le cadre théorique, puis on mobilise l'œuvre littéraire (via un pivot comparatif) comme un « laboratoire d'expérience » qui met ce concept à l'épreuve d'une situation humaine, dramatique ou sociale concrète.",
+      "criticalFormula": "\\text{Concept philosophique} + \\text{Pivot} + \\text{Expérience littéraire analysée}"
+    }
+  },
+  {
+    "id": "fr-02-fc-03",
+    "category": "Définition",
+    "front": "Quelle distinction fondamentale faut-il établir entre « convaincre » et « persuader » dans un sujet portant sur la parole, la vérité ou la société ?",
+    "back": {
+      "mainAnswer": "Convaincre consiste à obtenir l'adhésion de la raison de tout être pensant par une démonstration logique et objective. Persuader consiste à toucher la sensibilité, l'affectivité ou l'imagination d'un auditoire particulier pour le pousser à croire ou à agir."
+    }
+  },
+  {
+    "id": "fr-02-fc-04",
+    "category": "Piège Classique",
+    "front": "Pourquoi est-il déconseillé de raconter longuement l'intrigue d'un roman au programme dans une sous-partie ?",
+    "back": {
+      "mainAnswer": "Le correcteur connaît déjà parfaitement l'intrigue des œuvres au programme. La narration pure (résumé d'épisode) ne démontre rien : il faut sélectionner un détail précis (un dialogue, un choix de personnage, une métaphore) et l'analyser directement à l'aide des termes du sujet."
+    }
+  }
+]

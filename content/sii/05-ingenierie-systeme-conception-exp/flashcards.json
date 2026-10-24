@@ -1,0 +1,40 @@
+[
+  {
+    "id": "sii-05-fc-01",
+    "category": "Méthode",
+    "front": "Quels sont les rôles respectifs des diagrammes SysML `bdd`, `ibd`, `req` et `stm` ?",
+    "back": {
+      "mainAnswer": "- `req` : hiérarchise les exigences du cahier des charges (critères et niveaux).\n- `bdd` : décrit l'arborescence matérielle des blocs du système.\n- `ibd` : détaille les flux internes (Matière, Énergie, Information) entre les constituants.\n- `stm` : modélise le comportement séquentiel par états et transitions.",
+      "criticalFormula": "\\text{Chaîne d'énergie : Alimenter} \\to \\text{Distribuer} \\to \\text{Convertir} \\to \\text{Transmettre}"
+    }
+  },
+  {
+    "id": "sii-05-fc-02",
+    "category": "Formule Critique",
+    "front": "Quelle est la formule du quantum $q$ d'un Convertisseur Analogique-Numérique (CAN) de $N$ bits de pleine échelle $U_{\\text{PE}}$ et la condition de Shannon ?",
+    "back": {
+      "mainAnswer": "Le CAN découpe la plage de tension $U_{\\text{PE}}$ en $2^N$ échelons élémentaires de largeur $q$. Pour éviter le repliement spectral, la fréquence d'échantillonnage $f_e$ doit dépasser le double de la fréquence maximale du signal.",
+      "criticalFormula": "q = \\frac{U_{\\text{PE}}}{2^N} \\quad \\text{et} \\quad f_e > 2\\,f_{\\max}",
+      "commonTrap": "Ne pas oublier le filtre passe-bas analogique anti-repliement avant l'échantillonneur."
+    }
+  },
+  {
+    "id": "sii-05-fc-03",
+    "category": "Formule Critique",
+    "front": "Quelle est la résolution angulaire d'un codeur optique incrémental à $P$ fentes par tour exploité en quadrature sur les voies A et B ?",
+    "back": {
+      "mainAnswer": "L'exploitation des fronts montants et descendants des deux voies A et B déphasées de 90° multiplie par 4 le nombre de points par tour et permet de détecter le sens de rotation.",
+      "criticalFormula": "\\Delta \\theta = \\frac{2\\pi}{4\\,P}\\text{ rad} = \\frac{360^\\circ}{4\\,P}"
+    }
+  },
+  {
+    "id": "sii-05-fc-04",
+    "category": "Piège Classique",
+    "front": "Énoncer la règle d'ajustement et d'arrêt axial pour un guidage en rotation par deux roulements à billes à contact radial lorsque l'arbre tourne.",
+    "back": {
+      "mainAnswer": "Les bagues intérieures (tournantes par rapport à la charge) sont montées SERRÉES sur l'arbre et arrêtées axialement des deux côtés (4 obstacles). Les bagues extérieures (fixes) sont montées GLISSANTES dans l'alésage : l'une est arrêtée par 2 obstacles (roulement fixe) et l'autre est libre axialement (0 obstacle) pour autoriser la dilatation thermique.",
+      "criticalFormula": "\\text{Bague tournante / charge} \\implies \\text{Montage serré (4 obstacles)}",
+      "commonTrap": "Bloquer axialement les deux bagues extérieures créera un montage hyperstatique qui bridera les roulements dès que l'arbre chauffe."
+    }
+  }
+]

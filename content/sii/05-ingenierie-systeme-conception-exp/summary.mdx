@@ -1,0 +1,14 @@
+# Fiche Synthèse — Ingénierie Système (SysML), Acquisition et Conception
+
+<CriticalFormula title="1. Écarts du Triptyque et Chaîne de puissance">
+$$\varepsilon_{\text{perf}} = \frac{|G_{\text{réel}} - G_{\text{souhaité}}|}{|G_{\text{souhaité}}|} \quad ; \quad \varepsilon_{\text{modèle}} = \frac{|G_{\text{simulé}} - G_{\text{réel}}|}{|G_{\text{réel}}|} \quad ; \quad \eta_{\text{global}} = \prod_{k=1}^n \eta_k$$
+</CriticalFormula>
+
+<CriticalFormula title="2. Chaîne d'acquisition : Shannon, CAN et Codeur incrémental">
+$$\text{Shannon : } f_e > 2\,f_{\max} \quad ; \quad \text{Quantum CAN ($N$ bits) : } q = \frac{U_{\text{PE}}}{2^N} \quad ; \quad \text{Codeur (quadrature A/B) : } \Delta \theta = \frac{2\pi}{4\,P}\text{ rad}$$
+</CriticalFormula>
+
+| Cas de montage (Roulements à contact radial) | Bague Intérieure (sur l'arbre) | Bague Extérieure (dans l'alésage) | Arrêts axiaux sur les bagues glissantes |
+| :--- | :--- | :--- | :--- |
+| **Arbre tournant** (charge de direction fixe) | **Tournante $\implies$ SERRÉE** (`k6`/`m6`, 4 obstacles) | **Fixe $\implies$ GLISSANTE** (`H7`) | **2 obstacles** sur R1 (fixe) + **0 obstacle** sur R2 (libre) |
+| **Alésage (moyeu) tournant** (charge fixe) | **Fixe $\implies$ GLISSANTE** (`g6`/`h6`) | **Tournante $\implies$ SERRÉE** (`M7`/`N7`, 4 obstacles) | **2 obstacles** sur R1 (fixe) + **0 obstacle** sur R2 (libre) |
