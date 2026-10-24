@@ -60,7 +60,7 @@ export async function GET() {
           const backText =
             typeof card.back === "string"
               ? card.back
-              : (card as any).answer || "";
+              : `${(card.back as any)?.mainAnswer ?? ""} ${(card.back as any)?.criticalFormula ?? ""}`.trim();
 
           searchIndex.push({
             id: card.id,

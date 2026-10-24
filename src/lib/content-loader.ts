@@ -40,8 +40,131 @@ interface BuiltinChapterBundle {
 }
 
 /**
- * Helper universel pour construire un FlashcardItem compatible avec src/types/pedagogy.ts
- * (Fournit simultanément front/back et question/answer pour l'interface graphique)
+ * Normalise n'importe quelle flashcard (issue d'un JSON ou du fallback)
+ * pour garantir que card.back est TOUJOURS un objet { mainAnswer, criticalFormula, commonTrap }
+ */
+function normalizeFlashcard(raw: any, index: number): FlashcardItem {
+  const frontText =
+    typeof raw?.front === "string"
+      ? raw.front
+      : typeof raw?.question === "string"
+      ? raw.question
+      : "Question";
+
+  const backObj =
+    raw?.back && typeof raw.back === "object"
+      ? {
+          mainAnswer:
+            raw.back.mainAnswer ??
+            raw.back.answer ??
+            raw.back.text ??
+            "",
+          criticalFormula:
+            raw.back.criticalFormula ??
+            raw.back.formula ??
+            raw.latex ??
+            undefined,
+          commonTrap:
+            raw.back.commonTrap ?? raw.back.trap ?? raw.tip ?? undefined,
+        }
+      : {
+          mainAnswer:
+            typeof raw?.back === "string"
+              ? raw.back
+              : typeof raw?.answer === "string"
+              ? raw.answer
+              : "",
+          criticalFormula: raw?.criticalFormula ?? raw?.latex ?? undefined,
+          commonTrap: raw?.commonTrap ?? raw?.tip ?? undefined,
+        };
+
+  return {
+    id: raw?.id ?? `fc-${index + 1}`,
+    category: raw?.category ?? "Formule Critique",
+    difficulty: raw?.difficulty ?? "Concours ATS",
+    front: frontText,
+    back: backObj,
+  } as unknown as FlashcardItem;
+}
+
+/**
+ * Normalise n'importe quelle question de QCM (issue d'un JSON ou du fallback)
+ * pour garantir que questionText, options[], correctOptionId et explanation.steps[] existent toujours
+ */
+function normalizeQcmQuestion(raw: any, index: number): QcmQuestion {
+  const letters = ["a", "b", "c", "d"] as const;
+  const rawOptions = Array.isArray(raw?.options)
+    ? raw.options
+    : Array.isArray(raw?.choices)
+    ? raw.choices
+    : [];
+
+  const correctIndex: number =
+    typeof raw?.correctIndex === "number"
+      ? raw.correctIndex
+      : typeof raw?.correctOptionId === "string"
+      ? Math.max(0, letters.indexOf(raw.correctOptionId.toLowerCase() as any))
+      : 0;
+
+  const options = rawOptions.map((opt: any, idx: number) => {
+    const id = opt?.id ?? letters[idx] ?? String(idx);
+    const text =
+      typeof opt === "string"
+        ? opt
+        : opt?.text ?? opt?.label ?? opt?.latex ?? "";
+    return {
+      id,
+      label: opt?.label ?? id.toUpperCase(),
+      text,
+      latex: opt?.latex ?? undefined,
+      isCorrect:
+        typeof opt?.isCorrect === "boolean"
+          ? opt.isCorrect
+          : idx === correctIndex,
+    };
+  });
+
+  const correctOptionId =
+    raw?.correctOptionId ??
+    options.find((o: any) => o.isCorrect)?.id ??
+    options[correctIndex]?.id ??
+    "a";
+
+  const explanationObj =
+    raw?.explanation && typeof raw.explanation === "object"
+      ? {
+          steps: Array.isArray(raw.explanation.steps)
+            ? raw.explanation.steps
+            : [String(raw.explanation.main ?? "Voir formule clé ci-dessous.")],
+          keyFormula: raw.explanation.keyFormula ?? "",
+          commonTrap: raw.explanation.commonTrap ?? undefined,
+        }
+      : {
+          steps:
+            typeof raw?.explanation === "string"
+              ? [raw.explanation]
+              : ["Appliquer la formule du cours."],
+          keyFormula: raw?.keyFormula ?? "",
+          commonTrap: raw?.commonTrap ?? undefined,
+        };
+
+  const qText =
+    raw?.questionText ?? raw?.question ?? raw?.prompt ?? `Question ${index + 1}`;
+
+  return {
+    id: raw?.id ?? `qcm-${index + 1}`,
+    difficulty: raw?.difficulty ?? "Concours ATS",
+    questionText: qText,
+    question: qText,
+    options,
+    correctOptionId,
+    correctIndex,
+    explanation: explanationObj,
+  } as unknown as QcmQuestion;
+}
+
+/**
+ * Constructeurs typés pour nos chapitres intégrés
  */
 function makeBuiltinFlashcard(params: {
   id: string;
@@ -53,24 +176,24 @@ function makeBuiltinFlashcard(params: {
     | "Piège Classique";
   question: string;
   answer: string;
-  latex?: string;
-  tip?: string;
+  criticalFormula?: string;
+  commonTrap?: string;
 }): FlashcardItem {
-  return {
-    id: params.id,
-    category: params.category,
-    front: params.question,
-    back: params.answer,
-    question: params.question,
-    answer: params.answer,
-    latex: params.latex,
-    tip: params.tip,
-  } as unknown as FlashcardItem;
+  return normalizeFlashcard(
+    {
+      id: params.id,
+      category: params.category,
+      front: params.question,
+      back: {
+        mainAnswer: params.answer,
+        criticalFormula: params.criticalFormula,
+        commonTrap: params.commonTrap,
+      },
+    },
+    0
+  );
 }
 
-/**
- * Helper universel pour construire un QcmQuestion compatible avec src/types/pedagogy.ts
- */
 function makeBuiltinQcm(params: {
   id: string;
   question: string;
@@ -80,32 +203,24 @@ function makeBuiltinQcm(params: {
   keyFormula: string;
   commonTrap?: string;
 }): QcmQuestion {
-  const letters = ["a", "b", "c", "d"] as const;
-  const options = params.choices.map((text, idx) => ({
-    id: letters[idx],
-    label: letters[idx].toUpperCase(),
-    text,
-    latex: text,
-    isCorrect: idx === params.correctIndex,
-  }));
-
-  return {
-    id: params.id,
-    difficulty: "Concours ATS",
-    question: params.question,
-    options,
-    correctOptionId: letters[params.correctIndex],
-    correctIndex: params.correctIndex,
-    explanation: {
-      steps: params.steps,
-      keyFormula: params.keyFormula,
-      commonTrap: params.commonTrap,
+  return normalizeQcmQuestion(
+    {
+      id: params.id,
+      questionText: params.question,
+      options: params.choices,
+      correctIndex: params.correctIndex,
+      explanation: {
+        steps: params.steps,
+        keyFormula: params.keyFormula,
+        commonTrap: params.commonTrap,
+      },
     },
-  } as unknown as QcmQuestion;
+    0
+  );
 }
 
 // ============================================================================
-// CONTENU INTÉGRÉ POUR LES 10 NOUVEAUX CHAPITRES (ZÉRO ERREUR TYPESCRIPT)
+// CONTENU INTÉGRÉ POUR LES 10 NOUVEAUX CHAPITRES
 // ============================================================================
 const BUILTIN_CHAPTERS: Record<string, BuiltinChapterBundle> = {
   "physique-chimie/08": {
@@ -129,7 +244,7 @@ $$E_{\\text{libérée}} = \\Delta m \\cdot c^2 \\quad \\text{avec} \\quad c \\ap
 Pour une réaction $\\nu_A\\,\\text{A} + \\nu_B\\,\\text{B} \\rightarrow \\nu_C\\,\\text{C} + \\nu_D\\,\\text{D}$, l'**avancement maximal** est $x_{\\max} = \\min\\left(\\frac{n_{A,0}}{\\nu_A}, \\frac{n_{B,0}}{\\nu_B}\\right)$, ce qui identifie le **réactif limitant**.
 
 <CriticalFormula title="À connaître absolument — Combustion complète, Masse de CO₂ et PCI">
-$$\\text{C}_x\\text{H}_y\\text{O}_z + \\left(x + \\frac{y}{4} - \\frac{z}{2}\\right)\\text{O}_2 \\longrightarrow x\\,\\text{CO}_2 + \\frac{y}{2}\\,\\text{H}_2\\text{O}$$
+$$\\text{C}_x\\text{H}_y\\text{O}_z + \\left(x + \\frac{y}{4} - \\frac{z}{2}\right)\\text{O}_2 \\longrightarrow x\\,\\text{CO}_2 + \\frac{y}{2}\\,\\text{H}_2\\text{O}$$
 
 $$m(\\text{CO}_2) = x \\cdot \\frac{M_{\\text{CO}_2}}{M_{\\text{carb}}} \\cdot m_{\\text{carb}} \\quad (M_{\\text{CO}_2} = 44{,}0\\text{ g}\\cdot\\text{mol}^{-1}) \\quad \\text{et} \\quad Q_{\\text{lib}} = m_{\\text{carb}} \\cdot \\text{PCI}$$
 </CriticalFormula>
@@ -147,12 +262,14 @@ $$m(\\text{CO}_2) = x \\cdot \\frac{44{,}0}{M_{\\text{carb}}} \\cdot m_{\\text{c
         category: "Définition",
         question: "Que représentent $A$, $Z$ et $N = A - Z$ dans la notation $^A_Z\\text{X}$ et qu'appelle-t-on isotopes ?",
         answer: "$Z$ est le nombre de protons (numéro atomique), $A$ le nombre de nucléons et $N = A-Z$ le nombre de neutrons. Deux isotopes ont le même $Z$ mais un nombre de masse $A$ différent.",
+        criticalFormula: "A = Z + N \\quad ; \\quad n = \\frac{m}{M} = \\frac{N_{\\text{entités}}}{N_A}",
       }),
       makeBuiltinFlashcard({
         id: "pc-08-fc-02",
         category: "Formule Critique",
         question: "Quelle masse de $\\text{CO}_2$ ($M=44\\text{ g/mol}$) rejette la combustion complète de $1{,}00\\text{ kg}$ d'octane $\\text{C}_8\\text{H}_{18}$ ($M=114\\text{ g/mol}$) ?",
-        answer: "$m(\\text{CO}_2) = 8 \\times \\frac{44}{114} \\times 1{,}00\\text{ kg} \\approx 3{,}09\\text{ kg}$ de $\\text{CO}_2$.",
+        answer: "Chaque mole d'octane brûlée produit 8 moles de dioxyde de carbone, soit environ $3{,}09\\text{ kg}$ de $\\text{CO}_2$ par kilogramme de carburant.",
+        criticalFormula: "m(\\text{CO}_2) = 8 \\times \\frac{44}{114} \\times 1{,}00\\text{ kg} \\approx 3{,}09\\text{ kg}",
       }),
     ],
     qcm: [
@@ -203,7 +320,8 @@ $$u_{\\text{A}}(\\bar{x}) = \\frac{s_{n-1}}{\\sqrt{N}} \\quad ; \\quad u_{\\text
         id: "pc-09-fc-01",
         category: "Formule Critique",
         question: "Quelle est la condition sur l'écart normalisé $z$ pour valider la compatibilité d'une mesure $g_{\\text{exp}} \\pm u(g_{\\text{exp}})$ avec $g_{\\text{réf}}$ ?",
-        answer: "$z = \\frac{|g_{\\text{exp}} - g_{\\text{réf}}|}{u(g_{\\text{exp}})} \\le 2$.",
+        answer: "L'écart normalisé doit rester inférieur ou égal à 2 (niveau de confiance de 95 %).",
+        criticalFormula: "z = \\frac{|g_{\\text{exp}} - g_{\\text{réf}}|}{u(g_{\\text{exp}})} \\le 2",
       }),
     ],
     qcm: [
@@ -247,7 +365,8 @@ $$\\text{Pour } u_n \\to 0 : \\quad \\sin(u_n) \\sim u_n \\quad ; \\quad \\ln(1+
         id: "math-07-fc-01",
         category: "Théorème",
         question: "Quelles sont les hypothèses du théorème de la bijection monotone sur un intervalle $I$ ?",
-        answer: "$f$ doit être **continue** et **strictement monotone** sur l'intervalle $I$. Elle réalise alors une bijection de $I$ sur l'intervalle image $J = f(I)$.",
+        answer: "$f$ doit être continue et strictement monotone sur l'intervalle $I$. Elle réalise alors une bijection de $I$ sur l'intervalle image $J = f(I)$.",
+        criticalFormula: "\\forall y \\in f(I), \\; \\exists! x \\in I, \\; f(x) = y",
       }),
     ],
     qcm: [
@@ -290,7 +409,8 @@ $$\\mathrm{e}^x = 1 + x + \\frac{x^2}{2!} + \\frac{x^3}{3!} + o(x^3) \\quad ; \\
         id: "math-08-fc-01",
         category: "Formule Critique",
         question: "Donner le $\\text{DL}_3(0)$ de $\\sin x$, $\\cos x$ et $\\tan x$.",
-        answer: "$\\sin x = x - \\frac{x^3}{6} + o(x^3)$, $\\cos x = 1 - \\frac{x^2}{2} + o(x^3)$ et $\\tan x = x + \\frac{x^3}{3} + o(x^3)$.",
+        answer: "Les fonctions sinus et tangente sont impaires (puissances impaires) et cosinus est paire.",
+        criticalFormula: "\\sin x = x - \\frac{x^3}{6} + o(x^3) \\; ; \\; \\cos x = 1 - \\frac{x^2}{2} + o(x^3) \\; ; \\; \\tan x = x + \\frac{x^3}{3} + o(x^3)",
       }),
     ],
     qcm: [
@@ -329,6 +449,7 @@ $$\\lim_{n\\to+\\infty}\\frac{1}{n}\\sum_{k=1}^n f\\left(\\frac{k}{n}\\right) = 
         category: "Théorème",
         question: "Pour quelles valeurs de $\\alpha$ l'intégrale $\\int_1^{+\\infty} \\frac{\\mathrm{d}t}{t^\\alpha}$ converge-t-elle ? Et sur $]0, 1]$ ?",
         answer: "Sur $[1, +\\infty[$, elle converge si et seulement si $\\alpha > 1$. Sur $]0, 1]$, elle converge si et seulement si $\\alpha < 1$.",
+        criticalFormula: "\\int_1^{+\\infty} \\frac{\\mathrm{d}t}{t^\\alpha} < +\\infty \\iff \\alpha > 1",
       }),
     ],
     qcm: [
@@ -374,7 +495,8 @@ $$\\sum_{n\\ge 1}\\frac{1}{n^\\alpha} \\text{ converge} \\iff \\alpha > 1 \\quad
         id: "math-10-fc-01",
         category: "Formule Critique",
         question: "Énoncer l'égalité de Parseval pour une fonction $T$-périodique.",
-        answer: "$\\frac{1}{T}\\int_0^T f(t)^2\\,\\mathrm{d}t = a_0^2 + \\frac{1}{2}\\sum_{n=1}^{+\\infty}(a_n^2 + b_n^2)$.",
+        answer: "La puissance moyenne du signal sur une période est égale à la somme des puissances moyennes de ses harmoniques.",
+        criticalFormula: "\\frac{1}{T}\\int_0^T f(t)^2\\,\\mathrm{d}t = a_0^2 + \\frac{1}{2}\\sum_{n=1}^{+\\infty}(a_n^2 + b_n^2)",
       }),
     ],
     qcm: [
@@ -415,6 +537,7 @@ $$\\text{Classe } \\mathcal{C}^2 \\implies \\frac{\\partial^2 f}{\\partial x \\p
         category: "Méthode",
         question: "Comment distingue-t-on un minimum local, un maximum local et un point col en un point critique $(x_0, y_0)$ ?",
         answer: "Avec $r = \\partial_{xx}^2 f$, $s = \\partial_{xy}^2 f$, $t = \\partial_{yy}^2 f$ : si $rt-s^2 > 0$ et $r > 0$, minimum local ; si $rt-s^2 > 0$ et $r < 0$, maximum local ; si $rt-s^2 < 0$, point col.",
+        criticalFormula: "\\Delta = r\\,t - s^2",
       }),
     ],
     qcm: [
@@ -466,7 +589,8 @@ $$\\text{Roulements à contact radial : bague TOURNANTE par rapport à la charge
         id: "sii-05-fc-01",
         category: "Formule Critique",
         question: "Quel est le quantum $q$ d'un Convertisseur Analogique-Numérique (CAN) de $12\\text{ bits}$ sur une plage $0\\text{–}10\\text{ V}$ ?",
-        answer: "$q = \\frac{10}{2^{12}} = \\frac{10}{4096} \\approx 2{,}44\\text{ mV}$.",
+        answer: "Le CAN possède $2^{12} = 4096$ niveaux de quantification.",
+        criticalFormula: "q = \\frac{U_{\\text{PE}}}{2^N} = \\frac{10}{4096} \\approx 2{,}44\\text{ mV}",
       }),
     ],
     qcm: [
@@ -519,7 +643,7 @@ $$\\text{Sous-partie de dissertation : Thèse} \\longrightarrow \\text{Explicati
         id: "fr-01-fc-01",
         category: "Méthode",
         question: "Quelles sont les quatre règles formelles impératives du résumé de texte au concours ATS ?",
-        answer: "1. Respecter la fourchette de $\\pm 10\\,\\%$ du nombre de mots.\n2. Adopter l'énonciation de l'auteur (interdiction d'écrire « L'auteur dit que... »).\n3. Reformuler avec ses propres mots sans citer le texte.\n4. Suivre l'ordre du texte.",
+        answer: "1. Respecter la fourchette de ± 10 % du nombre de mots. 2. Adopter l'énonciation de l'auteur (interdiction d'écrire « L'auteur dit que... »). 3. Reformuler sans citer le texte. 4. Suivre l'ordre du texte.",
       }),
     ],
     qcm: [
@@ -567,7 +691,7 @@ $$\\text{Citation courte : intégrée dans votre phrase entre guillemets et imm�
         id: "fr-02-fc-01",
         category: "Méthode",
         question: "Comment éviter l'écueil de la « juxtaposition des œuvres » dans une partie de dissertation ?",
-        answer: "En organisant chaque partie autour d'une **idée directrice (un concept)** et en faisant dialoguer deux œuvres à l'intérieur d'une même sous-partie, au lieu de consacrer un paragraphe isolé à l'œuvre A puis un paragraphe isolé à l'œuvre B.",
+        answer: "En organisant chaque partie autour d'une idée directrice (un concept) et en faisant dialoguer deux œuvres à l'intérieur d'une même sous-partie, au lieu de consacrer un paragraphe isolé à chaque œuvre.",
       }),
     ],
     qcm: [
@@ -599,7 +723,7 @@ function getBuiltinBundle(
 }
 
 // ============================================================================
-// FONCTIONS D'ACCÈS AUX RESSOURCES (AVEC RÉSOLUTION AUTO + FALLBACK INTÉGRÉ)
+// FONCTIONS D'ACCÈS AUX RESSOURCES (COMPATIBLES TABLEAUX ET OBJETS .cards/.questions)
 // ============================================================================
 
 export function getMdxContent(
@@ -645,7 +769,18 @@ export function getFlashcardsData(
     if (fs.existsSync(filePath)) {
       try {
         const raw = fs.readFileSync(filePath, "utf-8");
-        return JSON.parse(raw) as FlashcardItem[];
+        const parsed = JSON.parse(raw);
+        // Supporte à la fois un tableau direct [...] ET un objet { cards: [...] } !
+        const rawArray = Array.isArray(parsed)
+          ? parsed
+          : Array.isArray(parsed?.cards)
+          ? parsed.cards
+          : [];
+        if (rawArray.length > 0) {
+          return rawArray.map((item: any, idx: number) =>
+            normalizeFlashcard(item, idx)
+          );
+        }
       } catch {
         // Ignore et passe au fallback
       }
@@ -666,7 +801,18 @@ export function getQcmData(
     if (fs.existsSync(filePath)) {
       try {
         const raw = fs.readFileSync(filePath, "utf-8");
-        return JSON.parse(raw) as QcmQuestion[];
+        const parsed = JSON.parse(raw);
+        // Supporte à la fois un tableau direct [...] ET un objet { questions: [...] } !
+        const rawArray = Array.isArray(parsed)
+          ? parsed
+          : Array.isArray(parsed?.questions)
+          ? parsed.questions
+          : [];
+        if (rawArray.length > 0) {
+          return rawArray.map((item: any, idx: number) =>
+            normalizeQcmQuestion(item, idx)
+          );
+        }
       } catch {
         // Ignore et passe au fallback
       }
