@@ -1,6 +1,10 @@
 ﻿// Définition des matières officielles de la CPGE ATS Ingénierie Industrielle
-export type SubjectId = "physique-chimie" | "mathematiques" | "sii" | "informatique";
-
+export type SubjectId =
+  | "physique-chimie"
+  | "mathematiques"
+  | "sii"
+  | "informatique"
+  | "francais-philosophie";
 // Structure d'un chapitre dans le menu de navigation
 export interface ChapterMeta {
   id: string;
