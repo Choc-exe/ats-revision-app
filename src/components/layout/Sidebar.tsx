@@ -478,26 +478,6 @@ export default function Sidebar() {
           </Link>
         </div>
 
-        {/* BARRE D'OUTILS DU PROGRAMME (Tout déplier / Tout replier) */}
-        {(!isCollapsed || mobileOpen) && (
-          <div className="px-4 pt-2.5 pb-1 flex items-center justify-between text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 shrink-0">
-            <span>Programme officiel</span>
-            <button
-              type="button"
-              onClick={toggleAllSubjects}
-              className="inline-flex items-center gap-1 hover:text-blue-600 dark:hover:text-sky-400 transition-colors cursor-pointer"
-              title={
-                allExpanded
-                  ? "Replier toutes les matières"
-                  : "Déplier toutes les matières"
-              }
-            >
-              <ChevronsUpDown className="w-3 h-3" />
-              <span>{allExpanded ? "Tout replier" : "Tout déplier"}</span>
-            </button>
-          </div>
-        )}
-
         {/* ARBORESCENCE DES MATIÈRES ET CHAPITRES (Avec Scrollbar personnalisée élégante) */}
         <nav
           className={`ats-custom-scroll flex-1 overflow-y-auto overflow-x-hidden ${
