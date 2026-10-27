@@ -398,14 +398,15 @@ $$\\text{Pour } u_n \\to 0 : \\quad \\sin(u_n) \\sim u_n \\quad ; \\quad \\ln(1+
 ## 1. Théorème de Rolle, Accroissements Finis et Développements Limités
 
 <CriticalFormula title="À connaître absolument — Accroissements Finis (TAF) et Taylor-Young">
-Si $f$ est continue sur $[a, b]$ et dérivable sur $]a, b[$, il existe $c \\in ]a, b[$ tel que $f(b) - f(a) = f'(c)(b - a)$.
-**Formulaire des $\\text{DL}_3(0)$ :**
 
-$$\\begin{aligned}
-\\mathrm{e}^x &= 1 + x + \\frac{x^2}{2} + \\frac{x^3}{6} + o(x^3) \\quad &;\\quad \\ln(1+x) &= x - \\frac{x^2}{2} + \\frac{x^3}{3} + o(x^3) \\\\[4pt]
-\\sin x &= x - \\frac{x^3}{6} + o(x^4) \\quad &;\\quad \\cos x &= 1 - \\frac{x^2}{2} + \\frac{x^4}{24} + o(x^5) \\\\[4pt]
-(1+x)^\\alpha &= 1 + \\alpha x + \\frac{\\alpha(\\alpha-1)}{2}x^2 + o(x^2) \\quad &;\\quad \\arctan x &= x - \\frac{x^3}{3} + o(x^4)
-\\end{aligned}$$
+Si $f$ est continue sur $[a, b]$ et dérivable sur $]a, b[$, il existe $c \\in ]a, b[$ tel que $f(b) - f(a) = f'(c)(b - a)$.
+
+$$\\mathrm{e}^x = 1 + x + \\frac{x^2}{2} + \\frac{x^3}{6} + o(x^3) \\quad ; \\quad \\ln(1+x) = x - \\frac{x^2}{2} + \\frac{x^3}{3} + o(x^3)$$
+
+$$\\sin x = x - \\frac{x^3}{6} + o(x^4) \\quad ; \\quad \\cos x = 1 - \\frac{x^2}{2} + \\frac{x^4}{24} + o(x^5)$$
+
+$$(1+x)^\\alpha = 1 + \\alpha x + \\frac{\\alpha(\\alpha-1)}{2}x^2 + o(x^2) \\quad ; \\quad \\arctan x = x - \\frac{x^3}{3} + o(x^4)$$
+
 </CriticalFormula>
 `,
     summary: `
