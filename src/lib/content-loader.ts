@@ -731,7 +731,28 @@ function getBuiltinBundle(
   const numPrefix = chapterId.slice(0, 2);
   return BUILTIN_CHAPTERS[`${subjectId}/${numPrefix}`] ?? null;
 }
-
+/**
+ * Nettoie le contenu MDX avant compilation par next-mdx-remote :
+ * - Force une ligne vide après les balises ouvrantes <CriticalFormula...> / <WarningBox...>
+ *   et avant leurs balises fermantes.
+ * - Aplatit les blocs $$ ... $$ multi-lignes sur une seule ligne pour éviter les conflits JSX.
+ */
+function sanitizeMdxForCompiler(mdx: string): string {
+  return mdx
+    // 1. Aplatit l'intérieur des blocs $$ ... $$ sur une seule ligne
+    .replace(/\$\$([\s\S]*?)\$\$/g, (_, inner: string) => {
+      const singleLine = inner
+        .split(/\r?\n/)
+        .map((line) => line.trim())
+        .filter(Boolean)
+        .join(" ");
+      return `\n\n$$${singleLine}$$\n\n`;
+    })
+    // 2. Garantit une ligne vide après <CriticalFormula ...> et <WarningBox ...>
+    .replace(/(<(?:CriticalFormula|WarningBox)[^>]*>)\s*/g, "$1\n\n")
+    // 3. Garantit une ligne vide avant </CriticalFormula> et </WarningBox>
+    .replace(/\s*(<\/(?:CriticalFormula|WarningBox)>)/g, "\n\n$1");
+}
 // ============================================================================
 // FONCTIONS D'ACCÈS AUX RESSOURCES (COMPATIBLES TABLEAUX ET OBJETS .cards/.questions)
 // ============================================================================
