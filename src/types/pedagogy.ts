@@ -4,7 +4,8 @@ export type SubjectId =
   | "mathematiques"
   | "sii"
   | "informatique"
-  | "francais-philosophie";
+  | "francais-philosophie"
+  | "anglais";
 // Structure d'un chapitre dans le menu de navigation
 export interface ChapterMeta {
   id: string;

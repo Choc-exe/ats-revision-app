@@ -77,6 +77,16 @@ export const ATS_CURRICULUM: SubjectMeta[] = [
       { id: "02-themes-oeuvres-concours", number: "02", semester: 2, title: "Thèmes au programme officiel, Répertoire d'arguments et Citations clés" },
     ],
   },
+  {
+    id: "anglais",
+    title: "Anglais Scientifique, Presse & Concours ATS",
+    shortTitle: "Anglais ATS",
+    chapters: [
+      { id: "01-grammaire-structures-concours", number: "01", semester: 1, title: "Grammaire de haut niveau, Modaux, Passif et Structures idiomatiques" },
+      { id: "02-methodologie-synthese-essay", number: "02", semester: 1, title: "Méthodologie de la Synthèse de dossier, de l'Essay et de la Khôlle audio" },
+      { id: "03-vocabulaire-industrie-transition", number: "03", semester: 2, title: "Lexique de l'Ingénieur : Énergie, IA, Industrie 4.0 et Géopolitique" },
+    ],
+  },
 ];
 
 export function getSubjectById(id: string) {
@@ -88,7 +98,6 @@ export function getChapterById(subjectId: string, chapterId: string) {
   if (!subject) return undefined;
   return (
     subject.chapters.find((chapter) => chapter.id === chapterId) ??
-    // Tolérance si l'URL contient un ancien slug mais commence par le même numéro (ex: "02-")
     subject.chapters.find(
       (chapter) => chapter.id.slice(0, 3) === chapterId.slice(0, 3)
     )

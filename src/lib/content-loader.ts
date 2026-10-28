@@ -32,6 +32,24 @@ function resolveChapterDir(subjectId: string, chapterId: string): string | null 
   return null;
 }
 
+/**
+ * Sécurise n'importe quel contenu MDX avant compilation par next-mdx-remote
+ * (Évite définitivement l'erreur "Expected a closing tag for <CriticalFormula>")
+ */
+function sanitizeMdxForCompiler(mdx: string): string {
+  return mdx
+    .replace(/\$\$([\s\S]*?)\$\$/g, (_, inner: string) => {
+      const singleLine = inner
+        .split(/\r?\n/)
+        .map((line) => line.trim())
+        .filter(Boolean)
+        .join(" ");
+      return `\n\n$$${singleLine}$$\n\n`;
+    })
+    .replace(/(<(?:CriticalFormula|WarningBox)[^>]*>)\s*/g, "$1\n\n")
+    .replace(/\s*(<\/(?:CriticalFormula|WarningBox)>)/g, "\n\n$1");
+}
+
 interface BuiltinChapterBundle {
   course: string;
   summary: string;
@@ -39,10 +57,6 @@ interface BuiltinChapterBundle {
   qcm: QcmQuestion[];
 }
 
-/**
- * Normalise n'importe quelle flashcard (issue d'un JSON ou du fallback)
- * pour garantir que card.back est TOUJOURS un objet { mainAnswer, criticalFormula, commonTrap }
- */
 function normalizeFlashcard(raw: any, index: number): FlashcardItem {
   const frontText =
     typeof raw?.front === "string"
@@ -87,10 +101,6 @@ function normalizeFlashcard(raw: any, index: number): FlashcardItem {
   } as unknown as FlashcardItem;
 }
 
-/**
- * Normalise n'importe quelle question de QCM (issue d'un JSON ou du fallback)
- * pour garantir que questionText, options[], correctOptionId et explanation.steps[] existent toujours
- */
 function normalizeQcmQuestion(raw: any, index: number): QcmQuestion {
   const letters = ["a", "b", "c", "d"] as const;
   const rawOptions = Array.isArray(raw?.options)
@@ -116,7 +126,6 @@ function normalizeQcmQuestion(raw: any, index: number): QcmQuestion {
       id,
       label: opt?.label ?? id.toUpperCase(),
       text,
-      // On ne définit latex que s'il existait explicitement dans le JSON d'origine sans '$'
       latex:
         typeof opt?.latex === "string" && !opt.latex.includes("$")
           ? opt.latex
@@ -140,9 +149,7 @@ function normalizeQcmQuestion(raw: any, index: number): QcmQuestion {
           steps: Array.isArray(raw.explanation.steps)
             ? raw.explanation.steps.map(String)
             : [String(raw.explanation.main ?? "Voir l'explication ci-dessous.")],
-          keyFormula: String(
-            raw.explanation.keyFormula ?? "N_{\\text{mots}} \\in [90\\,;\\,110]"
-          ),
+          keyFormula: String(raw.explanation.keyFormula ?? ""),
           commonTrap: raw.explanation.commonTrap
             ? String(raw.explanation.commonTrap)
             : undefined,
@@ -152,7 +159,7 @@ function normalizeQcmQuestion(raw: any, index: number): QcmQuestion {
             typeof raw?.explanation === "string"
               ? [raw.explanation]
               : ["Appliquer la méthode du cours."],
-          keyFormula: String(raw?.keyFormula ?? "N_{\\text{mots}} \\in [90\\,;\\,110]"),
+          keyFormula: String(raw?.keyFormula ?? ""),
           commonTrap: raw?.commonTrap ? String(raw.commonTrap) : undefined,
         };
 
@@ -172,9 +179,6 @@ function normalizeQcmQuestion(raw: any, index: number): QcmQuestion {
   } as unknown as QcmQuestion;
 }
 
-/**
- * Constructeurs typés pour nos chapitres intégrés
- */
 function makeBuiltinFlashcard(params: {
   id: string;
   category:
@@ -229,7 +233,7 @@ function makeBuiltinQcm(params: {
 }
 
 // ============================================================================
-// CONTENU INTÉGRÉ POUR LES 10 NOUVEAUX CHAPITRES
+// CONTENU INTÉGRÉ POUR LES CHAPITRES DE COMPLÉMENT (INCLUT ANGLAIS ATS)
 // ============================================================================
 const BUILTIN_CHAPTERS: Record<string, BuiltinChapterBundle> = {
   "physique-chimie/08": {
@@ -239,13 +243,11 @@ const BUILTIN_CHAPTERS: Record<string, BuiltinChapterBundle> = {
 Un noyau atomique est représenté par le symbole $^A_Z\\text{X}$, où **$Z$** est le **numéro atomique** (nombre de protons) et **$A = Z + N$** est le **nombre de masse** (nombre total de nucléons : protons + neutrons). Deux **isotopes** possèdent le même numéro atomique $Z$ (même élément chimique) mais un nombre de neutrons $N$ différent.
 
 <CriticalFormula title="À connaître absolument — Quantité de matière et Défaut de masse nucléaire">
-La quantité de matière $n$ (en $\\text{mol}$, avec $N_A = 6{,}022 \\times 10^{23}\\text{ mol}^{-1}$) se calcule selon l'état physique par :
 
 $$n = \\frac{m}{M} = \\frac{\\rho \\cdot V}{M} = \\frac{N_{\\text{entités}}}{N_A} = C \\cdot V_{\\text{sol}} = \\frac{P \\cdot V_{\\text{gaz}}}{R \\cdot T}$$
 
-Lors d'une réaction nucléaire (fission ou fusion, vérifiant les lois de conservation de Soddy $\\sum A = \\text{cte}$ et $\\sum Z = \\text{cte}$), l'énergie libérée par la perte de masse $\\Delta m = \\sum m_{\\text{initial}} - \\sum m_{\\text{final}} > 0$ vaut :
-
 $$E_{\\text{libérée}} = \\Delta m \\cdot c^2 \\quad \\text{avec} \\quad c \\approx 3{,}00 \\times 10^8\\text{ m}\\cdot\\text{s}^{-1}$$
+
 </CriticalFormula>
 
 ## 2. Transformations chimiques, Avancement et Combustions
@@ -253,16 +255,20 @@ $$E_{\\text{libérée}} = \\Delta m \\cdot c^2 \\quad \\text{avec} \\quad c \\ap
 Pour une réaction $\\nu_A\\,\\text{A} + \\nu_B\\,\\text{B} \\rightarrow \\nu_C\\,\\text{C} + \\nu_D\\,\\text{D}$, l'**avancement maximal** est $x_{\\max} = \\min\\left(\\frac{n_{A,0}}{\\nu_A}, \\frac{n_{B,0}}{\\nu_B}\\right)$, ce qui identifie le **réactif limitant**.
 
 <CriticalFormula title="À connaître absolument — Combustion complète, Masse de CO₂ et PCI">
-$$\\text{C}_x\\text{H}_y\\text{O}_z + \\left(x + \\frac{y}{4} - \\frac{z}{2}\right)\\text{O}_2 \\longrightarrow x\\,\\text{CO}_2 + \\frac{y}{2}\\,\\text{H}_2\\text{O}$$
+
+$$\\text{C}_x\\text{H}_y\\text{O}_z + \\left(x + \\frac{y}{4} - \\frac{z}{2}\\right)\\text{O}_2 \\longrightarrow x\\,\\text{CO}_2 + \\frac{y}{2}\\,\\text{H}_2\\text{O}$$
 
 $$m(\\text{CO}_2) = x \\cdot \\frac{M_{\\text{CO}_2}}{M_{\\text{carb}}} \\cdot m_{\\text{carb}} \\quad (M_{\\text{CO}_2} = 44{,}0\\text{ g}\\cdot\\text{mol}^{-1}) \\quad \\text{et} \\quad Q_{\\text{lib}} = m_{\\text{carb}} \\cdot \\text{PCI}$$
+
 </CriticalFormula>
 `,
     summary: `
 <CriticalFormula title="Synthèse — Quantité de matière, Combustions et Nucléaire">
+
 $$n = \\frac{m}{M} = C\\,V_{\\text{sol}} = \\frac{P\\,V_{\\text{gaz}}}{R\\,T} \\quad ; \\quad x_{\\max} = \\min\\left(\\frac{n_{A,0}}{\\nu_A}, \\frac{n_{B,0}}{\\nu_B}\\right)$$
 
 $$m(\\text{CO}_2) = x \\cdot \\frac{44{,}0}{M_{\\text{carb}}} \\cdot m_{\\text{carb}} \\quad ; \\quad Q_{\\text{lib}} = m_{\\text{carb}} \\cdot \\text{PCI} \\quad ; \\quad E_{\\text{nucl}} = \\Delta m \\cdot c^2$$
+
 </CriticalFormula>
 `,
     flashcards: [
@@ -307,21 +313,20 @@ $$m(\\text{CO}_2) = x \\cdot \\frac{44{,}0}{M_{\\text{carb}}} \\cdot m_{\\text{c
 ## 1. Incertitudes-types (Type A et Type B) et Propagation (Annexe V)
 
 <CriticalFormula title="À connaître absolument — Incertitudes-types A/B, Propagation et Score z">
+
 * **Type A ($N$ mesures d'écart-type $s_{n-1}$) :** $u(\\bar{x}) = \\dfrac{s_{n-1}}{\\sqrt{N}}$.
 * **Type B (demi-étendue $\\pm a$) :** $u(x) = \\dfrac{a}{\\sqrt{3}}$.
 * **Propagation sur produit/quotient ($G = k X^\\alpha Y^\\beta$) :** $\\dfrac{u(G)}{|G|} = \\sqrt{\\alpha^2\\left(\\dfrac{u(X)}{X}\\right)^2 + \\beta^2\\left(\\dfrac{u(Y)}{Y}\\right)^2}$.
-* **Écart normalisé (compatibilité avec une référence $g_{\\text{réf}}$) :**
 
 $$z = \\frac{|g_{\\text{exp}} - g_{\\text{réf}}|}{\\sqrt{u(g_{\\text{exp}})^2 + u(g_{\\text{réf}})^2}} \\le 2 \\quad (\\text{mesure compatible si } z \\le 2)$$
+
 </CriticalFormula>
-
-## 2. Régression linéaire et Analyse des résidus
-
-Une loi affine $Y = a X + b$ est validée si la droite traverse les barres d'incertitude et si les **résidus** $e_i = Y_i - (a X_i + b)$ sont répartis **aléatoirement autour de $0$** (sans forme en « U » ou en « S »).
 `,
     summary: `
 <CriticalFormula title="Synthèse — Incertitudes-types et Validation expérimentale">
+
 $$u_{\\text{A}}(\\bar{x}) = \\frac{s_{n-1}}{\\sqrt{N}} \\quad ; \\quad u_{\\text{B}}(x) = \\frac{a}{\\sqrt{3}} \\quad ; \\quad z = \\frac{|g_{\\text{exp}} - g_{\\text{réf}}|}{u(g_{\\text{exp}})} \\le 2$$
+
 </CriticalFormula>
 `,
     flashcards: [
@@ -358,15 +363,18 @@ $$u_{\\text{A}}(\\bar{x}) = \\frac{s_{n-1}}{\\sqrt{N}} \\quad ; \\quad u_{\\text
 ## 1. Convergence des suites réelles et Équivalents (Annexe III)
 
 <CriticalFormula title="À connaître absolument — Convergence monotone, Suites adjacentes et TVI">
+
 * **Convergence monotone :** Toute suite réelle **croissante et majorée** (ou décroissante et minorée) converge.
 * **Suites adjacentes :** Si $(u_n)$ est croissante, $(v_n)$ est décroissante et $\\lim_{n\\to+\\infty}(v_n - u_n) = 0$, elles convergent vers la même limite $\\ell$.
 * **Théorème des Valeurs Intermédiaires (TVI) :** Si $f$ est continue sur $[a, b]$ et $f(a)f(b) \\le 0$, l'équation $f(x) = 0$ admet au moins une solution dans $[a, b]$ (unique si $f$ est strictement monotone).
-* **Théorème des bornes atteintes :** Toute fonction continue sur un segment fermé borné $[a, b]$ est bornée et atteint son minimum et son maximum.
+
 </CriticalFormula>
 `,
     summary: `
 <CriticalFormula title="Synthèse — Suites, Équivalents en 0 et Continuité">
+
 $$\\text{Pour } u_n \\to 0 : \\quad \\sin(u_n) \\sim u_n \\quad ; \\quad \\ln(1+u_n) \\sim u_n \\quad ; \\quad \\mathrm{e}^{u_n} - 1 \\sim u_n \\quad ; \\quad 1 - \\cos(u_n) \\sim \\frac{u_n^2}{2}$$
+
 </CriticalFormula>
 `,
     flashcards: [
@@ -411,7 +419,9 @@ $$(1+x)^\\alpha = 1 + \\alpha x + \\frac{\\alpha(\\alpha-1)}{2}x^2 + o(x^2) \\qu
 `,
     summary: `
 <CriticalFormula title="Synthèse — Développements Limités usuels en 0">
+
 $$\\mathrm{e}^x = 1 + x + \\frac{x^2}{2!} + \\frac{x^3}{3!} + o(x^3) \\quad ; \\quad \\ln(1+x) = x - \\frac{x^2}{2} + \\frac{x^3}{3} + o(x^3) \\quad ; \\quad \\frac{1}{1-x} = 1 + x + x^2 + x^3 + o(x^3)$$
+
 </CriticalFormula>
 `,
     flashcards: [
@@ -443,14 +453,18 @@ $$\\mathrm{e}^x = 1 + x + \\frac{x^2}{2!} + \\frac{x^3}{3!} + o(x^3) \\quad ; \\
 ## 1. Intégration sur un segment et Intégrales impropres (Riemann)
 
 <CriticalFormula title="À connaître absolument — IPP, Changement de variable et Critères de Riemann">
+
 $$\\int_a^b u(x)\\,v'(x)\\,\\mathrm{d}x = \\Big[u(x)\\,v(x)\\Big]_a^b - \\int_a^b u'(x)\\,v(x)\\,\\mathrm{d}x$$
 
 $$\\int_1^{+\\infty} \\frac{\\mathrm{d}t}{t^\\alpha} \\text{ converge} \\iff \\mathbf{\\alpha > 1} \\quad \\text{et} \\quad \\int_0^1 \\frac{\\mathrm{d}t}{t^\\alpha} \\text{ converge} \\iff \\mathbf{\\alpha < 1}$$
+
 </CriticalFormula>
 `,
     summary: `
 <CriticalFormula title="Synthèse — Sommes de Riemann et Intégrales généralisées">
+
 $$\\lim_{n\\to+\\infty}\\frac{1}{n}\\sum_{k=1}^n f\\left(\\frac{k}{n}\\right) = \\int_0^1 f(t)\\,\\mathrm{d}t \\quad ; \\quad \\int_0^{+\\infty} \\mathrm{e}^{-\\lambda t}\\,\\mathrm{d}t = \\frac{1}{\\lambda} \\;(\\lambda > 0)$$
+
 </CriticalFormula>
 `,
     flashcards: [
@@ -487,17 +501,19 @@ $$\\lim_{n\\to+\\infty}\\frac{1}{n}\\sum_{k=1}^n f\\left(\\frac{k}{n}\\right) = 
 ## 1. Séries numériques et Séries de Fourier d'un signal $T$-périodique
 
 <CriticalFormula title="À connaître absolument — Coefficients de Fourier, Dirichlet et Parseval">
-Pour $f$ $T$-périodique de pulsation $\\omega = \\frac{2\\pi}{T}$ :
 
 $$a_0 = \\frac{1}{T}\\int_0^T f(t)\\,\\mathrm{d}t \\quad ; \\quad a_n = \\frac{2}{T}\\int_0^T f(t)\\cos(n\\omega t)\\,\\mathrm{d}t \\quad ; \\quad b_n = \\frac{2}{T}\\int_0^T f(t)\\sin(n\\omega t)\\,\\mathrm{d}t$$
 
 * **Théorème de Dirichlet :** $S_f(t) = \\dfrac{f(t^+) + f(t^-)}{2}$.
 * **Formule de Parseval :** $\\dfrac{1}{T}\\int_0^T |f(t)|^2\\,\\mathrm{d}t = a_0^2 + \\dfrac{1}{2}\\sum_{n=1}^{+\\infty}\\left(a_n^2 + b_n^2\\right)$.
+
 </CriticalFormula>
 `,
     summary: `
 <CriticalFormula title="Synthèse — Séries de Riemann et Symétries de Fourier">
+
 $$\\sum_{n\\ge 1}\\frac{1}{n^\\alpha} \\text{ converge} \\iff \\alpha > 1 \\quad ; \\quad f \\text{ paire} \\implies b_n = 0 \\quad ; \\quad f \\text{ impaire} \\implies a_n = 0$$
+
 </CriticalFormula>
 `,
     flashcards: [
@@ -529,16 +545,19 @@ $$\\sum_{n\\ge 1}\\frac{1}{n^\\alpha} \\text{ converge} \\iff \\alpha > 1 \\quad
 ## 1. Dérivées partielles, Gradient, Schwarz et Extremums locaux
 
 <CriticalFormula title="À connaître absolument — Gradient, Plan tangent et Critère rt - s² de Monge">
+
 $$\\overrightarrow{\\text{grad}}\\,f(x, y) = \\nabla f(x, y) = \\begin{pmatrix} \\partial f/\\partial x \\\\ \\partial f/\\partial y \\end{pmatrix} \\quad ; \\quad \\mathrm{d}f = \\frac{\\partial f}{\\partial x}\\mathrm{d}x + \\frac{\\partial f}{\\partial y}\\mathrm{d}y$$
 
-En un **point critique** $(x_0, y_0)$ vérifiant $\\nabla f(x_0, y_0) = \\vec{0}$, avec $r = \\frac{\\partial^2 f}{\\partial x^2}$, $s = \\frac{\\partial^2 f}{\\partial x \\partial y}$, $t = \\frac{\\partial^2 f}{\\partial y^2}$ :
 * Si **$rt - s^2 > 0$** : **extremum local** (minimum si $r > 0$, maximum si $r < 0$).
 * Si **$rt - s^2 < 0$** : **point col (ou point selle)**, pas d'extremum.
+
 </CriticalFormula>
 `,
     summary: `
 <CriticalFormula title="Synthèse — Théorème de Schwarz et Matrice Hessienne">
+
 $$\\text{Classe } \\mathcal{C}^2 \\implies \\frac{\\partial^2 f}{\\partial x \\partial y} = \\frac{\\partial^2 f}{\\partial y \\partial x} \\quad ; \\quad \\det H_f(x_0, y_0) = r\\,t - s^2$$
+
 </CriticalFormula>
 `,
     flashcards: [
@@ -565,7 +584,7 @@ $$\\text{Classe } \\mathcal{C}^2 \\implies \\frac{\\partial^2 f}{\\partial x \\p
           "On calcule les dérivées secondes : $r = 2$, $s = -2$ et $t = 6$.",
           "Comme $rt - s^2 = 12 - 4 = 8 > 0$ et $r = 2 > 0$, $(0, 0)$ est un minimum local strict.",
         ],
-        keyFormula: "\\Delta = r\\,t - s^2 > 0 \\text{ et } r > 0 \\implies \\text{Minimum local}",
+        keyFormula: "\\Delta = r\\,t - s^2 > 0 \\text{ et } r > 0 \\implies \\text{Minimum}",
       }),
     ],
   },
@@ -574,24 +593,17 @@ $$\\text{Classe } \\mathcal{C}^2 \\implies \\frac{\\partial^2 f}{\\partial x \\p
     course: `
 ## 1. Ingénierie Système (SysML), Chaîne d'acquisition et Conception (Annexe VI)
 
-L'analyse fonctionnelle et structurelle d'un système industriel s'appuie sur les diagrammes **SysML** :
-* **Diagramme des exigences (req)** : extrait les critères, niveaux et flexibilités du cahier des charges.
-* **Chaîne d'énergie** : Alimenter $\\to$ Distribuer (préactionneur : hacheur, onduleur, distributeur) $\\to$ Convertir (actionneur : moteur, vérin) $\\to$ Transmettre (réducteur, vis-écrou).
-* **Chaîne d'information** : Acquérir (capteurs, codeur incrémental) $\\to$ Traiter (microcontrôleur, CAN) $\\to$ Communiquer (bus, IHM).
-
 <CriticalFormula title="À connaître absolument — Résolution d'un CAN et Codeur incrémental">
-* **Convertisseur Analogique-Numérique (CAN) sur $N$ bits** de pleine échelle $U_{\\text{PE}}$ : le quantum (plus petite variation de tension détectable) vaut :
 
-$$q = \\frac{U_{\\text{PE}}}{2^N} \\quad \\text{(ou } \\frac{U_{\\text{PE}}}{2^N - 1}\\text{)}$$
+$$q = \\frac{U_{\\text{PE}}}{2^N} \\quad \\text{et} \\quad \\Delta \\theta_{\\text{quad}} = \\frac{2\\pi}{4\\,P}\\text{ rad} = \\frac{360^\\circ}{4\\,P}$$
 
-* **Codeur optique incrémental** à $P$ points (fentes) par tour avec exploitation en quadrature des voies A et B ($4$ fronts par fente) : la résolution angulaire vaut $\\Delta \\theta = \\frac{2\\pi}{4 P}\\text{ rad} = \\frac{360^\\circ}{4 P}$.
 </CriticalFormula>
 `,
     summary: `
 <CriticalFormula title="Synthèse — Chaîne d'acquisition et Montage de roulements">
-$$q_{\\text{CAN}} = \\frac{U_{\\text{PE}}}{2^N} \\quad ; \\quad \\text{Fréquence de Shannon : } f_e > 2\\,f_{\\max}$$
 
-$$\\text{Roulements à contact radial : bague TOURNANTE par rapport à la charge montée SERRÉE ; bague FIXE montée GLISSANTE.}$$
+$$q_{\\text{CAN}} = \\frac{U_{\\text{PE}}}{2^N} \\quad ; \\quad f_e > 2\\,f_{\\max}$$
+
 </CriticalFormula>
 `,
     flashcards: [
@@ -618,7 +630,7 @@ $$\\text{Roulements à contact radial : bague TOURNANTE par rapport à la charge
           "La bague intérieure liée à l'arbre tourne par rapport à la direction fixe de la charge : elle doit être montée serrée.",
           "La bague extérieure liée à l'alésage est fixe par rapport à la charge : elle est montée glissante.",
         ],
-        keyFormula: "\\text{Bague tournante / charge} \\implies \\text{Montage serré}",
+        keyFormula: "N_{\\text{obstacles bagues serrées}} = 4 \\quad ; \\quad N_{\\text{obstacles bagues glissantes}} = 2",
       }),
     ],
   },
@@ -627,25 +639,20 @@ $$\\text{Roulements à contact radial : bague TOURNANTE par rapport à la charge
     course: `
 ## 1. Méthodologie de la Contraction (Résumé de texte) au Concours ATS
 
-L'épreuve écrite de Français-Philosophie au concours ATS associe un **résumé de texte** (sous contrainte stricte de nombre de mots, généralement $100$ mots $\\pm 10\\,\\%$) et une **dissertation** sur le thème annuel.
-
 <CriticalFormula title="À connaître absolument — Les 4 Règles d'Or du Résumé de Texte ATS">
-1. **Marge de tolérance de $\\pm 10\\,\\%$ impérative :** Pour une consigne à $100$ mots, le résumé doit compter entre **$90$ et $110$ mots** (et le nombre exact de mots doit être indiqué à la fin de la copie).
-2. **Respect du système d'énonciation :** Vous rédigez **à la place de l'auteur** (conservez le *« je »* ou le *« nous »*). Les formules extérieures comme *« L'auteur explique que... »* sont éliminatoires.
-3. **Reformulation personnelle intégrale :** Aucun collage ni citation du texte source ; les exemples purement illustratifs sont supprimés au profit de l'idée directrice qu'ils servent.
-4. **Fidélité à l'ordre et à la logique :** Respectez l'enchaînement des thèses du texte grâce à des connecteurs logiques précis (*or, toutefois, dès lors, en effet*).
+
+1. **Marge de tolérance de $\\pm 10\\,\\%$ impérative :** Pour une consigne à $100$ mots, le résumé doit compter entre **$90$ et $110$ mots**.
+2. **Respect du système d'énonciation :** Vous rédigez **à la place de l'auteur**.
+3. **Reformulation personnelle intégrale :** Aucun collage ni citation du texte source.
+4. **Fidélité à l'ordre et à la logique :** Respectez l'enchaînement des thèses du texte.
+
 </CriticalFormula>
-
-## 2. Méthodologie de la Dissertation
-
-* **Introduction (en un seul bloc) :** Amorcer le sujet $\\to$ Définir les termes et dégager le **paradoxe** $\\to$ Formuler la **problématique** $\\to$ Annoncer le plan en 3 parties.
-* **Développement (3 parties de 2 ou 3 sous-parties) :** Chaque paragraphe argumentatif articule une **idée directrice**, son **analyse conceptuelle** et une **confrontation précise des œuvres au programme**.
 `,
     summary: `
-<CriticalFormula title="Synthèse — Décompte officiel des mots et Plan de Dissertation">
-$$\\text{Fourchette à } 100 \\text{ mots : } [90\\,;\\,110] \\text{ mots} \\quad (\\text{ex. « c'est-à-dire »} = 4 \\text{ mots})$$
+<CriticalFormula title="Synthèse — Décompte officiel des mots">
 
-$$\\text{Sous-partie de dissertation : Thèse} \\longrightarrow \\text{Explication conceptuelle} \\longrightarrow \\text{Exemple analysé d'une œuvre} \\longrightarrow \\text{Bilan}$$
+$$90 \\le N_{\\text{mots}} \\le 110 \\quad (\\text{pour une consigne à } 100 \\text{ mots})$$
+
 </CriticalFormula>
 `,
     flashcards: [
@@ -654,6 +661,7 @@ $$\\text{Sous-partie de dissertation : Thèse} \\longrightarrow \\text{Explicati
         category: "Méthode",
         question: "Quelles sont les quatre règles formelles impératives du résumé de texte au concours ATS ?",
         answer: "1. Respecter la fourchette de ± 10 % du nombre de mots. 2. Adopter l'énonciation de l'auteur (interdiction d'écrire « L'auteur dit que... »). 3. Reformuler sans citer le texte. 4. Suivre l'ordre du texte.",
+        criticalFormula: "90 \\le N_{\\text{mots}} \\le 110",
       }),
     ],
     qcm: [
@@ -671,7 +679,7 @@ $$\\text{Sous-partie de dissertation : Thèse} \\longrightarrow \\text{Explicati
           "Le candidat doit se substituer à l'auteur du texte en conservant son système d'énonciation.",
           "Toute mention extérieure (« l'auteur pense que », « selon ce texte ») est sanctionnée.",
         ],
-        keyFormula: "\\text{Énonciation du résumé} = \\text{Énonciation directe de l'auteur}",
+        keyFormula: "90 \\le N_{\\text{mots}} \\le 110",
       }),
     ],
   },
@@ -680,20 +688,21 @@ $$\\text{Sous-partie de dissertation : Thèse} \\longrightarrow \\text{Explicati
     course: `
 ## 1. Exploitation comparée des Œuvres au Programme Officiel ATS
 
-En dissertation de Français-Philosophie, les œuvres au programme ne doivent jamais être résumées séparément : elles servent de **laboratoire d'analyse** pour tester et approfondir vos hypothèses de lecture.
-
 <CriticalFormula title="À connaître absolument — Méthode de confrontation des œuvres en une sous-partie">
+
 1. **Thèse directrice :** Énoncez l'idée maîtresse du paragraphe dès la première phrase.
-2. **Première œuvre (Mise en situation) :** Mobilisez un passage précis ou un personnage de la première œuvre en analysant ses procédés (métaphore, ironie, dilemme tragique).
-3. **Pivot comparatif :** Utilisez un connecteur de rapprochement ou de nuance (*« Cette tension trouve un écho philosophique chez... », « À l'inverse, l'analyse de... déplace le problème vers... »*).
-4. **Seconde œuvre (Conceptualisation) :** Montrez comment la seconde œuvre éclaire, confirme ou dépasse la première.
+2. **Première œuvre :** Mobilisez un passage précis en analysant ses procédés.
+3. **Pivot comparatif :** Utilisez un connecteur de rapprochement ou de nuance.
+4. **Seconde œuvre :** Montrez comment la seconde œuvre éclaire ou dépasse la première.
+
 </CriticalFormula>
 `,
     summary: `
 <CriticalFormula title="Synthèse — Règles de citation et de ponctuation des titres">
-$$\\text{Titres d'œuvres : toujours soulignés sur copie manuscrite (en italique à l'écran).}$$
 
-$$\\text{Citation courte : intégrée dans votre phrase entre guillemets et immédiatement analysée.}$$
+* **Titre d'œuvre intégrale :** toujours souligné sur copie manuscrite (sans guillemets).
+* **Citation courte :** intégrée entre guillemets et immédiatement analysée.
+
 </CriticalFormula>
 `,
     flashcards: [
@@ -701,7 +710,7 @@ $$\\text{Citation courte : intégrée dans votre phrase entre guillemets et imm�
         id: "fr-02-fc-01",
         category: "Méthode",
         question: "Comment éviter l'écueil de la « juxtaposition des œuvres » dans une partie de dissertation ?",
-        answer: "En organisant chaque partie autour d'une idée directrice (un concept) et en faisant dialoguer deux œuvres à l'intérieur d'une même sous-partie, au lieu de consacrer un paragraphe isolé à chaque œuvre.",
+        answer: "En organisant chaque partie autour d'une idée directrice (un concept) et en faisant dialoguer deux œuvres à l'intérieur d'une même sous-partie.",
       }),
     ],
     qcm: [
@@ -718,7 +727,231 @@ $$\\text{Citation courte : intégrée dans votre phrase entre guillemets et imm�
         steps: [
           "Une citation ne constitue pas une preuve à elle seule : elle doit être expliquée et reliée à la thèse du paragraphe.",
         ],
-        keyFormula: "\\text{Idée directrice} \\longrightarrow \\text{Citation courte} \\longrightarrow \\text{Analyse conceptuelle}",
+        keyFormula: "3 \\text{ parties} \\times 3 \\text{ sous-parties}",
+      }),
+    ],
+  },
+
+  // ==========================================================================
+  // NOUVELLE MATIÈRE : ANGLAIS CONCOURS ATS (CHAPITRES 01, 02 ET 03)
+  // ==========================================================================
+  "anglais/01": {
+    course: `
+## 1. Concordance des temps, Aspect *Present Perfect* vs *Preterite*
+
+La maîtrise grammaticale est évaluée aussi bien dans la synthèse écrite que lors de la khôlle orale du concours ATS. L'erreur la plus sanctionnée concerne la confusion entre le **prétérit** (action passée datée, coupée du présent) et le **present perfect** ($\text{have/has} + \text{participe passé}$ : bilan dans le présent ou action commencée dans le passé qui continue).
+
+<CriticalFormula title="À connaître absolument — Marqueurs temporels et Structures en FOR / SINCE">
+
+* **Preterite obligatoire (rupture avec le présent) :** avec *ago*, *yesterday*, *in $2022$*, *last decade*, *when* :
+  * *« Engineers **designed** this grid ten years ago. »*
+* **Present Perfect (lien avec le présent ou durée ouverte) :** avec *since* (point de départ), *for* (durée jusqu'à aujourd'hui), *so far*, *over the past few years*, *already / yet* :
+  * *« Renewable output **has increased** significantly over the past decade. »*
+* **Present Perfect Continuous ($\text{have been} + \text{V-ing}$) :** insiste sur l'activité en cours depuis une durée :
+  * *« Researchers **have been working** on solid-state batteries **for** five years. »*
+
+</CriticalFormula>
+
+## 2. Les Structures de haut niveau qui valorisent une copie de concours
+
+Pour viser $16+/20$ à l'écrit, remplacez les tournures scolaires par des structures idiomatiques anglaises :
+
+* **Double comparatif d'accroissement corrélé (*The more..., the more...*) :**
+  * *« **The more** automated factories become, **the higher** the demand for skilled maintenance engineers. »*
+* **Passif impersonnel des articles scientifiques :**
+  * *« Nuclear fusion **is often said to be** the holy grail of clean energy. »* (au lieu du calque français fautif *« On dit souvent que... »*).
+* **Inversion emphatique en tête de phrase après un adverbe restrictif (*Not only..., Seldom..., Never...*) :**
+  * *« **Not only does** this process reduce carbon emissions, **but it also** lowers production costs. »*
+
+<WarningBox title="Pièges éliminatoires des francophones (Faux-amis et Indénombrables)">
+
+1. **Les noms indénombrables singuliers en anglais :** *information, advice, research, progress, equipment, evidence, news, knowledge* ne prennent **JAMAIS** d'article *« a »* ni de marque du pluriel *« -s »* ! On écrit : *« **Further research is** needed »* ou *« **A piece of advice** »*.
+2. **Faux-amis majeurs :** *actually* = en réalité (et non « actuellement » = *currently*) ; *eventually* = finalement / à terme (et non « éventuellement » = *possibly / potentially*) ; *sensible* = raisonnable / judicieux (et non « sensible » = *sensitive*).
+
+</WarningBox>
+`,
+    summary: `
+<CriticalFormula title="Synthèse — Règles d'Or Grammaticales Concours ATS">
+
+* **Indénombrables toujours au singulier sans « -s » :** *information, research, progress, equipment, evidence, advice*.
+* **Double comparatif :** *The + comparatif + Sujet + Verbe, the + comparatif + Sujet + Verbe*.
+* **Inversion après Not only :** *Not only + auxiliaire + Sujet + BV..., but also...*
+
+</CriticalFormula>
+`,
+    flashcards: [
+      makeBuiltinFlashcard({
+        id: "ang-01-fc-01",
+        category: "Piège Classique",
+        question: "Pourquoi la phrase « Many researches have given useful informations » comporte-t-elle deux fautes graves en anglais ?",
+        answer: "Les noms « research » et « information » (tout comme advice, progress, equipment, evidence) sont INDÉNOMBRABLES en anglais : ils ne prennent jamais de « -s » au pluriel et s'accordent toujours au singulier. Il faut écrire : « Much research has provided useful information ».",
+      }),
+      makeBuiltinFlashcard({
+        id: "ang-01-fc-02",
+        category: "Définition",
+        question: "Traduire correctement les faux-amis suivants : 1) Actuellement / Actually — 2) Éventuellement / Eventually — 3) Sensible / Sensible.",
+        answer: "1) Actuellement = currently / at present (tandis que actually = en réalité).\n2) Éventuellement = possibly / potentially (tandis que eventually = finalement, à la longue).\n3) Sensible = sensitive (tandis que sensible = raisonnable, sensé).",
+      }),
+      makeBuiltinFlashcard({
+        id: "ang-01-fc-03",
+        category: "Formule Critique",
+        question: "Comment construit-on une inversion emphatique commençant par « Not only... » ?",
+        answer: "On inverse le sujet et l'auxiliaire dans la première proposition (comme dans une question) : « Not only DOES this technology save energy, but it also cuts costs. »",
+      }),
+    ],
+    qcm: [
+      makeBuiltinQcm({
+        id: "ang-01-qcm-01",
+        question: "Choose the grammatically correct sentence for an engineering exam essay:",
+        choices: [
+          "The latest equipment installed in the plant has provided reliable evidence of efficiency.",
+          "The latest equipments installed in the plant have provided reliable evidences of efficiency.",
+          "A new equipment installed in the plant has provided a reliable evidence.",
+          "The latest equipment have provided many informations on efficiency.",
+        ],
+        correctIndex: 0,
+        steps: [
+          "In English, 'equipment', 'evidence', 'information', and 'research' are uncountable nouns.",
+          "They never take a plural '-s', cannot be preceded by 'a/an', and always take a singular verb ('has provided').",
+        ],
+        keyFormula: "\\text{Uncountable nouns} \\implies \\text{Singular verb, no '-s'}",
+      }),
+      makeBuiltinQcm({
+        id: "ang-01-qcm-02",
+        question: "Which sentence correctly translates: « Plus les batteries sont légères, plus l'autonomie du véhicule est grande » ?",
+        choices: [
+          "The lighter the batteries are, the greater the vehicle's range is.",
+          "More the batteries are light, more the range of the vehicle is big.",
+          "The more light are the batteries, the more great is the range.",
+          "As lighter as the batteries are, so greater is the range.",
+        ],
+        correctIndex: 0,
+        steps: [
+          "The double comparative structure requires 'The + comparative + Subject + Verb, the + comparative + Subject + Verb'.",
+          "'Light' is a one-syllable adjective so its comparative is 'lighter' (not 'more light').",
+        ],
+        keyFormula: "\\text{The} + \\text{Comp}_1 + S_1 + V_1, \\; \\text{the} + \\text{Comp}_2 + S_2 + V_2",
+      }),
+    ],
+  },
+
+  "anglais/02": {
+    course: `
+## 1. Méthodologie de la Synthèse de Dossier (*Synthesis*) à l'Écrit
+
+L'épreuve écrite d'anglais au concours ATS demande généralement de rédiger une **synthèse objective** d'un dossier de $3$ ou $4$ documents (articles de *The Economist*, *The Guardian*, *New Scientist*, graphiques) en **$250$ à $300$ mots** ($\pm 10\\,\\%$), suivie d'un **essai argumenté (*Essay*)**.
+
+<CriticalFormula title="À connaître absolument — Structure en 4 étapes d'une Synthèse de Dossier réussie">
+
+1. **Introduction compacte (1 seul paragraphe, 35–45 mots) :** Présentez la thématique commune et la problématique qui relie les documents (sans faire une liste mécanique *« Document 1 is an article from... Document 2 is... »* : intégrez les sources au fil du développement).
+2. **Développement croisé en 2 ou 3 paragraphes thématiques :** Chaque paragraphe confronte au moins **deux documents** autour d'une idée directrice (*While Author A highlights..., Author B warns against...*).
+3. **Interdiction absolue de citer et de donner son avis :** Reformulez intégralement (*paraphrasing*) sans guillemets et sans jamais employer *« I think »* dans la synthèse.
+4. **Brève phrase de bilan :** Concluez sur l'enjeu global soulevé par le corpus (sans introduire d'idée extérieure aux textes).
+
+</CriticalFormula>
+
+## 2. La Khôlle Audio et l'Oral de Concours (Compte rendu + Commentaire)
+
+À l'oral (préparation $20$ minutes sur un enregistrement audio de $3$ minutes de la BBC ou NPR, puis $20$ minutes de passage), votre exposé doit suivre un minutage précis :
+* **1. Introduction ($1\\text{ min }30$) :** Source, date, intervenants, sujet général et **tension centrale** (*At the heart of this report lies the question of whether...*).
+* **2. Résumé structuré de l'enregistrement ($4\\text{ à }5\\text{ min}$) :** Organisé par **axes thématiques** (et non phrase par phrase).
+* **3. Commentaire personnel (*Commentary*, $4\\text{ à }5\\text{ min}$) :** Prenez de la hauteur en ouvrant sur les enjeux techniques, économiques ou éthiques du sujet avant l'entretien avec l'examinateur.
+`,
+    summary: `
+<CriticalFormula title="Synthèse — Connecteurs Logiques Académiques (Essay & Oral)">
+
+* **Opposition / Concession :** *Whereas, while, albeit, nevertheless, nonetheless, however, on the other hand, despite (+ nom / V-ing).*
+* **Cause / Conséquence :** *Stemming from, owing to, thereby (+ V-ing), hence, consequently, as a result.*
+* **Confrontation des auteurs :** *Both articles converge on the idea that..., Conversely, Smith challenges this view by arguing that...*
+
+</CriticalFormula>
+`,
+    flashcards: [
+      makeBuiltinFlashcard({
+        id: "ang-02-fc-01",
+        category: "Méthode",
+        question: "Quelle est la différence grammaticale d'emploi entre « Although / Even though » et « Despite / In spite of » ?",
+        answer: "- « Although / Even though » sont des conjonctions suivies d'une proposition complète (Sujet + Verbe) : « Although the cost is high... ».\n- « Despite / In spite of » sont des prépositions suivies d'un groupe nominal ou d'un gérondif (V-ing) : « Despite the high cost... » (et jamais « Despite of » !).",
+      }),
+      makeBuiltinFlashcard({
+        id: "ang-02-fc-02",
+        category: "Méthode",
+        question: "Comment présenter efficacement un dossier de 3 documents dans l'introduction d'une synthèse écrite en anglais ?",
+        answer: "En regroupant l'origine et la date des documents en une seule phrase synthétique centrée sur leur thème commun et le paradoxe qu'ils explorent, plutôt que de rédiger une liste fastidieuse document par document.",
+      }),
+    ],
+    qcm: [
+      makeBuiltinQcm({
+        id: "ang-02-qcm-01",
+        question: "Which linking structure is grammatically correct to express concession in an academic essay?",
+        choices: [
+          "Despite investing billions in grid modernization, power outages remain frequent.",
+          "Despite of investing billions in grid modernization, power outages remain frequent.",
+          "Although the massive investment in grid modernization, power outages remain frequent.",
+          "In spite the fact that billions were invested, power outages remain frequent.",
+        ],
+        correctIndex: 0,
+        steps: [
+          "'Despite' is never followed by 'of', and must be followed by a noun phrase or a gerund ('investing').",
+          "'Although' must be followed by a subject and aconjugated verb ('Although they invested...').",
+        ],
+        keyFormula: "\\text{Despite} + \\text{Noun / V-ing} \\iff \\text{Although} + \\text{Subject} + \\text{Verb}",
+      }),
+    ],
+  },
+
+  "anglais/03": {
+    course: `
+## 1. Lexique stratégique de l'Ingénieur : Énergie, Industrie 4.0 & IA
+
+Les sujets de concours ATS puisent systématiquement dans quatre grands thèmes contemporains : la transition énergétique, l'automatisation industrielle, le numérique/IA et les enjeux géopolitiques des ressources.
+
+<CriticalFormula title="À connaître absolument — Vocabulaire clé de la Transition Énergétique & Industrie">
+
+* **Réseau et décarbonation :** *the power grid* (le réseau électrique), *greenhouse gas (GHG) emissions* (émissions de GES), *fossil fuel phase-out* (sortie des énergies fossiles), *carbon footprint* (empreinte carbone), *intermittency* (intermittence de l'éolien/solaire), *baseload power* (production électrique de base assurée par le nucléaire ou l'hydraulique).
+* **Industrie, Chaîne d'approvisionnement et Matières premières :** *supply chain bottlenecks* (goulets d'étranglement logistiques), *rare-earth elements* (terres rares), *predictive maintenance* (maintenance prédictive), *automation & robotics*, *reshoring* (relocalisation industrielle), *shortage* (pénurie).
+* **Verbes d'évolution pour commenter un graphique :** *to skyrocket / to surge / to soar* (flamber, bondir), *to plummet / to plunge* (s'effondrer), *to plateau / to level off* (plafonner, se stabiliser), *to outpace* (dépasser en rythme de croissance).
+
+</CriticalFormula>
+`,
+    summary: `
+<CriticalFormula title="Synthèse — Lexique de précision pour commenter des données chiffrées">
+
+* **Hausse forte :** *a sharp rise, to surge, to soar, to skyrocket*.
+* **Baisse brutale :** *a steep decline, to plummet, to plunge, to dwindle*.
+* **Double enjeu / Revers de la médaille :** *a double-edged sword, a trade-off between efficiency and resilience*.
+
+</CriticalFormula>
+`,
+    flashcards: [
+      makeBuiltinFlashcard({
+        id: "ang-03-fc-01",
+        category: "Définition",
+        question: "Comment traduit-on en anglais : 1) le réseau électrique, 2) une pénurie de semi-conducteurs, 3) la relocalisation industrielle, 4) un compromis technique ?",
+        answer: "1) The power grid (or electricity grid).\n2) A semiconductor shortage.\n3) Industrial reshoring.\n4) A technical trade-off.",
+      }),
+      makeBuiltinFlashcard({
+        id: "ang-03-fc-02",
+        category: "Définition",
+        question: "Citer trois verbes anglais précis pour traduire « monter en flèche » et deux verbes pour « chuter brutalement » lors d'un commentaire de graphique.",
+        answer: "- Monter en flèche : to skyrocket, to surge, to soar.\n- Chuter brutalement : to plummet, to plunge.",
+      }),
+    ],
+    qcm: [
+      makeBuiltinQcm({
+        id: "ang-03-qcm-01",
+        question: "In energy engineering, what does the term 'baseload power' refer to?",
+        choices: [
+          "The minimum level of continuous power supply required on the electrical grid over 24 hours",
+          "The maximum peak voltage reached during a lightning strike",
+          "Energy produced exclusively by domestic solar panels at noon",
+          "The mechanical friction losses inside an electric motor",
+        ],
+        correctIndex: 0,
+        steps: [
+          "'Baseload power' (production de base ou ruban) désigne la puissance électrique minimale continue que le réseau doit fournir en permanence, souvent assurée par le nucléaire ou l'hydraulique pour compenser l'intermittence des énergies renouvelables.",
+        ],
+        keyFormula: "\\text{Baseload power} + \\text{Peak load management}",
       }),
     ],
   },
@@ -731,31 +964,6 @@ function getBuiltinBundle(
   const numPrefix = chapterId.slice(0, 2);
   return BUILTIN_CHAPTERS[`${subjectId}/${numPrefix}`] ?? null;
 }
-/**
- * Nettoie le contenu MDX avant compilation par next-mdx-remote :
- * - Force une ligne vide après les balises ouvrantes <CriticalFormula...> / <WarningBox...>
- *   et avant leurs balises fermantes.
- * - Aplatit les blocs $$ ... $$ multi-lignes sur une seule ligne pour éviter les conflits JSX.
- */
-function sanitizeMdxForCompiler(mdx: string): string {
-  return mdx
-    // 1. Aplatit l'intérieur des blocs $$ ... $$ sur une seule ligne
-    .replace(/\$\$([\s\S]*?)\$\$/g, (_, inner: string) => {
-      const singleLine = inner
-        .split(/\r?\n/)
-        .map((line) => line.trim())
-        .filter(Boolean)
-        .join(" ");
-      return `\n\n$$${singleLine}$$\n\n`;
-    })
-    // 2. Garantit une ligne vide après <CriticalFormula ...> et <WarningBox ...>
-    .replace(/(<(?:CriticalFormula|WarningBox)[^>]*>)\s*/g, "$1\n\n")
-    // 3. Garantit une ligne vide avant </CriticalFormula> et </WarningBox>
-    .replace(/\s*(<\/(?:CriticalFormula|WarningBox)>)/g, "\n\n$1");
-}
-// ============================================================================
-// FONCTIONS D'ACCÈS AUX RESSOURCES (COMPATIBLES TABLEAUX ET OBJETS .cards/.questions)
-// ============================================================================
 
 export function getMdxContent(
   subjectId: string,
@@ -774,7 +982,10 @@ export function getMdxContent(
       if (fs.existsSync(filePath)) {
         const raw = fs.readFileSync(filePath, "utf-8");
         const { data, content } = matter(raw);
-        return { frontmatter: data, content };
+        return {
+          frontmatter: data,
+          content: sanitizeMdxForCompiler(content),
+        };
       }
     }
   }
@@ -783,7 +994,9 @@ export function getMdxContent(
   if (builtin) {
     return {
       frontmatter: { title: chapterId },
-      content: type === "summary" ? builtin.summary : builtin.course,
+      content: sanitizeMdxForCompiler(
+        type === "summary" ? builtin.summary : builtin.course
+      ),
     };
   }
 
@@ -801,7 +1014,6 @@ export function getFlashcardsData(
       try {
         const raw = fs.readFileSync(filePath, "utf-8");
         const parsed = JSON.parse(raw);
-        // Supporte à la fois un tableau direct [...] ET un objet { cards: [...] } !
         const rawArray = Array.isArray(parsed)
           ? parsed
           : Array.isArray(parsed?.cards)
@@ -833,7 +1045,6 @@ export function getQcmData(
       try {
         const raw = fs.readFileSync(filePath, "utf-8");
         const parsed = JSON.parse(raw);
-        // Supporte à la fois un tableau direct [...] ET un objet { questions: [...] } !
         const rawArray = Array.isArray(parsed)
           ? parsed
           : Array.isArray(parsed?.questions)
