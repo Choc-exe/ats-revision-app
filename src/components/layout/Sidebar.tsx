@@ -20,6 +20,8 @@ import {
   Activity,
   Menu,
   X,
+  Brain,
+  Waves,
   PanelLeftClose,
   PanelLeftOpen,
   Languages,
@@ -517,6 +519,71 @@ export default function Sidebar() {
               </span>
             )}
           </Link>
+
+          <Link
+            href="/simulateur-fourier"
+            title="Labo Fourier, Parseval & Newton"
+            className={`flex items-center rounded-lg text-xs transition-colors ${
+              isCollapsed && !mobileOpen
+                ? "justify-center p-2.5"
+                : "justify-between px-3 py-2"
+            } ${
+              pathname.startsWith("/simulateur-fourier")
+                ? "bg-blue-50 text-blue-700 dark:bg-sky-950/60 dark:text-sky-300 font-bold border border-blue-200/70 dark:border-sky-800/60"
+                : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/70 font-medium"
+            }`}
+          >
+            <span className="flex items-center gap-2.5 min-w-0">
+              <Waves
+                className={`w-4 h-4 shrink-0 ${
+                  pathname.startsWith("/simulateur-fourier")
+                    ? "text-blue-600 dark:text-sky-400"
+                    : "text-blue-600/80 dark:text-sky-400/80"
+                }`}
+              />
+              {(!isCollapsed || mobileOpen) && (
+                <span className="truncate">Labo Fourier & Newton</span>
+              )}
+            </span>
+            {(!isCollapsed || mobileOpen) && (
+              <span className="px-1.5 py-0.5 text-[10px] font-bold rounded shrink-0 bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                Maths/Py
+              </span>
+            )}
+          </Link>
+
+          <Link
+            href="/carnet-erreurs"
+            title="Carnet d'Erreurs & SRS Anki"
+            className={`flex items-center rounded-lg text-xs transition-colors ${
+              isCollapsed && !mobileOpen
+                ? "justify-center p-2.5"
+                : "justify-between px-3 py-2"
+            } ${
+              pathname.startsWith("/carnet-erreurs")
+                ? "bg-red-50 text-red-700 dark:bg-red-950/60 dark:text-red-300 font-bold border border-red-200/70 dark:border-red-800/60"
+                : "text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800/70 font-medium"
+            }`}
+          >
+            <span className="flex items-center gap-2.5 min-w-0">
+              <Brain
+                className={`w-4 h-4 shrink-0 ${
+                  pathname.startsWith("/carnet-erreurs")
+                    ? "text-red-600 dark:text-red-400"
+                    : "text-red-600/80 dark:text-red-400/80"
+                }`}
+              />
+              {(!isCollapsed || mobileOpen) && (
+                <span className="truncate">Carnet d'Erreurs & SRS</span>
+              )}
+            </span>
+            {(!isCollapsed || mobileOpen) && (
+              <span className="px-1.5 py-0.5 text-[10px] font-bold rounded shrink-0 bg-red-100 text-red-800 dark:bg-red-950/80 dark:text-red-300">
+                Anki
+              </span>
+            )}
+          </Link>
+          
         </div>
 
         {/* ARBORESCENCE DES MATIÈRES ET CHAPITRES (Avec Scrollbar personnalisée élégante) */}

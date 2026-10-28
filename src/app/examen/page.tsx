@@ -1,5 +1,6 @@
 "use client";
 
+import { recordQcmMistake } from "@/lib/srs-storage";
 import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { ATS_CURRICULUM } from "@/lib/curriculum";
@@ -472,6 +473,33 @@ export default function ExamenPage() {
         >,
       };
     }
+
+    useEffect(() => {
+    if (status !== "finished") return;
+    sessionQuestions.forEach((item, qIdx) => {
+      const q = item.question;
+      const chosenId = answers[qIdx];
+      const options = Array.isArray(q?.options) ? q.options : [];
+      const correctOpt = options.find((opt, oIdx) =>
+        isOptionCorrect(q, opt, oIdx)
+      );
+      const isOk = Boolean(
+        chosenId && correctOpt && chosenId === correctOpt.id
+      );
+      if (!isOk && correctOpt) {
+        recordQcmMistake({
+          questionId: q.id,
+          subjectId: item.subjectId,
+          subjectTitle: item.subjectTitle,
+          chapterId: item.chapterId,
+          chapterTitle: `${item.chapterNumber}. ${item.chapterTitle}`,
+          questionText: q.questionText ?? q.question ?? "",
+          correctAnswerText: correctOpt.text || correctOpt.latex || "",
+          keyFormula: q.explanation?.keyFormula,
+        });
+      }
+    });
+  }, [status, sessionQuestions, answers]);
 
     let correct = 0;
     let wrong = 0;

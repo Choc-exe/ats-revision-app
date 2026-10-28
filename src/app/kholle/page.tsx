@@ -33,7 +33,13 @@ function SafeMath({ text }: { text: string }) {
               throwOnError: false,
               strict: false,
             });
-            return <div key={idx} className="my-2 overflow-x-auto" dangerouslySetInnerHTML={{ __html: html }} />;
+            return (
+              <div
+                key={idx}
+                className="my-2 overflow-x-auto"
+                dangerouslySetInnerHTML={{ __html: html }}
+              />
+            );
           } catch {
             return <div key={idx}>{math}</div>;
           }
@@ -124,7 +130,7 @@ const KHOLLE_BOARDS: KholleBoard[] = [
           "En appliquant le théorème de Dirichlet en un point judicieusement choisi, déterminer les sommes $\\sum_{n=1}^{+\\infty} \\frac{1}{n^2}$ et $\\sum_{n=1}^{+\\infty} \\frac{(-1)^{n-1}}{n^2}$.",
         hint: "Évaluez la série de Fourier en $t = \\pi$ (où $\\cos(n\\pi) = (-1)^n$) puis en $t = 0$.",
         solution:
-          "$f$ est continue et $\\mathcal{C}^1$ par morceaux sur $\\mathbb{R}$, donc d'après le théorème de Dirichlet, pour tout $t \\in \\mathbb{R}$ : $$f(t) = \\frac{\\pi^2}{3} + 4\\sum_{n=1}^{+\\infty} \\frac{(-1)^n}{n^2}\\cos(nt)$$ En $t = \\pi$, $f(\\pi) = \\pi^2$ et $\\cos(n\\pi) = (-1)^n$, soit $(-1)^n\\cos(n\\pi) = (-1)^{2n} = 1$ : $$\\pi^2 = \\frac{\\pi^2}{3} + 4\\sum_{n=1}^{+\\infty}\\frac{1}{n^2} \\implies \\sum_{n=1}^{+\\infty}\\frac{1}{n^2} = \\frac{\\pi^2}{6}$$ En $t = 0$, $f(0) = 0 \\implies \\sum_{n=1}^{+\\infty} \\frac{(-1)^{n-1}}{n^2} = \\frac{\\pi^2}{12}$.",
+          "$f$ est continue et $\\mathcal{C}^1$ par morceaux sur $\\mathbb{R}$, donc d'après le théorème de Dirichlet, pour tout $t \\in \\mathbb{R}$ : $$f(t) = \\frac{\\pi^2}{3} + 4\\sum_{n=1}^{+\\infty} \\frac{(-1)^n}{n^2}\\cos(nt)$$ En $t = \\pi$, $f(\\pi) = \\pi^2$ et $(-1)^n\\cos(n\\pi) = 1$ : $$\\pi^2 = \\frac{\\pi^2}{3} + 4\\sum_{n=1}^{+\\infty}\\frac{1}{n^2} \\implies \\sum_{n=1}^{+\\infty}\\frac{1}{n^2} = \\frac{\\pi^2}{6}$$ En $t = 0$, $f(0) = 0 \\implies \\sum_{n=1}^{+\\infty} \\frac{(-1)^{n-1}}{n^2} = \\frac{\\pi^2}{12}$.",
       },
       {
         number: "2.b",
@@ -133,7 +139,53 @@ const KHOLLE_BOARDS: KholleBoard[] = [
           "En appliquant la formule de Parseval à la fonction $f$, calculer la somme exacte $S_4 = \\sum_{n=1}^{+\\infty} \\frac{1}{n^4}$.",
         hint: "Calculez d'abord la valeur moyenne de $|f(t)|^2 = t^4$ sur $[-\\pi, \\pi]$.",
         solution:
-          "D'une part, $\\frac{1}{2\\pi}\\int_{-\\pi}^{\\pi} t^4\\,\\mathrm{d}t = \\frac{1}{\\pi}\\left[\\frac{t^5}{5}\\right]_0^\\pi = \\frac{\\pi^4}{5}$. D'autre part, par Parseval : $$\\frac{\\pi^4}{5} = a_0^2 + \\frac{1}{2}\\sum_{n=1}^{+\\infty} a_n^2 = \\frac{\\pi^4}{9} + \\frac{1}{2}\\sum_{n=1}^{+\\infty} \\frac{16}{n^4} = \\frac{\\pi^4}{9} + 8\\sum_{n=1}^{+\\infty}\\frac{1}{n^4}$$ On en déduit : $$8\\sum_{n=1}^{+\\infty}\\frac{1}{n^4} = \\pi^4\\left(\\frac{1}{5} - \\frac{1}{9}\\right) = \\frac{4\\pi^4}{45} \\implies \\sum_{n=1}^{+\\infty}\\frac{1}{n^4} = \\frac{\\pi^4}{90}$$",
+          "D'une part, $\\frac{1}{2\\pi}\\int_{-\\pi}^{\\pi} t^4\\,\\mathrm{d}t = \\frac{\\pi^4}{5}$. D'autre part, par Parseval : $$\\frac{\\pi^4}{5} = a_0^2 + \\frac{1}{2}\\sum_{n=1}^{+\\infty} a_n^2 = \\frac{\\pi^4}{9} + 8\\sum_{n=1}^{+\\infty}\\frac{1}{n^4} \\implies \\sum_{n=1}^{+\\infty}\\frac{1}{n^4} = \\frac{\\pi^4}{90}$$",
+      },
+    ],
+  },
+  {
+    id: "kholle-math-diagonalisation-systeme",
+    subjectId: "mathematiques",
+    subjectTitle: "Mathématiques",
+    chapterHref: "/mathematiques/06-reduction-endomorphismes/cours",
+    title: "Planche 02 — Diagonalisation d'une matrice 3×3, Puissances Aⁿ et Système différentiel",
+    difficulty: "Oral Centrale / ENSAM",
+    courseQuestion: {
+      points: 6,
+      prompt:
+        "Donner la définition d'une valeur propre et d'un vecteur propre d'une matrice $A \\in \\mathcal{M}_n(\\mathbb{R})$. Énoncer la condition nécessaire et suffisante de diagonalisabilité portant sur les dimensions des sous-espaces propres $E_\\lambda = \\ker(A - \\lambda I_n)$, ainsi que le théorème spectral pour les matrices symétriques réelles.",
+      solution:
+        "$\\lambda$ est valeur propre de $A$ s'il existe $X \\neq 0$ tel que $AX = \\lambda X$, soit $\\det(A - \\lambda I_n) = 0$. $A$ est diagonalisable sur $\\mathbb{R}$ si et seulement si son polynôme caractéristique est scindé sur $\\mathbb{R}$ et pour chaque valeur propre $\\lambda_i$ de multiplicité algébrique $m_i$, $\\dim E_{\\lambda_i} = n - \\text{rg}(A - \\lambda_i I_n) = m_i$. Théorème spectral : toute matrice symétrique réelle ($A^T = A$) est diagonalisable dans une base orthonormée de vecteurs propres ($A = P D P^T$ avec $P^{-1} = P^T$).",
+    },
+    problemContext:
+      "On considère la matrice réelle symétrique $A = \\begin{pmatrix} 1 & 1 & 1 \\\\ 1 & 1 & 1 \\\\ 1 & 1 & 1 \\end{pmatrix} \\in \\mathcal{M}_3(\\mathbb{R})$ et la matrice $M = A + 2 I_3$.",
+    subQuestions: [
+      {
+        number: "1.a",
+        points: 4,
+        prompt:
+          "Sans calculer de déterminant, déterminer le rang de $A$, en déduire que $0$ est valeur propre de $A$ en précisant la dimension de $E_0(A)$, puis trouver la dernière valeur propre à l'aide de la trace de $A$.",
+        hint: "Les trois colonnes de $A$ sont identiques donc $\\text{rg}(A) = 1$. Utilisez le théorème du rang puis $\\text{Tr}(A) = \\lambda_1 + \\lambda_2 + \\lambda_3$.",
+        solution:
+          "Les 3 colonnes de $A$ sont égales à $(1,1,1)^T$, donc $\\text{rg}(A) = 1$. D'après le théorème du rang, $\\dim(\\ker A) = 3 - \\text{rg}(A) = 2$ : ainsi $\\lambda = 0$ est valeur propre de $A$ d'ordre au moins 2 ($\\dim E_0(A) = 2$). Comme $A$ est symétrique réelle, elle est diagonalisable et $\\text{Tr}(A) = 1 + 1 + 1 = 3 = 0 + 0 + \\lambda_3 \\implies \\lambda_3 = 3$ (de vecteur propre $V_3 = (1, 1, 1)^T$).",
+      },
+      {
+        number: "1.b",
+        points: 5,
+        prompt:
+          "En déduire les valeurs propres de $M = A + 2 I_3$, exprimer $A^k$ pour tout $k \\ge 1$, puis calculer explicitement $M^n$ pour tout $n \\in \\mathbb{N}$ à l'aide de la formule du binôme de Newton.",
+        hint: "Vérifiez que $A^2 = 3A$, d'où $A^k = 3^{k-1}A$ pour $k \\ge 1$. Comme $A$ et $2I_3$ commutent, appliquez le binôme de Newton.",
+        solution:
+          "Les valeurs propres de $M = A + 2I_3$ sont $0+2 = 2$ (double) et $3+2 = 5$ (simple). Par calcul direct, $A^2 = 3A$, donc par récurrence $\\forall k \\ge 1, \\; A^k = 3^{k-1}A$. Comme $A$ et $2I_3$ commutent : $$M^n = (2I_3 + A)^n = 2^n I_3 + \\sum_{k=1}^n \\binom{n}{k} 2^{n-k} 3^{k-1} A = 2^n I_3 + \\frac{1}{3}\\left((2+3)^n - 2^n\\right)A = 2^n I_3 + \\frac{5^n - 2^n}{3}A$$",
+      },
+      {
+        number: "2.a",
+        points: 5,
+        prompt:
+          "Résoudre le système différentiel couplé $X'(t) = M\\,X(t)$ où $X(t) = (x(t), y(t), z(t))^T$ avec la condition initiale $X(0) = (1, 0, -1)^T$.",
+        hint: "Remarquez que le vecteur initial $X(0) = (1, 0, -1)^T$ vérifie $x(0) + y(0) + z(0) = 0$, donc $X(0) \\in E_0(A) = E_2(M)$ !",
+        solution:
+          "On observe que $A\\,X(0) = (0, 0, 0)^T$, donc $M\\,X(0) = 2\\,X(0)$ : le vecteur initial $X(0)$ est un vecteur propre de $M$ associé à la valeur propre $\\lambda = 2$. La solution unique du problème de Cauchy est donc immédiatement : $$X(t) = \\mathrm{e}^{2t}\\,X(0) = \\begin{pmatrix} \\mathrm{e}^{2t} \\\\ 0 \\\\ -\\mathrm{e}^{2t} \\end{pmatrix}$$",
       },
     ],
   },
@@ -142,17 +194,17 @@ const KHOLLE_BOARDS: KholleBoard[] = [
     subjectId: "physique-chimie",
     subjectTitle: "Physique-Chimie",
     chapterHref: "/physique-chimie/06-induction-electromagnetique/cours",
-    title: "Planche 02 — Rail de Laplace générateur, Loi de Faraday et Bilan énergétique",
+    title: "Planche 03 — Rail de Laplace générateur, Loi de Faraday et Bilan énergétique",
     difficulty: "Oral Centrale / ENSAM",
     courseQuestion: {
       points: 6,
       prompt:
         "Énoncer la loi de Faraday donnant la force électromotrice induite $e$ dans un circuit fermé, la loi de modération de Lenz, ainsi que l'expression de la résultante des forces de Laplace $\\vec{F}_L$ sur une tige rectiligne de longueur $L$ parcourue par un courant $i$ dans un champ $\\vec{B}$ uniforme.",
       solution:
-        "Loi de Faraday : $e = -\\frac{\\mathrm{d}\\Phi}{\\mathrm{d}t}$ où $\\Phi = \\iint \\vec{B}\\cdot\\mathrm{d}\\vec{S}$ est le flux magnétique à travers le circuit orienté. Loi de Lenz : le sens du courant induit est tel que par ses effets électromagnétiques, il s'oppose à la cause qui lui donne naissance. Force de Laplace sur un conducteur rectiligne de vecteur longueur $\\vec{L}$ orienté dans le sens du courant $i$ : $$\\vec{F}_L = i\\,\\vec{L} \\wedge \\vec{B}$$",
+        "Loi de Faraday : $e = -\\frac{\\mathrm{d}\\Phi}{\\mathrm{d}t}$ où $\\Phi = \\iint \\vec{B}\\cdot\\mathrm{d}\\vec{S}$ est le flux magnétique à travers le circuit orienté. Loi de Lenz : le sens du courant induit est tel que par ses effets électromagnétiques, il s'oppose à la cause qui lui donne naissance. Force de Laplace : $$\\vec{F}_L = i\\,\\vec{L} \\wedge \\vec{B}$$",
     },
     problemContext:
-      "Une barre conductrice $MN$ de masse $m$, de longueur $a$ et de résistance électrique $R$ glisse sans frottement selon l'axe horizontal $(Ox)$ sur deux rails parallèles parfaitement conducteurs reliés entre eux à l'origine par un fil de résistance négligeable. L'ensemble est plongé dans un champ magnétique uniforme et stationnaire $\\vec{B} = B_0\\,\\vec{u}_z$ vertical ascendant. À $t = 0$, la barre est lancée avec une vitesse initiale $\\vec{v}(0) = v_0\\,\\vec{u}_x$. On néglige l'auto-induction du circuit.",
+      "Une barre conductrice $MN$ de masse $m$, de longueur $a$ et de résistance électrique $R$ glisse sans frottement selon l'axe horizontal $(Ox)$ sur deux rails parallèles parfaitement conducteurs reliés entre eux à l'origine par un fil de résistance négligeable. L'ensemble est plongé dans un champ magnétique uniforme et stationnaire $\\vec{B} = B_0\\,\\vec{u}_z$ vertical ascendant. À $t = 0$, la barre est lancée avec une vitesse initiale $\\vec{v}(0) = v_0\\,\\vec{u}_x$.",
     subQuestions: [
       {
         number: "1.a",
@@ -161,25 +213,71 @@ const KHOLLE_BOARDS: KholleBoard[] = [
           "En orientant le circuit dans le sens trigonométrique autour de $\\vec{u}_z$, exprimer le flux $\\Phi(t)$, la f.é.m. induite $e(t)$ et l'intensité $i(t)$ en fonction de la vitesse $v(t) = \\dot{x}(t)$.",
         hint: "La surface balayée par le circuit rectangulaire de largeur $a$ et d'abscisse $x(t)$ vaut $S(t) = a\\cdot x(t)$.",
         solution:
-          "Avec l'orientation choisie, la normale $\\vec{n} = \\vec{u}_z$ est colinéaire et de même sens que $\\vec{B}$. Le flux coupé vaut $\\Phi(t) = B_0\\,a\\,x(t)$. Par la loi de Faraday : $$e(t) = -\\frac{\\mathrm{d}\\Phi}{\\mathrm{d}t} = -B_0\\,a\\,v(t)$$ D'après le schéma électrique équivalent en convention générateur : $$i(t) = \\frac{e(t)}{R} = -\\frac{B_0\\,a}{R}\\,v(t)$$",
+          "Le flux coupé vaut $\\Phi(t) = B_0\\,a\\,x(t)$. Par la loi de Faraday : $$e(t) = -\\frac{\\mathrm{d}\\Phi}{\\mathrm{d}t} = -B_0\\,a\\,v(t) \\quad \\text{et} \\quad i(t) = \\frac{e(t)}{R} = -\\frac{B_0\\,a}{R}\\,v(t)$$",
       },
       {
         number: "1.b",
         points: 5,
         prompt:
           "Calculer la force de Laplace $\\vec{F}_L$ exercée sur la barre, établir l'équation différentielle vérifiée par $v(t)$ et déterminer la constante de temps mécanique $\\tau$.",
-        hint: "Appliquez le Principe Fondamental de la Dynamique (PFD) projeté sur $\\vec{u}_x$. Vérifiez que la force de Laplace est bien freinante (Loi de Lenz).",
+        hint: "Appliquez le Principe Fondamental de la Dynamique (PFD) projeté sur $\\vec{u}_x$.",
         solution:
-          "Le courant circule selon $+\\vec{u}_y$ avec l'intensité algébrique $i(t)$ : $\\vec{F}_L = i(t)(a\\,\\vec{u}_y)\\wedge (B_0\\,\\vec{u}_z) = i(t)a B_0\\,\\vec{u}_x = -\\frac{B_0^2 a^2}{R}v(t)\\,\\vec{u}_x$. La force s'oppose bien au mouvement (Lenz). Par le PFD selon $(Ox)$ : $$m\\frac{\\mathrm{d}v}{\\mathrm{d}t} = -\\frac{B_0^2 a^2}{R}v \\iff \\frac{\\mathrm{d}v}{\\mathrm{d}t} + \\frac{v}{\\tau} = 0 \\quad \\text{avec} \\quad \\tau = \\frac{m\\,R}{B_0^2\\,a^2}$$ D'où $v(t) = v_0\\,\\mathrm{e}^{-t/\\tau}$.",
+          "$\\vec{F}_L = i(t)(a\\,\\vec{u}_y)\\wedge (B_0\\,\\vec{u}_z) = -\\frac{B_0^2 a^2}{R}v(t)\\,\\vec{u}_x$. Par le PFD selon $(Ox)$ : $$m\\frac{\\mathrm{d}v}{\\mathrm{d}t} + \\frac{B_0^2 a^2}{R}v = 0 \\iff \\frac{\\mathrm{d}v}{\\mathrm{d}t} + \\frac{v}{\\tau} = 0 \\quad \\text{avec} \\quad \\tau = \\frac{m\\,R}{B_0^2\\,a^2}$$ D'où $v(t) = v_0\\,\\mathrm{e}^{-t/\\tau}$.",
       },
       {
         number: "2.a",
         points: 5,
         prompt:
           "Effectuer un bilan énergétique complet entre $t = 0$ et $t \\to +\\infty$ en calculant l'énergie dissipée par effet Joule dans la résistance $R$.",
-        hint: "Intégrez la puissance Joule $P_J(t) = R\\,i(t)^2$ de $0$ à $+\\infty$ et comparez-la à l'énergie cinétique initiale $\\frac{1}{2}m v_0^2$.",
+        hint: "Intégrez la puissance Joule $P_J(t) = R\\,i(t)^2$ de $0$ à $+\\infty$.",
         solution:
-          "La puissance dissipée par effet Joule vaut $P_J(t) = R\\,i(t)^2 = \\frac{B_0^2 a^2}{R}v_0^2\\,\\mathrm{e}^{-2t/\\tau} = \\frac{m}{\\tau}v_0^2\\,\\mathrm{e}^{-2t/\\tau}$. En intégrant sur $[0, +\\infty[$ : $$E_J = \\int_0^{+\\infty} P_J(t)\\,\\mathrm{d}t = \\frac{m\\,v_0^2}{\\tau}\\left[-\\frac{\\tau}{2}\\mathrm{e}^{-2t/\\tau}\\right]_0^{+\\infty} = \\frac{1}{2}m\\,v_0^2 = E_{c,\\text{initiale}}$$ Toute l'énergie cinétique initiale de la barre a été convertie en énergie électrique puis dissipée par effet Joule.",
+          "$$E_J = \\int_0^{+\\infty} R\\,i(t)^2\\,\\mathrm{d}t = \\frac{m\\,v_0^2}{\\tau}\\int_0^{+\\infty}\\mathrm{e}^{-2t/\\tau}\\,\\mathrm{d}t = \\frac{1}{2}m\\,v_0^2 = E_{c,\\text{initiale}}$$",
+      },
+    ],
+  },
+  {
+    id: "kholle-phys-thermo-cycle-diesel",
+    subjectId: "physique-chimie",
+    subjectTitle: "Physique-Chimie",
+    chapterHref: "/physique-chimie/02-thermodynamique/cours",
+    title: "Planche 04 — Machine thermique, Premier et Second Principes, Cycle de Carnot & Rendement",
+    difficulty: "Écrit Concours ATS",
+    courseQuestion: {
+      points: 6,
+      prompt:
+        "Énoncer le Premier Principe et le Second Principe de la thermodynamique pour un système fermé décrivant un cycle ditherme en contact avec une source chaude à $T_C$ et une source froide à $T_F$. Démontrer le théorème de Carnot donnant le rendement maximal $\\eta_{\\text{Carnot}}$ d'un moteur ditherme.",
+      solution:
+        "Sur un cycle complet, $\\Delta U_{\\text{cycle}} = W + Q_C + Q_F = 0$ (1er principe) et $\\Delta S_{\\text{cycle}} = \\frac{Q_C}{T_C} + \\frac{Q_F}{T_F} + S_{\\text{créée}} = 0$ avec $S_{\\text{créée}} \\ge 0$ (inégalité de Clausius : $\\frac{Q_C}{T_C} + \\frac{Q_F}{T_F} \\le 0$). Pour un moteur ($W < 0$, $Q_C > 0$, $Q_F < 0$), le rendement vaut $\\eta = \\frac{-W}{Q_C} = \\frac{Q_C + Q_F}{Q_C} = 1 + \\frac{Q_F}{Q_C}$. Or $\\frac{Q_F}{T_F} \\le -\\frac{Q_C}{T_C} \\implies \\frac{Q_F}{Q_C} \\le -\\frac{T_F}{T_C}$, d'où : $$\\eta \\le \\eta_{\\text{Carnot}} = 1 - \\frac{T_F}{T_C}$$",
+    },
+    problemContext:
+      "Une mole ($n = 1\\text{ mol}$) de gaz parfait diatomique (rapport $\\gamma = \\frac{c_P}{c_V} = 1{,}4$, capacité molaire $C_{V,m} = \\frac{R}{\\gamma - 1} = \\frac{5}{2}R$) subit un cycle moteur réversible de Beau de Rochas (Otto) composé de : (1→2) compression adiabatique réversible de $V_1$ à $V_2 = V_1 / a$ où $a = 8$ est le taux de compression volumétrique ; (2→3) échauffement isochore ($Q_{23} = Q_C > 0$) jusqu'à $T_3$ ; (3→4) détente adiabatique réversible de $V_2$ à $V_1$ ; (4→1) refroidissement isochore ($Q_{41} = Q_F < 0$).",
+    subQuestions: [
+      {
+        number: "1.a",
+        points: 4,
+        prompt:
+          "À l'aide de la loi de Laplace sur les transformations adiabatiques réversibles $1\\to 2$ et $3\\to 4$, exprimer $T_2$ en fonction de $T_1$ et $a$, puis $T_3$ en fonction de $T_4$ et $a$.",
+        hint: "En variables $(T, V)$, la loi de Laplace s'écrit $T\\,V^{\\gamma - 1} = \\text{cte}$.",
+        solution:
+          "Sur l'adiabatique réversible $1\\to 2$ : $T_1 V_1^{\\gamma-1} = T_2 V_2^{\\gamma-1} \\implies T_2 = T_1\\left(\\frac{V_1}{V_2}\\right)^{\\gamma-1} = T_1\\,a^{\\gamma-1}$. De même sur $3\\to 4$ ($V_3 = V_2$ et $V_4 = V_1$) : $$T_3 = T_4\\,a^{\\gamma - 1}$$",
+      },
+      {
+        number: "1.b",
+        points: 5,
+        prompt:
+          "Exprimer les transferts thermiques $Q_C = Q_{23}$ et $Q_F = Q_{41}$ en fonction de $n, C_{V,m}$ et des températures aux sommets du cycle.",
+        hint: "Sur une transformation isochore ($V = \\text{cte}$), le travail des forces de pression est nul ($W = 0$), donc $Q = \\Delta U = n\\,C_{V,m}\\,\\Delta T$.",
+        solution:
+          "Sur les deux transformations isochores $2\\to 3$ et $4\\to 1$, $W_{23} = W_{41} = 0$, donc par le premier principe : $$Q_C = Q_{23} = \\Delta U_{23} = n\\,C_{V,m}(T_3 - T_2) > 0 \\quad \\text{et} \\quad Q_F = Q_{41} = \\Delta U_{41} = n\\,C_{V,m}(T_1 - T_4) < 0$$",
+      },
+      {
+        number: "2.a",
+        points: 5,
+        prompt:
+          "Établir que le rendement thermodynamique du cycle vaut $\\eta = 1 - \\frac{1}{a^{\\gamma - 1}}$ et calculer sa valeur numérique pour $a = 8$ et $\\gamma = 1{,}4$.",
+        hint: "Remplacez $T_2 = a^{\\gamma-1}T_1$ et $T_3 = a^{\\gamma-1}T_4$ dans $\\eta = 1 + \\frac{Q_F}{Q_C}$.",
+        solution:
+          "Le rendement du cycle moteur vaut : $$\\eta = \\frac{-W_{\\text{cycle}}}{Q_C} = 1 + \\frac{Q_F}{Q_C} = 1 - \\frac{T_4 - T_1}{T_3 - T_2} = 1 - \\frac{T_4 - T_1}{a^{\\gamma-1}(T_4 - T_1)} = 1 - \\frac{1}{a^{\\gamma - 1}}$$ Application numérique pour $a = 8$ et $\\gamma - 1 = 0{,}4$ : $8^{0{,}4} \\approx 2{,}297$, d'où $\\eta = 1 - \\frac{1}{2{,}297} \\approx 0{,}565 = 56{,}5\\,\\%$.",
       },
     ],
   },
@@ -188,44 +286,136 @@ const KHOLLE_BOARDS: KholleBoard[] = [
     subjectId: "sii",
     subjectTitle: "Sciences Industrielles (SII)",
     chapterHref: "/sii/01-systemes-asservis-slci/cours",
-    title: "Planche 03 — Asservissement de position, Précision, Stabilité et Marge de phase",
+    title: "Planche 05 — Asservissement de position, Précision, Stabilité et Marge de phase",
     difficulty: "Écrit Concours ATS",
     courseQuestion: {
       points: 6,
       prompt:
-        "Soit un système bouclé à retour unitaire de FTBO $T(p) = \\frac{K}{p^\\alpha(1 + \\tau_1 p)(1 + \\tau_2 p)}$ où $\\alpha \\in \\{0, 1, 2\\}$ est la classe du système. Donner sans démonstration le tableau de l'erreur statique $\\varepsilon_s$ (échelon $E_0/p$) et de l'erreur de traînage $\\varepsilon_v$ (rampe $V_0/p^2$) selon la valeur de $\\alpha$, puis définir la pulsation de coupure à $0\\text{ dB}$ ($\\omega_{0\\text{dB}}$) et la marge de phase $M_\\varphi$.",
+        "Soit un système bouclé à retour unitaire de FTBO $T(p) = \\frac{K}{p^\\alpha(1 + \\tau_1 p)(1 + \\tau_2 p)}$ où $\\alpha \\in \\{0, 1, 2\\}$ est la classe du système. Donner le tableau de l'erreur statique $\\varepsilon_s$ (échelon $E_0/p$) et de l'erreur de traînage $\\varepsilon_v$ (rampe $V_0/p^2$) selon $\\alpha$, puis définir la marge de phase $M_\\varphi$.",
       solution:
-        "Par le théorème de la valeur finale $\\varepsilon(\\infty) = \\lim_{p\\to 0} p\\,\\varepsilon(p) = \\lim_{p\\to 0} \\frac{p\\,E(p)}{1 + T(p)}$ : \n- Si $\\alpha = 0$ (classe 0) : $\\varepsilon_s = \\frac{E_0}{1+K}$ et $\\varepsilon_v = +\\infty$.\n- Si $\\alpha = 1$ (1 intégrateur en BO) : $\\varepsilon_s = 0$ (erreur statique nulle) et $\\varepsilon_v = \\frac{V_0}{K}$.\n- Si $\\alpha \\ge 2$ : $\\varepsilon_s = 0$ et $\\varepsilon_v = 0$.\nLa marge de phase est définie à la pulsation $\\omega_{0\\text{dB}}$ telle que $|T(\\mathrm{j}\\omega_{0\\text{dB}})| = 1$ ($G_{\\text{dB}}(\\omega_{0\\text{dB}}) = 0\\text{ dB}$) par : $$M_\\varphi = 180^\\circ + \\arg\\big(T(\\mathrm{j}\\omega_{0\\text{dB}})\\big)$$",
+        "Par le théorème de la valeur finale $\\varepsilon(\\infty) = \\lim_{p\\to 0} \\frac{p\\,E(p)}{1 + T(p)}$ : \n- Si $\\alpha = 0$ : $\\varepsilon_s = \\frac{E_0}{1+K}$ et $\\varepsilon_v = +\\infty$.\n- Si $\\alpha = 1$ : $\\varepsilon_s = 0$ et $\\varepsilon_v = \\frac{V_0}{K}$.\n- Si $\\alpha \\ge 2$ : $\\varepsilon_s = 0$ et $\\varepsilon_v = 0$.\nLa marge de phase à $\\omega_{0\\text{dB}}$ ($|T(\\mathrm{j}\\omega_{0\\text{dB}})| = 1$) vaut : $$M_\\varphi = 180^\\circ + \\arg\\big(T(\\mathrm{j}\\omega_{0\\text{dB}})\\big)$$",
     },
     problemContext:
-      "Un axe robotisé de suivi de trajectoire possède une fonction de transfert en boucle ouverte non corrigée $T(p) = \\frac{K}{p(1 + 0{,}1\\,p)}$ avec un gain réglable $K > 0$. Le cahier des charges exige : (Exigence 1) une erreur en régime permanent sur une entrée en rampe unitaire ($v_c(t) = t\\,u(t)$) inférieure ou égale à $5\\,\\%$ ; (Exigence 2) une marge de phase $M_\\varphi \\ge 45^\\circ$.",
+      "Un axe robotisé de suivi de trajectoire possède une FTBO non corrigée $T(p) = \\frac{K}{p(1 + 0{,}1\\,p)}$ avec $K > 0$. Le cahier des charges exige : (1) une erreur de traînage pour une rampe unitaire $\\varepsilon_v \\le 0{,}05$ ; (2) une marge de phase $M_\\varphi \\ge 45^\\circ$.",
     subQuestions: [
       {
         number: "1.a",
         points: 4,
         prompt:
-          "Quelle est la valeur minimale $K_{\\min}$ du gain $K$ permettant de satisfaire l'Exigence 1 de précision en poursuite ?",
-        hint: "La FTBO comporte un intégrateur ($\\alpha = 1$), donc l'erreur de traînage pour une rampe de pente $1$ vaut $\\varepsilon_v = \\frac{1}{K}$.",
+          "Quelle est la valeur minimale $K_{\\min}$ du gain $K$ permettant de satisfaire l'exigence de précision en poursuite ?",
+        hint: "La FTBO comporte un intégrateur ($\\alpha = 1$), donc $\\varepsilon_v = \\frac{1}{K}$.",
         solution:
-          "Comme la FTBO est de classe $\\alpha = 1$ et de gain statique $K$, l'erreur de traînage pour une rampe unitaire vaut $\\varepsilon_v = \\frac{1}{K}$. La condition $\\varepsilon_v \\le 0{,}05$ impose : $$\\frac{1}{K} \\le 0{,}05 \\iff K \\ge K_{\\min} = 20\\text{ s}^{-1}$$",
+          "$$\\varepsilon_v = \\frac{1}{K} \\le 0{,}05 \\iff K \\ge K_{\\min} = 20\\text{ s}^{-1}$$",
       },
       {
         number: "1.b",
         points: 5,
         prompt:
-          "En fixant $K = 20\\text{ s}^{-1}$, exprimer la fonction de transfert en boucle fermée $H(p) = \\frac{T(p)}{1 + T(p)}$ sous forme canonique du second ordre et déterminer $\\omega_0$ et le facteur d'amortissement $\\xi$.",
-        hint: "Mettez $H(p)$ sous la forme $\\frac{1}{1 + \\frac{2\\xi}{\\omega_0}p + \\frac{p^2}{\\omega_0^2}}$.",
+          "En fixant $K = 20\\text{ s}^{-1}$, exprimer la FTBF $H(p) = \\frac{T(p)}{1 + T(p)}$ sous forme canonique du second ordre et déterminer $\\omega_0$ et $\\xi$.",
+        hint: "Identifiez avec $\\frac{1}{1 + \\frac{2\\xi}{\\omega_0}p + \\frac{p^2}{\\omega_0^2}}$.",
         solution:
-          "Avec $K = 20$ et $\\tau = 0{,}1\\text{ s}$ : $$H(p) = \\frac{\\frac{20}{p(1 + 0{,}1p)}}{1 + \\frac{20}{p(1 + 0{,}1p)}} = \\frac{1}{1 + \\frac{1}{20}p + \\frac{0{,}1}{20}p^2} = \\frac{1}{1 + 0{,}05\\,p + 0{,}005\\,p^2}$$ Par identification : $\\omega_0 = \\frac{1}{\\sqrt{0{,}005}} = \\sqrt{200} = 10\\sqrt{2} \\approx 14{,}14\\text{ rad/s}$ et $\\frac{2\\xi}{\\omega_0} = 0{,}05 \\implies \\xi = \\frac{0{,}05 \\times 10\\sqrt{2}}{2} = \\frac{\\sqrt{2}}{4} \\approx 0{,}354$.",
+          "$$H(p) = \\frac{1}{1 + 0{,}05\\,p + 0{,}005\\,p^2} \\implies \\omega_0 = \\sqrt{200} \\approx 14{,}14\\text{ rad/s} \\quad \\text{et} \\quad \\xi = \\frac{\\sqrt{2}}{4} \\approx 0{,}354$$",
       },
       {
         number: "2.a",
         points: 5,
         prompt:
-          "Calculer la pulsation $\\omega_{0\\text{dB}}$ et la marge de phase $M_\\varphi$ pour $K = 20$. Le cahier des charges est-il respecté sans correcteur à avance de phase ?",
-        hint: "Résolvez $|T(\\mathrm{j}\\omega)|^2 = \\frac{400}{\\omega^2(1 + 0{,}01\\omega^2)} = 1$ en posant $X = \\omega^2$.",
+          "Calculer $\\omega_{0\\text{dB}}$ et la marge de phase $M_\\varphi$ pour $K = 20$. Conclure.",
+        hint: "Résolvez $|T(\\mathrm{j}\\omega)|^2 = \\frac{400}{\\omega^2(1 + 0{,}01\\omega^2)} = 1$.",
         solution:
-          "À $\\omega = \\omega_{0\\text{dB}}$, $0{,}01\\omega^4 + \\omega^2 - 400 = 0$. Le discriminant vaut $\\Delta = 1 + 16 = 17$, donc $\\omega_{0\\text{dB}}^2 = \\frac{-1 + \\sqrt{17}}{0{,}02} \\approx 156{,}16 \\implies \\omega_{0\\text{dB}} \\approx 12{,}5\\text{ rad/s}$. Or $\\arg(T(\\mathrm{j}\\omega)) = -90^\\circ - \\arctan(0{,}1\\,\\omega)$, d'où : $$M_\\varphi = 180^\\circ - 90^\\circ - \\arctan(1{,}25) \\approx 90^\\circ - 51{,}3^\\circ = 38{,}7^\\circ < 45^\\circ$$ L'Exigence 2 n'est pas satisfaite : il faut ajouter un correcteur à avance de phase pour apporter environ $+10^\\circ$ de phase autour de $\\omega_{0\\text{dB}}$.",
+          "On obtient $\\omega_{0\\text{dB}} \\approx 12{,}5\\text{ rad/s}$ et $M_\\varphi = 90^\\circ - \\arctan(1{,}25) \\approx 38{,}7^\\circ < 45^\\circ$ : il faut ajouter un correcteur à avance de phase.",
+      },
+    ],
+  },
+  {
+    id: "kholle-info-python-euler-trapezes",
+    subjectId: "informatique",
+    subjectTitle: "Informatique (Python)",
+    chapterHref: "/informatique/02-methodes-numeriques-analyse/cours",
+    title: "Planche 06 — Intégration par la Méthode des Trapèzes et Schéma d'Euler Explicite",
+    difficulty: "Oral Centrale / ENSAM",
+    courseQuestion: {
+      points: 6,
+      prompt:
+        "Donner la formule géométrique d'approximation de $I = \\int_a^b f(x)\\,\\mathrm{d}x$ par la méthode des trapèzes composite sur $n$ sous-intervalles de pas $h = \\frac{b-a}{n}$, ainsi que la récurrence du schéma d'Euler explicite pour résoudre le problème de Cauchy $y'(t) = F(t, y(t))$ avec $y(t_0) = y_0$.",
+      solution:
+        "En notant $x_k = a + k\\,h$ pour $k \\in \\{0, \\dots, n\\}$ avec $h = \\frac{b-a}{n}$, la formule composite des trapèzes s'écrit : $$I_n = h\\left(\\frac{f(a) + f(b)}{2} + \\sum_{k=1}^{n-1} f(x_k)\\right)$$ Pour le schéma d'Euler explicite de pas $h$ : $t_{k+1} = t_k + h$ et $y_{k+1} = y_k + h\\,F(t_k, y_k)$.",
+    },
+    problemContext:
+      "On souhaite calculer numériquement en Python une valeur approchée de $\\ln(2) = \\int_1^2 \\frac{1}{x}\\,\\mathrm{d}x$ et simuler la décharge d'un condensateur régie par $u'(t) = -\\frac{u(t)}{\\tau}$ avec $u(0) = E_0$.",
+    subQuestions: [
+      {
+        number: "1.a",
+        points: 5,
+        prompt:
+          "Écrire une fonction Python `trapezes(f, a, b, n)` de complexité $\\mathcal{O}(n)$ qui retourne l'approximation $I_n$ sans utiliser de bibliothèque externe.",
+        hint: "Initialisez l'accumulateur avec `s = 0.5 * (f(a) + f(b))` puis parcourez `k` de `1` à `n - 1`.",
+        solution:
+          "`def trapezes(f, a: float, b: float, n: int) -> float:`\n`    h = (b - a) / n`\n`    s = 0.5 * (f(a) + f(b))`\n`    for k in range(1, n):`\n`        s += f(a + k * h)`\n`    return h * s`",
+      },
+      {
+        number: "1.b",
+        points: 5,
+        prompt:
+          "En appliquant le schéma d'Euler explicite de pas $h > 0$ à l'équation $u'(t) = -\\frac{u(t)}{\\tau}$, exprimer $u_k$ en fonction de $u_0 = E_0$, $h$, $\\tau$ et $k$. À quelle condition sur le pas $h$ la suite numérique $(u_k)$ converge-t-elle vers $0$ sans osciller ?",
+        hint: "Écrivez $u_{k+1} = u_k - \\frac{h}{\\tau}u_k = \\left(1 - \\frac{h}{\\tau}\\right)u_k$ et reconnaissez une suite géométrique.",
+        solution:
+          "La relation de récurrence donne $u_{k+1} = \\left(1 - \\frac{h}{\\tau}\\right)u_k$, soit $u_k = E_0\\left(1 - \\frac{h}{\\tau}\\right)^k$. Pour que $(u_k)$ converge vers $0$ (stabilité numérique) il faut $|1 - h/\\tau| < 1 \\iff h < 2\\tau$, et pour qu'elle décroisse de façon monotone sans changer de signe à chaque pas, il faut : $$0 < h < \\tau$$",
+      },
+      {
+        number: "2.a",
+        points: 4,
+        prompt:
+          "Quel est l'ordre de convergence de la méthode des trapèzes et celui de la méthode d'Euler explicite lorsque le pas $h \\to 0$ ? Conclure sur l'effet d'une division par $10$ du pas $h$.",
+        hint: "Trapèzes est d'ordre 2 ($\\mathcal{O}(h^2)$) et Euler explicite est d'ordre 1 ($\\mathcal{O}(h)$).",
+        solution:
+          "L'erreur globale de la méthode des trapèzes est en $\\mathcal{O}(h^2)$ (diviser $h$ par $10$ divise l'erreur par $100$), tandis que l'erreur globale d'Euler explicite est en $\\mathcal{O}(h)$ (diviser $h$ par $10$ ne divise l'erreur que par $10$).",
+      },
+    ],
+  },
+  {
+    id: "kholle-anglais-transition-energetique",
+    subjectId: "anglais",
+    subjectTitle: "Anglais ATS",
+    chapterHref: "/anglais/02-methodologie-synthese-essay/cours",
+    title: "Planche 07 — Khôlle Audio & Essay : Nuclear Power, Renewables and Grid Stability",
+    difficulty: "Oral Centrale / ENSAM",
+    courseQuestion: {
+      points: 6,
+      prompt:
+        "Donner la structure complète et les expressions idiomatiques d'introduction d'un compte rendu oral de Khôlle d'anglais (Audio report BBC/NPR), ainsi que 4 verbes précis pour décrire une hausse brutale et une chute brutale de production énergétique.",
+      solution:
+        "Structure d'introduction : « This audio report, broadcast on the BBC in..., deals with the pressing issue of... At the heart of this recording lies a fundamental tension between... and... ». Verbes de hausse brutale : *to skyrocket, to surge, to soar, to體驗 a sharp rise*. Verbes de chute brutale : *to plummet, to plunge, to nose-dive, to dwindle*.",
+    },
+    problemContext:
+      "Lors de votre oral ou de votre essai écrit, le sujet suivant vous est proposé : « To what extent can intermittent renewable energies replace baseload nuclear power in a decarbonized industrial economy? »",
+    subQuestions: [
+      {
+        number: "1.a",
+        points: 5,
+        prompt:
+          "Rédiger en anglais une phrase de problématique utilisant une structure en « Not only..., but also... » ou un double comparatif « The more..., the more... ».",
+        hint: "N'oubliez pas l'inversion auxiliaire-sujet après « Not only » en tête de phrase.",
+        solution:
+          "« **Not only does** the transition to net-zero require a massive expansion of solar and wind power, **but it also** demands reliable baseload capacity to prevent grid blackouts. » — ou : « **The more** countries rely on intermittent renewables, **the more** critical grid-scale battery storage becomes. »",
+      },
+      {
+        number: "1.b",
+        points: 5,
+        prompt:
+          "Traduire sans faute grammaticale en anglais : « Bien que les énergies renouvelables aient fait des progrès considérables depuis dix ans, les équipements de stockage restent coûteux. »",
+        hint: "Attention aux indénombrables « progress » et « equipment » (toujours au singulier sans -s) et à l'emploi du Present Perfect avec « over the past decade ».",
+        solution:
+          "« **Although** renewable energies **have made considerable progress** over the past decade, storage **equipment remains** expensive. »",
+      },
+      {
+        number: "2.a",
+        points: 4,
+        prompt:
+          "Proposer en anglais une conclusion nuancée (30–40 mots) articulant le compromis technique (*trade-off*) entre nucléaire et renouvelables.",
+        hint: "Utilisez des connecteurs académiques tels que « Ultimately », « far from being mutually exclusive », « complementary ».",
+        solution:
+          "« **Ultimately**, far from being mutually exclusive, nuclear energy and renewables are complementary pillars: while wind and solar drive rapid decarbonization, nuclear power provides the carbon-free baseload stability required by heavy industry. »",
       },
     ],
   },
@@ -235,13 +425,11 @@ export default function KhollePage() {
   const [selectedSubject, setSelectedSubject] = useState<string>("all");
   const [activeBoardId, setActiveBoardId] = useState<string>(KHOLLE_BOARDS[0].id);
 
-  // États de révélation des indices, solutions et barème d'auto-évaluation
   const [revealedCourse, setRevealedCourse] = useState<boolean>(false);
   const [revealedHints, setRevealedHints] = useState<Record<string, boolean>>({});
   const [revealedSolutions, setRevealedSolutions] = useState<Record<string, boolean>>({});
   const [selfScores, setSelfScores] = useState<Record<string, number>>({});
 
-  // Chronomètre de Khôlle : "prep" (20 min préparation) | "oral" (20 min passage)
   const [timerPhase, setTimerPhase] = useState<"idle" | "prep" | "oral">("idle");
   const [secondsLeft, setSecondsLeft] = useState<number>(20 * 60);
 
@@ -294,7 +482,6 @@ export default function KhollePage() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-6">
-      {/* EN-TÊTE DU SIMULATEUR DE KHÔLLE & PROBLÈMES ÉCRITS */}
       <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-xs space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-start gap-4">
@@ -314,7 +501,6 @@ export default function KhollePage() {
             </div>
           </div>
 
-          {/* Chronomètre officiel 20 min Prépa / 20 min Oral */}
           <div className="flex flex-col items-end gap-2 bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 shrink-0">
             <div className="flex items-center gap-2">
               <Clock className="w-4 h-4 text-blue-600 dark:text-sky-400" />
@@ -359,15 +545,16 @@ export default function KhollePage() {
           </div>
         </div>
 
-        {/* Sélecteur de matière et de planche */}
         <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
           <div className="flex flex-wrap items-center gap-2">
             <Filter className="w-4 h-4 text-slate-400" />
             {[
-              { id: "all", label: "Toutes les matières" },
+              { id: "all", label: "Toutes (${KHOLLE_BOARDS.length})".replace("${KHOLLE_BOARDS.length}", String(KHOLLE_BOARDS.length)) },
               { id: "mathematiques", label: "Mathématiques" },
               { id: "physique-chimie", label: "Physique-Chimie" },
-              { id: "sii", label: "Sciences Industrielles (SII)" },
+              { id: "sii", label: "SII" },
+              { id: "informatique", label: "Informatique Python" },
+              { id: "anglais", label: "Anglais ATS" },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -393,8 +580,7 @@ export default function KhollePage() {
           </div>
         </div>
 
-        {/* Liste des planches disponibles */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {filteredBoards.map((board) => {
             const isSelected = board.id === activeBoard.id;
             return (
@@ -425,7 +611,7 @@ export default function KhollePage() {
         </div>
       </div>
 
-      {/* PARTIE 1 DE LA PLANCHE : QUESTION DE COURS & DÉMONSTRATION (SUR 6 PTS) */}
+      {/* PARTIE I : QUESTION DE COURS */}
       <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 space-y-4 shadow-xs">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2">
@@ -495,7 +681,7 @@ export default function KhollePage() {
         )}
       </div>
 
-      {/* PARTIE 2 DE LA PLANCHE : PROBLÈME À TIROIRS (SUR 14 PTS) */}
+      {/* PARTIE II : PROBLÈME D'APPROFONDISSEMENT */}
       <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 space-y-6 shadow-xs">
         <div className="space-y-2 border-b border-slate-200 dark:border-slate-800 pb-4">
           <span className="px-2.5 py-1 rounded-lg text-xs font-mono font-bold bg-blue-100 text-blue-800 dark:bg-sky-950/70 dark:text-sky-300">
@@ -506,7 +692,6 @@ export default function KhollePage() {
           </div>
         </div>
 
-        {/* Sous-questions liées */}
         <div className="space-y-5">
           {activeBoard.subQuestions.map((sq) => {
             const hintOpen = Boolean(revealedHints[sq.number]);

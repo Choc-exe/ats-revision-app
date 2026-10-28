@@ -1,232 +1,471 @@
 "use client";
-import React, { useState } from "react";
-import { FlashcardDeckData, FlashcardItem } from "@/types/pedagogy";
-import MathText from "@/components/mdx/MathText";
-import {
-  RotateCw,
-  CheckCircle2,
-  XCircle,
-  Flame,
-  Lightbulb,
-  RotateCcw,
-  Sparkles,
-} from "lucide-react";
 
-interface FlashcardDeckProps {
+import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { FlashcardItem, SubjectId } from "@/types/pedagogy";
+import {
+  getSrsRecords,
+  rateFlashcardSrs,
+  SrsCardRecord,
+  SrsRating,
+} from "@/lib/srs-storage";
+import {
+  RotateCcw,
+  ChevronLeft,
+  ChevronRight,
+  Sparkles,
+  AlertTriangle,
+  CheckCircle2,
+  Clock,
+  Brain,
+  Shuffle,
+  Filter,
+} from "lucide-react";
+import "katex/dist/katex.min.css";
+import katex from "katex";
+
+export interface FlashcardDeckData {
+  subject: SubjectId;
+  chapterId: string;
+  title: string;
+  cards: FlashcardItem[];
+}
+
+export interface FlashcardDeckProps {
   deck: FlashcardDeckData;
 }
 
+function SafeMathText({
+  content,
+  displayMode = false,
+}: {
+  content?: string;
+  displayMode?: boolean;
+}) {
+  if (!content || typeof content !== "string") return null;
+
+  if (displayMode && !content.includes("$")) {
+    try {
+      const html = katex.renderToString(content, {
+        displayMode: true,
+        throwOnError: false,
+        strict: false,
+      });
+      return <span dangerouslySetInnerHTML={{ __html: html }} />;
+    } catch {
+      return <span>{content}</span>;
+    }
+  }
+
+  const parts = content.split(/(\$\$[\s\S]+?\$\$|\$[^$]+?\$)/g);
+  return (
+    <>
+      {parts.map((part, i) => {
+        if (part.startsWith("$$") && part.endsWith("$$")) {
+          const math = part.slice(2, -2);
+          try {
+            const html = katex.renderToString(math, {
+              displayMode: true,
+              throwOnError: false,
+              strict: false,
+            });
+            return <span key={i} dangerouslySetInnerHTML={{ __html: html }} />;
+          } catch {
+            return <span key={i}>{math}</span>;
+          }
+        }
+        if (part.startsWith("$") && part.endsWith("$")) {
+          const math = part.slice(1, -1);
+          try {
+            const html = katex.renderToString(math, {
+              displayMode: false,
+              throwOnError: false,
+              strict: false,
+            });
+            return <span key={i} dangerouslySetInnerHTML={{ __html: html }} />;
+          } catch {
+            return <span key={i}>{math}</span>;
+          }
+        }
+        return <span key={i}>{part}</span>;
+      })}
+    </>
+  );
+}
+
 export default function FlashcardDeck({ deck }: FlashcardDeckProps) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isFlipped, setIsFlipped] = useState(false);
-  const [masteredIds, setMasteredIds] = useState<string[]>([]);
-  const [toReviewIds, setToReviewIds] = useState<string[]>([]);
-  const [isFinished, setIsFinished] = useState(false);
+  const [srsMap, setSrsMap] = useState<Record<string, SrsCardRecord>>({});
+  const [filterMode, setFilterMode] = useState<"all" | "due">("all");
+  const [categoryFilter, setCategoryFilter] = useState<string>("all");
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [isFlipped, setIsFlipped] = useState<boolean>(false);
+  const [shuffledIds, setShuffledIds] = useState<string[] | null>(null);
 
-  const cards = deck.cards;
-  const currentCard: FlashcardItem = cards[currentIndex];
+  useEffect(() => {
+    setSrsMap(getSrsRecords());
+  }, []);
 
-  const handleFlip = () => {
-    setIsFlipped(!isFlipped);
-  };
+  const categories = useMemo(() => {
+    const set = new Set<string>();
+    (deck.cards ?? []).forEach((c) => {
+      if (c.category) set.add(c.category);
+    });
+    return Array.from(set);
+  }, [deck.cards]);
 
-  const handleRate = (status: "mastered" | "review") => {
-    if (status === "mastered") {
-      if (!masteredIds.includes(currentCard.id)) {
-        setMasteredIds([...masteredIds, currentCard.id]);
-      }
-      setToReviewIds(toReviewIds.filter((id) => id !== currentCard.id));
-    } else {
-      if (!toReviewIds.includes(currentCard.id)) {
-        setToReviewIds([...toReviewIds, currentCard.id]);
-      }
-      setMasteredIds(masteredIds.filter((id) => id !== currentCard.id));
+  const isCardDue = useCallback(
+    (cardId: string) => {
+      const rec = srsMap[cardId];
+      if (!rec) return true; // Jamais étudiée = à réviser
+      return rec.dueTimestamp <= Date.now();
+    },
+    [srsMap]
+  );
+
+  const dueCount = useMemo(() => {
+    return (deck.cards ?? []).filter((c) => isCardDue(c.id)).length;
+  }, [deck.cards, isCardDue]);
+
+  const masteredCount = useMemo(() => {
+    return (deck.cards ?? []).filter(
+      (c) => (srsMap[c.id]?.intervalDays ?? 0) >= 5
+    ).length;
+  }, [deck.cards, srsMap]);
+
+  const activeCards = useMemo(() => {
+    let list = [...(deck.cards ?? [])];
+
+    if (shuffledIds) {
+      const orderMap = new Map(shuffledIds.map((id, idx) => [id, idx]));
+      list.sort((a, b) => (orderMap.get(a.id) ?? 0) - (orderMap.get(b.id) ?? 0));
     }
 
-    setIsFlipped(false);
-    if (currentIndex < cards.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-    } else {
-      setIsFinished(true);
+    if (filterMode === "due") {
+      list = list.filter((c) => isCardDue(c.id));
     }
-  };
 
-  const handleRestart = () => {
+    if (categoryFilter !== "all") {
+      list = list.filter((c) => c.category === categoryFilter);
+    }
+
+    return list;
+  }, [deck.cards, shuffledIds, filterMode, categoryFilter, isCardDue]);
+
+  useEffect(() => {
     setCurrentIndex(0);
     setIsFlipped(false);
-    setMasteredIds([]);
-    setToReviewIds([]);
-    setIsFinished(false);
+  }, [filterMode, categoryFilter]);
+
+  const currentCard = activeCards[currentIndex];
+
+  const handleNext = useCallback(() => {
+    if (activeCards.length === 0) return;
+    setIsFlipped(false);
+    setCurrentIndex((prev) => (prev + 1) % activeCards.length);
+  }, [activeCards.length]);
+
+  const handlePrev = useCallback(() => {
+    if (activeCards.length === 0) return;
+    setIsFlipped(false);
+    setCurrentIndex(
+      (prev) => (prev - 1 + activeCards.length) % activeCards.length
+    );
+  }, [activeCards.length]);
+
+  const handleRate = useCallback(
+    (rating: SrsRating) => {
+      if (!currentCard) return;
+      const updated = rateFlashcardSrs({
+        cardId: currentCard.id,
+        subjectId: deck.subject,
+        chapterId: deck.chapterId,
+        rating,
+      });
+      setSrsMap((prev) => ({ ...prev, [currentCard.id]: updated }));
+      setIsFlipped(false);
+      if (currentIndex < activeCards.length - 1) {
+        setCurrentIndex((prev) => prev + 1);
+      } else {
+        setCurrentIndex(0);
+      }
+    },
+    [currentCard, deck.subject, deck.chapterId, currentIndex, activeCards.length]
+  );
+
+  const handleShuffle = () => {
+    const ids = (deck.cards ?? []).map((c) => c.id);
+    ids.sort(() => Math.random() - 0.5);
+    setShuffledIds(ids);
+    setCurrentIndex(0);
+    setIsFlipped(false);
   };
 
-  if (isFinished) {
+  // Raccourcis clavier (Espace, Flèches, 1/2/3)
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (
+        document.activeElement?.tagName === "INPUT" ||
+        document.activeElement?.tagName === "TEXTAREA"
+      ) {
+        return;
+      }
+      if (e.code === "Space") {
+        e.preventDefault();
+        setIsFlipped((f) => !f);
+      } else if (e.code === "ArrowRight") {
+        handleNext();
+      } else if (e.code === "ArrowLeft") {
+        handlePrev();
+      } else if (isFlipped && e.key === "1") {
+        handleRate("again");
+      } else if (isFlipped && e.key === "2") {
+        handleRate("good");
+      } else if (isFlipped && e.key === "3") {
+        handleRate("easy");
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isFlipped, handleNext, handlePrev, handleRate]);
+
+  if (!currentCard) {
     return (
-      <div className="bg-white rounded-2xl border border-slate-200 p-8 md:p-12 text-center shadow-sm max-w-2xl mx-auto">
-        <div className="w-16 h-16 rounded-full bg-red-50 text-red-600 flex items-center justify-center mx-auto mb-4">
-          <Sparkles className="w-8 h-8" />
-        </div>
-        <h2 className="text-2xl font-bold text-slate-900 mb-2">
-          Paquet terminé !
-        </h2>
-        <p className="text-sm text-slate-600 mb-8">
-          Vous avez parcouru l'ensemble des cartes de ce chapitre. Voici votre bilan :
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-8 text-center space-y-4">
+        <CheckCircle2 className="w-10 h-10 text-emerald-500 mx-auto" />
+        <h3 className="text-lg font-bold text-slate-900 dark:text-white">
+          Toutes les cartes de cette sélection sont à jour !
+        </h3>
+        <p className="text-xs text-slate-500 dark:text-slate-400 max-w-md mx-auto">
+          Vous avez terminé vos révisions espacées prévues pour aujourd'hui sur ce filtre. Vous pouvez repasser en mode « Toutes les cartes » pour un entraînement libre.
         </p>
-
-        <div className="grid grid-cols-2 gap-4 max-w-md mx-auto mb-8">
-          <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-center">
-            <span className="block text-2xl font-bold text-emerald-700">
-              {masteredIds.length}
-            </span>
-            <span className="text-xs font-medium text-emerald-600">Maîtrisées</span>
-          </div>
-          <div className="p-4 rounded-xl bg-amber-50 border border-amber-200 text-center">
-            <span className="block text-2xl font-bold text-amber-700">
-              {toReviewIds.length}
-            </span>
-            <span className="text-xs font-medium text-amber-600">À revoir</span>
-          </div>
-        </div>
-
         <button
-          onClick={handleRestart}
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-red-600 text-white font-semibold text-sm hover:bg-red-700 transition-colors shadow-sm"
+          type="button"
+          onClick={() => {
+            setFilterMode("all");
+            setCategoryFilter("all");
+          }}
+          className="px-4 py-2 rounded-xl text-xs font-bold bg-blue-600 text-white hover:bg-blue-700 cursor-pointer"
         >
-          <RotateCcw className="w-4 h-4" />
-          Recommencer la session
+          Afficher toutes les cartes ({deck.cards.length})
         </button>
       </div>
     );
   }
 
+  const frontText =
+    typeof currentCard.front === "string"
+      ? currentCard.front
+      : (currentCard as any).question ?? "";
+
+  const backObj =
+    currentCard.back && typeof currentCard.back === "object"
+      ? currentCard.back
+      : {
+          mainAnswer:
+            typeof currentCard.back === "string"
+              ? currentCard.back
+              : (currentCard as any).answer ?? "",
+          criticalFormula: (currentCard as any).criticalFormula,
+          commonTrap: (currentCard as any).commonTrap,
+        };
+
+  const cardSrs = srsMap[currentCard.id];
+
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
-      {/* Barre de progression */}
-      <div className="flex items-center justify-between text-xs font-semibold text-slate-500">
-        <span>
-          Carte <strong className="text-slate-900">{currentIndex + 1}</strong> sur {cards.length}
-        </span>
-        <span className="px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 font-mono">
-          Progression : {Math.round(((currentIndex + 1) / cards.length) * 100)}%
-        </span>
+    <div className="space-y-5">
+      {/* BARRE DE PILOTAGE SRS & FILTRES */}
+      <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-4 flex flex-wrap items-center justify-between gap-3 shadow-xs">
+        <div className="flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            onClick={() => setFilterMode("all")}
+            className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
+              filterMode === "all"
+                ? "bg-blue-600 text-white"
+                : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
+            }`}
+          >
+            Toutes ({deck.cards.length})
+          </button>
+          <button
+            type="button"
+            onClick={() => setFilterMode("due")}
+            className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
+              filterMode === "due"
+                ? "bg-amber-600 text-white"
+                : "bg-amber-50 dark:bg-amber-950/50 text-amber-800 dark:text-amber-300 border border-amber-200 dark:border-amber-800"
+            }`}
+          >
+            <Clock className="w-3.5 h-3.5" />
+            <span>À réviser aujourd'hui ({dueCount})</span>
+          </button>
+
+          {categories.length > 1 && (
+            <div className="flex items-center gap-1.5 ml-1">
+              <Filter className="w-3.5 h-3.5 text-slate-400" />
+              <select
+                value={categoryFilter}
+                onChange={(e) => setCategoryFilter(e.target.value)}
+                className="rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-2.5 py-1.5 text-xs font-semibold text-slate-800 dark:text-slate-200"
+              >
+                <option value="all">Toutes catégories</option>
+                {categories.map((cat) => (
+                  <option key={cat} value={cat}>
+                    {cat}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+        </div>
+
+        <div className="flex items-center gap-3">
+          <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/50 px-2.5 py-1 rounded-lg border border-emerald-200 dark:border-emerald-900">
+            Maîtrisées : {masteredCount} / {deck.cards.length}
+          </span>
+          <button
+            type="button"
+            onClick={handleShuffle}
+            title="Mélanger le paquet"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer"
+          >
+            <Shuffle className="w-3.5 h-3.5" />
+            <span>Mélanger</span>
+          </button>
+        </div>
       </div>
 
-      <div className="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
-        <div
-          className="bg-red-600 h-full transition-all duration-300"
-          style={{ width: `${((currentIndex + 1) / cards.length) * 100}%` }}
-        />
-      </div>
-
-      {/* Carte Flashcard 3D */}
+      {/* CARTE PRINCIPALE INTERACTIVE */}
       <div
-        onClick={handleFlip}
-        className="group relative min-h-[380px] w-full cursor-pointer perspective-1000"
+        onClick={() => setIsFlipped(!isFlipped)}
+        className="bg-white dark:bg-slate-900 rounded-2xl border-2 border-slate-200 dark:border-slate-800 hover:border-blue-400 dark:hover:border-sky-500 p-6 sm:p-10 min-h-[300px] flex flex-col justify-between transition-all cursor-pointer shadow-sm select-none"
       >
-        <div
-          className={`relative h-full w-full rounded-2xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-500 flex flex-col justify-between ${
-            isFlipped ? "ring-2 ring-red-600/30" : "hover:border-slate-300"
-          }`}
-        >
-          {/* En-tête de la carte */}
-          <div className="flex items-center justify-between">
-            <span className="px-3 py-1 rounded-full text-xs font-semibold bg-red-50 text-red-600">
+        {/* En-tête de la carte */}
+        <div className="flex items-center justify-between gap-2 border-b border-slate-100 dark:border-slate-800 pb-4">
+          <div className="flex items-center gap-2">
+            <span className="px-2.5 py-1 rounded-lg text-xs font-mono font-bold bg-blue-50 dark:bg-sky-950/80 text-blue-700 dark:text-sky-300">
+              Carte {currentIndex + 1} / {activeCards.length}
+            </span>
+            <span className="px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
               {currentCard.category}
             </span>
-            <span className="flex items-center gap-1 text-xs text-slate-400 font-medium">
-              <RotateCw className="w-3.5 h-3.5 transition-transform group-hover:rotate-180" />
-              {isFlipped ? "Voir la question" : "Cliquer pour retourner"}
+          </div>
+
+          <div className="flex items-center gap-2">
+            {cardSrs && (
+              <span className="text-[11px] font-mono text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                <Brain className="w-3.5 h-3.5 text-blue-600 dark:text-sky-400" />
+                Intervalle : {cardSrs.intervalDays}j
+              </span>
+            )}
+            <span className="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-sky-400">
+              {isFlipped ? "Verso (Réponse)" : "Recto (Question)"}
             </span>
           </div>
+        </div>
 
-          {/* Contenu Recto / Verso avec MathText */}
-          <div className="py-8 text-center my-auto">
-            {!isFlipped ? (
-              <div className="space-y-3">
-                <span className="text-xs uppercase tracking-wider text-slate-400 font-bold block">
-                  Question / Énoncé
-                </span>
-                <p className="text-lg font-semibold text-slate-900 leading-relaxed">
-                  <MathText text={currentCard.front} />
-                </p>
+        {/* Corps de la carte (Recto ou Verso) */}
+        <div className="py-6 my-auto">
+          {!isFlipped ? (
+            <div className="text-center space-y-4">
+              <div className="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-relaxed max-w-2xl mx-auto">
+                <SafeMathText content={frontText} />
               </div>
-            ) : (
-              <div className="space-y-6 text-left">
-                <div>
-                  <span className="text-xs uppercase tracking-wider text-red-600 font-bold block mb-1">
-                    Réponse détaillée
+              <p className="text-xs text-slate-400 dark:text-slate-500 pt-2">
+                Cliquez sur la carte ou appuyez sur <kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 font-mono text-[10px]">Espace</kbd> pour révéler la réponse
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-4 max-w-2xl mx-auto">
+              <div className="text-sm sm:text-base font-medium text-slate-800 dark:text-slate-100 leading-relaxed whitespace-pre-line">
+                <SafeMathText content={backObj.mainAnswer} />
+              </div>
+
+              {backObj.criticalFormula && (
+                <div className="rounded-xl border border-red-200 dark:border-red-900/60 border-l-4 border-l-red-600 bg-red-50/40 dark:bg-red-950/25 p-4">
+                  <span className="text-xs font-bold text-red-800 dark:text-red-300 block mb-1">
+                    Formule / Règle critique à retenir :
                   </span>
-                  <p className="text-sm font-medium text-slate-800 leading-relaxed">
-                    <MathText text={currentCard.back.mainAnswer} />
-                  </p>
+                  <div className="text-sm text-slate-900 dark:text-white overflow-x-auto">
+                    <SafeMathText content={backObj.criticalFormula} displayMode />
+                  </div>
                 </div>
+              )}
 
-                {currentCard.back.criticalFormula && (
-                  <div className="rounded-xl bg-red-50 border-l-4 border-red-600 p-4">
-                    <div className="flex items-center gap-1.5 text-xs font-bold text-red-600 uppercase mb-1">
-                      <Flame className="w-3.5 h-3.5" />
-                      <span>Formule Critique</span>
-                    </div>
-                    <p className="font-mono text-sm font-bold text-slate-900">
-                      <MathText text={currentCard.back.criticalFormula} />
-                    </p>
+              {(backObj as any).commonTrap && (
+                <div className="rounded-xl border border-amber-200 dark:border-amber-900/60 bg-amber-50/50 dark:bg-amber-950/30 p-3.5 text-xs flex items-start gap-2.5 text-amber-950 dark:text-amber-200">
+                  <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+                  <div>
+                    <span className="font-bold">Piège classique en concours : </span>
+                    <SafeMathText content={(backObj as any).commonTrap} />
                   </div>
-                )}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
 
-                {currentCard.back.mnemonicOrTip && (
-                  <div className="rounded-xl bg-amber-50 border border-amber-200 p-4 flex items-start gap-3">
-                    <Lightbulb className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
-                    <p className="text-xs text-amber-900 leading-relaxed">
-                      <strong>Astuce :</strong> <MathText text={currentCard.back.mnemonicOrTip} />
-                    </p>
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
+        {/* Pied de carte : Boutons SRS Anki (si retournée) ou Navigation simple */}
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="pt-4 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3"
+        >
+          <button
+            type="button"
+            onClick={handlePrev}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer"
+          >
+            <ChevronLeft className="w-4 h-4" />
+            <span>Précédente</span>
+          </button>
 
-          {/* Pied de carte */}
-          <div className="text-center border-t border-slate-100 pt-4 text-xs text-slate-400">
-            {isFlipped ? "Évaluez votre mémorisation ci-dessous" : "Testez votre réponse mentalement avant de retourner"}
-          </div>
+          {isFlipped ? (
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                onClick={() => handleRate("again")}
+                className="px-3.5 py-2 rounded-xl text-xs font-bold bg-red-600 hover:bg-red-700 text-white cursor-pointer"
+                title="Raccourci : Touche 1"
+              >
+                1 • À revoir (&lt; 1j)
+              </button>
+              <button
+                type="button"
+                onClick={() => handleRate("good")}
+                className="px-3.5 py-2 rounded-xl text-xs font-bold bg-blue-600 hover:bg-blue-700 text-white cursor-pointer"
+                title="Raccourci : Touche 2"
+              >
+                2 • Correct (2j+)
+              </button>
+              <button
+                type="button"
+                onClick={() => handleRate("easy")}
+                className="px-3.5 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white cursor-pointer"
+                title="Raccourci : Touche 3"
+              >
+                3 • Maîtrisé (5j+)
+              </button>
+            </div>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setIsFlipped(true)}
+              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-blue-600 text-white hover:bg-blue-700 cursor-pointer"
+            >
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>Révéler la réponse</span>
+            </button>
+          )}
+
+          <button
+            type="button"
+            onClick={handleNext}
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer"
+          >
+            <span>Suivante</span>
+            <ChevronRight className="w-4 h-4" />
+          </button>
         </div>
       </div>
-
-      {/* Boutons d'évaluation */}
-      {isFlipped ? (
-        <div className="grid grid-cols-2 gap-4 animate-fade-in">
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              handleRate("review");
-            }}
-            className="flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl border border-amber-200 bg-amber-50/80 text-amber-800 font-semibold text-sm hover:bg-amber-100 transition-colors shadow-sm"
-          >
-            <XCircle className="w-4 h-4 text-amber-600" />
-            <span>À revoir</span>
-          </button>
-
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              handleRate("mastered");
-            }}
-            className="flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-emerald-600 text-white font-semibold text-sm hover:bg-emerald-700 transition-colors shadow-sm"
-          >
-            <CheckCircle2 className="w-4 h-4" />
-            <span>Maîtrisé</span>
-          </button>
-        </div>
-      ) : (
-        <div className="text-center">
-          <button
-            onClick={handleFlip}
-            className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-slate-900 text-white font-semibold text-sm hover:bg-slate-800 transition-colors shadow-sm"
-          >
-            <RotateCw className="w-4 h-4" />
-            Voir la réponse au dos
-          </button>
-        </div>
-      )}
     </div>
   );
 }
