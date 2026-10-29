@@ -6,6 +6,9 @@ import {
   getQcmData,
 } from "@/lib/content-loader";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export async function GET() {
   const searchIndex: Array<{
     id: string;

@@ -1,3 +1,4 @@
+import { generateDynamicQcmBank } from "@/lib/dynamic-qcm";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -101,6 +102,25 @@ function normalizeFlashcard(raw: any, index: number): FlashcardItem {
   } as unknown as FlashcardItem;
 }
 
+/**
+ * Mélange un tableau sur place (Algorithme de Fisher-Yates)
+ */
+function shuffleArray<T>(array: T[]): T[] {
+  const copy = [...array];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = copy[i];
+    copy[i] = copy[j];
+    copy[j] = temp;
+  }
+  return copy;
+}
+
+/**
+ * Normalise n'importe quelle question de QCM issue d'un fichier qcm.json
+ * ET mélange aléatoirement l'emplacement des options A, B, C, D pour que
+ * la bonne réponse ne soit JAMAIS au même endroit !
+ */
 function normalizeQcmQuestion(raw: any, index: number): QcmQuestion {
   const letters = ["a", "b", "c", "d"] as const;
   const rawOptions = Array.isArray(raw?.options)
@@ -109,39 +129,62 @@ function normalizeQcmQuestion(raw: any, index: number): QcmQuestion {
     ? raw.choices
     : [];
 
-  const correctIndex: number =
+  const originalCorrectIndex: number =
     typeof raw?.correctIndex === "number"
       ? raw.correctIndex
       : typeof raw?.correctOptionId === "string"
       ? Math.max(0, letters.indexOf(raw.correctOptionId.toLowerCase() as any))
       : 0;
 
-  const options = rawOptions.map((opt: any, idx: number) => {
-    const id = String(opt?.id ?? letters[idx] ?? idx);
+  // 1. On type explicitement le tableau avant le mélange
+  const taggedOptions: Array<{
+    text: string;
+    latex?: string;
+    isCorrect: boolean;
+  }> = rawOptions.map((opt: any, idx: number) => {
+    const origId = String(opt?.id ?? letters[idx] ?? idx);
     const text =
       typeof opt === "string"
         ? opt
         : String(opt?.text ?? opt?.label ?? opt?.latex ?? "");
+    const isCorrect =
+      typeof opt?.isCorrect === "boolean"
+        ? opt.isCorrect
+        : raw?.correctOptionId
+        ? origId.toLowerCase() === String(raw.correctOptionId).toLowerCase()
+        : idx === originalCorrectIndex;
+
     return {
-      id,
-      label: opt?.label ?? id.toUpperCase(),
       text,
       latex:
         typeof opt?.latex === "string" && !opt.latex.includes("$")
           ? opt.latex
           : undefined,
-      isCorrect:
-        typeof opt?.isCorrect === "boolean"
-          ? opt.isCorrect
-          : idx === correctIndex,
+      isCorrect,
     };
   });
 
-  const correctOptionId =
-    raw?.correctOptionId ??
-    options.find((o: any) => o.isCorrect)?.id ??
-    options[correctIndex]?.id ??
-    "a";
+  // 2. MÉLANGE ALÉATOIRE DES EMPLACEMENTS (A, B, C, D)
+  const shuffledOptions = shuffleArray(taggedOptions).map(
+    (
+      opt: { text: string; latex?: string; isCorrect: boolean },
+      newIdx: number
+    ) => {
+      const newId = letters[newIdx] ?? String(newIdx);
+      return {
+        id: newId,
+        label: newId.toUpperCase(),
+        text: opt.text,
+        latex: opt.latex,
+        isCorrect: opt.isCorrect,
+      };
+  });
+
+  const newCorrectIndex = Math.max(
+    0,
+    shuffledOptions.findIndex((o) => o.isCorrect)
+  );
+  const newCorrectOptionId = shuffledOptions[newCorrectIndex]?.id ?? "a";
 
   const explanationObj =
     raw?.explanation && typeof raw.explanation === "object"
@@ -172,9 +215,9 @@ function normalizeQcmQuestion(raw: any, index: number): QcmQuestion {
     difficulty: raw?.difficulty ?? "Concours ATS",
     questionText: qText,
     question: qText,
-    options,
-    correctOptionId,
-    correctIndex,
+    options: shuffledOptions,
+    correctOptionId: newCorrectOptionId,
+    correctIndex: newCorrectIndex,
     explanation: explanationObj,
   } as unknown as QcmQuestion;
 }
@@ -1038,6 +1081,9 @@ export function getQcmData(
   subjectId: string,
   chapterId: string
 ): QcmQuestion[] {
+  let baseQuestions: QcmQuestion[] = [];
+
+  // 1. Lecture du fichier qcm.json du chapitre sur le disque s'il existe
   const dir = resolveChapterDir(subjectId, chapterId);
   if (dir) {
     const filePath = path.join(dir, "qcm.json");
@@ -1051,16 +1097,35 @@ export function getQcmData(
           ? parsed.questions
           : [];
         if (rawArray.length > 0) {
-          return rawArray.map((item: any, idx: number) =>
+          baseQuestions = rawArray.map((item: any, idx: number) =>
             normalizeQcmQuestion(item, idx)
           );
         }
       } catch {
-        // Ignore et passe au fallback
+        // Ignore erreur JSON
       }
     }
   }
 
-  const builtin = getBuiltinBundle(subjectId, chapterId);
-  return builtin ? builtin.qcm : [];
+  // 2. Fallback sur les chapitres intégrés si pas de fichier sur le disque
+  if (baseQuestions.length === 0) {
+    const builtin = getBuiltinBundle(subjectId, chapterId);
+    if (builtin) {
+      baseQuestions = builtin.qcm.map((item, idx) =>
+        normalizeQcmQuestion(item, idx)
+      );
+    }
+  }
+
+  // 3. Injection systématique de 3 séries de QCM calculatoires à nombres aléatoires pour CE chapitre
+  const chapterNum = chapterId.slice(0, 2);
+  const dynamicQuestions = generateDynamicQcmBank(3)
+    .filter(
+      (d) =>
+        d.subjectId === subjectId && d.chapterId.slice(0, 2) === chapterNum
+    )
+    .map((d, idx) => normalizeQcmQuestion(d.question, baseQuestions.length + idx));
+
+  // 4. Fusion + Mélange aléatoire de l'ordre des questions !
+  return shuffleArray([...baseQuestions, ...dynamicQuestions]);
 }
