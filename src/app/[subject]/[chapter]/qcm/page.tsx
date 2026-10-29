@@ -5,6 +5,7 @@ import { CheckSquare, FileWarning } from "lucide-react";
 import { Metadata } from "next";
 import { getChapterById } from "@/lib/curriculum";
 import { SubjectId } from "@/types/pedagogy";
+import { generateDynamicQcmBank } from "@/lib/dynamic-qcm";
 
 interface QcmPageProps {
   params: Promise<{
@@ -15,8 +16,13 @@ interface QcmPageProps {
 
 export default async function QcmPage({ params }: QcmPageProps) {
   const { subject, chapter } = await params;
-  const questions = await getQcmData(subject, chapter);
   const chapterData = getChapterById(subject, chapter);
+  const staticQuestions = await getQcmData(subject, chapter);
+  const dynamicForChapter = generateDynamicQcmBank(2)
+    .filter((d) => d.subjectId === subject && d.chapterId.slice(0, 2) === chapter.slice(0, 2))
+    .map((d) => d.question);
+
+  const questions = [...staticQuestions, ...dynamicForChapter];
 
   if (!questions || questions.length === 0) {
     return (

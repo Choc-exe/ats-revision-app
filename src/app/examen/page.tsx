@@ -1,5 +1,6 @@
 "use client";
 
+import { generateDynamicQcmBank } from "@/lib/dynamic-qcm";
 import { recordQcmMistake } from "@/lib/srs-storage";
 import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
@@ -299,11 +300,13 @@ export default function ExamenPage() {
     fetch("/api/study-data")
       .then((res) => res.json())
       .then((data) => {
-        if (Array.isArray(data?.qcmBank)) {
-          setBank(data.qcmBank);
-        }
+        const staticBank = Array.isArray(data?.qcmBank) ? data.qcmBank : [];
+        const dynamicBank = generateDynamicQcmBank(2); // Génère 16 QCM à nombres aléatoires !
+        setBank([...dynamicBank, ...staticBank]);
       })
-      .catch(() => {})
+      .catch(() => {
+        setBank(generateDynamicQcmBank(2));
+      })
       .finally(() => setLoading(false));
   }, []);
 
@@ -392,8 +395,20 @@ export default function ExamenPage() {
 
   // Démarrage de l'examen blanc
   const startExam = () => {
-    if (filteredPool.length === 0) return;
-    const shuffled = [...filteredPool].sort(() => Math.random() - 0.5);
+    // 1. Génère un nouveau jeu de questions à nombres aléatoires
+    const freshDynamic = generateDynamicQcmBank(2);
+    const staticOnly = bank.filter((item) => !(item as any).isDynamic);
+    const updatedBank = [...freshDynamic, ...staticOnly];
+    setBank(updatedBank);
+
+    // 2. Ne garde que les questions des thèmes cochés par l'utilisateur
+    const activePool = updatedBank.filter((item) =>
+      selectedChapters.has(`${item.subjectId}/${item.chapterId}`)
+    );
+    if (activePool.length === 0) return;
+
+    // 3. Mélange les questions et applique la limite choisie (ex: 10 questions)
+    const shuffled = [...activePool].sort(() => Math.random() - 0.5);
     const limit =
       questionCount === 0
         ? shuffled.length
@@ -406,9 +421,9 @@ export default function ExamenPage() {
       const letters = ["A", "B", "C", "D", "E", "F"];
       const mixedOptions = [...item.question.options]
         .sort(() => Math.random() - 0.5)
-        .map((opt, idx) => ({
+        .map((opt: any, idx) => ({
           ...opt,
-          label: letters[idx] ?? opt.label,
+          label: letters[idx] ?? opt.label ?? opt.id?.toUpperCase(),
         }));
       return {
         ...item,
@@ -419,6 +434,7 @@ export default function ExamenPage() {
       };
     });
 
+    // 4. Réinitialise et démarre la session
     setSessionQuestions(picked);
     setAnswers({});
     setFlagged({});
