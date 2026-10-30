@@ -1008,11 +1008,24 @@ function getBuiltinBundle(
   return BUILTIN_CHAPTERS[`${subjectId}/${numPrefix}`] ?? null;
 }
 
+// Cache mémoire en mémoire vive pour éviter les lectures disque fs répétitives
+const MDX_MEMORY_CACHE = new Map<
+  string,
+  { frontmatter: Record<string, unknown>; content: string }
+>();
+
 export function getMdxContent(
   subjectId: string,
   chapterId: string,
   type: "course" | "summary"
 ): { frontmatter: Record<string, unknown>; content: string } | null {
+  // 1. Vérification dans le cache mémoire
+  const cacheKey = `${subjectId}/${chapterId}/${type}`;
+  if (MDX_MEMORY_CACHE.has(cacheKey)) {
+    return MDX_MEMORY_CACHE.get(cacheKey)!;
+  }
+
+  // 2. Lecture sur le disque
   const dir = resolveChapterDir(subjectId, chapterId);
   if (dir) {
     const candidates =
@@ -1025,22 +1038,27 @@ export function getMdxContent(
       if (fs.existsSync(filePath)) {
         const raw = fs.readFileSync(filePath, "utf-8");
         const { data, content } = matter(raw);
-        return {
+        const result = {
           frontmatter: data,
           content: sanitizeMdxForCompiler(content),
         };
+        MDX_MEMORY_CACHE.set(cacheKey, result);
+        return result;
       }
     }
   }
 
+  // 3. Fallback sur le contenu intégré
   const builtin = getBuiltinBundle(subjectId, chapterId);
   if (builtin) {
-    return {
+    const result = {
       frontmatter: { title: chapterId },
       content: sanitizeMdxForCompiler(
         type === "summary" ? builtin.summary : builtin.course
       ),
     };
+    MDX_MEMORY_CACHE.set(cacheKey, result);
+    return result;
   }
 
   return null;

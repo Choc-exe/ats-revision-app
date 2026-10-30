@@ -1,7 +1,26 @@
 import React from "react";
 import { notFound } from "next/navigation";
-import { ATS_CURRICULUM } from "@/lib/curriculum";
-import ChapterTabs from "@/components/layout/ChapterTabs";
+import { getSubjectById, getChapterById } from "@/lib/curriculum";
+import {
+  getMdxContent,
+  getFlashcardsData,
+  getQcmData,
+} from "@/lib/content-loader";
+import { SubjectId } from "@/types/pedagogy";
+import ChapterWorkspace from "@/components/layout/ChapterWorkspace";
+import FlashcardDeck from "@/components/modules/FlashcardDeck";
+import QcmEngine from "@/components/modules/QcmEngine";
+import { MDXRemote } from "next-mdx-remote/rsc";
+import remarkMath from "remark-math";
+import remarkGfm from "remark-gfm";
+import rehypeKatex from "rehype-katex";
+import CriticalFormula from "@/components/mdx/CriticalFormula";
+import WarningBox from "@/components/mdx/WarningBox";
+
+const mdxComponents = {
+  CriticalFormula,
+  WarningBox,
+};
 
 interface ChapterLayoutProps {
   children: React.ReactNode;
@@ -11,34 +30,92 @@ interface ChapterLayoutProps {
   }>;
 }
 
-export default async function ChapterLayout({
-  children,
-  params,
-}: ChapterLayoutProps) {
+export default async function ChapterLayout({ params }: ChapterLayoutProps) {
   const { subject, chapter } = await params;
+  const subjectData = getSubjectById(subject);
+  const chapterData = getChapterById(subject, chapter);
 
-  // Vérification de l'existence de la matière et du chapitre dans le référentiel
-  const subjectMeta = ATS_CURRICULUM.find((s) => s.id === subject);
-  const chapterMeta = subjectMeta?.chapters.find((c) => c.id === chapter);
-
-  if (!subjectMeta || !chapterMeta) {
+  if (!subjectData || !chapterData) {
     notFound();
   }
 
-  return (
-    <div className="flex flex-col flex-1">
-      <ChapterTabs
-        subjectId={subjectMeta.id}
-        chapterId={chapterMeta.id}
-        subjectTitle={subjectMeta.title}
-        chapterTitle={`${chapterMeta.number}. ${chapterMeta.title}`}
-        semester={chapterMeta.semester}
-      />
+  // Chargement simultané des 4 ressources du chapitre côté serveur
+  const courseMdx = getMdxContent(subject, chapter, "course");
+  const summaryMdx = getMdxContent(subject, chapter, "summary");
+  const flashcards = getFlashcardsData(subject, chapter);
+  const qcmQuestions = getQcmData(subject, chapter);
 
-      {/* Conteneur de lecture centré, optimisé pour ne pas dépasser 85ch de large */}
-      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10 space-y-6">
-        {children}
-      </main>
+  const mdxOptions = {
+    mdxOptions: {
+      remarkPlugins: [remarkGfm, remarkMath],
+      rehypePlugins: [[rehypeKatex, { strict: false, throwOnError: false }]] as any,
+    },
+  };
+
+  const courseNode = courseMdx ? (
+    <article className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-10 shadow-xs prose prose-slate dark:prose-invert max-w-none">
+      <MDXRemote
+        source={courseMdx.content}
+        components={mdxComponents}
+        options={mdxOptions}
+      />
+    </article>
+  ) : (
+    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-8 text-center text-sm text-slate-500">
+      Cours en cours de rédaction pour ce chapitre.
     </div>
+  );
+
+  const summaryNode = summaryMdx ? (
+    <article className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-10 shadow-xs prose prose-slate dark:prose-invert max-w-none">
+      <MDXRemote
+        source={summaryMdx.content}
+        components={mdxComponents}
+        options={mdxOptions}
+      />
+    </article>
+  ) : (
+    <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-8 text-center text-sm text-slate-500">
+      Fiche synthèse indisponible pour ce chapitre.
+    </div>
+  );
+
+  const flashcardsNode = (
+    <FlashcardDeck
+      deck={{
+        subject: subject as SubjectId,
+        chapterId: chapter,
+        title: chapterData.title,
+        cards: flashcards,
+      }}
+    />
+  );
+
+  const qcmNode = (
+    <QcmEngine
+      qcm={{
+        subject: subject as SubjectId,
+        chapterId: chapter,
+        title: chapterData.title,
+        questions: qcmQuestions,
+      }}
+    />
+  );
+
+  return (
+    <ChapterWorkspace
+      subjectId={subjectData.id}
+      subjectTitle={subjectData.shortTitle}
+      chapterId={chapterData.id}
+      chapterNumber={chapterData.number}
+      chapterTitle={chapterData.title}
+      semester={chapterData.semester ?? 1}
+      flashcardsCount={flashcards.length}
+      qcmCount={qcmQuestions.length}
+      courseNode={courseNode}
+      summaryNode={summaryNode}
+      flashcardsNode={flashcardsNode}
+      qcmNode={qcmNode}
+    />
   );
 }
