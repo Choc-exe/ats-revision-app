@@ -7,8 +7,7 @@ import {
   FileText,
   Layers,
   CheckSquare,
-  Printer,
-  GraduationCap,
+  ChevronRight,
 } from "lucide-react";
 
 export type ChapterTabId = "cours" | "synthese" | "flashcards" | "qcm";
@@ -19,14 +18,38 @@ interface ChapterWorkspaceProps {
   chapterId: string;
   chapterNumber: string;
   chapterTitle: string;
-  semester?: number;
-  flashcardsCount: number;
-  qcmCount: number;
   courseNode: React.ReactNode;
   summaryNode: React.ReactNode;
   flashcardsNode: React.ReactNode;
   qcmNode: React.ReactNode;
 }
+
+const TABS: Array<{
+  id: ChapterTabId;
+  label: string;
+  icon: React.ReactNode;
+}> = [
+  {
+    id: "cours",
+    label: "Cours détaillé",
+    icon: <BookOpen className="w-4 h-4" />,
+  },
+  {
+    id: "synthese",
+    label: "Fiche Synthèse",
+    icon: <FileText className="w-4 h-4" />,
+  },
+  {
+    id: "flashcards",
+    label: "Flashcards",
+    icon: <Layers className="w-4 h-4" />,
+  },
+  {
+    id: "qcm",
+    label: "QCM & Annales",
+    icon: <CheckSquare className="w-4 h-4" />,
+  },
+];
 
 export default function ChapterWorkspace({
   subjectId,
@@ -34,9 +57,6 @@ export default function ChapterWorkspace({
   chapterId,
   chapterNumber,
   chapterTitle,
-  semester = 1,
-  flashcardsCount,
-  qcmCount,
   courseNode,
   summaryNode,
   flashcardsNode,
@@ -55,7 +75,6 @@ export default function ChapterWorkspace({
     detectTabFromPath(pathname)
   );
 
-  // Synchronise l'onglet si l'utilisateur navigue depuis la Sidebar ou les boutons Précédent/Suivant du navigateur
   useEffect(() => {
     setActiveTab(detectTabFromPath(pathname));
   }, [pathname]);
@@ -68,7 +87,6 @@ export default function ChapterWorkspace({
     return () => window.removeEventListener("popstate", onPopState);
   }, []);
 
-  // Bascule instantanée (0 ms) sans déclencher de rechargement serveur Next.js
   const handleSwitchTab = (tab: ChapterTabId) => {
     setActiveTab(tab);
     const newUrl = `/${subjectId}/${chapterId}/${tab}`;
@@ -77,104 +95,54 @@ export default function ChapterWorkspace({
     }
   };
 
-  const tabs: Array<{
-    id: ChapterTabId;
-    label: string;
-    icon: React.ReactNode;
-    badge?: number;
-  }> = [
-    {
-      id: "cours",
-      label: "Cours complet",
-      icon: <BookOpen className="w-4 h-4" />,
-    },
-    {
-      id: "synthese",
-      label: "Fiche Synthèse",
-      icon: <FileText className="w-4 h-4" />,
-    },
-    {
-      id: "flashcards",
-      label: "Flashcards SRS",
-      icon: <Layers className="w-4 h-4" />,
-      badge: flashcardsCount,
-    },
-    {
-      id: "qcm",
-      label: "QCM Concours",
-      icon: <CheckSquare className="w-4 h-4" />,
-      badge: qcmCount,
-    },
-  ];
-
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-6">
-      {/* EN-TÊTE DU CHAPITRE + BARRE D'ONGLETS INSTANTANÉE */}
-      <div className="no-print bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-xs space-y-5">
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div className="space-y-1.5">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-blue-50 text-blue-700 dark:bg-sky-950/80 dark:text-sky-300 border border-blue-200/60 dark:border-sky-800/60">
-                <GraduationCap className="w-3.5 h-3.5" />
-                {subjectTitle}
-              </span>
-              <span className="px-2.5 py-0.5 rounded-full text-xs font-mono font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300">
-                Chapitre {chapterNumber} • Semestre {semester}
-              </span>
-            </div>
-            <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              {chapterTitle}
-            </h1>
+    <div className="space-y-6">
+      {/* En-tête d'origine du chapitre */}
+      <header className="no-print bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 px-6 py-5 -mx-4 sm:-mx-6 lg:-mx-8 mb-6">
+        <div className="max-w-5xl mx-auto space-y-4">
+          {/* Fil d'Ariane */}
+          <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
+            <span className="uppercase tracking-wider text-red-600 dark:text-red-400 font-bold">
+              {subjectTitle}
+            </span>
+            <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+            <span>Chapitre {chapterNumber}</span>
           </div>
 
-          {(activeTab === "cours" || activeTab === "synthese") && (
-            <button
-              type="button"
-              onClick={() => window.print()}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors cursor-pointer shrink-0"
-            >
-              <Printer className="w-3.5 h-3.5" />
-              <span>Imprimer / PDF</span>
-            </button>
-          )}
-        </div>
+          {/* Titre du chapitre */}
+          <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            <span className="font-mono text-red-600 dark:text-red-400 mr-2.5">
+              {chapterNumber}.
+            </span>
+            {chapterTitle}
+          </h1>
 
-        {/* Barre des 4 onglets (commutation en mémoire 0 ms) */}
-        <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
-          {tabs.map((tab) => {
-            const isActive = activeTab === tab.id;
-            return (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => handleSwitchTab(tab.id)}
-                className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                  isActive
-                    ? "bg-blue-600 text-white shadow-xs"
-                    : "bg-slate-100/80 dark:bg-slate-800/70 text-slate-700 dark:text-slate-300 hover:bg-slate-200/70 dark:hover:bg-slate-800"
-                }`}
-              >
-                {tab.icon}
-                <span>{tab.label}</span>
-                {typeof tab.badge === "number" && tab.badge > 0 && (
-                  <span
-                    className={`px-1.5 py-0.5 rounded-md font-mono text-[10px] ${
-                      isActive
-                        ? "bg-blue-700 text-white"
-                        : "bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-300"
-                    }`}
-                  >
-                    {tab.badge}
-                  </span>
-                )}
-              </button>
-            );
-          })}
+          {/* Barre d'onglets d'origine (commutation 0 ms) */}
+          <nav className="flex items-center gap-1 pt-2 overflow-x-auto border-b border-slate-200 dark:border-slate-800 -mb-5">
+            {TABS.map((tab) => {
+              const isActive = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => handleSwitchTab(tab.id)}
+                  className={`flex items-center gap-2 px-4 py-3 text-xs sm:text-sm font-bold border-b-2 transition-colors whitespace-nowrap cursor-pointer ${
+                    isActive
+                      ? "border-red-600 text-red-600 dark:border-red-400 dark:text-red-400 bg-red-50/40 dark:bg-red-950/20"
+                      : "border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:border-slate-300"
+                  }`}
+                >
+                  {tab.icon}
+                  <span>{tab.label}</span>
+                </button>
+              );
+            })}
+          </nav>
         </div>
-      </div>
+      </header>
 
-      {/* CONTENU DES 4 ONGLETS PRÉ-CHARGÉS EN MÉMOIRE (ZÉRO LATENCE) */}
-      <div>
+      {/* Contenu des 4 vues gardées en mémoire avec le graphisme d'origine */}
+      <div className="max-w-5xl mx-auto">
         <div className={activeTab === "cours" ? "block" : "hidden"}>
           {courseNode}
         </div>
