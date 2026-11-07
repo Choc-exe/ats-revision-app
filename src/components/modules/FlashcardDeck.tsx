@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { FlashcardItem, SubjectId } from "@/types/pedagogy";
@@ -20,8 +20,8 @@ import {
   Shuffle,
   Filter,
 } from "lucide-react";
+import MathText from "@/components/mdx/MathText";
 import "katex/dist/katex.min.css";
-import katex from "katex";
 
 export interface FlashcardDeckData {
   subject: SubjectId;
@@ -34,63 +34,6 @@ export interface FlashcardDeckProps {
   deck: FlashcardDeckData;
 }
 
-function SafeMathText({
-  content,
-  displayMode = false,
-}: {
-  content?: string;
-  displayMode?: boolean;
-}) {
-  if (!content || typeof content !== "string") return null;
-
-  if (displayMode && !content.includes("$")) {
-    try {
-      const html = katex.renderToString(content, {
-        displayMode: true,
-        throwOnError: false,
-        strict: false,
-      });
-      return <span dangerouslySetInnerHTML={{ __html: html }} />;
-    } catch {
-      return <span>{content}</span>;
-    }
-  }
-
-  const parts = content.split(/(\$\$[\s\S]+?\$\$|\$[^$]+?\$)/g);
-  return (
-    <>
-      {parts.map((part, i) => {
-        if (part.startsWith("$$") && part.endsWith("$$")) {
-          const math = part.slice(2, -2);
-          try {
-            const html = katex.renderToString(math, {
-              displayMode: true,
-              throwOnError: false,
-              strict: false,
-            });
-            return <span key={i} dangerouslySetInnerHTML={{ __html: html }} />;
-          } catch {
-            return <span key={i}>{math}</span>;
-          }
-        }
-        if (part.startsWith("$") && part.endsWith("$")) {
-          const math = part.slice(1, -1);
-          try {
-            const html = katex.renderToString(math, {
-              displayMode: false,
-              throwOnError: false,
-              strict: false,
-            });
-            return <span key={i} dangerouslySetInnerHTML={{ __html: html }} />;
-          } catch {
-            return <span key={i}>{math}</span>;
-          }
-        }
-        return <span key={i}>{part}</span>;
-      })}
-    </>
-  );
-}
 
 export default function FlashcardDeck({ deck }: FlashcardDeckProps) {
   const [srsMap, setSrsMap] = useState<Record<string, SrsCardRecord>>({});
@@ -368,7 +311,7 @@ export default function FlashcardDeck({ deck }: FlashcardDeckProps) {
           {!isFlipped ? (
             <div className="text-center space-y-4">
               <div className="text-base sm:text-lg font-bold text-slate-900 dark:text-white leading-relaxed max-w-2xl mx-auto">
-                <SafeMathText content={frontText} />
+                <MathText content={frontText} />
               </div>
               <p className="text-xs text-slate-400 dark:text-slate-500 pt-2">
                 Cliquez sur la carte ou appuyez sur <kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 font-mono text-[10px]">Espace</kbd> pour révéler la réponse
@@ -377,7 +320,7 @@ export default function FlashcardDeck({ deck }: FlashcardDeckProps) {
           ) : (
             <div className="space-y-4 max-w-2xl mx-auto">
               <div className="text-sm sm:text-base font-medium text-slate-800 dark:text-slate-100 leading-relaxed whitespace-pre-line">
-                <SafeMathText content={backObj.mainAnswer} />
+                <MathText content={backObj.mainAnswer} />
               </div>
 
               {backObj.criticalFormula && (
@@ -386,17 +329,17 @@ export default function FlashcardDeck({ deck }: FlashcardDeckProps) {
                     Formule / Règle critique à retenir :
                   </span>
                   <div className="text-sm text-slate-900 dark:text-white overflow-x-auto">
-                    <SafeMathText content={backObj.criticalFormula} displayMode />
+                    <MathText content={backObj.criticalFormula} displayMode />
                   </div>
                 </div>
               )}
 
-              {(backObj as any).commonTrap && (
+              {(backObj as any).mnemonicOrTip && (
                 <div className="rounded-xl border border-amber-200 dark:border-amber-900/60 bg-amber-50/50 dark:bg-amber-950/30 p-3.5 text-xs flex items-start gap-2.5 text-amber-950 dark:text-amber-200">
                   <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
                   <div>
                     <span className="font-bold">Piège classique en concours : </span>
-                    <SafeMathText content={(backObj as any).commonTrap} />
+                    <MathText content={(backObj as any).mnemonicOrTip} />
                   </div>
                 </div>
               )}

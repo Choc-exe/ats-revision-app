@@ -16,52 +16,8 @@ import {
   Award,
   ChevronRight,
 } from "lucide-react";
+import MathText from "@/components/mdx/MathText";
 import "katex/dist/katex.min.css";
-import katex from "katex";
-
-function SafeMath({ text }: { text: string }) {
-  if (!text) return null;
-  const parts = text.split(/(\$\$[\s\S]+?\$\$|\$[^$]+?\$)/g);
-  return (
-    <>
-      {parts.map((part, idx) => {
-        if (part.startsWith("$$") && part.endsWith("$$")) {
-          const math = part.slice(2, -2);
-          try {
-            const html = katex.renderToString(math, {
-              displayMode: true,
-              throwOnError: false,
-              strict: false,
-            });
-            return (
-              <div
-                key={idx}
-                className="my-2 overflow-x-auto"
-                dangerouslySetInnerHTML={{ __html: html }}
-              />
-            );
-          } catch {
-            return <div key={idx}>{math}</div>;
-          }
-        }
-        if (part.startsWith("$") && part.endsWith("$")) {
-          const math = part.slice(1, -1);
-          try {
-            const html = katex.renderToString(math, {
-              displayMode: false,
-              throwOnError: false,
-              strict: false,
-            });
-            return <span key={idx} dangerouslySetInnerHTML={{ __html: html }} />;
-          } catch {
-            return <span key={idx}>{math}</span>;
-          }
-        }
-        return <span key={idx}>{part}</span>;
-      })}
-    </>
-  );
-}
 
 interface KholleSubQuestion {
   number: string;
@@ -650,7 +606,7 @@ export default function KhollePage() {
         </div>
 
         <div className="text-sm font-medium text-slate-900 dark:text-slate-100 leading-relaxed bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200 dark:border-slate-800">
-          <SafeMath text={activeBoard.courseQuestion.prompt} />
+          <MathText text={activeBoard.courseQuestion.prompt} />
         </div>
 
         <button
@@ -676,7 +632,7 @@ export default function KhollePage() {
             <div className="font-bold text-red-800 dark:text-red-300">
               Éléments de cours exigés au tableau :
             </div>
-            <SafeMath text={activeBoard.courseQuestion.solution} />
+            <MathText text={activeBoard.courseQuestion.solution} />
           </div>
         )}
       </div>
@@ -688,7 +644,7 @@ export default function KhollePage() {
             Partie II • Problème d'Approfondissement (14 pts)
           </span>
           <div className="text-sm font-semibold text-slate-800 dark:text-slate-200 leading-relaxed pt-2">
-            <SafeMath text={activeBoard.problemContext} />
+            <MathText text={activeBoard.problemContext} />
           </div>
         </div>
 
@@ -732,7 +688,7 @@ export default function KhollePage() {
                 </div>
 
                 <div className="text-sm font-medium text-slate-900 dark:text-white leading-relaxed">
-                  <SafeMath text={sq.prompt} />
+                  <MathText text={sq.prompt} />
                 </div>
 
                 <div className="flex flex-wrap items-center gap-2 pt-1">
@@ -770,7 +726,7 @@ export default function KhollePage() {
                 {hintOpen && (
                   <div className="p-3 rounded-lg bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900 text-xs text-amber-950 dark:text-amber-200">
                     <strong>Indice méthodologique : </strong>
-                    <SafeMath text={sq.hint} />
+                    <MathText text={sq.hint} />
                   </div>
                 )}
 
@@ -780,7 +736,7 @@ export default function KhollePage() {
                       <Sparkles className="w-3.5 h-3.5" />
                       Rédaction type attendue au concours :
                     </div>
-                    <SafeMath text={sq.solution} />
+                    <MathText text={sq.solution} />
                   </div>
                 )}
               </div>

@@ -1,4 +1,4 @@
-[
+﻿[
   {
     "id": "pc-09-fc-01",
     "category": "Incertitudes-types",
@@ -20,7 +20,7 @@
   {
     "id": "pc-09-fc-04",
     "category": "Validation expérimentale",
-    "question": "Comment calcule-t-on l'écart normalisé $z$ entre une mesure $g_{\\text{exp}} \\pm u(g_{\\text{exp}})$ et une valeur tabulée exacte $g_{\\text{réf}}$, et quel est le seuil de validation ?",
-    "answer": "$$z = \\frac{|g_{\\text{exp}} - g_{\\text{réf}}|}{u(g_{\\text{exp}})}$$\nLa mesure est déclarée compatible avec la valeur de référence si $z \\le 2$."
+    "question": "Comment calcule-t-on l'écart normalisé $z$ et quel est le seuil de validation ? Distinguer le cas d'une valeur de référence exacte du cas de deux mesures expérimentales.",
+    "answer": "**Cas 1 — Valeur de référence exacte $g_{\\text{réf}}$ :**\n$$z = \\frac{|g_{\\text{exp}} - g_{\\text{réf}}|}{u(g_{\\text{exp}})}$$\n**Cas 2 — Comparaison de deux mesures expérimentales $A$ et $B$ :**\n$$z = \\frac{|A - B|}{\\sqrt{u(A)^2 + u(B)^2}}$$\nDans les deux cas, la mesure est compatible si $z \\le 2$ (au seuil de 95 %)."
   }
 ]

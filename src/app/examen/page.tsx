@@ -29,8 +29,8 @@ import {
   Target,
   MinusCircle,
 } from "lucide-react";
+import MathText from "@/components/mdx/MathText";
 import "katex/dist/katex.min.css";
-import katex from "katex";
 
 interface ExamOption {
   id: string;
@@ -60,67 +60,6 @@ interface ExamItem {
       commonTrap?: string;
     };
   };
-}
-
-/**
- * Rendu sÃ©curisÃ© du texte contenant des formules LaTeX inline ($...$) ou une formule pure
- */
-function SafeMathText({
-  content,
-  displayMode = false,
-}: {
-  content?: string;
-  displayMode?: boolean;
-}) {
-  if (!content || typeof content !== "string") return null;
-
-  if (displayMode && !content.includes("$")) {
-    try {
-      const html = katex.renderToString(content, {
-        displayMode: true,
-        throwOnError: false,
-        strict: false,
-      });
-      return <span dangerouslySetInnerHTML={{ __html: html }} />;
-    } catch {
-      return <span>{content}</span>;
-    }
-  }
-
-  const parts = content.split(/(\$\$[\s\S]+?\$\$|\$[^$]+?\$)/g);
-  return (
-    <>
-      {parts.map((part, i) => {
-        if (part.startsWith("$$") && part.endsWith("$$")) {
-          const math = part.slice(2, -2);
-          try {
-            const html = katex.renderToString(math, {
-              displayMode: true,
-              throwOnError: false,
-              strict: false,
-            });
-            return <span key={i} dangerouslySetInnerHTML={{ __html: html }} />;
-          } catch {
-            return <span key={i}>{math}</span>;
-          }
-        }
-        if (part.startsWith("$") && part.endsWith("$")) {
-          const math = part.slice(1, -1);
-          try {
-            const html = katex.renderToString(math, {
-              displayMode: false,
-              throwOnError: false,
-              strict: false,
-            });
-            return <span key={i} dangerouslySetInnerHTML={{ __html: html }} />;
-          } catch {
-            return <span key={i}>{math}</span>;
-          }
-        }
-        return <span key={i}>{part}</span>;
-      })}
-    </>
-  );
 }
 
 /**
@@ -1052,7 +991,7 @@ export default function ExamenPage() {
           {/* Carte de la question active */}
           <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 space-y-6">
             <div className="text-base font-bold text-slate-900 dark:text-white leading-relaxed">
-              <SafeMathText
+              <MathText
                 content={
                   currentItem.question.questionText ??
                   currentItem.question.question ??
@@ -1105,7 +1044,7 @@ export default function ExamenPage() {
                       {opt.label ?? opt.id.toUpperCase()}
                     </span>
                     <div className="pt-0.5 leading-relaxed flex-1">
-                      <SafeMathText content={displayContent} />
+                      <MathText content={displayContent} />
                     </div>
                   </button>
                 );
@@ -1123,7 +1062,7 @@ export default function ExamenPage() {
                   <ul className="list-disc pl-5 space-y-1 text-slate-700 dark:text-slate-300">
                     {currentItem.question.explanation.steps.map((st, sIdx) => (
                       <li key={sIdx}>
-                        <SafeMathText content={st} />
+                        <MathText content={st} />
                       </li>
                     ))}
                   </ul>
@@ -1481,7 +1420,7 @@ export default function ExamenPage() {
                   </div>
 
                   <div className="text-sm font-bold text-slate-900 dark:text-white leading-relaxed">
-                    <SafeMathText
+                    <MathText
                       content={q.questionText ?? q.question ?? ""}
                     />
                   </div>
@@ -1491,7 +1430,7 @@ export default function ExamenPage() {
                     {!isOk && chosenOpt && (
                       <div className="text-red-700 dark:text-red-400">
                         <span className="font-bold">Votre rÃ©ponse : </span>
-                        <SafeMathText
+                        <MathText
                           content={chosenOpt.text || chosenOpt.latex || ""}
                         />
                       </div>
@@ -1500,7 +1439,7 @@ export default function ExamenPage() {
                       <span className="font-bold text-emerald-700 dark:text-emerald-400">
                         RÃ©ponse exacte :{" "}
                       </span>
-                      <SafeMathText
+                      <MathText
                         content={correctOpt?.text || correctOpt?.latex || ""}
                       />
                     </div>
@@ -1516,7 +1455,7 @@ export default function ExamenPage() {
                       <ul className="list-disc pl-5 space-y-1">
                         {steps.map((step, sIdx) => (
                           <li key={sIdx}>
-                            <SafeMathText content={step} />
+                            <MathText content={step} />
                           </li>
                         ))}
                       </ul>
@@ -1530,7 +1469,7 @@ export default function ExamenPage() {
                         Formule / RÃ¨gle critique Ã  retenir :
                       </span>
                       <div className="text-slate-900 dark:text-slate-100 overflow-x-auto">
-                        <SafeMathText content={keyFormula} displayMode />
+                        <MathText content={keyFormula} displayMode />
                       </div>
                     </div>
                   )}
@@ -1541,7 +1480,7 @@ export default function ExamenPage() {
                       <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
                       <div>
                         <span className="font-bold">PiÃ¨ge classique : </span>
-                        <SafeMathText content={commonTrap} />
+                        <MathText content={commonTrap} />
                       </div>
                     </div>
                   )}
