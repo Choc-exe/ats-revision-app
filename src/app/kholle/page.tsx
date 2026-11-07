@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
@@ -193,7 +193,7 @@ const KHOLLE_BOARDS: KholleBoard[] = [
     id: "kholle-phys-induction-rail-laplace",
     subjectId: "physique-chimie",
     subjectTitle: "Physique-Chimie",
-    chapterHref: "/physique-chimie/06-induction-electromagnetique/cours",
+    chapterHref: "/physique-chimie/06-electromagnetisme/cours",
     title: "Planche 03 — Rail de Laplace générateur, Loi de Faraday et Bilan énergétique",
     difficulty: "Oral Centrale / ENSAM",
     courseQuestion: {
@@ -239,7 +239,7 @@ const KHOLLE_BOARDS: KholleBoard[] = [
     id: "kholle-phys-thermo-cycle-diesel",
     subjectId: "physique-chimie",
     subjectTitle: "Physique-Chimie",
-    chapterHref: "/physique-chimie/02-thermodynamique/cours",
+    chapterHref: "/physique-chimie/02-energie-conversion-transferts/cours",
     title: "Planche 04 — Machine thermique, Premier et Second Principes, Cycle de Carnot & Rendement",
     difficulty: "Écrit Concours ATS",
     courseQuestion: {
@@ -331,7 +331,7 @@ const KHOLLE_BOARDS: KholleBoard[] = [
     id: "kholle-info-python-euler-trapezes",
     subjectId: "informatique",
     subjectTitle: "Informatique (Python)",
-    chapterHref: "/informatique/02-methodes-numeriques-analyse/cours",
+    chapterHref: "/informatique/02-algorithmique-numerique/cours",
     title: "Planche 06 — Intégration par la Méthode des Trapèzes et Schéma d'Euler Explicite",
     difficulty: "Oral Centrale / ENSAM",
     courseQuestion: {

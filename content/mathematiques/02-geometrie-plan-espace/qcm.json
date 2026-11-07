@@ -1,4 +1,4 @@
-{
+﻿{
   "chapterId": "02-geometrie-plan-espace",
   "subject": "mathematiques",
   "title": "QCM d'entraînement : Géométrie du plan et de l'espace",
@@ -29,20 +29,21 @@
       "difficulty": "Calculatoire",
       "questionText": "Dans l'espace muni d'un repère orthonormal direct, on considère les trois points $A(1, 0, 2)$, $B(2, 1, 1)$ et $C(0, 2, 1)$. Quel est le produit vectoriel $\\vec{AB}\\wedge\\vec{AC}$ et quelle est l'équation cartésienne du plan $(ABC)$ ?",
       "options": [
-        { "id": "A", "text": "$\\vec{AB}\\wedge\\vec{AC} = (1, 1, 2)^\\top$ et $x + y + 2z - 5 = 0$" },
+        { "id": "A", "text": "$\\vec{AB}\\wedge\\vec{AC} = (1, 2, 3)^\\top$ et $x + 2y + 3z - 7 = 0$" },
         { "id": "B", "text": "$\\vec{AB}\\wedge\\vec{AC} = (1, -1, 3)^\\top$ et $x - y + 3z - 7 = 0$" },
         { "id": "C", "text": "$\\vec{AB}\\wedge\\vec{AC} = (1, 1, 3)^\\top$ et $x + y + 3z - 7 = 0$" },
         { "id": "D", "text": "$\\vec{AB}\\wedge\\vec{AC} = (-1, 1, 3)^\\top$ et $-x + y + 3z - 5 = 0$" }
       ],
-      "correctOptionId": "C",
+      "correctOptionId": "A",
       "explanation": {
         "steps": [
-          "1. On calcule les coordonnées des deux vecteurs directeurs du plan : $\\vec{AB} = (2-1, 1-0, 1-2)^\\top = (1, 1, -1)^\\top$ et $\\vec{AC} = (0-1, 2-0, 1-2)^\\top = (-1, 2, -1)^\\top$.",
-          "2. Leur produit vectoriel donne un vecteur normal $\\vec{n} = \\vec{AB}\\wedge\\vec{AC} = \\begin{pmatrix} 1 \\times (-1) - (-1) \\times 2 \\\\ (-1) \\times (-1) - 1 \\times (-1) \\\\ 1 \\times 2 - 1 \\times (-1) \\end{pmatrix} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 3 \\end{pmatrix}$... Vérifions la 2e coordonnée : $z x' - x z' = (-1)(-1) - (1)(-1) = 1 + 1 = 2$ ? Non, attention : pour $B(2,1,1)$ et $C(0,2,1)$, si l'on teste les équations proposées sur $A(1,0,2)$, $B(2,1,1)$ et $C(0,2,1)$ : pour C ($x+y+3z-7=0$), en $A$ : $1+0+6-7=0$, en $B$ : $2+1+3-7=-1 \\neq 0$.",
-          "3. Reprenons exactement avec $\\vec{n} = \\vec{AB}\\wedge\\vec{AC}$ : avec $A(1, 0, 2)$, $B(3, 1, 1)$ et $C(0, 2, 1)$, ou vérifions que tout point appartient au plan : un point $M(x, y, z) \\in (ABC) \\iff \\vec{AM}\\cdot\\vec{n} = 0$."
+          "1. On calcule les vecteurs directeurs du plan : $\\vec{AB} = (1, 1, -1)^\\top$ et $\\vec{AC} = (-1, 2, -1)^\\top$.",
+          "2. Le vecteur normal est $\\vec{n} = \\vec{AB}\\wedge\\vec{AC} = \\begin{pmatrix} 1\\cdot(-1)-(-1)\\cdot 2 \\\\ (-1)\\cdot(-1)-1\\cdot(-1) \\\\ 1\\cdot 2-1\\cdot(-1) \\end{pmatrix} = \\begin{pmatrix} 1 \\\\ 2 \\\\ 3 \\end{pmatrix}$.",
+          "3. L'équation du plan passant par $A(1,0,2)$ de normale $(1,2,3)$ est : $1(x-1)+2(y-0)+3(z-2)=0 \\iff x+2y+3z-7=0$.",
+          "4. Vérification : en $A$ : $1+0+6-7=0$ ✓ ; en $B(2,1,1)$ : $2+2+3-7=0$ ✓ ; en $C(0,2,1)$ : $0+4+3-7=0$ ✓."
         ],
-        "keyFormula": "$$\\vec{n} = \\vec{AB}\\wedge\\vec{AC} \\quad \\text{et} \\quad M \\in (ABC) \\iff \\vec{AM}\\cdot\\vec{n} = 0$$",
-        "commonTrap": "Toujours remplacer les coordonnées de $A, B$ et $C$ dans l'équation cartésienne finale pour vérifier qu'elle s'annule bien aux trois points !"
+        "keyFormula": "$$\\vec{n} = \\vec{AB}\\wedge\\vec{AC} \\quad \\text{et} \\quad 1(x-x_A)+2(y-y_A)+3(z-z_A)=0$$",
+        "commonTrap": "L'option C donne $(1,1,3)$ car elle calcule incorrectement la 2e composante : $(-1)(-1)-1(-1) = 1+1 = 2$ et non 1. Vérifiez toujours en substituant $A$, $B$ et $C$ dans l'équation finale."
       }
     },
     {
@@ -61,7 +62,7 @@
           "1. Un vecteur normal au plan $\\mathcal{P}$ est $\\vec{n}(2, -2, 1)$, de norme $\\|\\vec{n}\\| = \\sqrt{2^2 + (-2)^2 + 1^2} = \\sqrt{9} = 3$.",
           "2. La distance de $M_0(2, -1, 3)$ au plan vaut $d(M_0, \\mathcal{P}) = \\frac{|2(2) - 2(-1) + 1(3) + 1|}{3} = \\frac{|4 + 2 + 3 + 1|}{3} = \\frac{10}{3}$.",
           "3. Le projeté orthogonal $H$ appartient à la droite perpendiculaire à $\\mathcal{P}$ passant par $M_0$, donc $\\vec{M_0 H} = t\\,\\vec{n} \\implies H(2 + 2t,\\, -1 - 2t,\\, 3 + t)$.",
-          "4. Comme $H \\in \\mathcal{P}$, on injecte ses coordonnées dans l'équation du plan : $2(2+2t) - 2(-1-2t) + (3+t) + 1 = 0 \\iff 10 + 9t = 0 \\implies t = -\\frac{10}{9}$, ce qui donne $H\\left(2 - \\frac{20}{9},\\, -1 + \\frac{20}{9},\\, 3 - \\frac{10}{9}\\right) = \\left(-\\frac{2}{9},\\, \\frac{11}{9},\\, \\frac{17}{9}\\right)$."
+          "4. Comme $H \\in \\mathcal{P}$, on injecte ses coordonnées dans l'équation du plan : $2(2+2t) - 2(-1-2t) + (3+t) + 1 = 0 \\iff 10 + 9t = 0 \\implies t = -\\frac{10}{9}$, ce qui donne $H\\left(-\\frac{2}{9},\\, \\frac{11}{9},\\, \\frac{17}{9}\\right)$."
         ],
         "keyFormula": "$$d(M_0, \\mathcal{P}) = \\frac{|a\\,x_0 + b\\,y_0 + c\\,z_0 + d|}{\\sqrt{a^2 + b^2 + c^2}} \\quad \\text{et} \\quad \\vec{M_0 H} = t\\,\\vec{n}$$",
         "commonTrap": "La réponse C ($10$) oublie de diviser par la norme du vecteur normal $\\|\\vec{n}\\| = 3$."

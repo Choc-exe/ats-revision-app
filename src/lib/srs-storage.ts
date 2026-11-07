@@ -1,6 +1,4 @@
-"use client";
-
-export type SrsRating = "again" | "good" | "easy";
+﻿export type SrsRating = "again" | "good" | "easy";
 
 export interface SrsCardRecord {
   cardId: string;
@@ -50,7 +48,7 @@ export function rateFlashcardSrs(params: {
 
   let nextIntervalDays = 1;
   if (params.rating === "again") {
-    nextIntervalDays = 0; // À revoir immédiatement / aujourd'hui
+    nextIntervalDays = 0; // Ã€ revoir immÃ©diatement / aujourd'hui
   } else if (params.rating === "good") {
     nextIntervalDays = prevInterval <= 0 ? 2 : Math.min(30, prevInterval * 2);
   } else if (params.rating === "easy") {
