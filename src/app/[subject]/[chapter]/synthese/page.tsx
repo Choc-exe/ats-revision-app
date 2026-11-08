@@ -32,7 +32,7 @@ export default async function SummaryPage({ params }: SummaryPageProps) {
 
   return (
     <div className="space-y-4">
-      <MdxViewer source={data.content} variant="synthetic" />
+      <MdxViewer source={data.content} />
     </div>
   );
 }
