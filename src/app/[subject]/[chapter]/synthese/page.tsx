@@ -32,14 +32,6 @@ export default async function SummaryPage({ params }: SummaryPageProps) {
 
   return (
     <div className="space-y-4">
-      {/* Bandeau d'en-tête propre au mode Synthèse */}
-      <div className="flex items-center justify-between bg-red-50 border border-red-200 rounded-xl px-5 py-3">
-        <div className="flex items-center gap-2.5 text-red-700 text-sm font-semibold">
-          <Zap className="w-4 h-4 text-red-600" />
-          <span>Mode Révision Rapide — Formules et capacités exigibles uniquement</span>
-        </div>
-      </div>
-
       <MdxViewer source={data.content} variant="synthetic" />
     </div>
   );
