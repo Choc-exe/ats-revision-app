@@ -17,16 +17,16 @@ type SignalType = "square" | "triangle" | "sawtooth" | "rectified";
 export default function SimulateurFourierPage() {
   const [activeTab, setActiveTab] = useState<"fourier" | "newton">("fourier");
 
-  // ParamÃ¨tres Fourier
+  // Paramètres Fourier
   const [signalType, setSignalType] = useState<SignalType>("square");
   const [harmonicsCount, setHarmonicsCount] = useState<number>(5);
 
-  // ParamÃ¨tres Newton-Raphson (RÃ©solution de f(x) = x^2 - 2 = 0 ou cos(x) - x = 0)
+  // Paramètres Newton-Raphson (Résolution de f(x) = x^2 - 2 = 0 ou cos(x) - x = 0)
   const [newtonFunc, setNewtonFunc] = useState<"sqrt2" | "cosx">("sqrt2");
   const [x0, setX0] = useState<number>(2.0);
   const [iterations, setIterations] = useState<number>(4);
 
-  // Calculs mathÃ©matiques exacts pour la SÃ©rie de Fourier sur [-pi, pi]
+  // Calculs mathématiques exacts pour la Série de Fourier sur [-pi, pi]
   const fourierData = useMemo(() => {
     const pointsCount = 240;
     const xs: number[] = [];
@@ -42,11 +42,11 @@ export default function SimulateurFourierPage() {
     let formulaLatex = "";
 
     if (signalType === "square") {
-      // CrÃ©neau impair d'amplitude E = 1 sur [-pi, pi]
+      // Créneau impair d'amplitude E = 1 sur [-pi, pi]
       a0 = 0;
       exactParsevalPower = 1; // Moyenne de 1^2
       formulaLatex =
-        "S_N(t) = \\frac{4}{\\pi}\\sum_{k=0}^{\\lfloor(N-1)/2\\rfloor} \\frac{\\sin((2k+1)t)}{2k+1}";
+        "$$S_N(t) = \\frac{4}{\\pi}\\sum_{k=0}^{\\lfloor(N-1)/2\\rfloor} \\frac{\\sin((2k+1)t)}{2k+1}$$";
       for (let n = 1; n <= harmonicsCount; n++) {
         an.push(0);
         bn.push(n % 2 === 1 ? 4 / (Math.PI * n) : 0);
@@ -56,7 +56,7 @@ export default function SimulateurFourierPage() {
       a0 = 0;
       exactParsevalPower = 1 / 3;
       formulaLatex =
-        "S_N(t) = \\frac{8}{\\pi^2}\\sum_{k=0}^{\\lfloor(N-1)/2\\rfloor} \\frac{\\cos((2k+1)t)}{(2k+1)^2}";
+        "$$S_N(t) = \\frac{8}{\\pi^2}\\sum_{k=0}^{\\lfloor(N-1)/2\\rfloor} \\frac{\\cos((2k+1)t)}{(2k+1)^2}$$";
       for (let n = 1; n <= harmonicsCount; n++) {
         an.push(n % 2 === 1 ? 8 / (Math.PI * Math.PI * n * n) : 0);
         bn.push(0);
@@ -66,7 +66,7 @@ export default function SimulateurFourierPage() {
       a0 = 0;
       exactParsevalPower = 1 / 3;
       formulaLatex =
-        "S_N(t) = \\frac{2}{\\pi}\\sum_{n=1}^{N} \\frac{(-1)^{n+1}}{n}\\sin(nt)";
+        "$$S_N(t) = \\frac{2}{\\pi}\\sum_{n=1}^{N} \\frac{(-1)^{n+1}}{n}\\sin(nt)$$";
       for (let n = 1; n <= harmonicsCount; n++) {
         an.push(0);
         bn.push((2 * (n % 2 === 1 ? 1 : -1)) / (Math.PI * n));
@@ -76,7 +76,7 @@ export default function SimulateurFourierPage() {
       a0 = 2 / Math.PI;
       exactParsevalPower = 0.5;
       formulaLatex =
-        "S_N(t) = \\frac{2}{\\pi} - \\frac{4}{\\pi}\\sum_{k=1}^{\\lfloor N/2 \\rfloor} \\frac{\\cos(2kt)}{4k^2 - 1}";
+        "$$S_N(t) = \\frac{2}{\\pi} - \\frac{4}{\\pi}\\sum_{k=1}^{\\lfloor N/2 \\rfloor} \\frac{\\cos(2kt)}{4k^2 - 1}$$";
       for (let n = 1; n <= harmonicsCount; n++) {
         if (n % 2 === 0) {
           an.push(-4 / (Math.PI * (n * n - 1)));
@@ -87,14 +87,15 @@ export default function SimulateurFourierPage() {
       }
     }
 
-    // Ã‰valuation de la cible exacte et de la somme partielle S_N(t)
+    // Évaluation de la cible exacte et de la somme partielle S_N(t)
     const exactY: number[] = [];
     const approxY: number[] = [];
 
     xs.forEach((t) => {
       let yTrue = 0;
       if (signalType === "square") yTrue = t >= 0 ? 1 : -1;
-      else if (signalType === "triangle") yTrue = 1 - (2 * Math.abs(t)) / Math.PI;
+      else if (signalType === "triangle")
+        yTrue = 1 - (2 * Math.abs(t)) / Math.PI;
       else if (signalType === "sawtooth") yTrue = t / Math.PI;
       else yTrue = Math.abs(Math.sin(t));
       exactY.push(yTrue);
@@ -106,7 +107,7 @@ export default function SimulateurFourierPage() {
       approxY.push(s);
     });
 
-    // Puissance cumulÃ©e par Parseval : P_N = a0^2 + 1/2 * sum(an^2 + bn^2)
+    // Puissance cumulée par Parseval : P_N = a0^2 + 1/2 * sum(an^2 + bn^2)
     let partialParseval = a0 * a0;
     const amplitudes: Array<{ n: number; cn: number }> = [];
     for (let n = 1; n <= harmonicsCount; n++) {
@@ -168,7 +169,7 @@ export default function SimulateurFourierPage() {
     return { steps, exactRoot };
   }, [newtonFunc, x0, iterations]);
 
-  // Conversion en coordonnÃ©es SVG pour le graphe de Fourier (600 x 240)
+  // Conversion en coordonnées SVG pour le graphe de Fourier (640 x 250)
   const svgWidth = 640;
   const svgHeight = 250;
   const mapX = (t: number) =>
@@ -176,16 +177,26 @@ export default function SimulateurFourierPage() {
   const mapY = (y: number) => svgHeight / 2 - y * 85;
 
   const exactPath = fourierData.xs
-    .map((t, i) => `${i === 0 ? "M" : "L"} ${mapX(t).toFixed(1)} ${mapY(fourierData.exactY[i]).toFixed(1)}`)
+    .map(
+      (t, i) =>
+        `${i === 0 ? "M" : "L"} ${mapX(t).toFixed(1)} ${mapY(
+          fourierData.exactY[i]
+        ).toFixed(1)}`
+    )
     .join(" ");
 
   const approxPath = fourierData.xs
-    .map((t, i) => `${i === 0 ? "M" : "L"} ${mapX(t).toFixed(1)} ${mapY(fourierData.approxY[i]).toFixed(1)}`)
+    .map(
+      (t, i) =>
+        `${i === 0 ? "M" : "L"} ${mapX(t).toFixed(1)} ${mapY(
+          fourierData.approxY[i]
+        ).toFixed(1)}`
+    )
     .join(" ");
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-6">
-      {/* EN-TÃŠTE DU LABO */}
+      {/* EN-TÊTE DU LABO */}
       <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-start gap-4">
           <div className="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center shrink-0">
@@ -193,18 +204,18 @@ export default function SimulateurFourierPage() {
           </div>
           <div>
             <span className="text-xs font-bold uppercase tracking-wider text-blue-600 dark:text-sky-400">
-              Laboratoire NumÃ©rique Interactif
+              Laboratoire Numérique Interactif
             </span>
             <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white mt-0.5">
-              SÃ©ries de Fourier, Parseval & Algorithme de Newton
+              Séries de Fourier, Parseval & Algorithme de Newton
             </h1>
             <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-              Visualisez la synthÃ¨se harmonique d'un signal pÃ©riodique (Maths, Physique, SII) et la convergence quadratique de Newton-Raphson (Python).
+              Visualisez la synthèse harmonique d'un signal périodique (Maths, Physique, SII) et la convergence quadratique de Newton-Raphson (Python).
             </p>
           </div>
         </div>
 
-        {/* SÃ©lecteur d'atelier */}
+        {/* Sélecteur d'atelier */}
         <div className="flex items-center gap-2 bg-slate-100 dark:bg-slate-800 p-1.5 rounded-xl shrink-0">
           <button
             type="button"
@@ -215,7 +226,7 @@ export default function SimulateurFourierPage() {
                 : "text-slate-600 dark:text-slate-300"
             }`}
           >
-            1. SynthÃ¨se de Fourier
+            1. Synthèse de Fourier
           </button>
           <button
             type="button"
@@ -232,16 +243,18 @@ export default function SimulateurFourierPage() {
       </div>
 
       {/* =====================================================================
-          ONGLET 1 : SYNTHÃˆSE DE FOURIER, SPECTRE & Ã‰GALITÃ‰ DE PARSEVAL
+          ONGLET 1 : SYNTHÈSE DE FOURIER, SPECTRE & ÉGALITÉ DE PARSEVAL
          ===================================================================== */}
       {activeTab === "fourier" && (
         <div className="space-y-6">
-          {/* Panneau de contrÃ´le */}
+          {/* Panneau de contrôle */}
           <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 grid grid-cols-1 md:grid-cols-12 gap-6 items-center shadow-xs">
             <div className="md:col-span-5 space-y-2">
               <label className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
                 <Sliders className="w-3.5 h-3.5 text-blue-600" />
-                Signal $2\pi$-pÃ©riodique Ã©tudiÃ©
+                <span>
+                  Signal <MathText text="$2\pi$" />-périodique étudié
+                </span>
               </label>
               <select
                 value={signalType}
@@ -249,16 +262,16 @@ export default function SimulateurFourierPage() {
                 className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3.5 py-2.5 text-xs font-bold text-slate-900 dark:text-white"
               >
                 <option value="square">
-                  CrÃ©neau impair (Discontinu â†’ PhÃ©nomÃ¨ne de Gibbs en 1/n)
+                  Créneau impair (Discontinu → Phénomène de Gibbs en 1/n)
                 </option>
                 <option value="triangle">
-                  Triangle pair (Continu Câ° â†’ Convergence rapide en 1/nÂ²)
+                  Triangle pair (Continu C⁰ → Convergence rapide en 1/n²)
                 </option>
                 <option value="sawtooth">
-                  Dent de scie impaire (Discontinu â†’ Harmoniques pairs & impairs)
+                  Dent de scie impaire (Discontinu → Harmoniques pairs & impairs)
                 </option>
                 <option value="rectified">
-                  Sinus redressÃ© double alternance |sin(t)| (Ã‰lectronique de puissance)
+                  Sinus redressé double alternance |sin(t)| (Électronique de puissance)
                 </option>
               </select>
             </div>
@@ -266,7 +279,7 @@ export default function SimulateurFourierPage() {
             <div className="md:col-span-4 space-y-2">
               <div className="flex items-center justify-between text-xs font-bold">
                 <span className="text-slate-700 dark:text-slate-300">
-                  Rang maximal d'harmonique $N$ :
+                  Rang maximal d'harmonique <MathText text="$N$" /> :
                 </span>
                 <span className="px-2 py-0.5 rounded bg-blue-100 text-blue-800 dark:bg-sky-900/70 dark:text-sky-300 font-mono">
                   N = {harmonicsCount}
@@ -290,7 +303,7 @@ export default function SimulateurFourierPage() {
             {/* Jauge de Parseval */}
             <div className="md:col-span-3 p-3.5 rounded-xl bg-emerald-50/70 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900 text-center">
               <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-700 dark:text-emerald-400 block">
-                Ã‰nergie captÃ©e (Parseval)
+                Énergie captée (Parseval)
               </span>
               <span className="font-mono text-xl font-extrabold text-emerald-900 dark:text-white">
                 {fourierData.energyRatioPct.toFixed(2)} %
@@ -307,16 +320,23 @@ export default function SimulateurFourierPage() {
             <div className="flex flex-wrap items-center justify-between gap-2">
               <div className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-2">
                 <Activity className="w-4 h-4 text-blue-600" />
-                Superposition temporelle sur $[-\pi, \pi]$
+                <span>
+                  Superposition temporelle sur <MathText text="$[-\pi, \pi]$" />
+                </span>
               </div>
               <div className="flex items-center gap-4 text-xs font-semibold">
                 <span className="flex items-center gap-1.5 text-slate-500">
                   <span className="w-4 h-0.5 bg-slate-400 inline-block" />
-                  Signal exact $f(t)$
+                  <span>
+                    Signal exact <MathText text="$f(t)$" />
+                  </span>
                 </span>
                 <span className="flex items-center gap-1.5 text-blue-600 dark:text-sky-400">
                   <span className="w-4 h-0.5 bg-blue-600 dark:bg-sky-400 inline-block" />
-                  Somme de Fourier $S_{harmonicsCount}(t)$
+                  <span>
+                    Somme de Fourier{" "}
+                    <MathText text={`$S_{${harmonicsCount}}(t)$`} />
+                  </span>
                 </span>
               </div>
             </div>
@@ -345,7 +365,7 @@ export default function SimulateurFourierPage() {
                   className="text-slate-300 dark:text-slate-800"
                   strokeWidth="1"
                 />
-                {/* Signal exact en pointillÃ© */}
+                {/* Signal exact en pointillé */}
                 <path
                   d={exactPath}
                   fill="none"
@@ -363,20 +383,26 @@ export default function SimulateurFourierPage() {
               </svg>
             </div>
 
-            {/* Formule critique de la sÃ©rie sÃ©lectionnÃ©e */}
+            {/* Formule critique de la série sélectionnée */}
             <div className="rounded-xl border border-red-200 dark:border-red-900/60 border-l-4 border-l-red-600 bg-red-50/40 dark:bg-red-950/25 p-4 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
                 <span className="font-bold text-red-800 dark:text-red-300 block mb-1">
-                  DÃ©veloppement en SÃ©rie de Fourier tronquÃ© au rang $N = {harmonicsCount}$ :
+                  Développement en Série de Fourier tronqué au rang{" "}
+                  <MathText text={`$N = ${harmonicsCount}$`} /> :
                 </span>
-                <MathText text={fourierData.formulaLatex} displayMode />
+                <MathText text={fourierData.formulaLatex} />
               </div>
 
               {(signalType === "square" || signalType === "sawtooth") && (
                 <div className="p-3 rounded-lg bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900 text-amber-900 dark:text-amber-200 max-w-xs shrink-0 flex items-start gap-2">
                   <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
                   <span className="text-[11px] leading-snug">
-<strong>PhÃ©nomÃ¨ne de Gibbs :</strong> Aux points de saut, la sÃ©rie converge vers la demi-somme <MathText latex="\\frac{f(t^+) + f(t^-)}{2}" /> (Dirichlet), mais prÃ©sente un dÃ©passement irrÃ©ductible d'environ $9\,\%$ du saut.                  </span>
+                    <strong>Phénomène de Gibbs :</strong> Aux points de saut, la
+                    série converge vers la demi-somme{" "}
+                    <MathText text={"$\\frac{f(t^+) + f(t^-)}{2}$"} />{" "}
+                    (Dirichlet), mais présente un dépassement irréductible
+                    d'environ 9 % du saut.
+                  </span>
                 </div>
               )}
             </div>
@@ -385,14 +411,14 @@ export default function SimulateurFourierPage() {
       )}
 
       {/* =====================================================================
-          ONGLET 2 : MÃ‰THODE DE NEWTON-RAPHSON & CODE PYTHON CONCOURS ATS
+          ONGLET 2 : MÉTHODE DE NEWTON-RAPHSON & CODE PYTHON CONCOURS ATS
          ===================================================================== */}
       {activeTab === "newton" && (
         <div className="space-y-6">
           <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 grid grid-cols-1 md:grid-cols-3 gap-4 shadow-xs">
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-700 dark:text-slate-300 block">
-                Ã‰quation non linÃ©aire $f(x) = 0$
+                Équation non linéaire <MathText text="$f(x) = 0$" />
               </label>
               <select
                 value={newtonFunc}
@@ -402,17 +428,17 @@ export default function SimulateurFourierPage() {
                 className="w-full rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 text-xs font-bold text-slate-900 dark:text-white"
               >
                 <option value="sqrt2">
-                  f(x) = xÂ² - 2 = 0 (Calcul de âˆš2 â‰ˆ 1,41421356)
+                  f(x) = x² - 2 = 0 (Calcul de √2 ≈ 1,41421356)
                 </option>
                 <option value="cosx">
-                  f(x) = cos(x) - x = 0 (Point fixe de Dottie â‰ˆ 0,73908513)
+                  f(x) = cos(x) - x = 0 (Point fixe de Dottie ≈ 0,73908513)
                 </option>
               </select>
             </div>
 
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-700 dark:text-slate-300 block">
-                Point de dÃ©part $x_0 = {x0.toFixed(1)}$
+                Point de départ <MathText text={`$x_0 = ${x0.toFixed(1)}$`} />
               </label>
               <input
                 type="range"
@@ -427,7 +453,7 @@ export default function SimulateurFourierPage() {
 
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-700 dark:text-slate-300 block">
-                Nombre d'itÃ©rations : {iterations}
+                Nombre d'itérations : {iterations}
               </label>
               <input
                 type="range"
@@ -441,22 +467,22 @@ export default function SimulateurFourierPage() {
             </div>
           </div>
 
-          {/* Tableau des itÃ©rations et vitesse de convergence quadratique */}
+          {/* Tableau des itérations et vitesse de convergence quadratique */}
           <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-4 shadow-xs">
             <h3 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white flex items-center gap-2">
               <Sparkles className="w-4 h-4 text-blue-600" />
-              Trace d'exÃ©cution pas-Ã -pas (Convergence quadratique : le nombre de dÃ©cimales exactes double Ã  chaque pas)
+              Trace d'exécution pas-à-pas (Convergence quadratique : le nombre de décimales exactes double à chaque pas)
             </h3>
 
             <div className="overflow-x-auto">
               <table className="w-full text-left border-collapse text-xs font-mono">
                 <thead>
                   <tr className="border-b border-slate-200 dark:border-slate-800 text-slate-500">
-                    <th className="py-2 px-3">ItÃ©ration k</th>
+                    <th className="py-2 px-3">Itération k</th>
                     <th className="py-2 px-3">Approximation x_k</th>
                     <th className="py-2 px-3">f(x_k)</th>
                     <th className="py-2 px-3">Tangente x_(k+1)</th>
-                    <th className="py-2 px-3">Erreur |x_k - Î±|</th>
+                    <th className="py-2 px-3">Erreur |x_k - α|</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -489,7 +515,7 @@ export default function SimulateurFourierPage() {
             <div className="rounded-xl bg-slate-950 text-slate-100 p-4 font-mono text-xs space-y-1.5 overflow-x-auto">
               <div className="text-sky-400 font-bold flex items-center gap-1.5 mb-2">
                 <Terminal className="w-3.5 h-3.5" />
-                ImplÃ©mentation Python exigible au Concours ATS :
+                Implémentation Python exigible au Concours ATS :
               </div>
               <pre>{`def newton(f, df, x0: float, eps: float = 1e-10, n_max: int = 100) -> float:
     x = x0
@@ -497,7 +523,7 @@ export default function SimulateurFourierPage() {
         fx = f(x)
         if abs(fx) < eps:
             return x
-        x = x - fx / df(x)  # RÃ©currence de la tangente
+        x = x - fx / df(x)  # Récurrence de la tangente
     return x`}</pre>
             </div>
           </div>
