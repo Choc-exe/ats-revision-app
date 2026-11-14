@@ -8,13 +8,20 @@ interface MathTextProps {
   text?: string;
   content?: string;
   className?: string;
-  /** Force le mode display (block centré) pour toute la chaîne */
+  /**
+   * Force le mode display (block centré) pour les formules pures.
+   * N'a d'effet que si la chaîne entière est enveloppée dans $...$ ou $$...$$.
+   * Pour du texte mixte (prose + formules inline), ce prop est ignoré.
+   */
   displayMode?: boolean;
 }
 
 /**
- * Composant universel de rendu KaTeX inline.
- * Accepte `text` ou `content` (interchangeables) et reconnaît $...$ / $$...$$.
+ * Composant universel de rendu KaTeX.
+ * - Texte pur sans $ → rendu HTML natif React (jamais passé à KaTeX).
+ * - Texte avec $...$ ou $$...$$ → parsing et rendu KaTeX des blocs math.
+ * - displayMode={true} sur une chaîne purement $...$ → rendu display centré.
+ *
  * Utilisé dans FlashcardDeck, QcmEngine, ExamenPage, CarnetErreurs, Kholle.
  */
 export default function MathText({
@@ -25,27 +32,34 @@ export default function MathText({
 }: MathTextProps) {
   const raw = text ?? content ?? "";
 
-  // Mode display forcé : on rend tout en un seul bloc display
-  if (displayMode) {
-    const inner = raw.startsWith("$$") && raw.endsWith("$$")
-      ? raw.slice(2, -2)
-      : raw.startsWith("$") && raw.endsWith("$")
-      ? raw.slice(1, -1)
-      : raw;
-    const html = katex.renderToString(inner, {
-      displayMode: true,
-      throwOnError: false,
-      strict: false,
-    });
-    return (
-      <span
-        className={`block my-2 overflow-x-auto ${className}`}
-        dangerouslySetInnerHTML={{ __html: html }}
-      />
-    );
+  if (!raw) return null;
+
+  // Vérifie si la chaîne ENTIÈRE est une formule pure ($$...$$ ou $...$)
+  const isFullDisplayBlock = raw.startsWith("$$") && raw.endsWith("$$") && raw.length > 4;
+  const isFullInlineBlock = raw.startsWith("$") && raw.endsWith("$") && raw.length > 2 && !raw.startsWith("$$");
+
+  // Cas 1 : bloc display pur ($$...$$) ou demande de displayMode sur $...$
+  if (isFullDisplayBlock || (displayMode && isFullInlineBlock)) {
+    const inner = isFullDisplayBlock ? raw.slice(2, -2) : raw.slice(1, -1);
+    try {
+      const html = katex.renderToString(inner, {
+        displayMode: true,
+        throwOnError: false,
+        strict: false,
+      });
+      return (
+        <span
+          className={`block my-2 overflow-x-auto ${className}`}
+          dangerouslySetInnerHTML={{ __html: html }}
+        />
+      );
+    } catch {
+      return <span className={className}>{inner}</span>;
+    }
   }
 
-  // Mode mixte : découpe la chaîne autour des délimiteurs $$...$$ et $...$
+  // Cas 2 : texte mixte — on découpe autour des délimiteurs $...$ et $$...$$
+  // Le texte ordinaire (accents, ponctuation…) est rendu tel quel par React.
   const parts = raw.split(/(\$\$[\s\S]+?\$\$|\$[^$]+?\$)/g);
 
   return (
@@ -53,35 +67,44 @@ export default function MathText({
       {parts.map((part, index) => {
         if (part.startsWith("$$") && part.endsWith("$$")) {
           const math = part.slice(2, -2);
-          const html = katex.renderToString(math, {
-            displayMode: true,
-            throwOnError: false,
-            strict: false,
-          });
-          return (
-            <span
-              key={index}
-              className="block my-2 overflow-x-auto"
-              dangerouslySetInnerHTML={{ __html: html }}
-            />
-          );
+          try {
+            const html = katex.renderToString(math, {
+              displayMode: true,
+              throwOnError: false,
+              strict: false,
+            });
+            return (
+              <span
+                key={index}
+                className="block my-2 overflow-x-auto"
+                dangerouslySetInnerHTML={{ __html: html }}
+              />
+            );
+          } catch {
+            return <span key={index}>{math}</span>;
+          }
         }
 
         if (part.startsWith("$") && part.endsWith("$")) {
           const math = part.slice(1, -1);
-          const html = katex.renderToString(math, {
-            displayMode: false,
-            throwOnError: false,
-            strict: false,
-          });
-          return (
-            <span
-              key={index}
-              dangerouslySetInnerHTML={{ __html: html }}
-            />
-          );
+          try {
+            const html = katex.renderToString(math, {
+              displayMode: false,
+              throwOnError: false,
+              strict: false,
+            });
+            return (
+              <span
+                key={index}
+                dangerouslySetInnerHTML={{ __html: html }}
+              />
+            );
+          } catch {
+            return <span key={index}>{math}</span>;
+          }
         }
 
+        // Texte ordinaire : rendu React natif — les accents s'affichent parfaitement
         return <span key={index}>{part}</span>;
       })}
     </span>

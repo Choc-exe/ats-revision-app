@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
@@ -46,7 +46,7 @@ export default function CarnetErreursPage() {
 
   return (
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-6">
-      {/* EN-TÃŠTE */}
+      {/* EN-T�`TE */}
       <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8 shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-start gap-4">
           <div className="w-12 h-12 rounded-2xl bg-red-600 text-white flex items-center justify-center shrink-0">
@@ -54,13 +54,13 @@ export default function CarnetErreursPage() {
           </div>
           <div>
             <span className="text-xs font-bold uppercase tracking-wider text-red-600 dark:text-red-400">
-              MÃ©thode de Progression Active
+              Méthode de Progression Active
             </span>
             <h1 className="text-2xl font-extrabold text-slate-900 dark:text-white mt-0.5">
-              Carnet d'Erreurs & RÃ©visions EspacÃ©es (SRS)
+              Carnet d'Erreurs & Révisions Espacées (SRS)
             </h1>
             <p className="text-sm text-slate-600 dark:text-slate-400 mt-1">
-              Concentrez votre Ã©nergie sur les questions qui vous ont mis en Ã©chec en Examen Blanc et sur les flashcards arrivÃ©es Ã  Ã©chÃ©ance aujourd'hui.
+              Concentrez votre énergie sur les questions qui vous ont mis en échec en Examen Blanc et sur les flashcards arrivées à échéance aujourd'hui.
             </p>
           </div>
         </div>
@@ -68,7 +68,7 @@ export default function CarnetErreursPage() {
         <div className="flex items-center gap-3 shrink-0">
           <div className="px-4 py-2.5 rounded-xl bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900 text-center">
             <span className="block text-[10px] font-bold uppercase text-red-600 dark:text-red-400">
-              Erreurs Ã  corriger
+              Erreurs à corriger
             </span>
             <span className="font-mono text-xl font-extrabold text-red-900 dark:text-white">
               {mistakes.length}
@@ -85,14 +85,14 @@ export default function CarnetErreursPage() {
         </div>
       </div>
 
-      {/* BLOC 1 : FLASHCARDS Ã€ REVOIR AUJOURD'HUI */}
+      {/* BLOC 1 : FLASHCARDS ì REVOIR AUJOURD'HUI */}
       {dueCards.length > 0 && (
         <div className="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-4 shadow-xs">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Layers className="w-4 h-4 text-amber-600" />
               <h2 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white">
-                Chapitres ayant des Flashcards arrivÃ©es Ã  Ã©chÃ©ance ({dueCards.length})
+                Chapitres ayant des Flashcards arrivées à échéance ({dueCards.length})
               </h2>
             </div>
           </div>
@@ -131,11 +131,11 @@ export default function CarnetErreursPage() {
         </div>
       )}
 
-      {/* BLOC 2 : LISTE DES ERREURS DE QCM ENREGISTRÃ‰ES */}
+      {/* BLOC 2 : LISTE DES ERREURS DE QCM ENREGISTR�0ES */}
       <div className="space-y-4">
         <h2 className="text-sm font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-2">
           <AlertTriangle className="w-4 h-4 text-red-600" />
-          Questions de QCM & Examens Blancs Ã  retravailler ({mistakes.length})
+          Questions de QCM & Examens Blancs à retravailler ({mistakes.length})
         </h2>
 
         {mistakes.length === 0 ? (
@@ -145,7 +145,7 @@ export default function CarnetErreursPage() {
               Votre carnet d'erreurs est vierge !
             </h3>
             <p className="text-xs text-slate-500 dark:text-slate-400 max-w-md mx-auto">
-              DÃ¨s que vous ferez une erreur en mode Examen Blanc, la question et sa formule critique s'ajouteront automatiquement ici pour que vous ne refassiez jamais deux fois la mÃªme faute le jour du concours.
+              Dès que vous ferez une erreur en mode Examen Blanc, la question et sa formule critique s'ajouteront automatiquement ici pour que vous ne refassiez jamais deux fois la même faute le jour du concours.
             </p>
             <Link
               href="/examen"
@@ -164,10 +164,10 @@ export default function CarnetErreursPage() {
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
                   <span className="px-2.5 py-1 rounded-lg text-xs font-mono font-bold bg-red-100 text-red-800 dark:bg-red-950/60 dark:text-red-300">
-                    Ã‰chouÃ©e {item.wrongCount} fois
+                    �0chouée {item.wrongCount} fois
                   </span>
                   <span className="text-xs font-bold text-slate-500 dark:text-slate-400">
-                    {item.subjectTitle} â€¢ {item.chapterTitle}
+                    {item.subjectTitle} ⬢ {item.chapterTitle}
                   </span>
                 </div>
 
@@ -185,7 +185,7 @@ export default function CarnetErreursPage() {
                     className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white cursor-pointer"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
-                    <span>Compris & RÃ©solu</span>
+                    <span>Compris & Résolu</span>
                   </button>
                 </div>
               </div>
@@ -197,7 +197,7 @@ export default function CarnetErreursPage() {
               <div className="p-3.5 rounded-xl bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-900 text-xs">
                 <span className="font-bold text-emerald-800 dark:text-emerald-300 flex items-center gap-1.5 mb-1">
                   <Sparkles className="w-3.5 h-3.5" />
-                  RÃ©ponse exacte Ã  maÃ®triser :
+                  Réponse exacte à maîtriser :
                 </span>
                 <div className="text-slate-900 dark:text-white font-medium">
                   <MathText content={item.correctAnswerText} />
@@ -207,7 +207,7 @@ export default function CarnetErreursPage() {
               {item.keyFormula && (
                 <div className="rounded-xl border border-red-200 dark:border-red-900/60 border-l-4 border-l-red-600 bg-red-50/40 dark:bg-red-950/25 p-3.5 text-xs">
                   <span className="font-bold text-red-800 dark:text-red-300 block mb-1">
-                    Formule / RÃ¨gle critique :
+                    Formule / Règle critique :
                   </span>
                   <div className="text-slate-900 dark:text-white overflow-x-auto">
                     <MathText content={item.keyFormula} displayMode />

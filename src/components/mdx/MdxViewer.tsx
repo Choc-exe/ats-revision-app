@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
@@ -13,7 +13,7 @@ interface MdxViewerProps {
   variant?: "detailed" | "synthetic";
 }
 
-// 1. FONCTION UTILITAIRE (placÃ©e EN DEHORS de mdxComponents)
+// 1. FONCTION UTILITAIRE (placée EN DEHORS de mdxComponents)
 // Elle extrait le texte brut du script Python contenu dans <pre><code>...</code></pre>
 function extractTextFromChildren(node: React.ReactNode): string {
   if (typeof node === "string") return node;
@@ -32,8 +32,8 @@ const mdxComponents = {
   CriticalFormula,
   WarningBox,
   SchemaPlaceholder,
-  // 1. Masque le <h1> redondant du fichier MDX (dÃ©jÃ  affichÃ© dans l'en-tÃªte de page)
-  // 1. Masque le <h1> redondant du fichier MDX (dÃ©jÃ  affichÃ© dans l'en-tÃªte de page)
+  // 1. Masque le <h1> redondant du fichier MDX (déjà affiché dans l'en-tête de page)
+  // 1. Masque le <h1> redondant du fichier MDX (déjà affiché dans l'en-tête de page)
   h1: () => null,
 
   // 2. Titres de sections avec barre bleue d'instrumentation (et non plus rouge)
@@ -54,7 +54,7 @@ const mdxComponents = {
     />
   ),
 
-  // 3. Termes dÃ©finis (**gras**) en ardoise/bleu sobre : le rouge reste 100% rÃ©servÃ© aux formules critiques
+  // 3. Termes définis (**gras**) en ardoise/bleu sobre : le rouge reste 100% réservé aux formules critiques
   strong: (props: React.HTMLAttributes<HTMLElement>) => (
     <strong
       className="font-bold text-slate-900 dark:text-white bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded dark:border-sky-400/40"
@@ -62,7 +62,7 @@ const mdxComponents = {
     />
   ),
 
-  // 3. Termes dÃ©finis (**gras**) en ardoise/bleu sobre : le rouge reste 100% rÃ©servÃ© aux formules critiques
+  // 3. Termes définis (**gras**) en ardoise/bleu sobre : le rouge reste 100% réservé aux formules critiques
   p: (props: React.HTMLAttributes<HTMLParagraphElement>) => (
     <p className="text-slate-700 leading-7 mb-4" {...props} />
   ),
@@ -81,9 +81,9 @@ const mdxComponents = {
 
   hr: () => <hr className="my-8 border-slate-200" />,
 
-  // C'EST ICI QUE L'ANCIEN BLOC `pre:` EST REMPLACÃ‰ PAR PYTHON SANDBOX :
+  // C'EST ICI QUE L'ANCIEN BLOC `pre:` EST REMPLAC�0 PAR PYTHON SANDBOX :
   pre: (props: React.HTMLAttributes<HTMLPreElement>) => {
-    // Vérifier si c'est un bloc Python via la classe CSS générée par remark/rehype
+    // V�rifier si c'est un bloc Python via la classe CSS g�n�r�e par remark/rehype
     const child = React.Children.toArray(props.children)[0];
     const isPython =
       React.isValidElement(child) &&
@@ -124,8 +124,8 @@ export default function MdxViewer({
       <div className="no-print flex items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-200 dark:border-slate-800">
         <span className="text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-400">
           {variant === "synthetic"
-            ? "Fiche SynthÃ¨se Officielle â€” Format RÃ©vision Rapide"
-            : "Cours Complet & DÃ©monstrations Exigibles"}
+            ? "Fiche Synthèse Officielle � Format Révision Rapide"
+            : "Cours Complet & Démonstrations Exigibles"}
         </span>
         <PrintPdfButton
           label={

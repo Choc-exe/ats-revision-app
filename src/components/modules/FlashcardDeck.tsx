@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { FlashcardItem, SubjectId } from "@/types/pedagogy";
