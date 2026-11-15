@@ -1,14 +1,7 @@
-﻿"use client";
-
-import React, { useState, useEffect, useMemo } from "react";
+﻿import React from "react";
 import Link from "next/link";
 import { ATS_CURRICULUM } from "@/lib/curriculum";
-import {
-  getSrsRecords,
-  getMistakesBook,
-  SrsCardRecord,
-  MistakeRecord,
-} from "@/lib/srs-storage";
+import HomeStatsIsland from "./HomeStatsIsland";
 import {
   GraduationCap,
   Trophy,
@@ -28,9 +21,15 @@ import {
   BookOpen,
   Layers,
   CheckSquare,
-  Flame,
   Sparkles,
 } from "lucide-react";
+
+// ─── Pré-calcul statique au build ────────────────────────────────────────────
+const totalChapters = ATS_CURRICULUM.reduce((acc, s) => acc + s.chapters.length, 0);
+
+// Compte approximatif statique : évite le fetch /api/study-data à chaque chargement.
+// Mettre à jour manuellement si le nombre de QCM change significativement.
+const TOTAL_BANK_QUESTIONS = 68;
 
 const SUBJECT_META_STYLE: Record<
   string,
@@ -79,42 +78,8 @@ const SUBJECT_META_STYLE: Record<
   },
 };
 
+// Server Component — rendu statique au build (pas de useEffect, pas de fetch)
 export default function HomePage() {
-  const [srsRecords, setSrsRecords] = useState<Record<string, SrsCardRecord>>({});
-  const [mistakes, setMistakes] = useState<MistakeRecord[]>([]);
-  const [totalBankQuestions, setTotalBankQuestions] = useState<number>(0);
-
-  useEffect(() => {
-    setSrsRecords(getSrsRecords());
-    const book = getMistakesBook();
-    setMistakes(Object.values(book));
-
-    fetch("/api/study-data")
-      .then((r) => r.json())
-      .then((d) => {
-        if (Array.isArray(d?.qcmBank)) {
-          setTotalBankQuestions(d.qcmBank.length);
-        }
-      })
-      .catch(() => {});
-  }, []);
-
-  const totalChapters = useMemo(() => {
-    return ATS_CURRICULUM.reduce((acc, s) => acc + s.chapters.length, 0);
-  }, []);
-
-  const srsStats = useMemo(() => {
-    const values = Object.values(srsRecords);
-    const now = Date.now();
-    const dueToday = values.filter((r) => r.dueTimestamp <= now).length;
-    const mastered = values.filter((r) => r.intervalDays >= 5).length;
-    return {
-      reviewedTotal: values.length,
-      dueToday,
-      mastered,
-    };
-  }, [srsRecords]);
-
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-8">
       {/* =====================================================================
@@ -128,18 +93,19 @@ export default function HomePage() {
               <span>Programme Officiel CPGE ATS — Édition Concours Complet</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              Plateforme d'Entraînement Intensif & Révision Active
+              Plateforme d&apos;Entraînement Intensif &amp; Révision Active
             </h1>
             <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-              Couverture intégrale des <strong>6 pôles d'évaluation</strong> (Physique-Chimie, Mathématiques, SII, Informatique Python, Français-Philosophie et Anglais) avec répétition espacée SRS, carnet d'erreurs dynamique, simulateur d'oral de khôlle et laboratoires numériques.
+              Couverture intégrale des <strong>6 pôles d&apos;évaluation</strong> (Physique-Chimie, Mathématiques, SII, Informatique Python, Français-Philosophie et Anglais) avec répétition espacée SRS, carnet d&apos;erreurs dynamique, simulateur d&apos;oral de khôlle et laboratoires numériques.
             </p>
           </div>
 
-          {/* 4 Indicateurs clés en temps réel */}
+          {/* 4 Indicateurs : 2 statiques + 2 dynamiques (île client) */}
           <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-2 gap-3 shrink-0">
+            {/* Statique : nombre de chapitres */}
             <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800">
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
-                Chapitres & Cours
+                Chapitres &amp; Cours
               </span>
               <span className="font-mono text-xl font-extrabold text-slate-900 dark:text-white">
                 {totalChapters} thèmes
@@ -149,59 +115,26 @@ export default function HomePage() {
               </span>
             </div>
 
+            {/* Statique : banque QCM */}
             <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800">
               <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
                 Banque Concours
               </span>
               <span className="font-mono text-xl font-extrabold text-slate-900 dark:text-white">
-                {totalBankQuestions > 0 ? totalBankQuestions : "60+"} QCM
+                {TOTAL_BANK_QUESTIONS}+ QCM
               </span>
               <span className="text-[11px] text-blue-600 dark:text-sky-400 font-semibold block">
                 + 8 Planches Khôlle
               </span>
             </div>
 
-            <Link
-              href="/carnet-erreurs"
-              className="p-3.5 rounded-xl bg-amber-50/70 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900 hover:bg-amber-100/60 transition-colors"
-            >
-              <span className="text-[10px] font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400 block">
-                Flashcards SRS dues
-              </span>
-              <span className="font-mono text-xl font-extrabold text-amber-900 dark:text-white">
-                {srsStats.dueToday} à revoir
-              </span>
-              <span className="text-[11px] text-amber-700 dark:text-amber-300 font-semibold block">
-                {srsStats.mastered} cartes maîtrisées
-              </span>
-            </Link>
-
-            <Link
-              href="/carnet-erreurs"
-              className="p-3.5 rounded-xl bg-red-50/70 dark:bg-red-950/30 border border-red-200 dark:border-red-900 hover:bg-red-100/60 transition-colors"
-            >
-              <span className="text-[10px] font-bold uppercase tracking-wider text-red-700 dark:text-red-400 block">
-                Carnet d'Erreurs
-              </span>
-              <span className="font-mono text-xl font-extrabold text-red-900 dark:text-white">
-                {mistakes.length} piège{mistakes.length > 1 ? "s" : ""}
-              </span>
-              <span className="text-[11px] text-red-700 dark:text-red-300 font-semibold block">
-                À purger avant l'écrit →
-              </span>
-            </Link>
+            {/* Îlot client : compteurs SRS + erreurs (lu depuis localStorage) */}
+            <HomeStatsIsland totalBankQuestions={TOTAL_BANK_QUESTIONS} />
           </div>
         </div>
 
-        {/* Barre d'actions prioritaires du jour */}
+        {/* Barre d'actions prioritaires */}
         <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-700 dark:text-slate-300">
-            <Flame className="w-4 h-4 text-red-600 shrink-0" />
-            <span>
-              <strong>Protocole quotidien du Major :</strong> 15 min de Carnet d'Erreurs/SRS $\to$ 1 Planche de Khôlle sur feuille blanche $\to$ 1 Examen Blanc ciblé.
-            </span>
-          </div>
-
           <div className="flex flex-wrap items-center gap-2">
             <Link
               href="/examen"
@@ -234,7 +167,7 @@ export default function HomePage() {
               <Trophy className="w-5 h-5" />
             </div>
             <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-blue-100 text-blue-800 dark:bg-sky-900/70 dark:text-sky-300">
-              Camembert & Stats
+              Camembert &amp; Stats
             </span>
           </div>
           <div>
@@ -261,7 +194,7 @@ export default function HomePage() {
           </div>
           <div>
             <h2 className="text-sm font-extrabold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400">
-              Planches de Khôlle & Écrits
+              Planches de Khôlle &amp; Écrits
             </h2>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
               Questions de cours démontrées et problèmes longs à tiroirs avec barème sur 20.
@@ -283,7 +216,7 @@ export default function HomePage() {
           </div>
           <div>
             <h2 className="text-sm font-extrabold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
-              Labo Fourier, Parseval & Newton
+              Labo Fourier, Parseval &amp; Newton
             </h2>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
               Synthèse harmonique en temps réel, phénomène de Gibbs et convergence de Newton.
@@ -300,12 +233,12 @@ export default function HomePage() {
               <Activity className="w-5 h-5" />
             </div>
             <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-100 text-amber-800 dark:bg-amber-900/70 dark:text-amber-300">
-              SLCI & Filtres
+              SLCI &amp; Filtres
             </span>
           </div>
           <div>
             <h2 className="text-sm font-extrabold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-400">
-              Traceur de Bode & Indicielle
+              Traceur de Bode &amp; Indicielle
             </h2>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">
               Diagrammes asymptotiques et réels, pulsation de coupure et dépassement temporel.

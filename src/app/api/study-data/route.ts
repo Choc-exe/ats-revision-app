@@ -6,8 +6,8 @@ import {
   getQcmData,
 } from "@/lib/content-loader";
 
-export const dynamic = "force-dynamic";
-export const revalidate = 0;
+// Cache ISR : revalidation toutes les heures (le contenu pédagogique ne change pas à chaque requête)
+export const revalidate = 3600;
 
 export async function GET() {
   const searchIndex: Array<{

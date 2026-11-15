@@ -3,8 +3,18 @@ import { getFlashcardsData } from "@/lib/content-loader";
 import FlashcardDeck from "@/components/modules/FlashcardDeck";
 import { Layers, FileWarning } from "lucide-react";
 import { Metadata } from "next";
-import { getChapterById } from "@/lib/curriculum";
+import { getChapterById, ATS_CURRICULUM } from "@/lib/curriculum";
 import { SubjectId } from "@/types/pedagogy";
+
+export async function generateStaticParams() {
+  const params: { subject: string; chapter: string }[] = [];
+  for (const subject of ATS_CURRICULUM) {
+    for (const chapter of subject.chapters) {
+      params.push({ subject: subject.id, chapter: chapter.id });
+    }
+  }
+  return params;
+}
 
 interface FlashcardsPageProps {
   params: Promise<{

@@ -2,12 +2,23 @@ import React from "react";
 import { getMdxContent } from "@/lib/content-loader";
 import MdxViewer from "@/components/mdx/MdxViewer";
 import { FileWarning } from "lucide-react";
+import { ATS_CURRICULUM } from "@/lib/curriculum";
 
 interface CoursePageProps {
   params: Promise<{
     subject: string;
     chapter: string;
   }>;
+}
+
+export async function generateStaticParams() {
+  const params: { subject: string; chapter: string }[] = [];
+  for (const subject of ATS_CURRICULUM) {
+    for (const chapter of subject.chapters) {
+      params.push({ subject: subject.id, chapter: chapter.id });
+    }
+  }
+  return params;
 }
 
 export default async function CoursePage({ params }: CoursePageProps) {

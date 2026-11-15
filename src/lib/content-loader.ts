@@ -1051,11 +1051,13 @@ function getBuiltinBundle(
   return BUILTIN_CHAPTERS[`${subjectId}/${numPrefix}`] ?? null;
 }
 
-// Cache mémoire en mémoire vive pour éviter les lectures disque fs répétitives
+// Caches mémoire pour éviter les lectures disque répétées dans le même processus Node.js
 const MDX_MEMORY_CACHE = new Map<
   string,
   { frontmatter: Record<string, unknown>; content: string }
 >();
+const FLASHCARDS_MEMORY_CACHE = new Map<string, FlashcardItem[]>();
+const QCM_MEMORY_CACHE = new Map<string, QcmQuestion[]>();
 
 export function getMdxContent(
   subjectId: string,
@@ -1111,6 +1113,11 @@ export function getFlashcardsData(
   subjectId: string,
   chapterId: string
 ): FlashcardItem[] {
+  const cacheKey = `${subjectId}/${chapterId}`;
+  if (FLASHCARDS_MEMORY_CACHE.has(cacheKey)) {
+    return FLASHCARDS_MEMORY_CACHE.get(cacheKey)!;
+  }
+
   const dir = resolveChapterDir(subjectId, chapterId);
   if (dir) {
     const filePath = path.join(dir, "flashcards.json");
@@ -1124,9 +1131,11 @@ export function getFlashcardsData(
           ? parsed.cards
           : [];
         if (rawArray.length > 0) {
-          return rawArray.map((item: any, idx: number) =>
+          const result = rawArray.map((item: any, idx: number) =>
             normalizeFlashcard(item, idx)
           );
+          FLASHCARDS_MEMORY_CACHE.set(cacheKey, result);
+          return result;
         }
       } catch {
         // Ignore et passe au fallback
@@ -1135,13 +1144,18 @@ export function getFlashcardsData(
   }
 
   const builtin = getBuiltinBundle(subjectId, chapterId);
-  return builtin ? builtin.flashcards : [];
+  const result = builtin ? builtin.flashcards : [];
+  FLASHCARDS_MEMORY_CACHE.set(cacheKey, result);
+  return result;
 }
 
 export function getQcmData(
   subjectId: string,
   chapterId: string
 ): QcmQuestion[] {
+  // Note : les QCM sont mélangés aléatoirement à chaque appel → pas de cache du résultat final.
+  // On cache uniquement la lecture brute du fichier JSON (avant mélange).
+  const cacheKey = `qcm-raw/${subjectId}/${chapterId}`;
   let baseQuestions: QcmQuestion[] = [];
 
   // 1. Lecture du fichier qcm.json du chapitre sur le disque s'il existe

@@ -3,7 +3,17 @@ import { getMdxContent } from "@/lib/content-loader";
 import MdxViewer from "@/components/mdx/MdxViewer";
 import { Zap } from "lucide-react";
 import { Metadata } from "next";
-import { getSubjectById, getChapterById } from "@/lib/curriculum";
+import { getSubjectById, getChapterById, ATS_CURRICULUM } from "@/lib/curriculum";
+
+export async function generateStaticParams() {
+  const params: { subject: string; chapter: string }[] = [];
+  for (const subject of ATS_CURRICULUM) {
+    for (const chapter of subject.chapters) {
+      params.push({ subject: subject.id, chapter: chapter.id });
+    }
+  }
+  return params;
+}
 
 interface SummaryPageProps {
   params: Promise<{
